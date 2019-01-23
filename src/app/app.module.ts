@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {
   HeaderComponent,
   FooterComponent,
+  BreadcrumbComponent, BreadcrumbsService,
   SharedModule
 } from "./shared";
 import { InicioModule } from "./inicio/inicio.module";
@@ -23,7 +24,8 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,9 @@ import { AppComponent } from './app.component';
     ProgramaModule,
     ReporteModule
   ],
-  providers: [],
+  providers: [
+    BreadcrumbsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

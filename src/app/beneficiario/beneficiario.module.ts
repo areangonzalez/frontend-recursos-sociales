@@ -2,6 +2,8 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from "@angular/router";
 
 import { BeneficiarioComponent } from "./beneficiario.component";
+import { FormularioComponent } from "./formulario";
+import { ListaComponent } from "./lista";
 import { SharedModule } from "../shared";
 import { BeneficiarioRoutingModule } from "./beneficiario-routing.module";
 
@@ -11,10 +13,10 @@ import { BeneficiarioRoutingModule } from "./beneficiario-routing.module";
         BeneficiarioRoutingModule
     ],
     declarations: [
-        BeneficiarioComponent
-    ],
-    providers: [
-    ],
+        BeneficiarioComponent,
+        FormularioComponent,
+        ListaComponent
+    ]
 })
 export class BeneficiarioModule {
     constructor() {
