@@ -9,28 +9,27 @@
   <!-- <a class="navbar-brand" href="#">PRIL</a> -->
   <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed" *ngIf="estoyLogueado">
       <ul class="navbar-nav mr-auto">
-          <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed">
+          <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed; ocultarMenu();">
               <a class="nav-link" [routerLink]="['inicio/beneficiario']" ><i class="fas fa-male"></i> Beneficiario</a>
           </li>
-          <!-- <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed">
-            <a class="nav-link" [routerLink]="['inicio/programa']" ><i class="fas fa-male"></i> Programas</a>
-          </li> -->
-
           <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" (click)="mostrarMenu()">
-                Dropdown link
-              </a>
-              <ul class="dropdown-menu" [ngClass]="{hide: !(mostrar), show: mostrar}">
-                <li *ngFor="let programa of listaProgramas; index as i;" class="dropdown-submenu dropright" (mouseenter)="mouseHovering(i)" (mouseleave)="mouseLeaving(i)" >
-                    <a class="dropdown-item dropdown-toggle">{{programa.nombre}}</a>
-                    <div class="dropdown-menu" [ngClass]="{hide: !(listaProgramas[i].isHovering), show: (listaProgramas[i].isHovering)}">
-                        <a class="dropdown-item" >Nuevo recurso</a>
-                        <a class="dropdown-item" >Listar</a>
-                    </div>
-                </li>
-              </ul>
+            <a class="nav-link dropdown-toggle" (click)="mostrarMenu()" >
+              Programas
+            </a>
+            <ul class="dropdown-menu" [ngClass]="{'show': mostrar, 'background-menu': (!isCollapsed)}"  >
+              <li *ngFor="let programa of listaProgramas; index as i;" class="dropdown-submenu dropright" (mouseenter)="mouseHovering(i)" (mouseleave)="mouseLeaving(i)" >
+                <a class="dropdown-item dropdown-toggle">{{programa.nombre}}</a>
+                <div class="dropdown-menu" [ngClass]="{'hide': !(listaProgramas[i].isHovering), 'show': (listaProgramas[i].isHovering), 'background-submenu': (!isCollapsed)}">
+                  <a class="dropdown-item" >Nuevo recurso</a>
+                  <a class="dropdown-item" >Listar</a>
+                </div>
+              </li>
+            </ul>
           </li>
-      </ul>
+          <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;  ocultarMenu();">
+            <a class="nav-link" [routerLink]="['inicio/reporte']" ><i class="fas fa-male"></i> Reportes</a>
+          </li>
+        </ul>
       <ul class="navbar-nav flex-row ml-md-auto d-md-flex" *ngIf="estoyLogueado">
           <!-- <li class="nav-item">
               <a class="nav-link" [routerLink]="['login']" (click)="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>

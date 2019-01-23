@@ -46,7 +46,10 @@ export class HeaderComponent implements OnInit {
 
     mostrarMenu(){
       this.mostrar = !this.mostrar;
-      return this.mostrar;
+    }
+
+    ocultarMenu(){
+      this.mostrar = false;
     }
 
 
