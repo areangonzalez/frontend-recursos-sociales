@@ -2,8 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+/* Routing */
+import { AppRoutingModule } from './app-routing.module';
+
 /* Modulos */
-import { HeaderComponent, FooterComponent, SharedModule } from "./shared";
+import {
+  HeaderComponent,
+  FooterComponent,
+  SharedModule
+} from "./shared";
+import { InicioModule } from "./inicio/inicio.module";
+import { BeneficiarioModule } from "./beneficiario/beneficiario.module";
+import { ProgramaModule } from "./programa/programa.module";
+import { ReporteModule } from "./reporte/reporte.module";
 
 
 import { AppComponent } from './app.component';
@@ -16,8 +27,13 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     NgbModule.forRoot(),
-    SharedModule
+    SharedModule,
+    InicioModule,
+    BeneficiarioModule,
+    ProgramaModule,
+    ReporteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

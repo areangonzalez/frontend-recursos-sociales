@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Router, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'layout-header',
@@ -9,12 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
     public isCollapsed = true;
+    public listaProgramas = [];
+    public mostrar: boolean = false;
 
-    /* constructor(
+    constructor(
         private _router: Router
-    ) { } */
+    ) { }
 
     ngOnInit() {
+      this.getProgramas();
     }
 
     estoyLogueado(){
@@ -24,5 +27,27 @@ export class HeaderComponent implements OnInit {
     cerrarSesion(){
       console.log("cierre");
     }
+
+    getProgramas(){
+      this.listaProgramas = [
+        { id: 1, nombre: 'Emprender', isHovering:false }, { id: 2, nombre: 'Habitat', isHovering:false },{ id: 3, nombre: 'Microemprendimientos', isHovering:false },
+        { id: 4, nombre: 'RN Presente', isHovering:false }, { id: 5, nombre: 'Subsidio', isHovering:false }
+      ];
+    }
+
+    public isHovering = false;
+
+    mouseHovering(index) {
+        this.listaProgramas[index].isHovering = true;
+    }
+    mouseLeaving(index) {
+      this.listaProgramas[index].isHovering = false;
+    }
+
+    mostrarMenu(){
+      this.mostrar = !this.mostrar;
+      return this.mostrar;
+    }
+
 
 }

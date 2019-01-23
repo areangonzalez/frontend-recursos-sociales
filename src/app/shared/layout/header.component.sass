@@ -72,11 +72,23 @@
   background: #8cc63f;
 
 .dropdown-item:hover
-  background: #aad11f;
-  color: #aaa;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #fff;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  background: none !important;
 
 .dropdown-item
+  color: #ccff99 !important;
+
+.dropdown-item > .active > a
   color: #fff;
+
+.dropdown-item > .active > a:hover
+  color: #fff;
+  box-shadow: none !important;
 
 
 .navbar-header > a > span
@@ -95,4 +107,24 @@ button.navbar-toggler > span
 
 .show .nav-item > a
   padding-left: 10px !important;
+
+.btn-dropdown-menu
+  color: #ccff99;
+  border: none;
+.btn-dropdown-menu:hover
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #fff;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+
+.btn-dropdown-submenu
+  position: relative;
+  color: #ccff99;
+
+.btn-dropdown-submenu .btn-dropdown-menu
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
 
