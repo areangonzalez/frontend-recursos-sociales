@@ -1,1 +1,4 @@
 <h2>formulario de beneficiario CREAR</h2>
+<form [formGroup]="personaForm">
+  <shared-form-persona [formPersona]="personaForm.controls.persona" [documento]="documento" ></shared-form-persona>
+</form>

@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-between">
+  <div class="col-5 pt-1"><hr></div>
+  <div class="col-2 text-center"><h3><small class="text-muted">Dirección</small></h3></div>
+  <div class="col-5 pt-1"><hr></div>
+</div>
+<div class="row" [formGroup]="lugar">
+    <div class="form-group col-md-4">
+        <label for="localidad" class="prioridad">Localidad (<span>*</span>):</label>
+        <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'is-invalid': (datosLugar.localidadid.invalid && submitted)}">
+                <option value="">Seleccione Localidad</option>
+                <option *ngFor="let localidad of localidadLista" value="{{localidad.id}}">{{localidad.nombre}}</option>
+            </select>
+        <div *ngIf="(datosLugar.localidadid.invalid && submitted)" class="text-danger">
+            <div *ngIf="datosLugar.localidadid.errors.required">Por favor Seleccione localidad. </div>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label for="calle" class="prioridad">Calle (<span>*</span>):</label>
+        <input type="text" id="calle" placeholder="calle" class="form-control" formControlName="calle" [ngClass]="{'is-invalid': (datosLugar.calle.invalid && submitted)}">
+        <div *ngIf="(datosLugar.calle.invalid && submitted)" class="text-danger">
+            <div *ngIf="datosLugar.calle.errors.required">Este campo es requerido. </div>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label for="altura" class="prioridad">Altura (<span>*</span>):</label>
+        <input type="text" id="altura" placeholder="altura" class="form-control" formControlName="altura" [ngClass]="{'is-invalid': (datosLugar.altura.invalid && submitted)}">
+        <div *ngIf="(datosLugar.altura.invalid && submitted)" class="text-danger">
+            <div *ngIf="datosLugar.altura.errors.required">Este campo es requerido. </div>
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <label for="barrio" class="prioridad">Barrio:</label>
+        <input type="text" id="barrio" placeholder="barrio" class="form-control" formControlName="barrio">
+    </div>
+    <div class="form-group col-md-3">
+        <label for="escalera">Escalera/Modulo:</label>
+        <input type="text" id="escalera" placeholder="escalera" class="form-control" formControlName="escalera">
+    </div>
+    <div class="form-group col-md-3">
+        <label for="piso">Piso:</label>
+        <input type="text" id="piso" placeholder="piso" class="form-control" formControlName="piso">
+    </div>
+    <div class="form-group col-md-3">
+        <label for="departamento">Departamento:</label>
+        <input type="text" id="departamento" placeholder="departamento" class="form-control" formControlName="depto">
+    </div>
+</div>
