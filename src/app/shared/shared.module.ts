@@ -33,6 +33,7 @@ import { FormContactoComponent } from "./formulario/contacto";
         FormLugarComponent,
         FormContactoComponent,
         FormPersonaComponent
+
     ]
 })
 export class SharedModule { }
