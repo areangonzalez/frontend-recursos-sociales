@@ -1,114 +1,118 @@
-<fieldset [formGroup]="persona" >
-  <div class="d-flex justify-content-between">
-    <div class="col-5 pt-1"><hr></div>
-    <div class="col-2 text-center"><h3><small class="text-muted">Datos Personales</small></h3></div>
-    <div class="col-5 pt-1"><hr></div>
-  </div>
-  <div class="row">
-      <div class="form-group col-md-4">
-          <label for="nro_documento" class="prioridad">Nro. documento (<span>*</span>):</label>
-          <div class="input-group">
-              <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" placeholder="Ej.: 23123987"
-              (keyup)="soloNumero($event.target)" (change)="[validarCuil($event.target.value), validarPersonaPorNroDocumento($event.target.value)]"  [ngClass]="{'is-invalid': (datosPersona.nro_documento.invalid && submitted)}">
-          </div>
-          <div *ngIf="(datosPersona.nro_documento.invalid && submitted)" class="text-danger">
-              <div *ngIf="datosPersona.nro_documento.errors.required">Este campo es requerido. </div>
-              <div *ngIf="datosPersona.nro_documento.errors.minlength">El número de documento debe tener al menos 7 digitos.</div>
-              <div *ngIf="datosPersona.nro_documento.errors.maxlength">El número de documento no puede tener mas de 8 digitos.</div>
-          </div>
-      </div>
-      <div class="form-group col-md-4">
-          <label for="form-agente-cuil" class="prioridad">Cuil (<span>*</span>):</label>
-          <div class="input-group">
-              <input class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2"
-               (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (datosPersona.cuil_prin.invalid && submitted)}">
-              <div class="input-group-addon div-cuil-num-center">{{(setDocumento != '')?setDocumento:cuil_medio}}</div>
-              <input class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_fin" maxlength="1"
-              (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (datosPersona.cuil_fin.invalid && submitted)}">
-              <div *ngIf="(datosPersona.cuil_prin.invalid && submitted)" class="text-danger">
-                  <div *ngIf="datosPersona.cuil_prin.errors.required">Este campo es requerido. </div>
-              </div>
-              <div *ngIf="(!datosPersona.cuil_prin.invalid && datosPersona.cuil_fin.invalid && submitted)" class="text-danger">
-                  <div *ngIf="datosPersona.cuil_fin.errors.required">Este campo es requerido. </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <div class="row">
-      <div class="form-group col-md-4">
-          <label for="apellido" class="prioridad">Apellido (<span>*</span>):</label>
-          <input type="text" id="apellido" placeholder="Apellido" class="form-control" formControlName="apellido" [ngClass]="{'is-invalid': (datosPersona.apellido.invalid && submitted)}">
-          <div *ngIf="(datosPersona.apellido.invalid && submitted)"
-              class="text-danger">
-              <div *ngIf="datosPersona.apellido.errors.required">Este campo es requerido. </div>
-              <div *ngIf="datosPersona.apellido.errors.minlength">El apellido es muy corto.</div>
-          </div>
-      </div>
-      <div class="form-group col-md-4">
-          <label for="nombre" class="prioridad">Nombre (<span>*</span>):</label>
-          <input type="text" id="nombre" placeholder="Nombre" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (datosPersona.nombre.invalid && submitted)}">
-          <div *ngIf="(datosPersona.nombre.invalid && submitted)"
-              class="text-danger">
-              <div *ngIf="datosPersona.nombre.errors.required">Este campo es requerido. </div>
-              <div *ngIf="datosPersona.nombre.errors.minlength">El nombre es muy corto.</div>
-          </div>
-      </div>
-      <div class="form-group col-md-4">
-          <label for="fecha_nacimiento" class="prioridad">Fecha nacimiento (<span>*</span>):</label>
-          <div class="input-group">
-              <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fpd="ngbDatepicker"
-              id="fecha_nacimiento" formControlName="fechaNacimiento" (ngModelChange)="formatFechaNacimiento($event)">
-              <div class="input-group-append">
-                  <button class="btn btn-outline-info" (click)="fpd.toggle()" type="button"
-                      [ngClass]="{'btn-outline-danger': (datosPersona.fechaNacimiento.invalid && submitted), 'is-invalid': (datosPersona.fechaNacimiento.invalid && submitted)}">
-                      <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
-                  </button>
-              </div>
-          </div>
-          <div *ngIf="(datosPersona.fechaNacimiento.invalid && submitted)" class="text-danger">
-              <div *ngIf="datosPersona.fechaNacimiento.errors.required">Este campo es requerido. </div>
-          </div>
-      </div>
-      <div class="form-group col-md-4">
-          <label for="sexo" class="prioridad">Sexo (<span>*</span>):</label>
-          <select class="form-control" id="sexo" formControlName="sexoid" [ngClass]="{'is-invalid': (datosPersona.sexoid.invalid && submitted)}">
-              <option value="">Seleccione Sexo</option>
-              <option *ngFor="let sexo of sexoLista" value="{{sexo.id}}">{{sexo.nombre}}</option>
-          </select>
-          <div *ngIf="(datosPersona.sexoid.invalid && submitted)" class="text-danger">
-              <div *ngIf="datosPersona.sexoid.errors.required">Por favor Seleccione sexo. </div>
-          </div>
-      </div>
-      <div class="form-group col-md-4">
-          <label for="genero" class="prioridad">Género (<span>*</span>):</label>
-          <select class="form-control" id="genero" formControlName="generoid" [ngClass]="{'is-invalid': (datosPersona.generoid.invalid && submitted)}">
-              <option value="">Seleccione Género</option>
-              <option *ngFor="let genero of generoLista" value="{{genero.id}}">{{genero.nombre}}</option>
-          </select>
-          <div *ngIf="(datosPersona.generoid.invalid && submitted)"
-              class="text-danger">
-              <div *ngIf="datosPersona.generoid.errors.required">Por favor Seleccione género. </div>
-          </div>
-      </div>
-      <div class="form-group col-md-4">
-          <label for="estado_civil" class="prioridad">Estado civil (<span>*</span>):</label>
-          <select class="form-control" id="estado_civil" formControlName="estado_civilid" [ngClass]="{'is-invalid': (datosPersona.estado_civilid.invalid && submitted)}">
-              <option value="">Seleccione Estado civil</option>
-              <option *ngFor="let estadoCivil of estadoCivilLista" value="{{estadoCivil.id}}">{{estadoCivil.nombre}}</option>
-          </select>
-          <div *ngIf="(datosPersona.estado_civilid.invalid && submitted)"
-              class="text-danger">
-              <div *ngIf="datosPersona.estado_civilid.errors.required">Por favor Seleccione estado civil. </div>
-          </div>
-      </div>
+<form [formGroup]="formPersona">
+  <fieldset >
+    <div class="d-flex justify-content-between">
+      <div class="col-5 pt-1"><hr></div>
+      <div class="col-2 text-center"><h3><small class="text-muted">Datos Personales</small></h3></div>
+      <div class="col-5 pt-1"><hr></div>
     </div>
-  <shared-form-contacto [formContacto]="datosPersona.contacto" ></shared-form-contacto>
-  <shared-form-lugar [formLugar]="datosPersona.lugar" ></shared-form-lugar>
+    <div class="row">
+    <!-- <div class="col-md-6"> -->
+        <div class="form-group col-md-3">
+            <label for="nro_documento" class="prioridad">Nro. documento (<span>*</span>):</label>
+            <div class="input-group">
+                <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" placeholder="Ej.: 23123987"
+                 (keyup)="soloNumero($event.target)" (change)="[validarCuil($event.target.value), validarPersonaPorNroDocumento($event.target.value)]" [ngClass]="{'is-invalid': (datosPersona.nro_documento.invalid && submitted)}">
+            </div>
+            <div *ngIf="(datosPersona.nro_documento.invalid && submitted)" class="text-danger">
+                <div *ngIf="datosPersona.nro_documento.errors.required">Este campo es requerido. </div>
+                <div *ngIf="datosPersona.nro_documento.errors.minlength">El número de documento debe tener al menos 7 digitos.</div>
+                <div *ngIf="datosPersona.nro_documento.errors.maxlength">El número de documento no puede tener mas de 8 digitos.</div>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="form-agente-cuil" class="prioridad">Cuil (<span>*</span>):</label>
+            <div class="input-group">
+                <input class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2"
+                (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (datosPersona.cuil_prin.invalid && submitted)}">
+                <div class="input-group-addon div-cuil-num-center">{{(setDocumento != '')?setDocumento:cuil_medio}}</div>
+                <input class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_fin" maxlength="1"
+                (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (datosPersona.cuil_fin.invalid && submitted)}">
+                <div *ngIf="(datosPersona.cuil_prin.invalid && submitted)" class="text-danger">
+                    <div *ngIf="datosPersona.cuil_prin.errors.required">Este campo es requerido. </div>
+                </div>
+                <div *ngIf="(!datosPersona.cuil_prin.invalid && datosPersona.cuil_fin.invalid && submitted)" class="text-danger">
+                    <div *ngIf="datosPersona.cuil_fin.errors.required">Este campo es requerido. </div>
+                </div>
+            </div>
+        </div>
+    <!-- </div> -->
+    <!-- <div class="row"> -->
+        <div class="form-group col-md-3">
+            <label for="apellido" class="prioridad">Apellido (<span>*</span>):</label>
+            <input type="text" id="apellido" placeholder="Apellido" class="form-control" formControlName="apellido" [ngClass]="{'is-invalid': (datosPersona.apellido.invalid && submitted)}">
+            <div *ngIf="(datosPersona.apellido.invalid && submitted)"
+                class="text-danger">
+                <div *ngIf="datosPersona.apellido.errors.required">Este campo es requerido. </div>
+                <div *ngIf="datosPersona.apellido.errors.minlength">El apellido es muy corto.</div>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="nombre" class="prioridad">Nombre (<span>*</span>):</label>
+            <input type="text" id="nombre" placeholder="Nombre" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (datosPersona.nombre.invalid && submitted)}">
+            <div *ngIf="(datosPersona.nombre.invalid && submitted)"
+                class="text-danger">
+                <div *ngIf="datosPersona.nombre.errors.required">Este campo es requerido. </div>
+                <div *ngIf="datosPersona.nombre.errors.minlength">El nombre es muy corto.</div>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="fecha_nacimiento" class="prioridad">Fecha nacimiento (<span>*</span>):</label>
+            <div class="input-group">
+                <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fpd="ngbDatepicker"
+                id="fecha_nacimiento" formControlName="fechaNacimiento" (ngModelChange)="formatFechaNacimiento($event)">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-info" (click)="fpd.toggle()" type="button"
+                        [ngClass]="{'btn-outline-danger': (datosPersona.fechaNacimiento.invalid && submitted), 'is-invalid': (datosPersona.fechaNacimiento.invalid && submitted)}">
+                        <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="(datosPersona.fechaNacimiento.invalid && submitted)" class="text-danger">
+                <div *ngIf="datosPersona.fechaNacimiento.errors.required">Este campo es requerido. </div>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="estado_civil" class="prioridad">Estado civil (<span>*</span>):</label>
+            <select class="form-control" id="estado_civil" formControlName="estado_civilid" [ngClass]="{'is-invalid': (datosPersona.estado_civilid.invalid && submitted)}">
+                <option value="">Seleccione Estado civil</option>
+                <option *ngFor="let estadoCivil of estadoCivilLista" value="{{estadoCivil.id}}">{{estadoCivil.nombre}}</option>
+            </select>
+            <div *ngIf="(datosPersona.estado_civilid.invalid && submitted)"
+                class="text-danger">
+                <div *ngIf="datosPersona.estado_civilid.errors.required">Por favor Seleccione estado civil. </div>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="sexo" class="prioridad">Sexo (<span>*</span>):</label>
+            <select class="form-control" id="sexo" formControlName="sexoid" [ngClass]="{'is-invalid': (datosPersona.sexoid.invalid && submitted)}">
+                <option value="">Seleccione Sexo</option>
+                <option *ngFor="let sexo of sexoLista" value="{{sexo.id}}">{{sexo.nombre}}</option>
+            </select>
+            <div *ngIf="(datosPersona.sexoid.invalid && submitted)" class="text-danger">
+                <div *ngIf="datosPersona.sexoid.errors.required">Por favor Seleccione sexo. </div>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="genero" class="prioridad">Género (<span>*</span>):</label>
+            <select class="form-control" id="genero" formControlName="generoid" [ngClass]="{'is-invalid': (datosPersona.generoid.invalid && submitted)}">
+                <option value="">Seleccione Género</option>
+                <option *ngFor="let genero of generoLista" value="{{genero.id}}">{{genero.nombre}}</option>
+            </select>
+            <div *ngIf="(datosPersona.generoid.invalid && submitted)"
+                class="text-danger">
+                <div *ngIf="datosPersona.generoid.errors.required">Por favor Seleccione género. </div>
+            </div>
+        </div>
+      </div>
+    <shared-form-contacto [formContacto]="datosPersona.contacto" ></shared-form-contacto>
+    <shared-form-lugar [formLugar]="datosPersona.lugar" ></shared-form-lugar>
 
-  <hr class="pt1">
-  <div class="float-right">
-      <button type="button" class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Guardar" aria-hidden="true"></span> Cancelar</button> &nbsp;
-      <button type="button" class="btn btn-success" (click)="onSubmit()"><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
-  </div>
+    <hr class="pt1">
 
-</fieldset>
+    <div class="float-right">
+        <button type="button" class="btn btn-danger" (click)="cancelarForm()" ><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>&nbsp;
+        <button type="button" class="btn btn-success" (click)="obtenerDatos()" ><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
+    </div>
+
+  </fieldset>
+</form>

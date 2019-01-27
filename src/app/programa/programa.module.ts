@@ -1,12 +1,14 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from "@angular/router";
+import { SharedModule } from "../shared";
 
 import { ProgramaComponent } from "./programa.component";
 import { ProgramaListaComponent } from "./lista";
 import { TipoProgramaComponent } from "./tipo-programa";
-import { SharedModule } from "../shared";
 import { ProgramaRoutingModule } from "./programa-routing.module";
-import { CrearRecursoComponent } from "./crear-recurso";
+import { ProgramaRecursoComponent, CrearRecursoComponent } from "./recurso";
+import { CrearPersonaComponent } from "./persona";
+
 
 @NgModule({
     imports: [
@@ -14,6 +16,8 @@ import { CrearRecursoComponent } from "./crear-recurso";
         ProgramaRoutingModule
     ],
     declarations: [
+      CrearPersonaComponent,
+      ProgramaRecursoComponent,
       CrearRecursoComponent,
       ProgramaListaComponent,
       TipoProgramaComponent,
@@ -21,8 +25,12 @@ import { CrearRecursoComponent } from "./crear-recurso";
     ],
     providers: [
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ProgramaModule {
     constructor() {
     }
  }
+
+
+ //schemas: [CUSTOM_ELEMENTS_SCHEMA],

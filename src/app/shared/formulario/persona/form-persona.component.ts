@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from "@angular/forms";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
 import { UtilService } from 'src/app/core/utils';
 
 @Component({
@@ -8,15 +9,17 @@ import { UtilService } from 'src/app/core/utils';
   styleUrls: ['./form-persona.component.sass']
 })
 export class FormPersonaComponent implements OnInit {
-  @Input('formPersona') public persona: FormGroup;
-  @Input("documento") public setDocumento: string;
+  @Input("cancelarUrl") public cancelarRoute:string;
+  @Output('getDatos') public getDatos = new EventEmitter();
 
+  public formPersona: FormGroup;
   public submitted: boolean = false;
   public sexoLista: any = [{id: 1, nombre: 'Hombre'}, {id: 2, nombre: 'Mujer'}];
   public generoLista: any = [{id: 1, nombre: 'Femenino'}, {id: 2, nombre: 'Masculino'}];
   public estadoCivilLista: any = [{id: 1, nombre: 'Casado'}, {id: 2, nombre: 'Soltero'}];
   public localidadLista: any = [{id: 1, nombre: 'Roca'}, {id: 2, nombre: 'Viedma'}];
 
+  public setDocumento: string = '';
 
   /**
    * @var cuil_medio [string] guarda el número que conforma el cuil
@@ -24,16 +27,47 @@ export class FormPersonaComponent implements OnInit {
   public cuil_medio:string = '';
 
   constructor(
+    private _fb: FormBuilder,
+    private _router: Router,
     private _util: UtilService
   ){
-
+    this.formPersona = _fb.group({
+        id: 0,
+        nro_documento: ['', [Validators.required, Validators.minLength(7)]],
+        apellido: ['', [Validators.required, Validators.minLength(3)]],
+        nombre: ['', [Validators.required, Validators.minLength(3)]],
+        cuil: '',
+        cuil_prin: ['', [Validators.required, Validators.minLength(2)]],
+        cuil_fin: ['', [Validators.required, Validators.minLength(2)]],
+        fecha_nacimiento: '',
+        fechaNacimiento: ['', Validators.required],
+        sexoid: ['', Validators.required],
+        generoid: ['', Validators.required],
+        estado_civilid: ['', Validators.required],
+        contacto: _fb.group({
+          telefono: '',
+          celular: '',
+          email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+          red_social: ''
+        }),
+        lugar: _fb.group({
+          id: 0,
+          localidadid: ['', Validators.required],
+          calle: ['', [Validators.required, Validators.minLength(3)]],
+          altura: ['', Validators.required],
+          barrio: '',
+          piso: '',
+          depto: '',
+          escalera: ''
+        })
+    });
   }
 
   ngOnInit() {
   }
 
   // convenience getter for easy access to form fields
-  get datosPersona() { return this.persona.controls; }
+  get datosPersona() { return this.formPersona.controls; }
 
   /**
    * @function soloNumero valida que los datos ingresados en un input sean solo numeros.
@@ -68,14 +102,14 @@ export class FormPersonaComponent implements OnInit {
    * @function armarCuil funcion que arma el cuil uniendo las variables de los formularios
    */
   public armarCuil(){
-    const cuil_primero = this.persona.value.cuil_prin;
-    const cuil_ult = this.persona.value.cuil_fin;
+    const cuil_primero = this.formPersona.value.cuil_prin;
+    const cuil_ult = this.formPersona.value.cuil_fin;
     // verifico si las variables son distintas a vacio
     // si la validacion es correcta seteo el valor del formulario con el cuil armado
     if (cuil_primero != '' && cuil_ult != '') {
-        return this.persona.controls.cuil.setValue(cuil_primero + this.cuil_medio + cuil_ult);
+        return this.formPersona.controls.cuil.setValue(cuil_primero + this.cuil_medio + cuil_ult);
     }else{ // si esta vacio seteo el valor del formulario en vacion
-        return this.persona.controls.cuil.setValue('');
+        return this.formPersona.controls.cuil.setValue('');
     }
   }
 
@@ -84,7 +118,25 @@ export class FormPersonaComponent implements OnInit {
    * @param obj la fecha viene en formato objeto
    */
   public formatFechaNacimiento(obj:any){
-    this.persona.controls.fecha_nacimiento.setValue(this._util.formatearFecha(obj.day, obj.month, obj.year, "yyyy-MM-dd"));
+    this.formPersona.controls.fecha_nacimiento.setValue(this._util.formatearFecha(obj.day, obj.month, obj.year, "yyyy-MM-dd"));
+  }
+
+  public obtenerDatos(){
+    //desarrollar submit
+    this.getDatos.emit(this.formPersona.value);
+  }
+
+  public cancelarForm(){
+    const urlRecurso:string = this._router.url;
+    switch (this.cancelarRoute) {
+      case "recurso":
+        const url = urlRecurso.replace('crear-persona','nuevo');
+        this._router.navigateByUrl(url);
+        break;
+      default:
+        this._router.navigate(['inicio']); // login
+        break;
+    }
   }
 
 }
