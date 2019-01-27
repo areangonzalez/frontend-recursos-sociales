@@ -72,7 +72,7 @@ export class BreadcrumbComponent implements OnInit {
 
           const hasData = (route.routeConfig && route.routeConfig.data);
           const hasDynamicBreadcrumb: boolean = route.snapshot.params.hasOwnProperty(ROUTE_PARAM_BREADCRUMB);
-
+          // console.log("hasDynamicBreadcrumb: ", hasDynamicBreadcrumb);
           if (hasData || hasDynamicBreadcrumb) {
 
 
@@ -102,9 +102,10 @@ export class BreadcrumbComponent implements OnInit {
             // Add breadcrumb
             let breadcrumb: IBreadcrumb = {
               label: breadCrumbLabel,
-              params: route.snapshot.params,
+              params: {},
               url: url
             };
+
             // Add the breadcrumb as 'prefixed'. It will appear before all breadcrumbs
             if (route.snapshot.data.hasOwnProperty(PREFIX_BREADCRUMB)) {
               this.breadcrumbService.storePrefixed(breadcrumb);

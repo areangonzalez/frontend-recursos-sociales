@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./programa.component.sass']
 })
 export class ProgramaComponent implements OnInit {
-  title = 'Reporte';
+  public title = 'todos los programas';
 
   ngOnInit() {
   }

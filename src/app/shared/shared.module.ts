@@ -8,6 +8,7 @@ import { RouterModule } from "@angular/router";
 import { FormPersonaComponent } from "./formulario/persona";
 import { FormLugarComponent } from "./formulario/lugar";
 import { FormContactoComponent } from "./formulario/contacto";
+import { FormRecursoComponent } from "./formulario/recurso";
 
 
 
@@ -23,7 +24,8 @@ import { FormContactoComponent } from "./formulario/contacto";
     declarations: [
       FormLugarComponent,
       FormContactoComponent,
-      FormPersonaComponent
+      FormPersonaComponent,
+      FormRecursoComponent
     ],
     exports: [
         CommonModule,
@@ -32,8 +34,8 @@ import { FormContactoComponent } from "./formulario/contacto";
         RouterModule,
         FormLugarComponent,
         FormContactoComponent,
-        FormPersonaComponent
-
+        FormPersonaComponent,
+        FormRecursoComponent
     ]
 })
 export class SharedModule { }

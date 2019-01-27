@@ -1,0 +1,43 @@
+<form [formGroup]="formRecurso">
+  <fieldset>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label for="tipo_recurso">Tipo recurso social:</label>
+        <select class="form-control" id="tipo_recurso" formControlName="tipo_recurso_socialid" [ngClass]="{'is-invalid': (datosRecurso.tipo_recurso_socialid.invalid && submitted)}">
+          <option value="">Seleccione tipo de recurso social</option>
+          <option *ngFor="let tipo of tipoRecursoSocialLista" value="{{tipo.id}}">{{tipo.nombre}}</option>
+        </select>
+        <div *ngIf="(datosRecurso.tipo_recurso_socialid.invalid && submitted)" class="text-danger">
+            <div *ngIf="datosRecurso.tipo_recurso_socialid.errors.required">Por favor Seleccione tipo de recurso social. </div>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="proposito">Propósito:</label>
+        <input type="text" id="proposito" placeholder="Propósito..." class="form-control" formControlName="proposito">
+        <div *ngIf="(datosRecurso.proposito.invalid && submitted)" class="text-danger">
+          <div *ngIf="datosRecurso.proposito.errors.required">Por favor Seleccione localidad. </div>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="fecha_alta" class="prioridad">Fecha Alta:</label>
+        <div class="input-group">
+          <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #frd="ngbDatepicker"
+          id="fecha_alta" formControlName="fechaAlta" (ngModelChange)="formatFechaAlta($event)">
+          <div class="input-group-append">
+              <button class="btn btn-outline-info" (click)="frd.toggle()" type="button"
+                  [ngClass]="{'btn-outline-danger': (datosRecurso.fechaAlta.invalid && submitted), 'is-invalid': (datosRecurso.fechaAlta.invalid && submitted)}">
+                  <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
+              </button>
+            </div>
+        </div>
+        <div *ngIf="(datosRecurso.fechaAlta.invalid && submitted)" class="text-danger">
+            <div *ngIf="datosRecurso.fechaAlta.errors.required">Este campo es requerido. </div>
+        </div>
+      </div>
+      <div class="form-group col-md-12">
+          <label for="observacion">Observación:</label>
+          <textarea class="form-control" id="observacion" cols="30" rows="2" placeholder="Descripcion..." formControlName="observacion" ></textarea>
+        </div>
+    </div>
+  </fieldset>
+</form>

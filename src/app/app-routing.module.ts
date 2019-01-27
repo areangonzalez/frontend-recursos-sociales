@@ -34,7 +34,7 @@ const routes: Routes = [
           },{
               path: 'programa',
               loadChildren: loadProgramaModule,
-              data: { preload: true, breadcrumb: 'Programas' }
+              data: { preload: true, breadcrumb: 'programa'}
           },
           {
               path: 'reporte',

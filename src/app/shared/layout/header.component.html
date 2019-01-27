@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-pril fixed-top">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse"
+  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed; ocultarMenu();" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="oi oi-menu"></span>
     </button>
@@ -20,13 +20,13 @@
               <li *ngFor="let programa of listaProgramas; index as i;" class="dropdown-submenu dropright" (mouseenter)="mouseHovering(i)" (mouseleave)="mouseLeaving(i)" >
                 <a class="dropdown-item dropdown-toggle">{{programa.nombre}}</a>
                 <div class="dropdown-menu" [ngClass]="{'hide': !(listaProgramas[i].isHovering), 'show': (listaProgramas[i].isHovering), 'background-submenu': (!isCollapsed)}">
-                  <a class="dropdown-item" >Nuevo recurso</a>
-                  <a class="dropdown-item" >Listar</a>
+                  <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'nuevo']" >Nuevo recurso</a>
+                  <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'lista']" (click)="ocultarMenu();">Listar</a>
                 </div>
               </li>
             </ul>
           </li>
-          <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;  ocultarMenu();">
+          <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed; ocultarMenu();">
             <a class="nav-link" [routerLink]="['inicio/reporte']" ><i class="fas fa-male"></i> Reportes</a>
           </li>
         </ul>

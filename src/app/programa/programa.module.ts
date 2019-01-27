@@ -2,8 +2,11 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from "@angular/router";
 
 import { ProgramaComponent } from "./programa.component";
+import { ProgramaListaComponent } from "./lista";
+import { TipoProgramaComponent } from "./tipo-programa";
 import { SharedModule } from "../shared";
 import { ProgramaRoutingModule } from "./programa-routing.module";
+import { CrearRecursoComponent } from "./crear-recurso";
 
 @NgModule({
     imports: [
@@ -11,7 +14,10 @@ import { ProgramaRoutingModule } from "./programa-routing.module";
         ProgramaRoutingModule
     ],
     declarations: [
-        ProgramaComponent
+      CrearRecursoComponent,
+      ProgramaListaComponent,
+      TipoProgramaComponent,
+      ProgramaComponent
     ],
     providers: [
     ],
