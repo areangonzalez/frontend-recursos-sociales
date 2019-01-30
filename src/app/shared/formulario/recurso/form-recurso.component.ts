@@ -14,13 +14,14 @@ export class FormRecursoComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _utilService: UtilService
+    private _utilService: UtilService,
   ) {
     this.formRecurso = _fb.group({
       tipo_recurso_socialid: ['', Validators.required],
       proposito: ['', Validators.required],
       fechaAlta: ['', Validators.required],
       fecha_alta: '',
+      monto: ['', Validators.required],
       observacion: ''
     });
   }
@@ -34,5 +35,11 @@ export class FormRecursoComponent implements OnInit {
   public formatFechaAlta(objFecha) {
     const fecha:string = this._utilService.formatearFecha(objFecha.day, objFecha.month, objFecha.year, 'yyyy-MM-dd');
     this.formRecurso.controls.fecha_alta.setValue(fecha);
+  }
+
+  public validadrNumero(datos){
+    if (!this._utilService.validarNumero(datos.value)) {
+      datos.value = datos.value.substring(0,datos.value.length - 1);
+    }
   }
 }

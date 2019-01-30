@@ -1,7 +1,7 @@
 <form [formGroup]="formRecurso">
   <fieldset>
     <div class="row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="tipo_recurso">Tipo recurso social:</label>
         <select class="form-control" id="tipo_recurso" formControlName="tipo_recurso_socialid" [ngClass]="{'is-invalid': (datosRecurso.tipo_recurso_socialid.invalid && submitted)}">
           <option value="">Seleccione tipo de recurso social</option>
@@ -11,14 +11,26 @@
             <div *ngIf="datosRecurso.tipo_recurso_socialid.errors.required">Por favor Seleccione tipo de recurso social. </div>
         </div>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="proposito">Propósito:</label>
         <input type="text" id="proposito" placeholder="Propósito..." class="form-control" formControlName="proposito">
         <div *ngIf="(datosRecurso.proposito.invalid && submitted)" class="text-danger">
           <div *ngIf="datosRecurso.proposito.errors.required">Por favor Seleccione localidad. </div>
         </div>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
+        <label for="monto">Monto:</label>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">$</div>
+          </div>
+          <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validadrNumero($event.target)" >
+        </div>
+        <div *ngIf="(datosRecurso.monto.invalid && submitted)" class="text-danger">
+          <div *ngIf="datosRecurso.monto.errors.required">Por favor Seleccione localidad. </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
         <label for="fecha_alta" class="prioridad">Fecha Alta:</label>
         <div class="input-group">
           <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #frd="ngbDatepicker"
