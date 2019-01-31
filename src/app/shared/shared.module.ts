@@ -5,10 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 
-import { FormPersonaComponent } from "./formulario/persona";
+import { FormPersonaComponent, BuscarPersonaComponent } from "./formulario/persona";
 import { FormLugarComponent } from "./formulario/lugar";
 import { FormContactoComponent } from "./formulario/contacto";
 import { FormRecursoComponent } from "./formulario/recurso";
+import { ListaPersonaComponent } from './lista';
+
 
 
 
@@ -22,20 +24,24 @@ import { FormRecursoComponent } from "./formulario/recurso";
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
+      BuscarPersonaComponent,
       FormLugarComponent,
       FormContactoComponent,
       FormPersonaComponent,
-      FormRecursoComponent
+      FormRecursoComponent,
+      ListaPersonaComponent
     ],
     exports: [
         CommonModule,
         FormsModule, ReactiveFormsModule,
         HttpClientModule,
         RouterModule,
+        BuscarPersonaComponent,
         FormLugarComponent,
         FormContactoComponent,
         FormPersonaComponent,
-        FormRecursoComponent
+        FormRecursoComponent,
+        ListaPersonaComponent
     ]
 })
 export class SharedModule { }

@@ -13,7 +13,7 @@
   <div class="row pl-3 pr-3">
     <table class="table table-hover table-sm">
       <thead>
-        <tr>
+        <tr (click)="seleccionarPersona(1)">
           <th scope="col">Nro. Documento</th>
           <th scope="col">Apellido y nombre</th>
           <th scope="col"></th>
@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr (click)="seleccionarPersona(2)">
           <td scope="row">23476745</td>
           <td >Carrasco, Alejandro</td>
           <td>
@@ -35,7 +35,7 @@
           </td>
           <td></td>
         </tr>
-        <tr>
+        <tr (click)="seleccionarPersona(3)">
           <td scope="row">23476746</td>
           <td >Carrasco, Alejandra</td>
           <td>
