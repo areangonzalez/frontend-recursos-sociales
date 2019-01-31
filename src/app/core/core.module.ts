@@ -5,7 +5,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {
   TitleService,
-  ApiService
+  ApiService,
+  PersonaService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -18,7 +19,8 @@ import { UtilService } from "./utils";
     // { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     TitleService,
     UtilService,
-    ApiService
+    ApiService,
+    PersonaService
     /* ArticlesService,
     AuthGuard,
     CommentsService,
