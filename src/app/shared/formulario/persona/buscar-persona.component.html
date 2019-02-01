@@ -1,9 +1,9 @@
 
     <div class="form-group">
       <div class="input-group">
-        <input type="text" class="form-control" id="buscar-persona" placeholder="burcar por DNI, nombre, apellido">
+        <input type="text" class="form-control" [(ngModel)]="busqueda" id="buscar-persona" placeholder="burcar por DNI, nombre, apellido">
         <div class="input-group-append btn-group">
-          <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>
+          <button type="button" class="btn btn-primary" (click)="buscar(busqueda)" ><i class="fas fa-search"></i></button>
           <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
           <button type="button" class="btn btn-success"><i class="fas fa-user-plus"></i></button>
         </div>
@@ -13,19 +13,23 @@
   <div class="row pl-3 pr-3">
     <table class="table table-hover table-sm">
       <thead>
-        <tr (click)="seleccionarPersona(1)">
+        <tr>
           <th scope="col">Nro. Documento</th>
           <th scope="col">Apellido y nombre</th>
           <th scope="col"></th>
-          <th scope="col">Selección</th>
         </tr>
       </thead>
-      <tbody>
-        <tr (click)="seleccionarPersona(2)">
-          <td scope="row">23476745</td>
-          <td >Carrasco, Alejandro</td>
-          <td>
-            <div class="btn-group">
+      <tbody *ngIf="(listaPersonas.length == 0)">
+        <tr>
+          <td rowspan="1" colspan="4" class="text-center"> <h5>No se han encontrado resultado.</h5> </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="(listaPersonas.length > 0)">
+        <tr *ngFor="let persona of listaPersonas" (click)="seleccionarPersona(persona.id, persona)">
+          <td scope="row">{{persona.nro_documento}}</td>
+          <td >
+            {{persona.apellido}}, {{persona.nombre}} &nbsp;
+            <div class="btn-group" *ngIf="(persona.lugar.localidad != '')">
               <button type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
               <button type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
               <button type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
@@ -33,23 +37,9 @@
               <button type="button" class="btn btn-sm btn-light"><i class="fas fa-users"></i></button>
             </div>
           </td>
-          <td></td>
-        </tr>
-        <tr (click)="seleccionarPersona(3)">
-          <td scope="row">23476746</td>
-          <td >Carrasco, Alejandra</td>
           <td>
-
+            <span class="rounded-circle" ><i class="fas fa-check-circle"></i></span>
           </td>
-          <td>sel</td>
-        </tr>
-        <tr>
-          <td scope="row">23476747</td>
-          <td>Carrasco, Pablo</td>
-          <td>
-
-          </td>
-          <td>sel</td>
         </tr>
       </tbody>
       </table>

@@ -10,6 +10,7 @@ import { FormLugarComponent } from "./formulario/lugar";
 import { FormContactoComponent } from "./formulario/contacto";
 import { FormRecursoComponent } from "./formulario/recurso";
 import { ListaPersonaComponent } from './lista';
+import { VistaInfoPersonaComponent } from "./vista";
 
 
 
@@ -29,7 +30,8 @@ import { ListaPersonaComponent } from './lista';
       FormContactoComponent,
       FormPersonaComponent,
       FormRecursoComponent,
-      ListaPersonaComponent
+      ListaPersonaComponent,
+      VistaInfoPersonaComponent
     ],
     exports: [
         CommonModule,
@@ -41,7 +43,8 @@ import { ListaPersonaComponent } from './lista';
         FormContactoComponent,
         FormPersonaComponent,
         FormRecursoComponent,
-        ListaPersonaComponent
+        ListaPersonaComponent,
+        VistaInfoPersonaComponent
     ]
 })
 export class SharedModule { }

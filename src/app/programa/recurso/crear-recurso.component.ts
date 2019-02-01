@@ -6,8 +6,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./crear-recurso.component.sass']
 })
 export class CrearRecursoComponent implements OnInit {
-  //public title = 'todos los programas';
+  public infoPersona = false;
+  public datosPersona:any = {};
 
   ngOnInit() {
   }
+
+  public seleccionarPersona(datos){
+    console.log(datos);
+    if (datos.persona != undefined) {
+      this.infoPersona = true;
+      this.datosPersona = datos.persona;
+    }
+  }
+
+  public cambiarPersona(){
+    this.datosPersona = {};
+    this.infoPersona = false;
+  }
+
 }

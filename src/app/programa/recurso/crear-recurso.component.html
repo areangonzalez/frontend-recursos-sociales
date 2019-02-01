@@ -1,6 +1,10 @@
 <div class="mb-3 bg-white  p-3 rounded">
-  <h2>Crear prestación</h2>
-  <shared-buscar-persona></shared-buscar-persona>
+  <div class="d-flex justify-content-between">
+    <h2>Crear prestación</h2>
+    <button type="button" class="btn btn-md btn-info mb-2" *ngIf="infoPersona"><i class="fas fa-sync"></i></button>
+  </div>
+  <shared-buscar-persona *ngIf="!(infoPersona)" (personaElegida)="seleccionarPersona($event)" ></shared-buscar-persona>
+  <shared-vista-info-persona *ngIf="infoPersona" [persona]=""></shared-vista-info-persona>
 </div>
 <div class="mb-3 bg-white  p-3 rounded">
   <shared-form-recurso></shared-form-recurso>

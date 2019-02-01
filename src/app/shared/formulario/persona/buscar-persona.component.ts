@@ -1,27 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { PersonaService } from 'src/app/core/services';
+
 
 @Component({
   selector: 'shared-buscar-persona',
   templateUrl: './buscar-persona.component.html',
-  styleUrls: []
+  styleUrls: ['./buscar-persona.component.sass']
 })
 export class BuscarPersonaComponent implements OnInit {
-  //public title = 'todos los programas';
+  @Output("personaElegida") public personaElegida = new EventEmitter();
+  public busqueda = "";
+  public listaPersonas: any = [];
 
   constructor(
-    private _route: Router
+    private _route: Router,
+    private _personaService: PersonaService
   ){}
 
   ngOnInit() {
   }
 
-  public buscar(e:any){
-    console.log("algun valor: ",e);
+  public buscar(busqueda){
+    const params: object = {global_search:busqueda, _limit:3};
+
+    this._personaService.buscar(params).subscribe(
+      datos => {
+        if (datos.resultado != undefined && datos.resultado.length >= 0){
+          this.listaPersonas = datos.resultado;
+        }else if (datos.length >= 0){
+          this.listaPersonas = datos;
+        }else{
+          console.log("datos no contiene nada");
+        }
+      }, error => {
+        console.log(error);
+      });
+
+
   }
 
 
-  public seleccionarPersona(id){
-    console.log(id);
+  public seleccionarPersona(id, persona){
+    const datos: object = {id:id, persona: persona};
+    this.personaElegida.emit(datos);
   }
 }
