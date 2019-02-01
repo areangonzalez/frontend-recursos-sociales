@@ -6,7 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./vista-info-persona.component.sass']
 })
 export class VistaInfoPersonaComponent implements OnInit {
-  @Input("persona") public persona:object;
+  @Input("persona") public persona:any;
+  @Input("mostrarBoton") public mostrarBoton: boolean;
 
   ngOnInit() {
   }

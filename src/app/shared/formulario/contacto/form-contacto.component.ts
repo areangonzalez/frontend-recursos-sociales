@@ -7,7 +7,7 @@ import { FormGroup } from "@angular/forms";
   styleUrls: ['./form-contacto.component.sass']
 })
 export class FormContactoComponent implements OnInit {
-  @Input('formContacto') public contacto: FormGroup;
+  @Input("formContacto") public contacto: FormGroup;
 
   public submitted: boolean = false;
   public localidadLista: any = [{id: 1, nombre: 'Roca'}, {id: 2, nombre: 'Viedma'}];
@@ -15,6 +15,7 @@ export class FormContactoComponent implements OnInit {
   constructor(){}
 
   ngOnInit() {
+    console.log(this.contacto);
   }
 
   // convenience getter for easy access to form fields
