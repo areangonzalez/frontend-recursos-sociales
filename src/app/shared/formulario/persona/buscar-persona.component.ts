@@ -45,4 +45,14 @@ export class BuscarPersonaComponent implements OnInit {
     const datos: object = {id:id, persona: persona};
     this.personaElegida.emit(datos);
   }
+
+  public direccion(lugar){
+    let dir = "";
+    dir += lugar['localidad'] + " - " + lugar['barrio'] + ' - ' + lugar['calle'] + ' ' + lugar['altura'];
+    dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
+    dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
+    dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
+
+    return dir;
+  }
 }

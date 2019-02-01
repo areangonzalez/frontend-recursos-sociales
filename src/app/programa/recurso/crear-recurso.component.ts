@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'programa-crear-recurso',
@@ -12,6 +13,7 @@ export class CrearRecursoComponent implements OnInit {
   public contactosForm: FormGroup;
 
   constructor(
+    private _router: Router,
     private _fb: FormBuilder
   ){
     this.contactosForm = _fb.group({
@@ -38,7 +40,14 @@ export class CrearRecursoComponent implements OnInit {
   public cambiarPersona(){
     this.datosPersona = {};
     this.infoPersona = false;
+    this.contactosForm.reset();
   }
 
+  public editarPersona(){
+    const url: string = this._router.url;
+    const urlModificada: string = url.replace('nuevo', 'crear-persona');
+    this._router.navigateByUrl(urlModificada);
+  }
 
 }
+

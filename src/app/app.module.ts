@@ -1,6 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDatepickerI18n, NgbDateStruct, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
 /* Routing */
@@ -34,6 +34,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule.forRoot(),
+    NgbTooltipModule.forRoot(),
     CoreModule,
     SharedModule,
     InicioModule,
