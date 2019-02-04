@@ -7,9 +7,9 @@
     </div>
   </div>
   <shared-buscar-persona *ngIf="!(infoPersona)" (personaElegida)="seleccionarPersona($event)" ></shared-buscar-persona>
-  <shared-vista-info-persona *ngIf="infoPersona" [persona]="datosPersona" [mostrarBoton]="false" ></shared-vista-info-persona>
 
-  <shared-form-contacto [formContacto]="contactosForm.controls.contacto"></shared-form-contacto>
+  <shared-vista-info-persona *ngIf="infoPersona" [persona]="datosPersona" [mostrarBoton]="false" ></shared-vista-info-persona>
+  <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.controls.contacto"></shared-form-contacto>
 
 </div>
 <div class="mb-3 bg-white  p-3 rounded">
