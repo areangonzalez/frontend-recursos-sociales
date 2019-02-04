@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'programa-crear-recurso',
@@ -11,8 +12,10 @@ export class CrearRecursoComponent implements OnInit {
   public infoPersona = false;
   public datosPersona:any = {};
   public contactosForm: FormGroup;
+  public programaID: any;
 
   constructor(
+    private _route: ActivatedRoute,
     private _router: Router,
     private _fb: FormBuilder
   ){

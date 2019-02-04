@@ -52,5 +52,9 @@ export class HeaderComponent implements OnInit {
       this.mostrar = false;
     }
 
+    public guardarPrograma(programa:Object) {
+      console.log(programa);
+    }
+
 
 }

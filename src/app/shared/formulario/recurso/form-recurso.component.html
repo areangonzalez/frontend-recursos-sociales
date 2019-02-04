@@ -5,7 +5,7 @@
         <label for="tipo_recurso">Tipo recurso social:</label>
         <select class="form-control" id="tipo_recurso" formControlName="tipo_recurso_socialid" [ngClass]="{'is-invalid': (datosRecurso.tipo_recurso_socialid.invalid && submitted)}">
           <option value="">Seleccione tipo de recurso social</option>
-          <option *ngFor="let tipo of tipoRecursoSocialLista" value="{{tipo.id}}">{{tipo.nombre}}</option>
+          <option *ngFor="let tipo of tipoPrestacionLista" value="{{tipo.id}}">{{tipo.nombre}}</option>
         </select>
         <div *ngIf="(datosRecurso.tipo_recurso_socialid.invalid && submitted)" class="text-danger">
             <div *ngIf="datosRecurso.tipo_recurso_socialid.errors.required">Por favor Seleccione tipo de recurso social. </div>

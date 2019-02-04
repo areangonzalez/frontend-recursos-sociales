@@ -7,7 +7,8 @@ import {
   TitleService,
   ApiService,
   PersonaService,
-  TipoRecursoService
+  TipoRecursoService,
+  ProgramaService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -22,7 +23,8 @@ import { UtilService } from "./utils";
     UtilService,
     ApiService,
     PersonaService,
-    TipoRecursoService
+    TipoRecursoService,
+    ProgramaService
     /* ArticlesService,
     AuthGuard,
     CommentsService,

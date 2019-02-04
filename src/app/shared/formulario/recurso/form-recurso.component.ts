@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilService } from 'src/app/core/utils';
+import { TipoRecursoService } from 'src/app/core/services';
 
 @Component({
   selector: 'shared-form-recurso',
@@ -10,11 +11,12 @@ import { UtilService } from 'src/app/core/utils';
 export class FormRecursoComponent implements OnInit {
 
   public formRecurso: FormGroup;
-  public tipoRecursoSocialLista: any = [{id: 1, nombre: 'Alimentacion'}];
+  public tipoPrestacionLista: any = [];
 
   constructor(
     private _fb: FormBuilder,
     private _utilService: UtilService,
+    private _tipoRecursoService: TipoRecursoService
   ) {
     this.formRecurso = _fb.group({
       tipo_recurso_socialid: ['', Validators.required],
@@ -27,6 +29,8 @@ export class FormRecursoComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.getTipoPrestacion(this.programaid);
+
   }
 
   get datosRecurso(){ return this.formRecurso.controls; }
@@ -41,5 +45,12 @@ export class FormRecursoComponent implements OnInit {
     if (!this._utilService.validarNumero(datos.value)) {
       datos.value = datos.value.substring(0,datos.value.length - 1);
     }
+  }
+
+  public getTipoPrestacion(programaid) {
+    this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(
+      datos => {
+        this.tipoPrestacionLista = datos;
+      }, error => console.log("hubo un error: ", error));
   }
 }

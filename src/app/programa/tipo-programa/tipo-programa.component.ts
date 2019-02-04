@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'programa-tipo',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TipoProgramaComponent implements OnInit {
   //public title = 'todos los programas';
+
+  constructor(
+  ){}
 
   ngOnInit() {
   }
