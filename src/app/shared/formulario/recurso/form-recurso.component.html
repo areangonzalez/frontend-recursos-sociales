@@ -2,20 +2,20 @@
   <fieldset>
     <div class="row">
       <div class="form-group col-md-3">
-        <label for="tipo_recurso">Tipo recurso social:</label>
+        <label for="tipo_recurso">Tipo de prestación:</label>
         <select class="form-control" id="tipo_recurso" formControlName="tipo_recurso_socialid" [ngClass]="{'is-invalid': (datosRecurso.tipo_recurso_socialid.invalid && submitted)}">
-          <option value="">Seleccione tipo de recurso social</option>
+          <option value="">Seleccione tipo de prestación</option>
           <option *ngFor="let tipo of tipoPrestacionLista" value="{{tipo.id}}">{{tipo.nombre}}</option>
         </select>
         <div *ngIf="(datosRecurso.tipo_recurso_socialid.invalid && submitted)" class="text-danger">
-            <div *ngIf="datosRecurso.tipo_recurso_socialid.errors.required">Por favor Seleccione tipo de recurso social. </div>
+            <div *ngIf="datosRecurso.tipo_recurso_socialid.errors.required">Por favor Seleccione un tipo de prestación. </div>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label for="proposito">Propósito:</label>
         <input type="text" id="proposito" placeholder="Propósito..." class="form-control" formControlName="proposito">
         <div *ngIf="(datosRecurso.proposito.invalid && submitted)" class="text-danger">
-          <div *ngIf="datosRecurso.proposito.errors.required">Por favor Seleccione localidad. </div>
+          <div *ngIf="datosRecurso.proposito.errors.required">Por favor ingrese un propósito. </div>
         </div>
       </div>
       <div class="form-group col-md-3">
@@ -27,7 +27,7 @@
           <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validadrNumero($event.target)" >
         </div>
         <div *ngIf="(datosRecurso.monto.invalid && submitted)" class="text-danger">
-          <div *ngIf="datosRecurso.monto.errors.required">Por favor Seleccione localidad. </div>
+          <div *ngIf="datosRecurso.monto.errors.required">Por favor ingrese un monto. </div>
         </div>
       </div>
       <div class="form-group col-md-3">
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div *ngIf="(datosRecurso.fechaAlta.invalid && submitted)" class="text-danger">
-            <div *ngIf="datosRecurso.fechaAlta.errors.required">Este campo es requerido. </div>
+            <div *ngIf="datosRecurso.fechaAlta.errors.required">Pro favor ingrese una fecha. </div>
         </div>
       </div>
       <div class="form-group col-md-12">
@@ -52,16 +52,23 @@
         </div>
     </div>
   </fieldset>
-  <fieldset>
+  <fieldset *ngIf="(emprender)" >
     <div class="d-flex justify-content-between">
       <div class="col-4 pt-1"><hr></div>
-      <div class="col-4 text-center"><h3><small class="text-muted">Crear listado de alumnos</small></h3></div>
+      <div class="col-4 text-center"><h3><small class="text-muted">Buscar alumnos</small></h3></div>
       <div class="col-4 pt-1"><hr></div>
     </div>
     <div class="row" >
       <div class="col-md-12">
         <shared-buscar-persona></shared-buscar-persona>
       </div>
+    </div>
+    <div class="d-flex justify-content-between">
+        <div class="col-4 pt-1"><hr></div>
+        <div class="col-4 text-center"><h3><small class="text-muted">listado de alumnos</small></h3></div>
+        <div class="col-4 pt-1"><hr></div>
+      </div>
+    <div class="row">
       <div class="col-md-12">
         <shared-lista-persona></shared-lista-persona>
       </div>

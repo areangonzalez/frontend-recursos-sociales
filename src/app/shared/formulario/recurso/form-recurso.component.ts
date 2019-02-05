@@ -12,6 +12,7 @@ export class FormRecursoComponent implements OnInit {
 
   public formRecurso: FormGroup;
   public tipoPrestacionLista: any = [];
+  public emprender: boolean = false;
 
   constructor(
     private _fb: FormBuilder,
@@ -32,6 +33,7 @@ export class FormRecursoComponent implements OnInit {
   ngOnInit() {
     this._programaService.getProgramaUrl().subscribe(
       datos => {
+        this.emprender = (datos.programa.id == 1) ? true : false;
         this.getTipoPrestacion(datos.programa.id);
       });
 

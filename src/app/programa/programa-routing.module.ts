@@ -16,7 +16,7 @@ const routes: Routes = [
           children: [
             { path: '', redirectTo: 'lista', pathMatch: 'full' },
             { path:'lista', component: ProgramaListaComponent, data: {breadcrumb: 'lista'} },
-            { path:'recurso', component: ProgramaRecursoComponent, data: {breadcrumb: 'Crear recurso'},
+            { path:'prestacion', component: ProgramaRecursoComponent, data: {breadcrumb: 'Crear prestación'},
               children: [
                 { path: '', redirectTo: 'nuevo', pathMatch: 'full' },
                 { path: 'nuevo', component: CrearRecursoComponent  },
