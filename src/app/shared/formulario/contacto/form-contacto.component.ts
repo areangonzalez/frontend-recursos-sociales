@@ -15,7 +15,6 @@ export class FormContactoComponent implements OnInit {
   constructor(){}
 
   ngOnInit() {
-    console.log(this.contacto);
   }
 
   // convenience getter for easy access to form fields

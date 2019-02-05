@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { map } from "rxjs/operators";
+import { ProgramaService } from 'src/app/core/services';
 
 @Component({
   selector: 'programa-crear-recurso',
@@ -12,12 +13,13 @@ export class CrearRecursoComponent implements OnInit {
   public infoPersona = false;
   public datosPersona:any = {};
   public contactosForm: FormGroup;
-  public programaID: any;
+  public programa: any;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _programService: ProgramaService
   ){
     this.contactosForm = _fb.group({
       contacto: _fb.group({
@@ -32,7 +34,6 @@ export class CrearRecursoComponent implements OnInit {
   }
 
   public seleccionarPersona(datos){
-    console.log(datos);
     if (datos.persona != undefined) {
       this.infoPersona = true;
       this.datosPersona = datos.persona;

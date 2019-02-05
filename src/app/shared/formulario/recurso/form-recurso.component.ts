@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilService } from 'src/app/core/utils';
-import { TipoRecursoService } from 'src/app/core/services';
+import { TipoRecursoService, ProgramaService } from 'src/app/core/services';
 
 @Component({
   selector: 'shared-form-recurso',
@@ -16,6 +16,7 @@ export class FormRecursoComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _utilService: UtilService,
+    private _programaService: ProgramaService,
     private _tipoRecursoService: TipoRecursoService
   ) {
     this.formRecurso = _fb.group({
@@ -29,7 +30,10 @@ export class FormRecursoComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getTipoPrestacion(this.programaid);
+    this._programaService.getProgramaUrl().subscribe(
+      datos => {
+        this.getTipoPrestacion(datos.programa.id);
+      });
 
   }
 
