@@ -11,6 +11,7 @@ import { CoreModule } from "./core/core.module";
 import {
   HeaderComponent,
   FooterComponent,
+  MensajesComponent,
   BreadcrumbComponent, BreadcrumbsService,
   CustomDatepickerI18n,
   SharedModule
@@ -28,6 +29,7 @@ import { AppComponent } from './app.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    MensajesComponent,
     BreadcrumbComponent
   ],
   imports: [
