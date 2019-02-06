@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
 import { IPrograma, IListaProgramas } from "../../core/models";
-import { ProgramaService } from 'src/app/core/services';
+import { ProgramaService, MensajesService } from 'src/app/core/services';
 
 @Component({
     selector: 'layout-header',
@@ -16,7 +16,8 @@ export class HeaderComponent implements OnInit {
 
     constructor(
         private _router: Router,
-        private _programaService: ProgramaService
+        private _programaService: ProgramaService,
+        private _mensajeService: MensajesService
     ) { }
 
     ngOnInit() {
@@ -35,12 +36,7 @@ export class HeaderComponent implements OnInit {
       this._programaService.listar().subscribe(
         datos => {
           this.listaProgramas = datos;
-        }, error => { console.log("hubo un error: ",error); });
-
-      /* this.listaProgramas = [
-        { id: 1, nombre: 'Emprender', isHovering:false }, { id: 2, nombre: 'Habitat', isHovering:false },{ id: 3, nombre: 'Microemprendimientos', isHovering:false },
-        { id: 4, nombre: 'RN Presente', isHovering:false }, { id: 5, nombre: 'Subsidio', isHovering:false }
-      ]; */
+        }, error => { this._mensajeService.cancelado(error, [{name:''}] ); });
     }
 
     public isHovering = false;
@@ -61,7 +57,6 @@ export class HeaderComponent implements OnInit {
     }
 
     public guardarPrograma(programa:Object) {
-      console.log(programa);
       this._programaService.setProgramaUrl(programa);
     }
 

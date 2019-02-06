@@ -55,12 +55,11 @@ export class FormRecursoComponent implements OnInit {
 
   public getTipoPrestacion() {
     this.programa = this._programaService.getProgramaUrl();
-        console.log(this.programa);
-        this.emprender = (this.programa.id == 1) ? true : false;
-        this._tipoRecursoService.buscarPorPrograma(this.programa.id).subscribe(
-          prestacion => {
-            this.tipoPrestacionLista = prestacion;
-          }, error => console.log("hubo un error: ", error));
+    this.emprender = (this.programa.id == 1) ? true : false;
+    this._tipoRecursoService.buscarPorPrograma(this.programa.id).subscribe(
+      prestacion => {
+        this.tipoPrestacionLista = prestacion;
+      }, error => console.log("hubo un error: ", error));
   }
 
   public agregarAlumnos(alumno:any){
