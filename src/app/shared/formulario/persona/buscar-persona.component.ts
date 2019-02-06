@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { PersonaService } from 'src/app/core/services';
+import { ModalConfig, BotonDisenio } from 'src/app/core/models';
 
 
 @Component({
@@ -12,7 +13,8 @@ export class BuscarPersonaComponent implements OnInit {
   @Output("personaElegida") public personaElegida = new EventEmitter();
   public busqueda = "";
   public listaPersonas: any = [];
-  public botonAgregar = {class: "btn btn-success", iconoClass: "fas fa-user-plus",  text: ""};
+  public configModal: ModalConfig = {title:"Crear persona"};
+  public botonAgregar: BotonDisenio = {class: "btn btn-success", iconoClass: "fas fa-user-plus",  text: ""};
 
   constructor(
     private _route: Router,
