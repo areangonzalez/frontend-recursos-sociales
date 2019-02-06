@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'modal-form-persona-content',
@@ -9,11 +9,17 @@ export class ModalFormPersonaContent {
   @Input() name;
 
   constructor(public activeModal: NgbActiveModal) {}
+
+  public guardar(datos:any) {
+    console.log(datos);
+  }
 }
 
 @Component({
   selector: 'modal-form-persona-component',
-  templateUrl: './modal-form-persona.component.html'
+  templateUrl: './modal-form-persona.component.html',
+  providers: [NgbModalConfig]
+
 })
 export class ModalFormPersonaComponent {
   /**
@@ -21,10 +27,16 @@ export class ModalFormPersonaComponent {
    */
   @Input("disenioBoton") public disenioBoton: object;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(
+    private modalService: NgbModal,
+    private config: NgbModalConfig
+  ) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   open() {
-    const modalRef = this.modalService.open(ModalFormPersonaContent);
+    const modalRef = this.modalService.open(ModalFormPersonaContent, {size: 'lg'});
     modalRef.componentInstance.name = 'World';
   }
 }

@@ -9,7 +9,6 @@ import { UtilService } from 'src/app/core/utils';
   styleUrls: ['./form-persona.component.sass']
 })
 export class FormPersonaComponent implements OnInit {
-  @Input("cancelarUrl") public cancelarRoute:string;
   @Output('getDatos') public getDatos = new EventEmitter();
 
   public formPersona: FormGroup;
@@ -124,19 +123,6 @@ export class FormPersonaComponent implements OnInit {
   public obtenerDatos(){
     //desarrollar submit
     this.getDatos.emit(this.formPersona.value);
-  }
-
-  public cancelarForm(){
-    const urlRecurso:string = this._router.url;
-    switch (this.cancelarRoute) {
-      case "recurso":
-        const url = urlRecurso.replace('crear-persona','nuevo');
-        this._router.navigateByUrl(url);
-        break;
-      default:
-        this._router.navigate(['inicio']); // login
-        break;
-    }
   }
 
 }
