@@ -84,4 +84,12 @@ export class FormRecursoComponent implements OnInit {
     return existe;
 
   }
+
+  borrarAlumno(alumno:any){
+    for (let i = 0; i < this.listaAlumnos.length; i++) {
+      if (this.listaAlumnos[i].id == alumno.id){
+        this.listaAlumnos.splice(i, 1);
+      }
+    }
+  }
 }
