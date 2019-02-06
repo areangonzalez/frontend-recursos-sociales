@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilService } from 'src/app/core/utils';
-import { TipoRecursoService, ProgramaService } from 'src/app/core/services';
+import { TipoRecursoService, ProgramaService, MensajesService } from 'src/app/core/services';
 
 @Component({
   selector: 'shared-form-recurso',
@@ -20,7 +20,8 @@ export class FormRecursoComponent implements OnInit {
     private _fb: FormBuilder,
     private _utilService: UtilService,
     private _programaService: ProgramaService,
-    private _tipoRecursoService: TipoRecursoService
+    private _tipoRecursoService: TipoRecursoService,
+    private _mensajeService: MensajesService
   ) {
     this.formRecurso = _fb.group({
       tipo_recurso_socialid: ['', Validators.required],
@@ -63,6 +64,24 @@ export class FormRecursoComponent implements OnInit {
   }
 
   public agregarAlumnos(alumno:any){
-    this.listaAlumnos.push(alumno.persona);
+
+    if (this.alumnoDuplicado(alumno.id) === true){
+      this.listaAlumnos.push(alumno.persona);
+    }else{
+      this._mensajeService.cancelado("Este alumno ya fue ingresado.", [{name: ''}]);
+    }
+  }
+
+  private alumnoDuplicado(id:number) {
+    let existe = true;
+    if (this.listaAlumnos.length > 0){
+      for (let i = 0; i < this.listaAlumnos.length; i++) {
+        if (this.listaAlumnos[i].id == id) {
+          existe = false;
+        }
+      }
+    }
+    return existe;
+
   }
 }
