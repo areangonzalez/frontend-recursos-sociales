@@ -28,6 +28,7 @@ import { CrearPersonaComponent } from "./persona";
     providers: [
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class ProgramaModule {
     constructor() {

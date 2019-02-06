@@ -12,6 +12,7 @@ export class BuscarPersonaComponent implements OnInit {
   @Output("personaElegida") public personaElegida = new EventEmitter();
   public busqueda = "";
   public listaPersonas: any = [];
+  public botonAgregar = {class: "btn btn-success", iconoClass: "fas fa-user-plus",  text: ""};
 
   constructor(
     private _route: Router,
@@ -36,8 +37,6 @@ export class BuscarPersonaComponent implements OnInit {
       }, error => {
         console.log(error);
       });
-
-
   }
 
 

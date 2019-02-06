@@ -11,6 +11,7 @@ import { FormContactoComponent } from "./formulario/contacto";
 import { FormRecursoComponent } from "./formulario/recurso";
 import { ListaPersonaComponent } from './lista';
 import { VistaInfoPersonaComponent } from "./vista";
+import { ModalFormPersonaComponent, ModalFormPersonaContent } from "./modal";
 
 
 
@@ -31,7 +32,8 @@ import { VistaInfoPersonaComponent } from "./vista";
       FormPersonaComponent,
       FormRecursoComponent,
       ListaPersonaComponent,
-      VistaInfoPersonaComponent
+      VistaInfoPersonaComponent,
+      ModalFormPersonaComponent, ModalFormPersonaContent
     ],
     exports: [
         CommonModule,
@@ -44,7 +46,9 @@ import { VistaInfoPersonaComponent } from "./vista";
         FormPersonaComponent,
         FormRecursoComponent,
         ListaPersonaComponent,
-        VistaInfoPersonaComponent
-    ]
+        VistaInfoPersonaComponent,
+        ModalFormPersonaComponent, ModalFormPersonaContent
+    ],
+    entryComponents: [ModalFormPersonaComponent, ModalFormPersonaContent]
 })
 export class SharedModule { }
