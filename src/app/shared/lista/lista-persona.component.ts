@@ -6,6 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: []
 })
 export class ListaPersonaComponent implements OnInit {
+  @Input("personas") public personas:any;
 
   constructor(){}
 

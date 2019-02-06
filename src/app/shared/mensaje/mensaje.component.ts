@@ -7,7 +7,7 @@ import { MensajesService } from "../../core/services";
 @Component({
     selector: 'mensajes-alert',
     templateUrl: './mensaje.component.html',
-    styleUrls: ['./mensaje.component.sass'],
+    styleUrls: ['./mensaje.component.sass']
 })
 @Injectable()
 export class MensajesComponent implements OnInit {
@@ -37,7 +37,6 @@ export class MensajesComponent implements OnInit {
                     this.tipo = alert.tipo;
                     this.url = alert.urlLink;
                 }
-
             }
         );
     }

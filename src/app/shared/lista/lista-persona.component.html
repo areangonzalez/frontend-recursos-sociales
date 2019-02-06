@@ -8,10 +8,15 @@
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="(personas.length == 0)">
         <tr>
-          <td scope="row">23476745</td>
-          <td >Carrasco, Alejandro</td>
+          <td class="text-center" rowspan="1" colspan="4"><h5>No hay personas agregadas.</h5></td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="(personas.length > 0)">
+        <tr *ngFor="let persona of personas">
+          <td scope="row">{{persona.nro_documento}}</td>
+          <td >{{persona.apellido}}, {{persona.nombre}}</td>
           <td class="text-center">
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
@@ -20,30 +25,6 @@
               <button type="button" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
               <button type="button" class="btn btn-sm btn-light"><i class="fas fa-users"></i></button>
             </div>
-          </td>
-          <td class="text-center">sel</td>
-        </tr>
-        <tr>
-          <td scope="row">23476746</td>
-          <td >Carrasco, Alejandra</td>
-          <td>
-              <button type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
-              <button type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
-              <button type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
-              <button type="button" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
-              <button type="button" class="btn btn-sm btn-light"><i class="fas fa-users"></i></button>
-          </td>
-          <td class="text-center">sel</td>
-        </tr>
-        <tr>
-          <td scope="row">23476747</td>
-          <td>Carrasco, Pablo</td>
-          <td>
-              <button type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
-              <button type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
-              <button type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
-              <button type="button" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
-              <button type="button" class="btn btn-sm btn-light"><i class="fas fa-users"></i></button>
           </td>
           <td class="text-center">sel</td>
         </tr>

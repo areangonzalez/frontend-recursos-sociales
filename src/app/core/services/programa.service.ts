@@ -2,11 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpParams } from '@angular/common/http';
 
 import { ApiService } from './api.service';
-import { Subject, Observable } from "rxjs";
 
 @Injectable()
 export class ProgramaService {
-  private subject = new Subject<any>();
 
   constructor(
     private _apiService: ApiService
@@ -14,15 +12,15 @@ export class ProgramaService {
 
 
   setProgramaUrl(programa: object) {
-    this.subject.next({ programa: programa  });
+    localStorage.setItem("programaUrl", JSON.stringify(programa));
   }
 
   clearProgramaUrl() {
-      this.subject.next();
+    localStorage.clear();
   }
 
-  getProgramaUrl(): Observable<any> {
-      return this.subject.asObservable();
+  getProgramaUrl() {
+    return JSON.parse(localStorage.getItem('programaUrl'));
   }
 
   listar() {

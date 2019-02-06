@@ -13,6 +13,8 @@ export class FormRecursoComponent implements OnInit {
   public formRecurso: FormGroup;
   public tipoPrestacionLista: any = [];
   public emprender: boolean = false;
+  public programa:any;
+  public listaAlumnos = [];
 
   constructor(
     private _fb: FormBuilder,
@@ -31,11 +33,8 @@ export class FormRecursoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._programaService.getProgramaUrl().subscribe(
-      datos => {
-        this.emprender = (datos.programa.id == 1) ? true : false;
-        this.getTipoPrestacion(datos.programa.id);
-      });
+    this.getTipoPrestacion();
+
 
   }
 
@@ -53,10 +52,17 @@ export class FormRecursoComponent implements OnInit {
     }
   }
 
-  public getTipoPrestacion(programaid) {
-    this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(
-      datos => {
-        this.tipoPrestacionLista = datos;
-      }, error => console.log("hubo un error: ", error));
+  public getTipoPrestacion() {
+    this.programa = this._programaService.getProgramaUrl();
+        console.log(this.programa);
+        this.emprender = (this.programa.id == 1) ? true : false;
+        this._tipoRecursoService.buscarPorPrograma(this.programa.id).subscribe(
+          prestacion => {
+            this.tipoPrestacionLista = prestacion;
+          }, error => console.log("hubo un error: ", error));
+  }
+
+  public agregarAlumnos(alumno:any){
+    this.listaAlumnos.push(alumno.persona);
   }
 }

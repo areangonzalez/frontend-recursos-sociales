@@ -61,6 +61,7 @@ export class HeaderComponent implements OnInit {
     }
 
     public guardarPrograma(programa:Object) {
+      console.log(programa);
       this._programaService.setProgramaUrl(programa);
     }
 
