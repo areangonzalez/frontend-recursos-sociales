@@ -54,7 +54,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "frontend-recursos-sociales:build"
+            "browserTarget": "frontend-recursos-sociales:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {

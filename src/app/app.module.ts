@@ -1,7 +1,7 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule, NgbDatepickerI18n, NgbDateStruct, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 /* Routing */
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +26,8 @@ import { ReporteModule } from "./reporte/reporte.module";
 
 
 import { AppComponent } from './app.component';
+import { HttpClient } from 'selenium-webdriver/http';
+import { ErrorInterceptor } from './shared/helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     NgbModule.forRoot(),
     NgbTooltipModule.forRoot(),
+    HttpClientModule,
     CoreModule,
     SharedModule,
     InicioModule,
@@ -48,6 +51,7 @@ import { AppComponent } from './app.component';
     ReporteModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
     Title,
     BreadcrumbsService,

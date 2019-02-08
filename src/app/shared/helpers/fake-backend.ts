@@ -15,7 +15,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
-            // authenticate
+            /* // authenticate
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
                 // find if any user matches login credentials
                 let filteredUsers = users.filter(user => {
@@ -111,6 +111,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });
                 }
+            } */
+
+
+            /* ----------------------  LISTAS GENERALES  --------------------------- */
+
+            // get users
+            if (request.url.endsWith('/localidads') && request.method === 'GET') {
+              // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+              /* if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') { */
+
+                  console.log(request.body);
+
+
+                  //return of(new HttpResponse({ status: 200, body: users }));
+              /* } else {
+                  // return 401 not authorised if token is null or invalid
+                  return throwError({ error: { message: 'Unauthorised' } });
+              } */
             }
 
             // pass through any requests not handled above
