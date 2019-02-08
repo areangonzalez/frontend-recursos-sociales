@@ -6,6 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 /* Routing */
 import { AppRoutingModule } from './app-routing.module';
 
+// fake backend provider
+import { FakeBackendInterceptor } from "./shared/helpers/fake-backend";
+
 /* Modulos */
 import { CoreModule } from "./core/core.module";
 import {
@@ -47,7 +50,11 @@ import { AppComponent } from './app.component';
   providers: [
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
     Title,
-    BreadcrumbsService
+    BreadcrumbsService,
+
+    // facke-backend providers
+    FakeBackendInterceptor
+
   ],
   bootstrap: [AppComponent]
 })

@@ -25,20 +25,25 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: loadInicioModule,
+            loadChildren: loadInicioModule, // dev
+            //loadChildren: './inicio/inicio.module#InicioModule', // production
           },
-          {
+          /* {
             path: 'beneficiario',
-            loadChildren: loadBeneficiarioModule,
+            //loadChildren: loadBeneficiarioModule,
+            loadChildren: './inicio/inicio.module#InicioModule',
             data: { preload: true, breadcrumb: 'Beneficiario' }
-          },{
+          }, */
+          {
               path: 'programa',
-              loadChildren: loadProgramaModule,
+              loadChildren: loadProgramaModule, // dev
+              //loadChildren: './programa/programa.module#ProgramaModule', // production
               data: { preload: true, breadcrumb: 'programa'}
           },
           {
               path: 'reporte',
-              loadChildren: loadReporteModule,
+              loadChildren: loadReporteModule, // dev
+              //loadChildren: './reporte/reporte.module#ReporteModule', // production
               data: { preload: true, breadcrumb: 'Reportes' }
           },
         ]

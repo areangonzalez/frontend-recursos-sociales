@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://api.recurso-social.local'
+  baseUrl: 'http://recurso-social.local/api'
 };

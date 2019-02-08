@@ -25,17 +25,18 @@ export class BuscarPersonaComponent implements OnInit {
   }
 
   public buscar(busqueda){
-    const params: object = {global_search:busqueda, _limit:3};
+    const params: object = {global_search:busqueda, pagesize:3};
 
     this._personaService.buscar(params).subscribe(
       datos => {
-        if (datos.resultado != undefined && datos.resultado.length >= 0){
-          this.listaPersonas = datos.resultado;
+        this.listaPersonas = datos.resultado;
+        console.log(this.listaPersonas);
+        /* if (datos.resultado != undefined && datos.resultado.length >= 0){
         }else if (datos.length >= 0){
           this.listaPersonas = datos;
         }else{
           console.log("datos no contiene nada");
-        }
+        } */
       }, error => {
         console.log(error);
       });

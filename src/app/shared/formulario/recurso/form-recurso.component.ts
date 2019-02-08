@@ -15,6 +15,7 @@ export class FormRecursoComponent implements OnInit {
   public emprender: boolean = false;
   public programa:any;
   public listaAlumnos = [];
+  public submitted = false;
 
   constructor(
     private _fb: FormBuilder,
