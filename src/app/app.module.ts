@@ -7,7 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 // fake backend provider
-import { FakeBackendInterceptor } from "./shared/helpers/fake-backend";
+import { fakeBackendProvider } from "./shared/helpers/fake-backend";
 
 /* Modulos */
 import { CoreModule } from "./core/core.module";
@@ -57,7 +57,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     BreadcrumbsService,
 
     // facke-backend providers
-    FakeBackendInterceptor
+    fakeBackendProvider
 
   ],
   bootstrap: [AppComponent]
