@@ -5,3 +5,4 @@ export * from './tipo-recurso.service';
 export * from './programa.service';
 export * from './mesnaje.service';
 export * from './sexo.service';
+export * from './genero.service';
