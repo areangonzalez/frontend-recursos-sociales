@@ -68,15 +68,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let total = parseFloat(totalFiltrado/pageSize);
                 let totalPagina = (total > parseInt(total)) ? parseInt(total) + 1 : total;
 
-                console.log(resultado.length);
                 listaPersonas.total_filtrado = resultado.length;
                 listaPersonas.pages = totalPagina;
-                if (page != null || page == 0) {
-                  listaPersonas.resultado = resultado.slice(0,pageSize);
-                }else{
+                if (page > 0) {
+                  console.log("pagina mayor a 0: ",page);
                   let pageStart = page * pageSize;
                   let pageEnd = pageStart + pageSize;
                   listaPersonas.resultado = resultado.slice(pageStart, pageEnd);
+                }else{
+                  listaPersonas.resultado = resultado.slice(0,pageSize);
                 }
 
               return of(new HttpResponse({ status: 200, body: listaPersonas }));
