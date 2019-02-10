@@ -9,7 +9,8 @@ import {
   MensajesService,
   PersonaService,
   TipoRecursoService,
-  ProgramaService
+  ProgramaService,
+  SexoService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -26,7 +27,8 @@ import { UtilService } from "./utils";
     MensajesService,
     PersonaService,
     TipoRecursoService,
-    ProgramaService
+    ProgramaService,
+    SexoService
     /* ArticlesService,
     AuthGuard,
     CommentsService,

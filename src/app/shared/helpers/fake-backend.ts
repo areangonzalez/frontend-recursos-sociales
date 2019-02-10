@@ -16,6 +16,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let programas = (<any>data).programas;
         let localidades = (<any>data).localidads;
         let tipoRecurso = (<any>data).tipoRecursoSocials;
+        let sexos = (<any>data).sexos;
+        let generos = (<any>data).generos;
+        let estadoCivil = (<any>data).estadoCivils;
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -40,6 +43,42 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               return of(new HttpResponse({ status: 200, body: tipos }));
 
+            }
+            // get sexos
+            if (request.url.endsWith('/apimock/sexos') && request.method === 'GET') {
+              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  return of(new HttpResponse({ status: 200, body: sexos }));
+              //} else {
+                  // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
+            }
+            // get localidades
+            if (request.url.endsWith('/apimock/localidads') && request.method === 'GET') {
+              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  return of(new HttpResponse({ status: 200, body: localidades }));
+              //} else {
+                  // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
+            }
+            // get estado civil
+            if (request.url.endsWith('/apimock/estado-civils') && request.method === 'GET') {
+              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  return of(new HttpResponse({ status: 200, body: estadoCivil }));
+              //} else {
+                  // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
+            }
+            // get genero
+            if (request.url.endsWith('/apimock/generos') && request.method === 'GET') {
+              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  return of(new HttpResponse({ status: 200, body: generos }));
+              //} else {
+                  // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
             }
 
 

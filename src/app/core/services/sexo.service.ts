@@ -5,17 +5,14 @@ import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 
 @Injectable()
-export class TipoRecursoService {
+export class SexoService {
 
   constructor(
     private _apiService: ApiService
   ){}
 
-  buscarPorPrograma(programaid) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.set("programaid", programaid);
-
-    return this._apiService.get('/tipo-recurso-socials',httpParams);
+  listar() {
+    return this._apiService.get('/sexos');
   }
 
 }
