@@ -3,7 +3,7 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 // importo los datos JSON
-import data from '../../../assets/data/data.json';
+import * as data from '../../../assets/data/data.json';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -12,10 +12,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
-        const personas: any = (<any>data).personas;
-        const programas: any = (<any>data).programas;
-        const localidades: any = (<any>data).localidades;
-        const tipoRecurso: any = (<any>data).tipoRecursoSocials;
+        let personas = (<any>data).personas;
+        let programas = (<any>data).programas;
+        let localidades = (<any>data).localidads;
+        let tipoRecurso = (<any>data).tipoRecursoSocials;
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -32,9 +32,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               //     return throwError({ error: { message: 'Unauthorised' } });
               // }
             }
-            // get TIPO RECURSO SOCIAL por ID /\/users\/\d+$/
-            if(request.url.endsWith('/\/apimock/\/tipo-recurso-socials/\/d+$/') && request.method === 'GET') {
-              return of(new HttpResponse({ status: 200, body: tipoRecurso }));
+            // get TIPO RECURSO SOCIAL por programa id
+            if(request.url.endsWith('/apimock/tipo-recurso-socials') && request.method === 'GET') {
+              let programaid = request.params.get('programaid');
+              let cont = 0;
+              let tipos = tipoRecurso.filter(recurso => { return recurso.programaid === programaid });
+
+              return of(new HttpResponse({ status: 200, body: tipos }));
+
             }
 
 

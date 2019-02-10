@@ -12,6 +12,7 @@ export class TipoRecursoService {
   ){}
 
   buscarPorPrograma(programaid) {
+    console.log(programaid);
     let httpParams = new HttpParams();
     httpParams = httpParams.set("programaid", programaid);
 

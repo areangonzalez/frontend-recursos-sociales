@@ -11,7 +11,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     //constructor(private authenticationService: AuthenticationService, private _loadService: LoaderService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      console.log(request);
         ///this._loadService.show();
         return next.handle(request).pipe(
             catchError(err => {
@@ -21,7 +20,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                     location.reload(true);
                 }
                 const error = err.error.message || err.statusText;
-                console.log("error: ",error);
                 return throwError(error);
             }),
             //finalize(() => this._loadService.hide())
