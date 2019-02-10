@@ -11,7 +11,8 @@ import {
   TipoRecursoService,
   ProgramaService,
   SexoService,
-  GeneroService
+  GeneroService,
+  EstadoCivilService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -30,7 +31,8 @@ import { UtilService } from "./utils";
     TipoRecursoService,
     ProgramaService,
     SexoService,
-    GeneroService
+    GeneroService,
+    EstadoCivilService
     /* ArticlesService,
     AuthGuard,
     CommentsService,
