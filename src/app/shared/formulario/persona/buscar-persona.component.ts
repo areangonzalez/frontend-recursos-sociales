@@ -29,8 +29,8 @@ export class BuscarPersonaComponent implements OnInit {
 
     this._personaService.buscar(params).subscribe(
       datos => {
+        console.log(datos);
         this.listaPersonas = datos.resultado;
-        console.log(this.listaPersonas);
         /* if (datos.resultado != undefined && datos.resultado.length >= 0){
         }else if (datos.length >= 0){
           this.listaPersonas = datos;

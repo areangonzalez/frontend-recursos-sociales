@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 // importo los datos JSON
 import * as data from '../../../assets/data/data.json';
+import { NgForOf } from '@angular/common';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -24,6 +25,64 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(null).pipe(mergeMap(() => {
 
             /* ----------------------  LISTAS GENERALES  --------------------------- */
+            // get TIPO RECURSO SOCIAL por programa id
+            if(request.url.endsWith('/apimock/personas') && request.method === 'GET') {
+              let globalSearch = request.params.get('global_search');
+              let pageSize = parseInt(request.params.get('pagesize'));
+              let page = parseInt(request.params.get('page'));
+              let search = globalSearch.split(" ");
+              let resultado = [];
+
+              let listaPersonas = {
+                total_filtrado: 0,
+                pagesize: pageSize,
+                pages: 0,
+                estado: true,
+                resultado:[]
+              };
+              console.log(search);
+              resultado = personas.filter(
+                persona => {
+                  for (let i = 0; i < search.length; i++) {
+                    let nombre = persona.nombre.split(" ");
+                    for (let j = 0; j < nombre.length; j++) {
+                        if ( search[i] === nombre[j] ) {
+                          return persona;
+                        }
+                    }
+                    if ( !isNaN(parseInt(search[i])) ) {
+                      if (persona.nro_documento === search[i]){
+                        return persona;
+                      }
+                    }
+                    if ( search[i] === persona.apellido ) {
+                      return persona;
+                    }
+                    if ( search[i] === persona.lugar.calle ) {
+                      return persona;
+                    }
+                  }
+                });
+
+                let totalFiltrado = parseInt(resultado.length);
+                let total = parseFloat(totalFiltrado/pageSize);
+                let totalPagina = (total > parseInt(total)) ? parseInt(total) + 1 : total;
+
+                console.log(resultado.length);
+                listaPersonas.total_filtrado = resultado.length;
+                listaPersonas.pages = totalPagina;
+                if (page != null || page == 0) {
+                  listaPersonas.resultado = resultado.slice(0,pageSize);
+                }else{
+                  let pageStart = page * pageSize;
+                  let pageEnd = pageStart + pageSize;
+                  listaPersonas.resultado = resultado.slice(pageStart, pageEnd);
+                }
+
+              return of(new HttpResponse({ status: 200, body: listaPersonas }));
+
+            }
+
 
             // get PROGRAMAS
             if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
