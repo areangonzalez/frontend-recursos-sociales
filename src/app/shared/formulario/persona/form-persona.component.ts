@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { UtilService } from 'src/app/core/utils';
+import { SexoService, GeneroService, EstadoCivilService, MensajesService } from 'src/app/core/services';
 
 @Component({
   selector: 'shared-form-persona',
@@ -13,10 +14,9 @@ export class FormPersonaComponent implements OnInit {
 
   public formPersona: FormGroup;
   public submitted: boolean = false;
-  public sexoLista: any = [{id: 1, nombre: 'Hombre'}, {id: 2, nombre: 'Mujer'}];
-  public generoLista: any = [{id: 1, nombre: 'Femenino'}, {id: 2, nombre: 'Masculino'}];
-  public estadoCivilLista: any = [{id: 1, nombre: 'Casado'}, {id: 2, nombre: 'Soltero'}];
-  public localidadLista: any = [{id: 1, nombre: 'Roca'}, {id: 2, nombre: 'Viedma'}];
+  public sexoLista: any = [];
+  public generoLista: any = [];
+  public estadoCivilLista: any = [];
 
   public setDocumento: string = '';
 
@@ -28,7 +28,11 @@ export class FormPersonaComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
-    private _util: UtilService
+    private _util: UtilService,
+    private _mensajeService: MensajesService,
+    private _sexoService: SexoService,
+    private _generoService: GeneroService,
+    private _estadoCivilService: EstadoCivilService
   ){
     this.formPersona = _fb.group({
         id: 0,
@@ -63,6 +67,9 @@ export class FormPersonaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.listarSexo();
+    this.listarGenero();
+    this.listarEstadoCivil();
   }
 
   // convenience getter for easy access to form fields
@@ -123,6 +130,35 @@ export class FormPersonaComponent implements OnInit {
   public obtenerDatos(){
     //desarrollar submit
     this.getDatos.emit(this.formPersona.value);
+  }
+
+  /* Funcionalidad para los listados */
+
+  public listarSexo(){
+    this._sexoService.listar().subscribe(
+      datos => {
+        this.sexoLista = datos;
+      }, error => {
+        this._mensajeService.cancelado(error, [{name:''}]);
+      });
+  }
+
+  public listarGenero(){
+    this._generoService.listar().subscribe(
+      datos => {
+        this.generoLista = datos;
+      }, error => {
+        this._mensajeService.cancelado(error, [{name:''}]);
+      });
+  }
+
+  public listarEstadoCivil(){
+    this._estadoCivilService.listar().subscribe(
+      datos => {
+        this.estadoCivilLista = datos;
+      }, error => {
+        this._mensajeService.cancelado(error, [{name:''}]);
+      });
   }
 
 }
