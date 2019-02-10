@@ -46,19 +46,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   for (let i = 0; i < search.length; i++) {
                     let nombre = persona.nombre.split(" ");
                     for (let j = 0; j < nombre.length; j++) {
-                        if ( search[i] === nombre[j] ) {
+                        if ( nombre[j].toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
                           return persona;
                         }
                     }
-                    if ( !isNaN(parseInt(search[i])) ) {
-                      if (persona.nro_documento === search[i]){
-                        return persona;
-                      }
-                    }
-                    if ( search[i] === persona.apellido ) {
+                    if (persona.nro_documento.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ){
                       return persona;
                     }
-                    if ( search[i] === persona.lugar.calle ) {
+                    //if ( search[i] === persona.apellido ) {
+                    if ( persona.apellido.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ) {
+                      return persona;
+                    }
+                    if ( persona.lugar.calle.toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
                       return persona;
                     }
                   }

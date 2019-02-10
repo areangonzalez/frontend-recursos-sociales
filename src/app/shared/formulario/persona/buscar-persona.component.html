@@ -43,6 +43,6 @@
       </tbody>
       </table>
     </div>
-    <div class="d-flex justify-content-center">
-        <ngb-pagination *ngIf="(colleccionSize > 0)"  [collectionSize]="colleccionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="cambioPagina(page)" aria-label="Default pagination"></ngb-pagination>
+    <div class=" d-flex justify-content-center">
+        <ngb-pagination *ngIf="(colleccionSize > 0)"  [collectionSize]="colleccionSize" [(page)]="page" [pageSize]="pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(page)" aria-label="Default pagination"></ngb-pagination>
     </div>
