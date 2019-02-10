@@ -20,7 +20,8 @@
               <li *ngFor="let programa of listaProgramas; index as i;" class="dropdown-submenu dropright" (mouseenter)="mouseHovering(i)" (mouseleave)="mouseLeaving(i)" >
                 <a class="dropdown-item dropdown-toggle">{{programa.nombre}}</a>
                 <div class="dropdown-menu" [ngClass]="{'hide': !(listaProgramas[i].isHovering), 'show': (listaProgramas[i].isHovering), 'background-submenu': (!isCollapsed)}">
-                  <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'prestacion', 'nuevo']" (click)="ocultarMenu();guardarPrograma(programa);" >Nueva prestación</a>
+                  <!-- <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'prestacion', 'nuevo']" (click)="ocultarMenu();guardarPrograma(programa);" >Nueva prestación</a> -->
+                  <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'prestacion']" (click)="ocultarMenu();guardarPrograma(programa);" >Nueva prestación</a>
                   <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'lista']" (click)="ocultarMenu();guardarPrograma(programa);">Listar</a>
                 </div>
               </li>

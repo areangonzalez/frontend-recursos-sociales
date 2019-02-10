@@ -35,6 +35,7 @@ export class FormRecursoComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(JSON.parse(localStorage.getItem('programaUrl')));
     this.getTipoPrestacion();
 
 

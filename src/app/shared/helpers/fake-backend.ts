@@ -28,7 +28,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // get TIPO RECURSO SOCIAL por programa id
             if(request.url.endsWith('/apimock/personas') && request.method === 'GET') {
               let globalSearch = request.params.get('global_search');
-              let pageSize = parseInt(request.params.get('pagesize'));
+              let pageSize:number = parseInt(request.params.get('pagesize'));
               let page = parseInt(request.params.get('page'));
               let search = globalSearch.split(" ");
               let resultado = [];
@@ -40,7 +40,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 estado: true,
                 resultado:[]
               };
-              console.log(search);
               resultado = personas.filter(
                 persona => {
                   for (let i = 0; i < search.length; i++) {
@@ -53,7 +52,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     if (persona.nro_documento.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ){
                       return persona;
                     }
-                    //if ( search[i] === persona.apellido ) {
                     if ( persona.apellido.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ) {
                       return persona;
                     }
@@ -63,9 +61,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   }
                 });
 
-                let totalFiltrado = parseInt(resultado.length);
-                let total = parseFloat(totalFiltrado/pageSize);
-                let totalPagina = (total > parseInt(total)) ? parseInt(total) + 1 : total;
+                let totalFiltrado:number = resultado.length;
+                let total:number = parseFloat(totalFiltrado/pageSize);
+                let totalPagina:number = (total > parseInt(total)) ? parseInt(total) + 1 : total;
 
                 listaPersonas.total_filtrado = resultado.length;
                 listaPersonas.pages = totalPagina;

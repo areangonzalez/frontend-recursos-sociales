@@ -7,8 +7,7 @@ import { ProgramaComponent } from "./programa.component";
 import { ProgramaListaComponent } from "./lista";
 import { TipoProgramaComponent } from "./tipo-programa";
 import { ProgramaRoutingModule } from "./programa-routing.module";
-import { ProgramaRecursoComponent, CrearRecursoComponent } from "./recurso";
-import { CrearPersonaComponent } from "./persona";
+import { ProgramaRecursoComponent } from "./recurso";
 
 
 @NgModule({
@@ -18,9 +17,7 @@ import { CrearPersonaComponent } from "./persona";
       ProgramaRoutingModule
     ],
     declarations: [
-      CrearPersonaComponent,
       ProgramaRecursoComponent,
-      CrearRecursoComponent,
       ProgramaListaComponent,
       TipoProgramaComponent,
       ProgramaComponent

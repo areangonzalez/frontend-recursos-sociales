@@ -3,8 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProgramaComponent } from './programa.component';
 import { ProgramaListaComponent } from "./lista";
 import { TipoProgramaComponent } from "./tipo-programa";
-import { ProgramaRecursoComponent, CrearRecursoComponent } from "./recurso";
-import { CrearPersonaComponent } from "./persona";
+import { ProgramaRecursoComponent } from "./recurso";
 
 const routes: Routes = [
     {
@@ -16,14 +15,7 @@ const routes: Routes = [
           children: [
             { path: '', redirectTo: 'lista', pathMatch: 'full' },
             { path:'lista', component: ProgramaListaComponent, data: {breadcrumb: 'lista'} },
-            { path:'prestacion', component: ProgramaRecursoComponent, data: {breadcrumb: 'Crear prestación'},
-              children: [
-                { path: '', redirectTo: 'nuevo', pathMatch: 'full' },
-                { path: 'nuevo', component: CrearRecursoComponent  },
-                { path: 'crear-persona', component: CrearPersonaComponent, data: {breadcrumb: 'Crear persona'}  },
-
-              ]
-            }
+            { path:'prestacion', component: ProgramaRecursoComponent, data: {breadcrumb: 'Crear prestación',title: 'Crear prestación' } }
           ]
         }
       ]
