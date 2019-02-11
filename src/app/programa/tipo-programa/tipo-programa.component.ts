@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'programa-tipo',
@@ -7,11 +7,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./tipo-programa.component.sass']
 })
 export class TipoProgramaComponent implements OnInit {
-  //public title = 'todos los programas';
+  public programaid:any;
 
-  constructor(
-  ){}
+  constructor(private _route: ActivatedRoute){}
 
   ngOnInit() {
+    this.programaid = this._route.snapshot.paramMap.get('id');
+    console.log("tipo-programa-component: ",this.programaid);
   }
 }

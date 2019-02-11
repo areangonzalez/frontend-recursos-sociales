@@ -1,26 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router, ActivatedRoute, ParamMap, NavigationEnd, NavigationStart } from '@angular/router';
-import { map } from "rxjs/operators";
+import { Router } from '@angular/router';
 import { ProgramaService } from 'src/app/core/services';
-import { NavigationEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-view-model';
-import { timer } from 'rxjs';
 
 @Component({
-  selector: 'programa-recurso',
-  templateUrl: './programa-recurso.component.html',
-  styleUrls: []
+  selector: 'app-recurso',
+  templateUrl: './recurso.component.html',
+  styleUrls: ['./recurso.component.sass']
 })
-export class ProgramaRecursoComponent implements OnInit {
+export class RecursoComponent implements OnInit {
   public infoPersona:boolean = false;
   public datosPersona:any = {};
   public contactosForm: FormGroup;
   public programaid: number = 0;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
     private _fb: FormBuilder,
+    private _router: Router,
     private _programService: ProgramaService
   ){
     this.contactosForm = _fb.group({
@@ -48,11 +44,5 @@ export class ProgramaRecursoComponent implements OnInit {
     this.datosPersona = {};
     this.infoPersona = false;
     this.contactosForm.reset();
-  }
-
-  public editarPersona(){
-    const url: string = this._router.url;
-    const urlModificada: string = url.replace('nuevo', 'crear-persona');
-    this._router.navigateByUrl(urlModificada);
   }
 }

@@ -62,13 +62,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 });
 
                 let totalFiltrado:number = resultado.length;
-                let total:number = parseFloat(totalFiltrado/pageSize);
-                let totalPagina:number = (total > parseInt(total)) ? parseInt(total) + 1 : total;
+                let total:number = totalFiltrado/pageSize;
+                let numEntero = Math.floor(total);
+                let totalPagina:number = (total > numEntero) ? numEntero + 1 : total;
 
                 listaPersonas.total_filtrado = resultado.length;
                 listaPersonas.pages = totalPagina;
                 if (page > 0) {
-                  console.log("pagina mayor a 0: ",page);
                   let pageStart = page * pageSize;
                   let pageEnd = pageStart + pageSize;
                   listaPersonas.resultado = resultado.slice(pageStart, pageEnd);

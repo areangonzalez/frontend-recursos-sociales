@@ -7,3 +7,7 @@ export interface IPrograma {
 export interface IListaProgramas extends IPrograma {
   [index: number]: IPrograma
 }
+
+export interface IProgramaId {
+  id:number
+}

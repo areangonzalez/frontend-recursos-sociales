@@ -21,8 +21,8 @@
                 <a class="dropdown-item dropdown-toggle">{{programa.nombre}}</a>
                 <div class="dropdown-menu" [ngClass]="{'hide': !(listaProgramas[i].isHovering), 'show': (listaProgramas[i].isHovering), 'background-submenu': (!isCollapsed)}">
                   <!-- <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'prestacion', 'nuevo']" (click)="ocultarMenu();guardarPrograma(programa);" >Nueva prestación</a> -->
-                  <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'prestacion']" (click)="ocultarMenu();guardarPrograma(programa);" >Nueva prestación</a>
-                  <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'lista']" (click)="ocultarMenu();guardarPrograma(programa);">Listar</a>
+                  <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'prestacion']" (click)="ocultarMenu();guardarPrograma(programa.id);" >Nueva prestación</a>
+                  <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'lista']" (click)="ocultarMenu();guardarPrograma(programa.id);">Listar</a>
                 </div>
               </li>
             </ul>

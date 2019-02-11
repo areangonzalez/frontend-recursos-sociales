@@ -56,8 +56,8 @@ export class HeaderComponent implements OnInit {
       this.mostrar = false;
     }
 
-    public guardarPrograma(programa:Object) {
-      this._programaService.setProgramaUrl(programa);
+    public guardarPrograma(programaid:number) {
+      this._programaService.setProgramaUrl(programaid);
     }
 
 

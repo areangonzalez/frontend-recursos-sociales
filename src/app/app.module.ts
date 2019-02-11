@@ -23,6 +23,7 @@ import { InicioModule } from "./inicio/inicio.module";
 import { BeneficiarioModule } from "./beneficiario/beneficiario.module";
 import { ProgramaModule } from "./programa/programa.module";
 import { ReporteModule } from "./reporte/reporte.module";
+import { RecursoModule } from "./recurso/recurso.module";
 
 
 import { AppComponent } from './app.component';
@@ -48,7 +49,8 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     InicioModule,
     BeneficiarioModule,
     ProgramaModule,
-    ReporteModule
+    ReporteModule,
+    RecursoModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
