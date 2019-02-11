@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-pril fixed-top">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed; ocultarMenu();" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse"
+  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="oi oi-menu"></span>
     </button>
@@ -9,26 +9,11 @@
   <!-- <a class="navbar-brand" href="#">PRIL</a> -->
   <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed" *ngIf="estoyLogueado">
       <ul class="navbar-nav mr-auto">
-          <!-- <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed; ocultarMenu();">
-              <a class="nav-link" [routerLink]="['inicio/beneficiario']" ><i class="fas fa-male"></i> Beneficiario</a>
-          </li> -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" (click)="mostrarMenu()" >
-              Programas
-            </a>
-            <ul class="dropdown-menu" [ngClass]="{'show': mostrar, 'background-menu': (!isCollapsed)}"  >
-              <li *ngFor="let programa of listaProgramas; index as i;" class="dropdown-submenu dropright" (mouseenter)="mouseHovering(i)" (mouseleave)="mouseLeaving(i)" >
-                <a class="dropdown-item dropdown-toggle">{{programa.nombre}}</a>
-                <div class="dropdown-menu" [ngClass]="{'hide': !(listaProgramas[i].isHovering), 'show': (listaProgramas[i].isHovering), 'background-submenu': (!isCollapsed)}">
-                  <!-- <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'prestacion', 'nuevo']" (click)="ocultarMenu();guardarPrograma(programa);" >Nueva prestación</a> -->
-                  <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'prestacion']" (click)="ocultarMenu();guardarPrograma(programa.id);" >Nueva prestación</a>
-                  <a class="dropdown-item" [routerLink]="['inicio/programa', programa.nombre, programa.id, 'lista']" (click)="ocultarMenu();guardarPrograma(programa.id);">Listar</a>
-                </div>
-              </li>
-            </ul>
+          <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
+            <a class="nav-link" [routerLink]="['inicio/crear-prestacion']" ><i class="fas fa-hands-helping"></i> Crear prestación</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed; ocultarMenu();">
-            <a class="nav-link" [routerLink]="['inicio/reporte']" ><i class="fas fa-male"></i> Reportes</a>
+          <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
+            <a class="nav-link" [routerLink]="['inicio/reporte']" ><i class="fas fa-file-contract"></i> Reportes</a>
           </li>
         </ul>
       <ul class="navbar-nav flex-row ml-md-auto d-md-flex" *ngIf="estoyLogueado">

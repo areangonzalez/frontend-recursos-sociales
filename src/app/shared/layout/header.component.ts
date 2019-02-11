@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
-import { IPrograma, IListaProgramas } from "../../core/models";
-import { ProgramaService, MensajesService } from 'src/app/core/services';
 
 @Component({
     selector: 'layout-header',
@@ -11,17 +9,13 @@ import { ProgramaService, MensajesService } from 'src/app/core/services';
 export class HeaderComponent implements OnInit {
 
     public isCollapsed = true;
-    public listaProgramas: IListaProgramas;
     public mostrar: boolean = false;
 
     constructor(
         private _router: Router,
-        private _programaService: ProgramaService,
-        private _mensajeService: MensajesService
     ) { }
 
     ngOnInit() {
-      this.getProgramas();
     }
 
     estoyLogueado(){
@@ -32,22 +26,6 @@ export class HeaderComponent implements OnInit {
       console.log("cierre");
     }
 
-    getProgramas(){
-      this._programaService.listar().subscribe(
-        datos => {
-          this.listaProgramas = datos;
-        }, error => { this._mensajeService.cancelado(error, [{name:''}] ); });
-    }
-
-    public isHovering = false;
-
-    mouseHovering(index) {
-        this.listaProgramas[index].isHovering = true;
-    }
-    mouseLeaving(index) {
-      this.listaProgramas[index].isHovering = false;
-    }
-
     mostrarMenu(){
       this.mostrar = !this.mostrar;
     }
@@ -55,10 +33,5 @@ export class HeaderComponent implements OnInit {
     ocultarMenu(){
       this.mostrar = false;
     }
-
-    public guardarPrograma(programaid:number) {
-      this._programaService.setProgramaUrl(programaid);
-    }
-
 
 }
