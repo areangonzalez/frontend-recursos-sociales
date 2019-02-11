@@ -4,6 +4,7 @@ import { SharedModule } from "../shared";
 
 import { RecursoRoutingModule } from "./recurso-routing.module";
 import { RecursoComponent } from "./recurso.component";
+import { VistaRecursoComponent } from "./vista";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { RecursoComponent } from "./recurso.component";
       RecursoRoutingModule
     ],
     declarations: [
-      RecursoComponent
+      RecursoComponent,
+      VistaRecursoComponent
     ],
     providers: [
     ],
