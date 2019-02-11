@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { InicioModule } from "./inicio/inicio.module";
 export function loadInicioModule() { return InicioModule; }
-import { BeneficiarioModule } from "./beneficiario/beneficiario.module";
-export function loadBeneficiarioModule() { return BeneficiarioModule; }
+import { RecursoModule } from "./recurso/recurso.module";
+export function loadRecursoModule() { return RecursoModule; }
 import { ProgramaModule } from "./programa/programa.module";
 export function loadProgramaModule() { return ProgramaModule; }
 import { ReporteModule } from "./reporte/reporte.module";
@@ -28,12 +28,12 @@ const routes: Routes = [
             loadChildren: loadInicioModule, // dev
             //loadChildren: './inicio/inicio.module#InicioModule', // production
           },
-          /* {
-            path: 'beneficiario',
-            //loadChildren: loadBeneficiarioModule,
-            loadChildren: './inicio/inicio.module#InicioModule',
-            data: { preload: true, breadcrumb: 'Beneficiario' }
-          }, */
+          {
+            path: 'crear-prestacion',
+            loadChildren: loadRecursoModule, // dev
+            //loadChildren: './recurso/recurso.module#RecursoModule', // production
+            data: { preload: true, breadcrumb: 'Crear prestación' }
+          },
           {
               path: 'programa',
               loadChildren: loadProgramaModule, // dev
