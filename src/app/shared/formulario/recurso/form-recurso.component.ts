@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilService } from 'src/app/core/utils';
-import { TipoRecursoService, MensajesService } from 'src/app/core/services';
+import { TipoRecursoService, MensajesService, ProgramaService } from 'src/app/core/services';
 
 
 @Component({
@@ -10,9 +10,9 @@ import { TipoRecursoService, MensajesService } from 'src/app/core/services';
   styleUrls: ['./form-recurso.component.sass']
 })
 export class FormRecursoComponent implements OnInit {
-  @Input("programaid") public programaid: number;
 
   public formRecurso: FormGroup;
+  public programaLista: any = [];
   public tipoPrestacionLista: any = [];
   public emprender: boolean = false;
   public listaAlumnos = [];
@@ -23,9 +23,11 @@ export class FormRecursoComponent implements OnInit {
     private _fb: FormBuilder,
     private _utilService: UtilService,
     private _tipoRecursoService: TipoRecursoService,
-    private _mensajeService: MensajesService
+    private _mensajeService: MensajesService,
+    private _programaService: ProgramaService
   ) {
     this.formRecurso = _fb.group({
+      programaid: ['', Validators.required],
       tipo_recurso_socialid: ['', Validators.required],
       proposito: ['', Validators.required],
       fechaAlta: ['', Validators.required],
@@ -33,17 +35,10 @@ export class FormRecursoComponent implements OnInit {
       monto: ['', Validators.required],
       observacion: ''
     });
-
-
   }
 
-   ngOnInit() {
-    //console.log(JSON.parse(localStorage.getItem('programaUrl')));
-    console.log(this.programaid);
-    if (this.programaid){
-      this.listarTipoPrestacion(this.programaid);
-    }
-
+  ngOnInit() {
+    this.listarProgramas();
   }
 
   get datosRecurso(){ return this.formRecurso.controls; }
@@ -60,7 +55,14 @@ export class FormRecursoComponent implements OnInit {
     }
   }
 
-  public listarTipoPrestacion(programaid) {
+  public listarProgramas(){
+    this._programaService.listar().subscribe(
+      programas => {
+        this.programaLista = programas;
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+  }
+
+  public listarTipoPrestacion(programaid:number) {
     this.emprender = (programaid == 1) ? true : false;
 
     this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(

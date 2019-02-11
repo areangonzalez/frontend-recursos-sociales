@@ -95,8 +95,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if(request.url.endsWith('/apimock/tipo-recurso-socials') && request.method === 'GET') {
               let programaid = request.params.get('programaid');
               let cont = 0;
-              let tipos = tipoRecurso.filter(recurso => { return recurso.programaid === programaid });
-
+              let tipos = tipoRecurso.filter(recurso => { return recurso.programaid === parseInt(programaid) });
+              console.log(tipos);
               return of(new HttpResponse({ status: 200, body: tipos }));
 
             }
