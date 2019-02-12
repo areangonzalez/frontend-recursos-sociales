@@ -13,9 +13,9 @@ export class RecursoSocialService {
     return this._apiService.get('/recurso-socials');
   }
 
-  buscarPorPrograma(programaid) {
+  buscarPorPrograma(params:object) {
     let httpParams = new HttpParams();
-    httpParams = httpParams.set("programaid", programaid);
+    httpParams = this._apiService.formatParams(httpParams, params);
 
     return this._apiService.get('/recurso-socials',httpParams);
   }

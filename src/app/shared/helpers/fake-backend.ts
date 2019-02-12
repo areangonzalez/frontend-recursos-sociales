@@ -4,7 +4,6 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 // importo los datos JSON
 import * as data from '../../../assets/data/data.json';
-import { NgForOf } from '@angular/common';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -24,8 +23,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
-            /* ----------------------  LISTAS GENERALES  --------------------------- */
-            // get TIPO RECURSO SOCIAL por programa id
+            // get buscador de recurso social por programaid
+            if(request.url.endsWith('/apimock/recurso-socials') && request.method === 'GET') {
+              let programaid: number = parseInt(request.params.get('programaid'));
+              let pageSize: number = parseInt(request.params.get('pagesize'));
+              let totalRecursos = programaid * 13;
+              //let tipos = tipoRecurso.filter(recurso => { return recurso.programaid === parseInt(programaid) });
+              let listaRecursos = {
+                total_filtrado: totalRecursos,
+                pagesize: pageSize,
+                pages: 0,
+                estado: true,
+                resultado:[]
+              };
+
+              //console.log(tipos);
+              return of(new HttpResponse({ status: 200, body: listaRecursos }));
+            }
+            // get Buscador de personas
             if(request.url.endsWith('/apimock/personas') && request.method === 'GET') {
               let globalSearch = request.params.get('global_search');
               let pageSize:number = parseInt(request.params.get('pagesize'));
@@ -79,8 +94,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               return of(new HttpResponse({ status: 200, body: listaPersonas }));
 
             }
-
-
+            /* ----------------------  LISTAS GENERALES  --------------------------- */
             // get PROGRAMAS
             if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application

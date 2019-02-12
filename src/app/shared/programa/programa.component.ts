@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MensajesService } from 'src/app/core/services';
+import { MensajesService, RecursoSocialService } from 'src/app/core/services';
 
 @Component({
   selector: 'shared-programa',
@@ -7,20 +7,25 @@ import { MensajesService } from 'src/app/core/services';
   styleUrls: ['./programa.component.sass'],
 })
 export class ProgramaComponent implements OnInit {
-  @Input("programa") public programa: object;
+  @Input("programaId") public programaId: number;
+  @Input("programaNombre") public programaNombre: string;
+
+  public cantidadRecursos:number = 0;
 
   constructor(
-    private _mensajeService: MensajesService
+    private _mensajeService: MensajesService,
+    private _recursoSocialService: RecursoSocialService
   ){}
 
   ngOnInit() {
-
+    this.contarRecursoSociales(this.programaId);
   }
 
-  public contarRecursoSociales(programaid) {
-    //this._recursoSocial
-    console.log(programaid);
-    return programaid;
+  public contarRecursoSociales(programaid:number) {
+    this._recursoSocialService.buscarPorPrograma({programaid: programaid, pagesize:0}).subscribe(
+      recursos => {
+        this.cantidadRecursos = recursos.total_filtrado;
+      }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
 
 }
