@@ -29,18 +29,6 @@
         </div>
       </div>
       <div class="form-group col-md-3">
-        <label for="monto">Monto:</label>
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">$</div>
-          </div>
-          <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validadrNumero($event.target)" >
-        </div>
-        <div *ngIf="(datosRecurso.monto.invalid && submitted)" class="text-danger">
-          <div *ngIf="datosRecurso.monto.errors.required">Por favor ingrese un monto. </div>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
         <label for="fecha_alta" class="prioridad">Fecha Alta:</label>
         <div class="input-group">
           <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #frd="ngbDatepicker"
@@ -56,13 +44,30 @@
             <div *ngIf="datosRecurso.fechaAlta.errors.required">Pro favor ingrese una fecha. </div>
         </div>
       </div>
-      <div class="form-group col-md-12">
-          <label for="observacion">Observación:</label>
-          <textarea class="form-control" id="observacion" cols="30" rows="2" placeholder="Descripcion..." formControlName="observacion" ></textarea>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="row">
+            <div class="form-group col-md-12">
+              <label for="monto">Monto:</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">$</div>
+                </div>
+                <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validadrNumero($event.target)" >
+              </div>
+              <div *ngIf="(datosRecurso.monto.invalid && submitted)" class="text-danger">
+                <div *ngIf="datosRecurso.monto.errors.required">Por favor ingrese un monto. </div>
+              </div>
+            </div>
         </div>
+      </div>
+      <div class="form-group col-md-9">
+        <label for="observacion">Observación:</label>
+        <textarea class="form-control" id="observacion" cols="30" rows="1" placeholder="Descripcion..." formControlName="observacion" ></textarea>
+      </div>
     </div>
   </fieldset>
-  {{emprender}}
   <fieldset *ngIf="(emprender)" >
     <div class="d-flex justify-content-between">
       <div class="col-4 pt-1"><hr></div>
