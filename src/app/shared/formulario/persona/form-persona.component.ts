@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { UtilService } from 'src/app/core/utils';
 import { SexoService, GeneroService, EstadoCivilService, MensajesService } from 'src/app/core/services';
+import { PersonaModel } from 'src/app/core/models';
 
 @Component({
   selector: 'shared-form-persona',
@@ -17,6 +18,9 @@ export class FormPersonaComponent implements OnInit {
   public sexoLista: any = [];
   public generoLista: any = [];
   public estadoCivilLista: any = [];
+  //public personaModel = new PersonaModel('','','','','','',0,0,0,'','',{barrio:'',calle:'',altura:'',depto:'',escalera:'',piso:'',localidadid:0});
+  public personaModel = new PersonaModel();
+
 
   public setDocumento: string = '';
 
@@ -41,7 +45,7 @@ export class FormPersonaComponent implements OnInit {
         nombre: ['', [Validators.required, Validators.minLength(3)]],
         cuil: '',
         cuil_prin: ['', [Validators.required, Validators.minLength(2)]],
-        cuil_fin: ['', [Validators.required, Validators.minLength(2)]],
+        cuil_fin: ['', [Validators.required, Validators.minLength(1)]],
         fecha_nacimiento: '',
         fechaNacimiento: ['', Validators.required],
         sexoid: ['', Validators.required],
@@ -161,12 +165,21 @@ export class FormPersonaComponent implements OnInit {
       });
   }
 
-  public guardar() {
+  public validarPersona() {
     this.submitted = true;
-    if (this.formPersona.invalid) {
+    if (this.formPersona.invalid) { // verifico la validación en los campos del formulario
       this._mensajeService.cancelado("Campos sin completar!!", [{name:''}]);
       return;
+    }else{ // si pasa la validación
+      let persona = this.personaModel.deserealize(this.formPersona.value);
+      //console.log("modelo persona: ",persona);
+
     }
+  }
+
+  public guardarPersona(params:object) {
+    console.log("guardado satifactorio", params);
+    return 1;
   }
 
 }
