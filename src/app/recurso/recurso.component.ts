@@ -41,4 +41,8 @@ export class RecursoComponent implements OnInit {
     this.infoPersona = false;
     this.contactosForm.reset();
   }
+
+  public editarPersona(){
+    console.log("Hacer algo");
+  }
 }

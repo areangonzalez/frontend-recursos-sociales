@@ -5,8 +5,6 @@ import { InicioModule } from "./inicio/inicio.module";
 export function loadInicioModule() { return InicioModule; }
 import { RecursoModule } from "./recurso/recurso.module";
 export function loadRecursoModule() { return RecursoModule; }
-import { ProgramaModule } from "./programa/programa.module";
-export function loadProgramaModule() { return ProgramaModule; }
 import { ReporteModule } from "./reporte/reporte.module";
 export function loadReporteModule() { return ReporteModule; }
 
@@ -33,12 +31,6 @@ const routes: Routes = [
             loadChildren: loadRecursoModule, // dev
             //loadChildren: './recurso/recurso.module#RecursoModule', // production
             data: { preload: true, breadcrumb: 'Crear prestación' }
-          },
-          {
-              path: 'programa',
-              loadChildren: loadProgramaModule, // dev
-              //loadChildren: './programa/programa.module#ProgramaModule', // production
-              data: { preload: true, breadcrumb: 'programa'}
           },
           {
               path: 'reporte',
