@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from "@angular/router";
 
 import { InicioComponent } from "./inicio.component";
@@ -13,6 +13,7 @@ import { InicioRoutingModule } from "./inicio-routing.module";
     declarations: [
         InicioComponent
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
     ],
 })

@@ -13,7 +13,8 @@ import {
   SexoService,
   GeneroService,
   EstadoCivilService,
-  LocalidadService
+  LocalidadService,
+  RecursoSocialService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -34,14 +35,12 @@ import { UtilService } from "./utils";
     SexoService,
     GeneroService,
     EstadoCivilService,
-    LocalidadService
-    /* ArticlesService,
+    LocalidadService,
+    RecursoSocialService
+    /*
     AuthGuard,
-    CommentsService,
     JwtService,
-    ProfilesService,
-    TagsService,
-    UserService */
+     */
   ],
   declarations: []
 })
