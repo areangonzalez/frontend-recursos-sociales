@@ -9,8 +9,8 @@ import { MensajesService, LocalidadService } from 'src/app/core/services';
 })
 export class FormLugarComponent implements OnInit {
   @Input('formLugar') public lugar: FormGroup;
+  @Input("submitted") public submitted: boolean;
 
-  public submitted: boolean = false;
   public localidadLista: any = [];
 
   constructor(private _mensajeService: MensajesService, private _localidadService: LocalidadService){}

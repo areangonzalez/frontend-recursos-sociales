@@ -161,4 +161,12 @@ export class FormPersonaComponent implements OnInit {
       });
   }
 
+  public guardar() {
+    this.submitted = true;
+    if (this.formPersona.invalid) {
+      this._mensajeService.cancelado("Campos sin completar!!", [{name:''}]);
+      return;
+    }
+  }
+
 }
