@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recurso',
@@ -11,10 +11,12 @@ export class RecursoComponent implements OnInit {
   public infoPersona:boolean = false;
   public datosPersona:any = {};
   public contactosForm: FormGroup;
+  public programaid: any;
 
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
+    private _route: ActivatedRoute
   ){
     this.contactosForm = _fb.group({
       contacto: _fb.group({
@@ -26,6 +28,7 @@ export class RecursoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.programaid = this._route.snapshot.paramMap.get('programaid');
   }
 
   public seleccionarPersona(datos){

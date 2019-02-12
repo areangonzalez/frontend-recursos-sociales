@@ -95,22 +95,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             }
             /* ----------------------  LISTAS GENERALES  --------------------------- */
-            // get PROGRAMAS
-            if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
-              // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                  return of(new HttpResponse({ status: 200, body: programas }));
-              //} else {
-                  // return 401 not authorised if token is null or invalid
-              //     return throwError({ error: { message: 'Unauthorised' } });
-              // }
-            }
             // get TIPO RECURSO SOCIAL por programa id
             if(request.url.endsWith('/apimock/tipo-recurso-socials') && request.method === 'GET') {
               let programaid = request.params.get('programaid');
-              let cont = 0;
               let tipos = tipoRecurso.filter(recurso => { return recurso.programaid === parseInt(programaid) });
-              console.log(tipos);
               return of(new HttpResponse({ status: 200, body: tipos }));
 
             }
@@ -150,9 +138,29 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               //     return throwError({ error: { message: 'Unauthorised' } });
               // }
             }
-
-
-
+            // get PROGRAMAS
+            if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
+              // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  return of(new HttpResponse({ status: 200, body: programas }));
+              //} else {
+                  // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
+            }
+            // get PROGRAMAS por id /\/users\/\d+$/
+            if (request.url.match(/\/apimock/\/programas\/\d+$/) && request.method === 'GET') {
+              // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                let urlParts = request.url.split('/');
+                let id = parseInt(urlParts[urlParts.length - 1]);
+                let programaElegido = programas.filter(programa => { return programa.id === id });
+                  return of(new HttpResponse({ status: 200, body: programaElegido[0] }));
+              //} else {
+                  // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
+            }
             // pass through any requests not handled above
             return next.handle(request);
 

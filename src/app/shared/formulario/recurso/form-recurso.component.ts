@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilService } from 'src/app/core/utils';
 import { TipoRecursoService, MensajesService, ProgramaService } from 'src/app/core/services';
@@ -10,6 +10,7 @@ import { TipoRecursoService, MensajesService, ProgramaService } from 'src/app/co
   styleUrls: ['./form-recurso.component.sass']
 })
 export class FormRecursoComponent implements OnInit {
+  @Input("programaid") public programaid: any;
 
   public formRecurso: FormGroup;
   public programaLista: any = [];
@@ -38,7 +39,15 @@ export class FormRecursoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listarProgramas();
+    if (this.programaid !== null) {
+      let id: number = parseInt(this.programaid);
+      // busco el programa seleccionado
+      this.buscarProgramaPorId(id);
+      this.formRecurso.controls.programaid.patchValue(id);
+      this.listarTipoPrestacion(id);
+    }else{
+      this.listarProgramas();
+    }
   }
 
   get datosRecurso(){ return this.formRecurso.controls; }
@@ -98,5 +107,12 @@ export class FormRecursoComponent implements OnInit {
         this.listaAlumnos.splice(i, 1);
       }
     }
+  }
+
+  public buscarProgramaPorId(programaid:number){
+    this._programaService.buscarPorId(programaid).subscribe(
+      programa => {
+        this.programaLista = [programa];
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 }

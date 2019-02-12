@@ -10,8 +10,12 @@ export class ProgramaService {
     private _apiService: ApiService
   ){}
 
-  listar() {
+  public listar() {
     return this._apiService.get('/programas');
+  }
+
+  public buscarPorId(id:number) {
+    return this._apiService.get('/programas/' + id);
   }
 
 }

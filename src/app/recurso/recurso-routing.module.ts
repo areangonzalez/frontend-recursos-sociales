@@ -5,6 +5,9 @@ import { RecursoComponent } from './recurso.component';
 const routes: Routes = [
     {
       path: '', component: RecursoComponent,
+    },
+    {
+      path: ':programaid', component: RecursoComponent
     }
 ];
 
