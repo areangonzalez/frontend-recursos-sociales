@@ -18,6 +18,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return personas;
         }
 
+        function nombrePorId(id, lista){
+          for (let i = 0; i < lista.length; i++) {
+            if (lista[i].id == id){
+              return lista[i].nombre;
+            }
+          }
+        }
+
 
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
@@ -117,6 +125,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // save new user
               let id = personas.length + 1;
               nuevaPersona.id = id;
+              nuevaPersona.sexo = nombrePorId(nuevaPersona.sexoid, sexos);
+              nuevaPersona.genero = nombrePorId(nuevaPersona.generoid, generos);
+              nuevaPersona.estado_civil = nombrePorId(nuevaPersona.estado_civilid, estadoCivil);
+              nuevaPersona.lugar.localidad = nombrePorId(nuevaPersona.lugar.localidadid, localidades);
+
               personas.push(nuevaPersona);
               localStorage.setItem('personas', JSON.stringify(nuevaPersona));
 
