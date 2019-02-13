@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfig, BotonDisenio } from 'src/app/core/models';
 
@@ -12,7 +12,11 @@ export class ModalFormPersonaContent {
   constructor(public activeModal: NgbActiveModal) {}
 
   public guardar(datos:any) {
-    console.log(datos);
+    this.activeModal.close(datos);
+  }
+
+  public cancelar(cancelar:boolean) {
+    this.activeModal.close('closed');
   }
 }
 
@@ -29,6 +33,7 @@ export class ModalFormPersonaComponent {
    */
   @Input("disenioBoton") public disenioBoton: BotonDisenio;
   @Input("configModal") public configModal: ModalConfig;
+  @Output("obtenerPersona") public obtenerPersona = new EventEmitter();
 
   constructor(
     private modalService: NgbModal,
@@ -41,5 +46,13 @@ export class ModalFormPersonaComponent {
   open() {
     const modalRef = this.modalService.open(ModalFormPersonaContent, {size: 'lg'});
     modalRef.componentInstance.configModal = this.configModal;
+    modalRef.result.then(
+      (result) => {
+        if (result == 'closed'){
+        }else{
+          return this.obtenerPersona.emit(result);
+        }
+      }
+    )
   }
 }

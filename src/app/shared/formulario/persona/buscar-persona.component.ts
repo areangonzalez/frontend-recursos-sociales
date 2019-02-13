@@ -67,4 +67,10 @@ export class BuscarPersonaComponent implements OnInit {
   public cambioPagina(page){
     this.buscar(this.busqueda, page);
   }
+
+  public personaCreada(persona) {
+    const datos: object = {id:persona.id, persona:persona};
+    console.log(datos);
+    this.personaElegida.emit(datos);
+  }
 }

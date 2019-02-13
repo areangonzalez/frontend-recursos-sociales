@@ -11,7 +11,8 @@ import { PersonaModel } from 'src/app/core/models';
   styleUrls: ['./form-persona.component.sass']
 })
 export class FormPersonaComponent implements OnInit {
-  @Output('getDatos') public getDatos = new EventEmitter();
+  @Output("getDatos") public getDatos = new EventEmitter();
+  @Output("cancelarForm") public cancelarForm = new EventEmitter();
 
   public formPersona: FormGroup;
   public submitted: boolean = false;
@@ -194,6 +195,10 @@ export class FormPersonaComponent implements OnInit {
           this._mensajeService.cancelado(error, [{name:''}]);
         });
     }
+  }
+
+  public cancelar(){
+    this.cancelarForm.emit(true);
   }
 
 }
