@@ -10,9 +10,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        function getPersonas(){
+          let personas = (<any>data).personas;
+          if (localStorage.getItem('personas') != '') {
+            personas.push(JSON.parse(localStorage.getItem('personas')));
+          }
+          return personas;
+        }
+
+
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
-        let personas = (<any>data).personas;
+        let personas = getPersonas();
         let programas = (<any>data).programas;
         let localidades = (<any>data).localidads;
         let tipoRecurso = (<any>data).tipoRecursoSocials;
@@ -94,6 +103,27 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               return of(new HttpResponse({ status: 200, body: listaPersonas }));
 
             }
+            // guardar persona
+            if (request.url.endsWith('/apimock/personas') && request.method === 'POST') {
+              // get new user object from post body
+              let nuevaPersona = request.body;
+
+              // validation
+              let duplicateUser = personas.filter(persona => { return persona.nro_documento === nuevaPersona.nro_documento; }).length;
+              if (duplicateUser) {
+                  return throwError({ error: { message: 'Esta persona ya existe!' } });
+              }
+
+              // save new user
+              let id = personas.length + 1;
+              nuevaPersona.id = id;
+              personas.push(nuevaPersona);
+              localStorage.setItem('personas', JSON.stringify(nuevaPersona));
+
+              // respond 200 OK
+              return of(new HttpResponse({ status: 200, body: {id: id} }));
+            }
+
             /* ----------------------  LISTAS GENERALES  --------------------------- */
             // get TIPO RECURSO SOCIAL por programa id
             if(request.url.endsWith('/apimock/tipo-recurso-socials') && request.method === 'GET') {

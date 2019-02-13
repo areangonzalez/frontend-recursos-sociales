@@ -132,9 +132,10 @@ export class FormPersonaComponent implements OnInit {
     this.formPersona.controls.fecha_nacimiento.setValue(this._util.formatearFecha(obj.day, obj.month, obj.year, "yyyy-MM-dd"));
   }
 
-  public obtenerDatos(){
+  public obtenerDatos(persona:object){
     //desarrollar submit
-    this.getDatos.emit(this.formPersona.value);
+    console.log(persona);
+    this.getDatos.emit(persona);
   }
 
   /* Funcionalidad para los listados */
@@ -183,7 +184,15 @@ export class FormPersonaComponent implements OnInit {
     if (id != 0) {
       console.log("Editado satisfactorio: ", params);
     }else{
-      //this._personaService
+      this._personaService.guardar(params, 0).subscribe(
+        resultado => {
+          params.id = resultado.id;
+          this.obtenerDatos(params);
+          this._mensajeService.exitoso("Se ha guardado la persona con éxito.", [{name:''}]);
+
+        }, error => {
+          this._mensajeService.cancelado(error, [{name:''}]);
+        });
     }
   }
 
