@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { UtilService } from 'src/app/core/utils';
-import { SexoService, GeneroService, EstadoCivilService, MensajesService } from 'src/app/core/services';
+import { SexoService, GeneroService, EstadoCivilService, MensajesService, PersonaService } from 'src/app/core/services';
 import { PersonaModel } from 'src/app/core/models';
 
 @Component({
@@ -36,7 +36,8 @@ export class FormPersonaComponent implements OnInit {
     private _mensajeService: MensajesService,
     private _sexoService: SexoService,
     private _generoService: GeneroService,
-    private _estadoCivilService: EstadoCivilService
+    private _estadoCivilService: EstadoCivilService,
+    private _personaService: PersonaService
   ){
     this.formPersona = _fb.group({
         id: 0,
@@ -171,15 +172,19 @@ export class FormPersonaComponent implements OnInit {
       this._mensajeService.cancelado("Campos sin completar!!", [{name:''}]);
       return;
     }else{ // si pasa la validación
+      let id = this.formPersona.value.id;
       let persona = this.personaModel.deserealize(this.formPersona.value);
-      //console.log("modelo persona: ",persona);
+      this.guardarPersona(persona,id);
 
     }
   }
 
-  public guardarPersona(params:object) {
-    console.log("guardado satifactorio", params);
-    return 1;
+  public guardarPersona(params:object, id:number) {
+    if (id != 0) {
+      console.log("Editado satisfactorio: ", params);
+    }else{
+      //this._personaService
+    }
   }
 
 }

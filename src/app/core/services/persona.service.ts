@@ -11,10 +11,18 @@ export class PersonaService {
     private _apiService: ApiService
   ){}
 
-  buscar(params:object) {
+  public buscar(params:object) {
     let httpParams = new HttpParams();
     httpParams = this._apiService.formatParams(httpParams, params);
 
     return this._apiService.get('/personas',httpParams);
+  }
+
+  public guardar(params:object, id:number) {
+    if( id !== 0 ){ //editar persona
+
+    }else{ // crear persona
+      return this._apiService.post('/personas', params);
+    }
   }
 }
