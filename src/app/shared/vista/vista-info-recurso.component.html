@@ -1,0 +1,44 @@
+<ngb-tabset [justify]="'start'">
+  <ngb-tab title="{{recurso.programa}}">
+    <ng-template  ngbTabContent>
+      <div class="card border-light p-2">
+        <div class="card-header">
+          <div class="d-flex justify-content-between">
+            <span class="d-flex align-items-center">Alta: {{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</span>
+            <button type="button" class="btn btn-md btn-light border-dark" ngbTooltip="Editar recurso" container="body" ><i class="fas fa-pencil-alt"></i></button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Tipo prestación:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.tipo_recurso}}</dd>
+              </dl>
+            </div>
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Proposito:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.proposito}}</dd>
+              </dl>
+            </div>
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Monto:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.monto}}</dd>
+              </dl>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <dl class="row">
+                <dt class="col-3 col-sm-3 col-md-3 col-lg-3">Observación:</dt>
+                <dd class="col-3 col-sm-9 col-md-9 col-lg-9">{{recurso.observacion}}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
