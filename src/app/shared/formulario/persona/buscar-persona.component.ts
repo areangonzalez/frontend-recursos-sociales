@@ -37,12 +37,6 @@ export class BuscarPersonaComponent implements OnInit {
         this.colleccionSize = datos.total_filtrado;
         this.pageSize = datos.pagesize;
         this.listaPersonas = datos.resultado;
-        /* if (datos.resultado != undefined && datos.resultado.length >= 0){
-        }else if (datos.length >= 0){
-          this.listaPersonas = datos;
-        }else{
-          console.log("datos no contiene nada");
-        } */
       }, error => {
         console.log(error);
       });
@@ -70,7 +64,6 @@ export class BuscarPersonaComponent implements OnInit {
 
   public personaCreada(persona) {
     const datos: object = {id:persona.id, persona:persona};
-    console.log(datos);
     this.personaElegida.emit(datos);
   }
 }

@@ -12,9 +12,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         function getPersonas(){
           let personas = (<any>data).personas;
-          if (localStorage.getItem('personas') != '') {
-            personas.push(JSON.parse(localStorage.getItem('personas')));
+          let existe = false;
+          if (localStorage.getItem('personas')) {
+            let personaStorage: any[] = JSON.parse(localStorage.getItem('personas'));
+            for (let j = 0; j < personaStorage.length; j++) {
+              for (let i = 0; i < personas.length; i++) {
+                if (personas[i].id === personaStorage[j].id){
+                  existe = true;
+                }
+              }
+              if(!existe){ // si no existe la persona la agrego
+                personas.push(personaStorage[j]);
+              }
+            }
           }
+
           return personas;
         }
 
@@ -64,7 +76,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let page = parseInt(request.params.get('page'));
               let search = globalSearch.split(" ");
               let resultado = [];
-
+              console.log("parametro: ",globalSearch);
               let listaPersonas = {
                 total_filtrado: 0,
                 pagesize: pageSize,
@@ -72,6 +84,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 estado: true,
                 resultado:[]
               };
+              console.log("objeto Personas: ", personas);
               resultado = personas.filter(
                 persona => {
                   for (let i = 0; i < search.length; i++) {
@@ -92,7 +105,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                   }
                 });
-
+                console.log("encontrados", resultado);
                 let totalFiltrado:number = resultado.length;
                 let total:number = totalFiltrado/pageSize;
                 let numEntero = Math.floor(total);
@@ -130,9 +143,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               nuevaPersona.estado_civil = nombrePorId(nuevaPersona.estado_civilid, estadoCivil);
               nuevaPersona.lugar.localidad = nombrePorId(nuevaPersona.lugar.localidadid, localidades);
 
+              //personas.push(nuevaPersona);
+              let personasAgregadas = [];
+              if (localStorage.getItem('personas')) {
+                personasAgregadas = [JSON.parse(localStorage.getItem('personas'))];
+                personasAgregadas[0].push(nuevaPersona);
+                localStorage.setItem('personas', JSON.stringify(personasAgregadas[0]));
+              }else{
+                personasAgregadas.push([nuevaPersona]);
+                localStorage.setItem('personas', JSON.stringify(personasAgregadas));
+              }
               personas.push(nuevaPersona);
-              localStorage.setItem('personas', JSON.stringify(nuevaPersona));
-
               // respond 200 OK
               return of(new HttpResponse({ status: 200, body: {id: id} }));
             }
