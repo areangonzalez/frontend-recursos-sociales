@@ -20,7 +20,7 @@ export class PersonaService {
 
   public guardar(params:object, id:number) {
     if( id !== 0 ){ //editar persona
-
+      return this._apiService.put('/personas/' + id, params);
     }else{ // crear persona
       return this._apiService.post('/personas', params);
     }

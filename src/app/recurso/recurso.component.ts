@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
-import { MensajesService } from '../core/services';
+import { MensajesService, PersonaService } from '../core/services';
 
 @Component({
   selector: 'app-recurso',
@@ -18,7 +18,8 @@ export class RecursoComponent implements OnInit {
     private _fb: FormBuilder,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _mensajeService: MensajesService
+    private _mensajeService: MensajesService,
+    private _personaService: PersonaService
 
   ){
     this.contactosForm = _fb.group({
@@ -54,17 +55,13 @@ export class RecursoComponent implements OnInit {
 
   public guardarRecurso(recurso:object) {
     if (this.datosPersona.id !== undefined ) {
-      let contacto: any[] = [];
-      // armo un array de contacto
-      contacto.push(this.contactosForm.value.contacto);
       // agrego el id de persona
       recurso["personaid"] = this.datosPersona.id;
 
-
-      console.log("api contactos: ",contacto[0]);
-      // agrego los contactos
-
-      console.log("api recurso: ",recurso);
+      this._personaService.guardar(this.contactosForm.value.contacto, this.datosPersona.id).subscribe(
+        resultado =>{
+          console.log(resultado);
+        }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
 
     }else{
       this._mensajeService.cancelado("Disculpe, aun NO se ha seleccionado una persona.", [{name:''}]);

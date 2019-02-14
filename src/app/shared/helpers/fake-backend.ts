@@ -18,6 +18,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             for (let j = 0; j < personaStorage.length; j++) {
               for (let i = 0; i < personas.length; i++) {
                 if (personas[i].id === personaStorage[j].id){
+                  personas[i] = personaStorage[j]; // actualizo los datos
                   existe = true;
                 }
               }
@@ -76,7 +77,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let page = parseInt(request.params.get('page'));
               let search = globalSearch.split(" ");
               let resultado = [];
-              console.log("parametro: ",globalSearch);
               let listaPersonas = {
                 total_filtrado: 0,
                 pagesize: pageSize,
@@ -84,7 +84,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 estado: true,
                 resultado:[]
               };
-              console.log("objeto Personas: ", personas);
               resultado = personas.filter(
                 persona => {
                   for (let i = 0; i < search.length; i++) {
@@ -105,7 +104,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                   }
                 });
-                console.log("encontrados", resultado);
                 let totalFiltrado:number = resultado.length;
                 let total:number = totalFiltrado/pageSize;
                 let numEntero = Math.floor(total);
@@ -157,6 +155,59 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // respond 200 OK
               return of(new HttpResponse({ status: 200, body: {id: id} }));
             }
+
+            // get user by id
+            if (request.url.match(/\/apimock\/personas\/\d+$/) && request.method === 'PUT') {
+              // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  // find user by id in users array
+                  let urlParts = request.url.split('/');
+                  let personaid = parseInt(urlParts[urlParts.length - 1]);
+                  let datosPersona = request.body;
+
+
+                  let matchedUsers = personas.filter(persona => { return persona.id === personaid; });
+                  let personaEncontrada = matchedUsers.length ? matchedUsers[0] : null;
+                  // actualizo los datos de contacto
+                  console.log("encuentro persona ",personaEncontrada);
+                  for (const key in datosPersona) {
+                    for (const clave in personaEncontrada) {
+                      if ( datosPersona[clave] != undefined && key === 'lugar' ) {
+                        if (datosPersona['lugar'][key] === personaEncontrada['lugar'][clave]) {
+                          personaEncontrada['lugar'][clave] = datosPersona['lugar'][clave];
+                        }
+                      }else if ( datosPersona[clave] != undefined && clave === key ){
+                        personaEncontrada[clave] = datosPersona[clave];
+                      }
+                    }
+                  }
+
+                  console.log("actulizo persona: ",personaEncontrada);
+
+                  let personasAgregadas = [];
+                  if (localStorage.getItem('personas')) {
+                    let existe = false;
+                    personasAgregadas = [JSON.parse(localStorage.getItem('personas'))];
+                    for (let i = 0; i < personasAgregadas.length; i++) {
+                      if (personasAgregadas[0][i].id === personaid){
+                        personasAgregadas[0][i] = personaEncontrada;
+                        existe = true;
+                      }}
+                    if (!existe) {
+                      personasAgregadas[0].push(personaEncontrada);
+                    }
+                    localStorage.setItem('personas', JSON.stringify(personasAgregadas[0]));
+                  }else{
+                    personasAgregadas.push(personaEncontrada);
+                    localStorage.setItem('personas', JSON.stringify(personasAgregadas));
+                  }
+
+                  return of(new HttpResponse({ status: 200, body: {id:personaid} }));
+              /* } else {
+                  // return 401 not authorised if token is null or invalid
+                  return throwError({ error: { message: 'Unauthorised' } });
+              } */
+          }
 
             /* ----------------------  LISTAS GENERALES  --------------------------- */
             // get TIPO RECURSO SOCIAL por programa id
@@ -213,7 +264,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // }
             }
             // get PROGRAMAS por id /\/users\/\d+$/
-            if (request.url.match(/\/apimock/\/programas\/\d+$/) && request.method === 'GET') {
+            if (request.url.match(/\/apimock\/programas\/\d+$/) && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 let urlParts = request.url.split('/');
