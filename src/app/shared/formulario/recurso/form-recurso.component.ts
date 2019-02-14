@@ -135,7 +135,22 @@ export class FormRecursoComponent implements OnInit {
     if (this.formRecurso.invalid) {
       return;
     }else{
-      this.obtenerDatos.emit(this.formRecurso.value);
+      let recurso:object = this.formRecurso.value;
+      let alumno: any[] = [];
+      if (recurso["tipo_recursoid"] == 3){ // si es programa emprender
+        if (this.listaAlumnos.length > 0){
+          for (let i = 0; i < this.listaAlumnos.length; i++) {
+            alumno[i]["alumnoid"] = this.listaAlumnos[i].id;
+          }
+          recurso["alumnos"] = alumno;
+          this.obtenerDatos.emit(recurso);
+        }else{
+          this._mensajeService.cancelado('La lista de alumnos deberia de tener una persona.', [{name:''}]);
+          return;
+        }
+      }else{ // si no es programa emprender
+        this.obtenerDatos.emit(this.formRecurso.value);
+      }
     }
   }
 }
