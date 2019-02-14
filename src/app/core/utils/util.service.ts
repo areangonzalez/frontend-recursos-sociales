@@ -36,4 +36,9 @@ export class UtilService {
 
     return fecha;
   }
+
+  public validarMoneda(moneda:any):boolean {
+    const pattern = /^\d*(\.\d{0,2})?$/;
+    return pattern.test(moneda);
+  }
 }

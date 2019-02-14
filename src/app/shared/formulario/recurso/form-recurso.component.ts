@@ -66,6 +66,12 @@ export class FormRecursoComponent implements OnInit {
     }
   }
 
+  public validarMoneda(moneda) {
+    if (!this._utilService.validarMoneda(moneda.value)) {
+      moneda.value = moneda.value.substring(0, moneda.value.length -1);
+    }
+  }
+
   public listarProgramas(){
     this._programaService.listar().subscribe(
       programas => {

@@ -54,7 +54,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">$</div>
                 </div>
-                <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validadrNumero($event.target)" >
+                <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validarMoneda($event.target)" >
               </div>
               <div *ngIf="(datosRecurso.monto.invalid && submitted)" class="text-danger">
                 <div *ngIf="datosRecurso.monto.errors.required">Por favor ingrese un monto. </div>
