@@ -31,7 +31,7 @@ export class FormRecursoComponent implements OnInit {
   ) {
     this.formRecurso = _fb.group({
       programaid: ['', Validators.required],
-      tipo_recurso_socialid: ['', Validators.required],
+      tipo_recursoid: ['', Validators.required],
       proposito: ['', Validators.required],
       fechaAlta: ['', Validators.required],
       fecha_alta: '',
@@ -80,6 +80,7 @@ export class FormRecursoComponent implements OnInit {
   }
 
   public listarTipoPrestacion(programaid:number) {
+    this.formRecurso.controls.tipo_recursoid.setValue('');
     this.emprender = (programaid == 1) ? true : false;
 
     this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(

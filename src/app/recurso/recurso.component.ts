@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
-import { MensajesService, PersonaService } from '../core/services';
+import { MensajesService, PersonaService, RecursoSocialService } from '../core/services';
 
 @Component({
   selector: 'app-recurso',
@@ -19,8 +19,8 @@ export class RecursoComponent implements OnInit {
     private _router: Router,
     private _route: ActivatedRoute,
     private _mensajeService: MensajesService,
-    private _personaService: PersonaService
-
+    private _personaService: PersonaService,
+    private _recursoService: RecursoSocialService
   ){
     this.contactosForm = _fb.group({
       contacto: _fb.group({
@@ -53,24 +53,34 @@ export class RecursoComponent implements OnInit {
     console.log("Hacer algo");
   }
 
-  public guardarRecurso(recurso:object) {
+  public guardar(recurso:object) {
     if (this.datosPersona.id !== undefined ) {
       // agrego el id de persona
       recurso["personaid"] = this.datosPersona.id;
+      recurso["monto"] = parseFloat(recurso["monto"]);
 
       this._personaService.guardar(this.contactosForm.value.contacto, this.datosPersona.id).subscribe(
         resultado =>{
-          console.log(resultado);
+          this.guardarRecurso(recurso);
         }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
 
     }else{
       this._mensajeService.cancelado("Disculpe, aun NO se ha seleccionado una persona.", [{name:''}]);
     }
+
+    console.log(recurso);
   }
 
   public cancelar(cancela:boolean) {
     if(cancela) {
       this._router.navigate(['inicio']);
     }
+  }
+
+  public guardarRecurso(params:object){
+    this._recursoService.guardar(params, 0).subscribe(
+      resultado => {
+        this._mensajeService.confirmar("Se ha guardado correctamente la prestación", [{name: 'inicio/vista', param:resultado["id"], tipo:'vista'}]);
+      }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
 }

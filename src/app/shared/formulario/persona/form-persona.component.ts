@@ -187,7 +187,7 @@ export class FormPersonaComponent implements OnInit {
     }else{
       this._personaService.guardar(params, 0).subscribe(
         resultado => {
-          params.id = resultado.id;
+          params["id"] = resultado.id;
           this.obtenerDatos(params);
           this._mensajeService.exitoso("Se ha guardado la persona con éxito.", [{name:''}]);
 

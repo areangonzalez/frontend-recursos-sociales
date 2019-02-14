@@ -28,5 +28,9 @@ export class MensajesService {
     cancelado(mensaje: string, url: IUrl) {
         this.alert(AlertType.Cancelado, mensaje, url);
     }
+    confirmar(mensaje: string, url: IUrl){
+      this.alert(AlertType.Confirmar, mensaje, url);
+    }
+
 
 }

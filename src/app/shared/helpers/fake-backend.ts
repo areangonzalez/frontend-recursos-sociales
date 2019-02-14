@@ -31,6 +31,27 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return personas;
         }
 
+        function getRecursos(){
+          let recursos = (<any>data).recursos;
+          let existe = false;
+          if(localStorage.getItem("recursos")) {
+            let recursoStorage: any[] = JSON.parse(localStorage.getItem("recursos"));
+            for (let i = 0; i < recursoStorage.length; i++) {
+              for (let j = 0; j < recursos.length; j++) {
+                if (recursoStorage[i].id === recursos[j].id){
+                  //recursos[j] = recursoStorage[i]; // si se edito
+                  existe = true;
+                }
+              }
+              if (!existe) {
+                recursos.push(recursoStorage[i]);
+              }
+            }
+          }
+
+          return recursos;
+        }
+
         function nombrePorId(id, lista){
           for (let i = 0; i < lista.length; i++) {
             if (lista[i].id == id){
@@ -39,10 +60,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           }
         }
 
+        function hoy() {
+          let fecha = new Date();
+          return fecha.getFullYear() + '-' + fecha.getMonth() + '-' + fecha.getDate();
+        }
+
 
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
         let personas = getPersonas();
+        let recursos = getRecursos();
         let programas = (<any>data).programas;
         let localidades = (<any>data).localidads;
         let tipoRecurso = (<any>data).tipoRecursoSocials;
@@ -54,21 +81,53 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(null).pipe(mergeMap(() => {
 
             // get buscador de recurso social por programaid
-            if(request.url.endsWith('/apimock/recurso-socials') && request.method === 'GET') {
+            if(request.url.endsWith('/apimock/recursos') && request.method === 'GET') {
               let programaid: number = parseInt(request.params.get('programaid'));
               let pageSize: number = parseInt(request.params.get('pagesize'));
               let totalRecursos = programaid * 13;
-              //let tipos = tipoRecurso.filter(recurso => { return recurso.programaid === parseInt(programaid) });
+              let recursoEncontrados: any[] = recursos.filter(recurso => { return recurso.programaid === programaid });
               let listaRecursos = {
                 total_filtrado: totalRecursos,
                 pagesize: pageSize,
                 pages: 0,
                 estado: true,
-                resultado:[]
+                resultado:recursoEncontrados
               };
 
               //console.log(tipos);
               return of(new HttpResponse({ status: 200, body: listaRecursos }));
+            }
+            //Guardado de recurso
+            if(request.url.endsWith('/apimock/recursos') && request.method === 'POST') {
+              let nuevoRecurso = request.body;
+              console.log("nuevo: ", nuevoRecurso);
+              // validation
+              let duplicateRecurso = recursos.filter(recurso => { return recurso.id === nuevoRecurso.id; }).length;
+              if (duplicateRecurso) {
+                  return throwError({ error: { message: 'Esta persona ya existe!' } });
+              }
+              let recursoid = recursos.length + 1;
+
+              nuevoRecurso["id"] = recursoid;
+              nuevoRecurso["fecha_inicial"] = hoy();
+              nuevoRecurso["tipo_recurso"] = nombrePorId(nuevoRecurso.tipo_recursoid, tipoRecurso);
+              nuevoRecurso["programa"] = nombrePorId(nuevoRecurso.programaid, programas);
+
+              delete nuevoRecurso["fechaAlta"];
+
+              //personas.push(nuevaPersona);
+              let recursosAgregados = [];
+              if (localStorage.getItem('recursos')) {
+                recursosAgregados = [JSON.parse(localStorage.getItem('recursos'))];
+                recursosAgregados[0].push(nuevoRecurso);
+                localStorage.setItem('recursos', JSON.stringify(recursosAgregados[0]));
+              }else{
+                recursosAgregados.push(nuevoRecurso);
+                localStorage.setItem('recursos', JSON.stringify(recursosAgregados));
+              }
+              recursos.push(nuevoRecurso);
+
+              return of(new HttpResponse({ status: 200, body: {id:recursoid} }));
             }
             // get Buscador de personas
             if(request.url.endsWith('/apimock/personas') && request.method === 'GET') {
@@ -211,7 +270,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             /* ----------------------  LISTAS GENERALES  --------------------------- */
             // get TIPO RECURSO SOCIAL por programa id
-            if(request.url.endsWith('/apimock/tipo-recurso-socials') && request.method === 'GET') {
+            if(request.url.endsWith('/apimock/tipo-recursos') && request.method === 'GET') {
               let programaid = request.params.get('programaid');
               let tipos = tipoRecurso.filter(recurso => { return recurso.programaid === parseInt(programaid) });
               return of(new HttpResponse({ status: 200, body: tipos }));

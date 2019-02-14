@@ -15,7 +15,7 @@ export class TipoRecursoService {
     let httpParams = new HttpParams();
     httpParams = httpParams.set("programaid", programaid);
 
-    return this._apiService.get('/tipo-recurso-socials',httpParams);
+    return this._apiService.get('/tipo-recursos',httpParams);
   }
 
 }
