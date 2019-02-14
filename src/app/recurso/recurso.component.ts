@@ -48,4 +48,14 @@ export class RecursoComponent implements OnInit {
   public editarPersona(){
     console.log("Hacer algo");
   }
+
+  public guardarRecurso(recurso:object) {
+    console.log(recurso);
+  }
+
+  public cancelar(cancela:boolean) {
+    if(cancela) {
+      this._router.navigate(['inicio']);
+    }
+  }
 }

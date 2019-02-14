@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilService } from 'src/app/core/utils';
 import { TipoRecursoService, MensajesService, ProgramaService } from 'src/app/core/services';
@@ -11,6 +11,8 @@ import { TipoRecursoService, MensajesService, ProgramaService } from 'src/app/co
 })
 export class FormRecursoComponent implements OnInit {
   @Input("programaid") public programaid: any;
+  @Output("cancelar") public cancelar = new EventEmitter();
+  @Output("obtenerDatos") public obtenerDatos = new EventEmitter();
 
   public formRecurso: FormGroup;
   public programaLista: any = [];
@@ -101,7 +103,7 @@ export class FormRecursoComponent implements OnInit {
 
   }
 
-  borrarAlumno(alumno:any){
+  public borrarAlumno(alumno:any){
     for (let i = 0; i < this.listaAlumnos.length; i++) {
       if (this.listaAlumnos[i].id == alumno.id){
         this.listaAlumnos.splice(i, 1);
@@ -114,5 +116,19 @@ export class FormRecursoComponent implements OnInit {
       programa => {
         this.programaLista = [programa];
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+  }
+
+  public cancelarForm(){
+    this.cancelar.emit(true);
+  }
+
+  public validarForm(){
+    this.submitted = true;
+
+    if (this.formRecurso.invalid) {
+      return;
+    }else{
+      this.obtenerDatos.emit(this.formRecurso.value);
+    }
   }
 }

@@ -150,7 +150,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 personasAgregadas[0].push(nuevaPersona);
                 localStorage.setItem('personas', JSON.stringify(personasAgregadas[0]));
               }else{
-                personasAgregadas.push([nuevaPersona]);
+                personasAgregadas.push(nuevaPersona);
                 localStorage.setItem('personas', JSON.stringify(personasAgregadas));
               }
               personas.push(nuevaPersona);
