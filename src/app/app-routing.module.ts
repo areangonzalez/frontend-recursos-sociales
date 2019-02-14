@@ -7,6 +7,8 @@ import { RecursoModule } from "./recurso/recurso.module";
 export function loadRecursoModule() { return RecursoModule; }
 import { ReporteModule } from "./reporte/reporte.module";
 export function loadReporteModule() { return ReporteModule; }
+import { VistaModule } from "./vista/vista.module";
+export function loadVistaModule() { return VistaModule; }
 
 import { CustomPreloadingStrategy } from "./custom-preloading-strategy";
 
@@ -38,6 +40,12 @@ const routes: Routes = [
               //loadChildren: './reporte/reporte.module#ReporteModule', // production
               data: { preload: true, breadcrumb: 'Reportes' }
           },
+          {
+            path: 'vista',
+            loadChildren: loadVistaModule, // dev
+            //loadChildren: './vista/vista.module#VistaModule', // production
+            data: { preload: true, breadcrumb: 'Visualizar prestación' }
+          }
         ]
     },
     {

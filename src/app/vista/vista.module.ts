@@ -2,25 +2,27 @@ import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from "../shared";
 
-import { RecursoRoutingModule } from "./recurso-routing.module";
-import { RecursoComponent } from "./recurso.component";
+import { VistaRoutingModule } from "./vista-routing.module";
+import { VistaComponent } from "./vista.component";
+import { VistaRecursoComponent } from "./recurso";
 
 
 @NgModule({
     imports: [
       NgbModule,
       SharedModule,
-      RecursoRoutingModule
+      VistaRoutingModule
     ],
     declarations: [
-      RecursoComponent,
+      VistaComponent,
+      VistaRecursoComponent
     ],
     providers: [
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
-export class RecursoModule {
+export class VistaModule {
     constructor() {
     }
  }

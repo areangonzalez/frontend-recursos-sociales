@@ -22,6 +22,7 @@ import {
 import { InicioModule } from "./inicio/inicio.module";
 import { ReporteModule } from "./reporte/reporte.module";
 import { RecursoModule } from "./recurso/recurso.module";
+import { VistaModule } from "./vista/vista.module";
 
 
 import { AppComponent } from './app.component';
@@ -46,7 +47,8 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     SharedModule,
     InicioModule,
     ReporteModule,
-    RecursoModule
+    RecursoModule,
+    VistaModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
