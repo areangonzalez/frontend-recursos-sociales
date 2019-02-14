@@ -54,12 +54,17 @@ export class RecursoComponent implements OnInit {
 
   public guardarRecurso(recurso:object) {
     if (this.datosPersona.id !== undefined ) {
+      let contacto: any[] = [];
+      // armo un array de contacto
+      contacto.push(this.contactosForm.value.contacto);
       // agrego el id de persona
-      recurso["idpersona"] = this.datosPersona.id;
-      console.log("datos contactos: ",this.contactosForm.value);
+      recurso["personaid"] = this.datosPersona.id;
+
+
+      console.log("api contactos: ",contacto[0]);
       // agrego los contactos
 
-      console.log(recurso);
+      console.log("api recurso: ",recurso);
 
     }else{
       this._mensajeService.cancelado("Disculpe, aun NO se ha seleccionado una persona.", [{name:''}]);
