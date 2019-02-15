@@ -25,4 +25,8 @@ export class PersonaService {
       return this._apiService.post('/personas', params);
     }
   }
+
+  public personaPorId(id:number){
+    return this._apiService.get('/personas/' + id);
+  }
 }

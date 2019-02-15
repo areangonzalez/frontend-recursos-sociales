@@ -38,6 +38,7 @@
             </div>
           </div>
         </div>
+        <shared-lista-persona *ngIf="(recurso.alumnos !== undefined)" [personas]="recurso.alumnos" [mostrar]="false"></shared-lista-persona>
       </div>
     </ng-template>
   </ngb-tab>

@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ListaPersonaComponent implements OnInit {
   @Input("personas") public personas:any;
+  @Input("mostrar") public mostrar:boolean;
   @Output("borrarPersona") public borrarPersona = new EventEmitter();
 
   constructor(){}

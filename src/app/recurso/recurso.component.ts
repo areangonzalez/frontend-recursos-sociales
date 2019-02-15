@@ -80,7 +80,7 @@ export class RecursoComponent implements OnInit {
   public guardarRecurso(params:object){
     this._recursoService.guardar(params, 0).subscribe(
       resultado => {
-        this._mensajeService.confirmar("Se ha guardado correctamente la prestación", [{name: 'inicio/vista', param:resultado["id"], tipo:'vista'}]);
+        this._mensajeService.confirmar("Se ha guardado correctamente la prestación", [{name: 'inicio/vista/prestacion', param:resultado["id"], tipo:'vista'}]);
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
 }

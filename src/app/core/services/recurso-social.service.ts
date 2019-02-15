@@ -13,19 +13,23 @@ export class RecursoSocialService {
     return this._apiService.get('/recursos');
   }
 
-  buscarPorPrograma(params:object) {
+  public buscarPorPrograma(params:object) {
     let httpParams = new HttpParams();
     httpParams = this._apiService.formatParams(httpParams, params);
 
     return this._apiService.get('/recursos',httpParams);
   }
 
-  guardar(params:object, id:number) {
+  public guardar(params:object, id:number) {
     if (id !== 0) {
       // update
     }else{
       return this._apiService.post('/recursos',params);
     }
+  }
+
+  public recursoPorId(id:number) {
+    return this._apiService.get('/recursos/' + id);
   }
 
 

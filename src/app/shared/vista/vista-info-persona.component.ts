@@ -15,7 +15,7 @@ export class VistaInfoPersonaComponent implements OnInit {
     configTooltip: NgbTooltipConfig
   ){
     configTooltip.placement = 'top';
-    configTooltip.triggers = 'click';
+    configTooltip.triggers = 'hover';
   }
 
   ngOnInit() {

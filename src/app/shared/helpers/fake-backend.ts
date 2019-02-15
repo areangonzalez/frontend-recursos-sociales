@@ -79,7 +79,36 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
+            // obtener reurso por ID
+            if(request.url.match(/\/apimock\/recursos\/\d+$/) && request.method === 'GET') {
+              let urlParts = request.url.split('/');
+              let id = parseInt(urlParts[urlParts.length - 1]);
+              console.log("recurso id: ",id);
+              let recurso = recursos.filter(recurso => { return recurso.id === id; });
+              let recursoEncontrado = recurso.length ? recurso[0] : null;
+              let alumnos: any[] = [];
+              if(recursoEncontrado["alumnos"]!== undefined) {
+                for (let i = 0; i < recursoEncontrado["alumnos"].length; i++) {
+                  let encontrado = personas.filter(alumno => { return alumno.id === recursoEncontrado["alumnos"][i].alumnoid; });
+                  alumnos.push(encontrado[0]);
+                }
 
+                recursoEncontrado["alumnos"] = alumnos;
+              }
+
+              console.log("recurso encontrado: ",recursoEncontrado);
+              //console.log(tipos);
+              return of(new HttpResponse({ status: 200, body: recursoEncontrado }));
+            }
+            if(request.url.match(/\/apimock\/personas\/\d+$/) && request.method === 'GET') {
+              let urlParts = request.url.split('/');
+              let id = parseInt(urlParts[urlParts.length - 1]);
+              let persona = personas.filter(persona => { return persona.id === id; });
+              let personaEncontrada = persona.length ? persona[0] : null;
+
+              //console.log(tipos);
+              return of(new HttpResponse({ status: 200, body: personaEncontrada }));
+            }
             // get buscador de recurso social por programaid
             if(request.url.endsWith('/apimock/recursos') && request.method === 'GET') {
               let programaid: number = parseInt(request.params.get('programaid'));
