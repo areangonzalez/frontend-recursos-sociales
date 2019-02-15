@@ -1,1 +1,105 @@
-<h2>Hola reporte</h2>
+<div class="mb-3 bg-white  p-3 rounded">
+    <div class="form-group">
+        <div class="input-group">
+          <input type="text" class="form-control" [(ngModel)]="globalSearch" id="buscar-reporte" placeholder="">
+          <div class="input-group-append btn-group">
+            <button type="button" class="btn btn-primary" (click)="buscar(globalSearch, page)" ngbTooltip="Buscar" ><i class="fas fa-search"></i></button>
+            <button type="button" class="btn btn-danger" ngbTooltip="Limpiar busqueda" ><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-md btn-primary" (click)="mostrarBusquedaAvanzada();">
+        busqueda avanzada &nbsp;
+        <i class="fas fa-caret-down" *ngIf="!mostrar" ></i>
+        <i class="fas fa-caret-up" *ngIf="mostrar" ></i>
+      </button>
+      <div class="card mt-1" *ngIf="mostrar">
+          <div class="card-body">
+            <fieldset [formGroup]="busquedaAvanzada">
+              <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="localidad" class="prioridad">Localidad:</label>
+                    <select class="form-control" id="localidad" formControlName="localidadid">
+                      <option value="">Seleccione Localidad</option>
+                      <option *ngFor="let localidad of localidadesLista" value="{{localidad.id}}">{{localidad.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="programa" class="prioridad">Programa:</label>
+                    <select class="form-control" id="programa" formControlName="programaid">
+                      <option value="">Seleccione Localidad</option>
+                      <option *ngFor="let programa of programasLista" value="{{programa.id}}">{{programa.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="tipo_recurso" class="prioridad">Tipo prestación:</label>
+                    <select class="form-control" id="tipo_recurso" formControlName="tipo_recursoid">
+                      <option value="">Seleccione Localidad</option>
+                      <option *ngFor="let tipo_recurso of tipoRecursosLista" value="{{tipo_recurso.id}}">{{tipo_recurso.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fecha_desde" class="prioridad">Fecha desde:</label>
+                    <div class="input-group">
+                        <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fbd="ngbDatepicker"
+                        id="fecha_desde" formControlName="fechaDesde" (ngModelChange)="formatFechaDesde($event)">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-info" (click)="fbd.toggle()" type="button">
+                                <span class="oi oi-calendar" title="Fecha desde" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fecha_hasta" class="prioridad">Fecha hasta:</label>
+                    <div class="input-group">
+                        <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fbh="ngbDatepicker"
+                        id="fecha_hasta" formControlName="fechaHasta" (ngModelChange)="formatFechaHasta($event)">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-info" (click)="fbh.toggle()" type="button">
+                                <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+      </div>
+      <div class="row mt-2 pl-3 pr-3">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Nro. Documento</th>
+              <th scope="col">Apellido y nombre</th>
+              <th class="text-center" scope="col">Dirección / Contacto</th>
+            </tr>
+          </thead>
+          <!-- <tbody *ngIf="(listaPersonas.length == 0)">
+            <tr>
+              <td rowspan="1" colspan="4" class="text-center"> <h5>No se han encontrado resultado.</h5> </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="(listaPersonas.length > 0)">
+            <tr *ngFor="let persona of listaPersonas" (click)="seleccionarPersona(persona.id, persona)">
+              <td scope="row">{{persona.nro_documento}}</td>
+              <td >
+                {{persona.apellido}}, {{persona.nombre}}
+              </td>
+              <td class="text-center">
+                <div class="btn-group">
+                  <button *ngIf="(persona.lugar != undefined)" container="body" type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
+                  <button *ngIf="(persona.telefono != '')" type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
+                  <button *ngIf="(persona.celular != '')" type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
+                  <button *ngIf="(persona.email != '')"type="button" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
+                  <button *ngIf="(persona.red_social != undefined && persona.red_social != '')" type="button" class="btn btn-sm btn-light"><i class="fas fa-users"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody> -->
+          </table>
+        </div>
+        <div class=" d-flex justify-content-center">
+            <!-- <ngb-pagination *ngIf="(colleccionSize > 0)"  [collectionSize]="colleccionSize" [(page)]="page" [pageSize]="pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(page)" aria-label="Default pagination"></ngb-pagination> -->
+        </div>
+</div>
