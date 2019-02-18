@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UtilService } from 'src/app/core/utils';
 import { SexoService, GeneroService, EstadoCivilService, MensajesService, PersonaService } from 'src/app/core/services';
 import { PersonaModel } from 'src/app/core/models';
+import { map, catchError } from "rxjs/operators";
 
 @Component({
   selector: 'shared-form-persona',
@@ -11,6 +12,7 @@ import { PersonaModel } from 'src/app/core/models';
   styleUrls: ['./form-persona.component.sass']
 })
 export class FormPersonaComponent implements OnInit {
+  @Input("personaid") public personaid: number;
   @Output("getDatos") public getDatos = new EventEmitter();
   @Output("cancelarForm") public cancelarForm = new EventEmitter();
 
@@ -76,6 +78,9 @@ export class FormPersonaComponent implements OnInit {
     this.listarSexo();
     this.listarGenero();
     this.listarEstadoCivil();
+    if (this.personaid !== undefined) {
+      this.personaPorId(this.personaid);
+    }
   }
 
   // convenience getter for easy access to form fields
@@ -199,6 +204,44 @@ export class FormPersonaComponent implements OnInit {
 
   public cancelar(){
     this.cancelarForm.emit(true);
+  }
+
+  public personaPorId(personaid) {
+    this._personaService.personaPorId(personaid)
+    .pipe(map(vPersona => {
+      let vDatos = {};
+      // agrego los datos que pertenecen a contacto y los borro del objeto de persona
+      vDatos = vPersona;
+      vDatos["contacto"] = {};
+
+      vDatos["contacto"]["telefono"] = vPersona["telefono"];
+      delete vDatos["telefono"];
+      vDatos["contacto"]["celular"] = vPersona["celular"];
+      delete vDatos["celular"];
+      vDatos["contacto"]["email"] = vPersona["email"];
+      delete vDatos["email"];
+      vDatos["contacto"]["red_social"] = vPersona["red_social"];
+      delete vDatos["red_social"];
+      // armo numero de cuil
+      if (vPersona["cuil"] != '') {
+        vDatos["cuil_prin"] = vPersona["cuil"].substring(0, 2);
+        vDatos["cuil_fin"] = vPersona["cuil"].substring(10);
+      }
+      this.validarCuil(vPersona["nro_documento"]);
+      // verifico que exista y armo la fecha de nacimiento
+      if (vPersona["fecha_nacimiento"] != '') {
+        let fecha = vPersona["fecha_nacimiento"].split("-");
+        vDatos["fechaNacimiento"] = { year: parseInt(fecha[0]), month: parseInt(fecha[1]), day: parseInt(fecha[2]) };
+      }
+
+      return vDatos;
+    }))
+    .subscribe(
+      persona => {
+        console.log(persona);
+        this.formPersona.patchValue(persona);
+
+      }, error => { this._mensajeService.cancelado(error, [{name: ''}]) });
   }
 
 }

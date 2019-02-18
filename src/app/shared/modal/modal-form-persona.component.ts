@@ -8,6 +8,7 @@ import { ModalConfig, BotonDisenio } from 'src/app/core/models';
 })
 export class ModalFormPersonaContent {
   @Input("configModal") public configModal:ModalConfig;
+  @Input("personaid") public personaid: any;
 
   constructor(public activeModal: NgbActiveModal) {}
 
@@ -30,9 +31,12 @@ export class ModalFormPersonaComponent {
   /**
    * @var disenioBoton {Object} define el diseño del boton por Ej.: {class: "", iconoClass: "",  text: ""}
    * @var configModal {Object} define la configuracion del modal y diseño Ej.: {title: ""}
+   * @var personaid {number} identificador de una persona
+   * @function {Object} devuelve los datos de la persona
    */
   @Input("disenioBoton") public disenioBoton: BotonDisenio;
   @Input("configModal") public configModal: ModalConfig;
+  @Input("personaid") public personaid: any;
   @Output("obtenerPersona") public obtenerPersona = new EventEmitter();
 
   constructor(
@@ -46,6 +50,7 @@ export class ModalFormPersonaComponent {
   open() {
     const modalRef = this.modalService.open(ModalFormPersonaContent, {size: 'lg'});
     modalRef.componentInstance.configModal = this.configModal;
+    modalRef.componentInstance.personaid = this.personaid;
     modalRef.result.then(
       (result) => {
         if (result == 'closed'){

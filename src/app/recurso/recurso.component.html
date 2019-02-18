@@ -2,7 +2,8 @@
     <div class="d-flex justify-content-between">
       <h2>Crear prestación</h2>
       <div class="btn-group">
-          <button type="button" class="btn btn-md btn-light mb-2" ngbTooltip="Editar persona" (click)="editarPersona()" *ngIf="infoPersona" container="body" ><i class="fas fa-pencil-alt"></i></button>
+          <modal-form-persona-component class="btn-group" ngbTooltip="Editar persona" [configModal]="configModal" [disenioBoton]="configBotonModal" (obtenerPersona)="personaEditada($event)" [personaid]="datosPersona['id']" *ngIf="infoPersona" ></modal-form-persona-component>
+          <!-- <button type="button" class="btn btn-md btn-light mb-2" ngbTooltip="Editar persona" (click)="editarPersona()" *ngIf="infoPersona" container="body" ><i class="fas fa-pencil-alt"></i></button> -->
         <button type="button" class="btn btn-md btn-info mb-2" ngbTooltip="Cambiar persona" (click)="cambiarPersona()" *ngIf="infoPersona"><i class="fas fa-sync"></i></button>
       </div>
     </div>

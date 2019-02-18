@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
 import { MensajesService, PersonaService, RecursoSocialService } from '../core/services';
+import { ModalConfig, BotonDisenio } from '../core/models';
 
 @Component({
   selector: 'app-recurso',
@@ -13,6 +14,9 @@ export class RecursoComponent implements OnInit {
   public datosPersona:any = {};
   public contactosForm: FormGroup;
   public programaid: any;
+  public configModal: ModalConfig = { title: "Editar persona" };
+  public configBotonModal: BotonDisenio = { class: 'btn btn-md btn-light mb-2', iconoClass: 'fas fa-pencil-alt', text:'' };
+
 
   constructor(
     private _fb: FormBuilder,
@@ -83,4 +87,9 @@ export class RecursoComponent implements OnInit {
         this._mensajeService.confirmar("Se ha guardado correctamente la prestación", [{name: 'inicio/vista/prestacion', param:resultado["id"], tipo:'vista'}]);
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
+
+  public personaEditada(datos){
+
+  }
+
 }
