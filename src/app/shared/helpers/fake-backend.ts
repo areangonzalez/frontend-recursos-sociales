@@ -100,6 +100,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               //console.log(tipos);
               return of(new HttpResponse({ status: 200, body: recursoEncontrado }));
             }
+            // Persona por ID
             if(request.url.match(/\/apimock\/personas\/\d+$/) && request.method === 'GET') {
               let urlParts = request.url.split('/');
               let id = parseInt(urlParts[urlParts.length - 1]);
@@ -109,22 +110,116 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               //console.log(tipos);
               return of(new HttpResponse({ status: 200, body: personaEncontrada }));
             }
-            // get buscador de recurso social por programaid
+            // get buscador de recurso social
             if(request.url.endsWith('/apimock/recursos') && request.method === 'GET') {
-              let programaid: number = parseInt(request.params.get('programaid'));
+              // parametros
+              let programaid = request.params.get('programaid');
               let pageSize: number = parseInt(request.params.get('pagesize'));
-              let totalRecursos = programaid * 13;
-              let recursoEncontrados: any[] = recursos.filter(recurso => { return recurso.programaid === programaid });
+              let localidadid = request.params.get('localidadid');
+              let tipo_recursoid = request.params.get('tipo_recursoid');
+              let fecha_desde: string = request.params.get('fecha_desde');
+              let fecha_hasta: string = request.params.get('fecha_hasta');
+              let global_search: string = request.params.get('global_search');
+              let page: number = parseInt(request.params.get("page"));
+              // variables de uso general
+              //let search = (global_search != '') ? global_search.split(" ") : [] ;
+              let search = global_search.split(" ");
+              let totalPaginas = 0;
+              let recursosEncontrados: any[] = [];
               let listaRecursos = {
-                total_filtrado: totalRecursos,
+                total_filtrado: 0,
                 pagesize: pageSize,
-                pages: 0,
+                pages: totalPaginas,
                 estado: true,
-                resultado:recursoEncontrados
+                resultado:recursosEncontrados
               };
+              // esto facilita la busqueda de un recurso con la persona y su dirección
+              for (let i = 0; i < recursos.length; i++) {
+                recursos[i]["programa"] = nombrePorId(recursos[i]["programaid"], programas);
+                for (let j = 0; j < personas.length; j++) {
+                  // preguntar si los id's soinciden
+                  if (recursos[i]["personaid"] == personas[j]["id"]){
+                    // actualizo las localidades
+                    personas[j]["lugar"]["localidad"] = nombrePorId(personas[j]["lugar"]["localidadid"], localidades);
+                    // creo a la persona dentro del recurso
+                    recursos[i]["persona"] = personas[j];
+                  }
+                  // pregunto si alumnos existe en el recurso
+                  if (recursos[i]["alumnos"] !== undefined){
+                    for (let k = 0; k < recursos[i]["alumnos"].length; k++) {
+                      for (let l = 0; l < personas.length; l++) {
+                        // verifico si el alumno tiene el mismo id que la persona
+                        if (recursos[i]["alumnos"][k]["alumnoid"] == personas[l]["id"]) {
+                          // actualizo su localidad
+                          personas[l]["lugar"]["localidad"] = nombrePorId(personas[l]["lugar"]["localidadid"], localidades);
+                          // creo los alumnos
+                          recursos[i]["alumnos"][k] = personas[l];
+                        }
+                      }
+                    }
+                  }
+                }
+              }// fin for de recursos
 
-              //console.log(tipos);
-              return of(new HttpResponse({ status: 200, body: listaRecursos }));
+              if (pageSize == 0 && programaid !== undefined){ // paginacion 0 y un id de programa
+                let totalRecursos = parseInt(programaid) * 13;
+                recursosEncontrados = recursos.filter(recurso => { return recurso.programaid === programaid });
+
+                // armo array final
+                listaRecursos["total_filtrado"] = totalRecursos;
+                listaRecursos["pagesize"] = pageSize;
+                listaRecursos["resultado"] = recursosEncontrados;
+
+                return of(new HttpResponse({ status: 200, body: listaRecursos }));
+              }else{
+                recursosEncontrados = recursos.filter(
+                  recurso => {
+                    for (let i = 0; i < search.length; i++) {
+                      let nombre = recurso.persona.nombre.split(" ");
+                      for (let j = 0; j < nombre.length; j++) {
+                          if ( nombre[j].toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
+                            return recurso;
+                          }
+                      }
+                      if (recurso.persona.nro_documento.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ){
+                        return recurso;
+                      }
+                      if ( recurso.persona.apellido.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ) {
+                        return recurso;
+                      }
+                    }
+                  });
+                  if (localidadid) {
+                    recursosEncontrados = recursosEncontrados.filter(recurso => { return parseInt(localidadid) === parseInt(recurso.persona.lugar.localidadid); });
+                  }
+                  if (programaid) {
+                    recursosEncontrados = recursosEncontrados.filter(recurso => { return parseInt(programaid) === parseInt(recurso.programaid); });
+                  }
+                  if (tipo_recursoid) {
+                    recursosEncontrados = recursosEncontrados.filter(recurso => { return parseInt(tipo_recursoid) === parseInt(recurso.tipo_recursoid); });
+                  }
+                  //console.log(recursosEncontrados);
+                  let totalFiltrado:number = recursosEncontrados.length;
+                  let total:number = totalFiltrado/pageSize;
+                  let numEntero = Math.floor(total);
+                  let totalPagina:number = (total > numEntero) ? numEntero + 1 : total;
+
+                  listaRecursos.total_filtrado = recursosEncontrados.length;
+                  listaRecursos.pages = totalPagina;
+                  if (page > 0) {
+                    page = page - 1;
+                    let pageStart = page * pageSize;
+                    let pageEnd = pageStart + pageSize;
+                    listaRecursos.resultado = recursosEncontrados.slice(pageStart, pageEnd);
+                  }else{
+                    listaRecursos.resultado = recursosEncontrados.slice(0,pageSize);
+                  }
+
+
+
+                return of(new HttpResponse({ status: 200, body: listaRecursos }));
+              }
+                //console.log(tipos);
             }
             //Guardado de recurso
             if(request.url.endsWith('/apimock/recursos') && request.method === 'POST') {
@@ -200,6 +295,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 listaPersonas.total_filtrado = resultado.length;
                 listaPersonas.pages = totalPagina;
                 if (page > 0) {
+                  page = page - 1;
                   let pageStart = page * pageSize;
                   let pageEnd = pageStart + pageSize;
                   listaPersonas.resultado = resultado.slice(pageStart, pageEnd);

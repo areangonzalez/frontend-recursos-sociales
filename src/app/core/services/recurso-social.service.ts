@@ -13,7 +13,7 @@ export class RecursoSocialService {
     return this._apiService.get('/recursos');
   }
 
-  public buscarPorPrograma(params:object) {
+  public buscar(params:object) {
     let httpParams = new HttpParams();
     httpParams = this._apiService.formatParams(httpParams, params);
 
