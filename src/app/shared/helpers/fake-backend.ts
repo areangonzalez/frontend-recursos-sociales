@@ -339,6 +339,44 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // respond 200 OK
               return of(new HttpResponse({ status: 200, body: {id: id} }));
             }
+            // Guardar Persona por ID actualizar datos
+            if(request.url.match(/\/apimock\/personas\/\d+$/) && request.method === 'PUT') {
+              let urlParts = request.url.split('/');
+              let id = parseInt(urlParts[urlParts.length - 1]);
+              let editarPersona = request.body;
+              let persona = personas.filter(persona => { return persona.id === id; });
+
+              for (const clave in editarPersona) {
+                for (const k in persona) {
+                  if (clave == "lugar"){
+                    for (const l in editarPersona["lugar"]) {
+                      if (persona["lugar"][k] == editarPersona["lugar"][l]) {
+                        persona["lugar"][k] = editarPersona["lugar"][l];
+                      }
+                    }
+                  }else if (clave == k) {
+                    persona[clave] = editarPersona[clave];
+                  }
+                }
+              }
+
+              //personas.push(nuevaPersona);
+              let personasAgregadas = [];
+              if (localStorage.getItem('personas')) {
+                personasAgregadas = [JSON.parse(localStorage.getItem('personas'))];
+                personasAgregadas[0].push(persona);
+                localStorage.setItem('personas', JSON.stringify(personasAgregadas[0]));
+              }else{
+                personasAgregadas.push(persona);
+                localStorage.setItem('personas', JSON.stringify(personasAgregadas));
+              }
+              personas.push(persona);
+
+              // let personaEncontrada = persona.length ? persona[0] : null;
+
+              //console.log(tipos);
+              return of(new HttpResponse({ status: 200, body: {id:id} }));
+            }
 
             // get user by id
             if (request.url.match(/\/apimock\/personas\/\d+$/) && request.method === 'PUT') {
