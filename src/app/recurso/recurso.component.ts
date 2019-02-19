@@ -58,6 +58,7 @@ export class RecursoComponent implements OnInit {
   }
 
   public guardar(recurso:object) {
+    console.log(this.datosPersona.id);
     if (this.datosPersona.id !== undefined ) {
       // agrego el id de persona
       recurso["personaid"] = this.datosPersona.id;
@@ -71,8 +72,6 @@ export class RecursoComponent implements OnInit {
     }else{
       this._mensajeService.cancelado("Disculpe, aun NO se ha seleccionado una persona.", [{name:''}]);
     }
-
-    console.log(recurso);
   }
 
   public cancelar(cancela:boolean) {
@@ -88,8 +87,10 @@ export class RecursoComponent implements OnInit {
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
 
-  public personaEditada(datos){
-
+  public personaEditada(persona){
+    this.infoPersona = true;
+    this.datosPersona = persona;
+    this.contactosForm.controls.contacto.patchValue(persona);
   }
 
 }

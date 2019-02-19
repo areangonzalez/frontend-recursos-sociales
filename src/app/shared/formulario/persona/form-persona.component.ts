@@ -188,7 +188,11 @@ export class FormPersonaComponent implements OnInit {
 
   public guardarPersona(params:object, id:number) {
     if (id != 0) {
-      console.log("Editado satisfactorio: ", params);
+      this._personaService.guardar(params, id).subscribe(
+        resultado => {
+          this.obtenerDatos(params);
+          this._mensajeService.exitoso("Se han actualizado los datos de la persona con éxito.", [{name:''}]);
+        }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
     }else{
       this._personaService.guardar(params, 0).subscribe(
         resultado => {
