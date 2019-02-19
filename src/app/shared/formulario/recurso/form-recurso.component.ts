@@ -81,8 +81,6 @@ export class FormRecursoComponent implements OnInit {
 
   public listarTipoPrestacion(programaid:number) {
     this.formRecurso.controls.tipo_recursoid.setValue('');
-    this.emprender = (programaid == 1) ? true : false;
-
     this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(
       prestacion => {
         this.tipoPrestacionLista = prestacion;
@@ -137,7 +135,7 @@ export class FormRecursoComponent implements OnInit {
     }else{
       let recurso:object = this.formRecurso.value;
       let alumno: any[] = [];
-      if (recurso["programaid"] == 3){ // si es programa emprender
+      if (this.emprender){ // si es programa emprender
         if (this.listaAlumnos.length > 0){
           for (let i = 0; i < this.listaAlumnos.length; i++) {
             alumno.push({ alumnoid: this.listaAlumnos[i].id });
@@ -152,5 +150,11 @@ export class FormRecursoComponent implements OnInit {
         this.obtenerDatos.emit(this.formRecurso.value);
       }
     }
+  }
+
+  public esEmprender(event:any){
+    // obtengo el nombre del programa
+    let selectElementText = event.target['options'][event.target['options'].selectedIndex].text;
+    this.emprender = (selectElementText.toLowerCase() === "emprender") ? true : false;
   }
 }
