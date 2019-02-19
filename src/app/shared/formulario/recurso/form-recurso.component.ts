@@ -137,7 +137,7 @@ export class FormRecursoComponent implements OnInit {
     }else{
       let recurso:object = this.formRecurso.value;
       let alumno: any[] = [];
-      if (recurso["tipo_recursoid"] == 3){ // si es programa emprender
+      if (recurso["programaid"] == 3){ // si es programa emprender
         if (this.listaAlumnos.length > 0){
           for (let i = 0; i < this.listaAlumnos.length; i++) {
             alumno.push({ alumnoid: this.listaAlumnos[i].id });
