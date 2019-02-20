@@ -3,7 +3,7 @@
   "generos": [{ "id": 1, "nombre": "Femenino" }, { "id": 2, "nombre": "Masculino" }],
   "estadoCivils": [{ "id": 1, "nombre": "Casado/a" }, { "id": 2, "nombre": "Soltero/a" }, { "id": 2, "nombre": "Viudo/a" }],
   "localidads": [{ "id": 1, "nombre": "Bariloche" }, { "id": 2, "nombre": "Cipolletti" }, { "id": 3, "nombre": "Gral. Roca" }, { "id": 4, "nombre": "Viedma" }],
-  "programas": [{ "id": 1, "nombre": "Emprender" }, { "id": 2, "nombre": "Habitat" },{ "id": 3, "nombre": "Microemprendimientos" }, { "id": 4, "nombre": "RN Presente" }, { "id": 5, "nombre": "Subsidio" }],
+  "programas": [{ "id": 1, "nombre": "Emprender" }, { "id": 2, "nombre": "Habitat" },{ "id": 3, "nombre": "Micro Emprendimientos" }, { "id": 4, "nombre": "Río Negro Presente" }, { "id": 5, "nombre": "Subsidio" }],
   "tipoRecursoSocials": [
       {"id":1, "nombre": "Alimentación", "programaid": 4},
       {"id":2, "nombre": "Alimentación", "programaid": 5},
