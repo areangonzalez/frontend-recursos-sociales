@@ -365,6 +365,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                   }
 
+                  personaEncontrada.sexo = nombrePorId(personaEncontrada.sexoid, sexos);
+                  personaEncontrada.genero = nombrePorId(personaEncontrada.generoid, generos);
+                  personaEncontrada.estado_civil = nombrePorId(personaEncontrada.estado_civilid, estadoCivil);
+                  personaEncontrada.lugar.localidad = nombrePorId(personaEncontrada.lugar.localidadid, localidades);
+
                   console.log("actulizo persona: ",personaEncontrada);
 
                   let personasAgregadas = [];

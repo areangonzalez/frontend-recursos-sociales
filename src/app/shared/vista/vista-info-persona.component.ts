@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ModalConfig, BotonDisenio } from 'src/app/core/models';
+import { PersonaService, MensajesService } from 'src/app/core/services';
 
 @Component({
   selector: 'shared-vista-info-persona',
@@ -11,8 +13,13 @@ export class VistaInfoPersonaComponent implements OnInit {
   @Input("persona") public persona:any;
   @Input("mostrarBoton") public mostrarBoton: boolean;
 
+  public configModal: ModalConfig = { title: "Editar persona" };
+  public configBotonModal: BotonDisenio = { class: 'btn btn-md btn-light mb-2', iconoClass: 'fas fa-pencil-alt', text:'' };
+
   constructor(
-    configTooltip: NgbTooltipConfig
+    configTooltip: NgbTooltipConfig,
+    private _personaService: PersonaService,
+    private _mensajeService: MensajesService
   ){
     configTooltip.placement = 'top';
     configTooltip.triggers = 'hover';
@@ -21,5 +28,11 @@ export class VistaInfoPersonaComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  personaEditada(persona) {
+    this._personaService.personaPorId(persona.id).subscribe(
+      datos => {
+        console.log("datos: ", datos);
+        this.persona = datos;
+      }, error => { this._mensajeService.cancelado(error, [{name: ''}]) });
+  }
 }
