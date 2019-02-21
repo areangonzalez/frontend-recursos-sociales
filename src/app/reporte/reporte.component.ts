@@ -50,7 +50,7 @@ export class ReporteComponent implements OnInit {
 
   public buscar(busqueda:string, page:number) {
     let busquedaAvanzada = this.busquedaAvanzada.value;
-    let apiBusqueda:object = {page:page, pagesize:20, global_search: busqueda};
+    let apiBusqueda:object = {page:page, pagesize:20, global_param: busqueda};
     for (const clave in busquedaAvanzada) {
       if(busquedaAvanzada[clave] !== '') {
         apiBusqueda[clave] = busquedaAvanzada[clave];

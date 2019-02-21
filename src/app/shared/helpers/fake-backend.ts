@@ -119,7 +119,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let tipo_recursoid = request.params.get('tipo_recursoid');
               let fecha_desde: string = request.params.get('fecha_desde');
               let fecha_hasta: string = request.params.get('fecha_hasta');
-              let global_search: string = request.params.get('global_search');
+              let global_search: string = request.params.get('global_param');
               let page: number = parseInt(request.params.get("page"));
               // variables de uso general
               //let search = (global_search != '') ? global_search.split(" ") : [] ;
@@ -224,7 +224,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             //Guardado de recurso
             if(request.url.endsWith('/apimock/recursos') && request.method === 'POST') {
               let nuevoRecurso = request.body;
-              console.log("nuevo: ", nuevoRecurso);
               // validation
               let duplicateRecurso = recursos.filter(recurso => { return recurso.id === nuevoRecurso.id; }).length;
               if (duplicateRecurso) {
@@ -255,7 +254,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // get Buscador de personas
             if(request.url.endsWith('/apimock/personas') && request.method === 'GET') {
-              let globalSearch = request.params.get('global_search');
+              let globalSearch = request.params.get('global_param');
               let pageSize:number = parseInt(request.params.get('pagesize'));
               let page = parseInt(request.params.get('page'));
               let search = globalSearch.split(" ");

@@ -44,11 +44,19 @@
                         <div class="btn-group">
                             <ng-template #direccionContent>
                                 {{persona.lugar.localidad}} <br>
-                                {{persona.lugar.barrio}} <br>
+                                <span *ngIf="(persona.lugar.barrio != '')" >{{persona.lugar.barrio}} <br></span>
                                 {{persona.lugar.calle}} {{persona.lugar.altura}}
-                                <span *ngIf="(persona.lugar.escalera != '' || persona.lugar.depto != '' || persona.lugar.piso != '')">
-                                    <br>
-                                    {{(persona.lugar.escalera != "")?persona.lugar.escalera:""}} {{(persona.lugar.depto != "")?persona.lugar.depto:""}} {{(persona.lugar.piso != "")?persona.lugar.piso:""}}
+                                <span *ngIf="(persona.lugar.escalera != '')">
+                                    <br> Esc/Mod:&nbsp;
+                                    {{(persona.lugar.escalera != "")?persona.lugar.escalera:""}}
+                                </span>
+                                <span *ngIf="(persona.lugar.piso != '')">
+                                  <br> Piso:&nbsp;
+                                    {{(persona.lugar.piso != "")?persona.lugar.piso:""}}
+                                </span>
+                                <span *ngIf="(persona.lugar.depto != '')">
+                                  <br>Dpto:&nbsp;
+                                  {{(persona.lugar.depto != "")?persona.lugar.depto:""}}
                                 </span>
                             </ng-template>
                             <button type="button" class="btn btn-sm btn-light" [autoClose]="'outside'" [ngbTooltip]="direccionContent" container="body"><i class="fas fa-home"></i></button>

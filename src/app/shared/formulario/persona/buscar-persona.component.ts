@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { PersonaService } from 'src/app/core/services';
+import { PersonaService, MensajesService } from 'src/app/core/services';
 import { ModalConfig, BotonDisenio } from 'src/app/core/models';
 
 
@@ -22,7 +22,8 @@ export class BuscarPersonaComponent implements OnInit {
 
   constructor(
     private _route: Router,
-    private _personaService: PersonaService
+    private _personaService: PersonaService,
+    private _mensajeService: MensajesService
   ){}
 
   ngOnInit() {
@@ -30,16 +31,14 @@ export class BuscarPersonaComponent implements OnInit {
 
   public buscar(busqueda:string, pagina:number){
     let pag = pagina - 1;
-    const params: object = {global_search:busqueda, pagesize: 3, page: pag};
+    const params: object = {global_param:busqueda, pagesize: 3, page: pag};
 
     this._personaService.buscar(params).subscribe(
       datos => {
         this.colleccionSize = datos.total_filtrado;
         this.pageSize = datos.pagesize;
         this.listaPersonas = datos.resultado;
-      }, error => {
-        console.log(error);
-      });
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
 
@@ -50,10 +49,12 @@ export class BuscarPersonaComponent implements OnInit {
 
   public direccion(lugar){
     let dir = "";
-    dir += lugar['localidad'] + " - " + lugar['barrio'] + ' - ' + lugar['calle'] + ' ' + lugar['altura'];
-    dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
-    dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
-    dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
+    dir += lugar['localidad'];
+    dir += (lugar['barrio'] != '') ? " - " + lugar['barrio'] : '';
+    dir += ' - ' + lugar['calle'] + ' ' + lugar['altura'];
+    dir += (lugar['escalera'] != '') ? ' - Esc/Mod: ' + lugar['escalera'] : '';
+    dir += (lugar['piso'] != '') ? ' - Piso: ' + lugar['piso'] : '';
+    dir += (lugar['depto'] != '') ? ' - Dpto: ' + lugar['depto'] : '';
 
     return dir;
   }
@@ -65,5 +66,10 @@ export class BuscarPersonaComponent implements OnInit {
   public personaCreada(persona) {
     const datos: object = {id:persona.id, persona:persona};
     this.personaElegida.emit(datos);
+  }
+
+  limpiarBusqueda() {
+    this.busqueda = "";
+    this.listaPersonas = [];
   }
 }

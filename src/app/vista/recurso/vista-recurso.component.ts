@@ -8,7 +8,7 @@ import { RecursoSocialService, MensajesService, PersonaService } from 'src/app/c
   styleUrls: ['./vista-recurso.component.sass']
 })
 export class VistaRecursoComponent implements OnInit {
-  public persona:object;
+  public persona:any;
   public recurso:object;
 
   constructor(
