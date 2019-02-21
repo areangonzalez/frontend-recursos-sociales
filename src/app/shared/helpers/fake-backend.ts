@@ -123,7 +123,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let page: number = parseInt(request.params.get("page"));
               // variables de uso general
               //let search = (global_search != '') ? global_search.split(" ") : [] ;
-              let search = global_search.split(" ");
+              console.log("entra: ", programaid);
+              if (global_search){
+                let search = global_search.split(" ");
+              }else{
+                let search = [''];
+              }
               let totalPaginas = 0;
               let recursosEncontrados: any[] = [];
               let listaRecursos = {
@@ -161,9 +166,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
               }// fin for de recursos
 
-              if (pageSize == 0 && programaid !== undefined){ // paginacion 0 y un id de programa
+              if (pageSize == 0 && programaid){ // paginacion 0 y un id de programa
                 let totalRecursos = parseInt(programaid) * 13;
-                recursosEncontrados = recursos.filter(recurso => { return recurso.programaid === programaid });
+                recursosEncontrados = recursos.filter(recurso => { return recurso.programaid === parseInt(programaid) });
 
                 // armo array final
                 listaRecursos["total_filtrado"] = totalRecursos;

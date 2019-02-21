@@ -35,7 +35,6 @@ export class VistaRecursoComponent implements OnInit {
     this._recursoService.recursoPorId(recursoid).subscribe(
       recurso => {
         this.recurso = recurso;
-        console.log(this.recurso);
         this.obtenerPersona(recurso["personaid"]);
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
@@ -43,9 +42,7 @@ export class VistaRecursoComponent implements OnInit {
   public obtenerPersona(personaid:number) {
     this._personaService.personaPorId(personaid).subscribe(
       persona => {
-        console.log(persona);
         this.persona = persona;
-
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]) })
   }
 }
