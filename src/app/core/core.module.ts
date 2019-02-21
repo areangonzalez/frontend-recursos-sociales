@@ -6,6 +6,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   TitleService,
   ApiService,
+  LoaderService,
   MensajesService,
   PersonaService,
   TipoRecursoService,
@@ -28,6 +29,7 @@ import { UtilService } from "./utils";
     TitleService,
     UtilService,
     ApiService,
+    LoaderService,
     MensajesService,
     PersonaService,
     TipoRecursoService,

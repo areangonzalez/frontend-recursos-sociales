@@ -2,6 +2,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule, NgbDatepickerI18n, NgbDateStruct, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PixelSpinnerModule } from "angular-epic-spinners";
 
 /* Routing */
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,7 @@ import {
   MensajesComponent,
   BreadcrumbComponent, BreadcrumbsService,
   CustomDatepickerI18n,
+  LoaderComponent,
   SharedModule
 } from "./shared";
 import { InicioModule } from "./inicio/inicio.module";
@@ -35,13 +37,15 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     HeaderComponent,
     FooterComponent,
     MensajesComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     NgbTooltipModule.forRoot(),
+    PixelSpinnerModule,
     HttpClientModule,
     CoreModule,
     SharedModule,

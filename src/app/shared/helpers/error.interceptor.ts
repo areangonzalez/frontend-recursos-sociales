@@ -3,15 +3,17 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
+import { LoaderService } from 'src/app/core/services';
 //import { AuthenticationService } from '../services/authentication.service';
 //import { LoaderService } from "../components/loader/loader.service";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     //constructor(private authenticationService: AuthenticationService, private _loadService: LoaderService) { }
+    constructor(private _loadService: LoaderService){}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        ///this._loadService.show();
+        this._loadService.show();
         console.log("url: ",request.url);
         return next.handle(request).pipe(
           catchError(err => {
@@ -24,7 +26,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             console.log(error);
                 return throwError(error);
             }),
-            //finalize(() => this._loadService.hide())
+            finalize(() => this._loadService.hide())
         )
     }
 }

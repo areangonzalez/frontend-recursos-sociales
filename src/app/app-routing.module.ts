@@ -21,7 +21,7 @@ const routes: Routes = [
     },
     {
         path: 'inicio',
-        data: { preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
+        data: { loading: true, preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
         children: [
           {
             path: '',

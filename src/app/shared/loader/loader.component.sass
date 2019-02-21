@@ -1,0 +1,51 @@
+.loader-hidden
+  visibility: hidden;
+
+.loader-overlay
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  z-index: 500000;
+
+.tootlbar-icon
+  padding: 0 14px;
+
+.tootlbar-spacer
+  flex: 1 1 auto;
+
+/* Absolute Center Spinner */
+.loading
+  position: fixed;
+  z-index: 999999999999;
+  height: 2em;
+  width: 5%;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+/* Transparent Overlay */
+.loading:before
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
+
+/* :not(:required) hides these rules from IE9 and below */
+.loading:not(:required)
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+
