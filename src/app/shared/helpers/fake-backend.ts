@@ -348,39 +348,61 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   let personaid = parseInt(urlParts[urlParts.length - 1]);
                   let datosPersona = request.body;
 
+                  let persona = personas.filter(persona => { return persona.id === personaid; });
+                  let personaEncontrada = persona.length ? persona[0] : null;
 
-                  let matchedUsers = personas.filter(persona => { return persona.id === personaid; });
-                  let personaEncontrada = matchedUsers.length ? matchedUsers[0] : null;
-                  // actualizo los datos de contacto
-                  console.log("encuentro persona ",personaEncontrada);
-                  for (const key in datosPersona) {
-                    for (const clave in personaEncontrada) {
-                      if ( datosPersona[clave] != undefined && key === 'lugar' ) {
-                        if (datosPersona['lugar'][key] === personaEncontrada['lugar'][clave]) {
-                          personaEncontrada['lugar'][clave] = datosPersona['lugar'][clave];
-                        }
-                      }else if ( datosPersona[clave] != undefined && clave === key ){
-                        personaEncontrada[clave] = datosPersona[clave];
-                      }
-                    }
+                  if (personaEncontrada["contacto"] !== undefined) {
+                    delete personaEncontrada["contacto"];
                   }
-
-                  personaEncontrada.sexo = nombrePorId(personaEncontrada.sexoid, sexos);
-                  personaEncontrada.genero = nombrePorId(personaEncontrada.generoid, generos);
-                  personaEncontrada.estado_civil = nombrePorId(personaEncontrada.estado_civilid, estadoCivil);
-                  personaEncontrada.lugar.localidad = nombrePorId(personaEncontrada.lugar.localidadid, localidades);
-
-                  console.log("actulizo persona: ",personaEncontrada);
+                  if (personaEncontrada["hogar"] !== undefined) {
+                    delete personaEncontrada["hogar"];
+                  }
+                  if (personaEncontrada["estudios"] !== undefined) {
+                    delete personaEncontrada["estudios"];
+                  }
+                  if (datosPersona.apellido !== undefined){
+                    personaEncontrada["apellido"]             = datosPersona.apellido;
+                    personaEncontrada["celular"]              = datosPersona.celular;
+                    personaEncontrada["cuil"]                 = datosPersona.cuil;
+                    personaEncontrada["email"]                = datosPersona.email;
+                    personaEncontrada["estado_civil"]         = nombrePorId(datosPersona.estado_civilid, estadoCivil);
+                    personaEncontrada["estado_civilid"]       = datosPersona.estado_civilid;
+                    personaEncontrada["fecha_nacimiento"]     = datosPersona.fecha_nacimiento;
+                    personaEncontrada["genero"]               = nombrePorId(datosPersona.generoid, generos);
+                    personaEncontrada["generoid"]             = datosPersona.generoid;
+                    personaEncontrada["id"]                   = datosPersona.id;
+                    personaEncontrada["nombre"]               = datosPersona.nombre;
+                    personaEncontrada["nro_documento"]        = datosPersona.nro_documento;
+                    personaEncontrada["red_social"]           = datosPersona.red_social;
+                    personaEncontrada["sexo"]                 = nombrePorId(datosPersona.sexoid, sexos);
+                    personaEncontrada["sexoid"]               = datosPersona.sexoid;
+                    personaEncontrada["telefono"]             = datosPersona.telefono;
+                    personaEncontrada["lugar"]["altura"]      = datosPersona.lugar.altura;
+                    personaEncontrada["lugar"]["barrio"]      = datosPersona.lugar.barrio;
+                    personaEncontrada["lugar"]["calle"]       = datosPersona.lugar.calle;
+                    personaEncontrada["lugar"]["depto"]       = datosPersona.lugar.depto;
+                    personaEncontrada["lugar"]["escalera"]    = datosPersona.lugar.escalera;
+                    personaEncontrada["lugar"]["id"]          = datosPersona.lugar.id;
+                    personaEncontrada["lugar"]["localidad"]   = nombrePorId(datosPersona.lugar.localidadid, localidades);
+                    personaEncontrada["lugar"]["localidadid"] = datosPersona.lugar.localidadid;
+                    personaEncontrada["lugar"]["piso"]        = datosPersona.lugar.piso;
+                  }else{
+                    personaEncontrada["celular"]              = datosPersona.celular;
+                    personaEncontrada["red_social"]           = datosPersona.red_social;
+                    personaEncontrada["telefono"]             = datosPersona.telefono;
+                    personaEncontrada["email"]                = datosPersona.email;
+                  }
 
                   let personasAgregadas = [];
                   if (localStorage.getItem('personas')) {
                     let existe = false;
                     personasAgregadas = [JSON.parse(localStorage.getItem('personas'))];
-                    for (let i = 0; i < personasAgregadas.length; i++) {
+                    for (let i = 0; i < personasAgregadas[0].length; i++) {
                       if (personasAgregadas[0][i].id === personaid){
                         personasAgregadas[0][i] = personaEncontrada;
                         existe = true;
-                      }}
+                      }
+                    }
                     if (!existe) {
                       personasAgregadas[0].push(personaEncontrada);
                     }
@@ -389,6 +411,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     personasAgregadas.push(personaEncontrada);
                     localStorage.setItem('personas', JSON.stringify(personasAgregadas));
                   }
+                  for (let i = 0; i < personas.length; i++) {
+                    if (personas[i].id === personaid) {
+                      personas[i] = personaEncontrada;
+                    }}
 
                   return of(new HttpResponse({ status: 200, body: {id:personaid} }));
               /* } else {

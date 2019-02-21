@@ -87,10 +87,15 @@ export class RecursoComponent implements OnInit {
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
 
-  public personaEditada(persona){
+  public personaEditada(personaid){
     this.infoPersona = true;
-    this.datosPersona = persona;
-    this.contactosForm.controls.contacto.patchValue(persona);
+    this._personaService.personaPorId(personaid).subscribe(
+      datos => {
+        this.datosPersona = datos;
+        this.contactosForm.controls.contacto.patchValue(datos);
+      }, error => {
+        this._mensajeService.cancelado(error, [{name:''}]);
+      })
   }
 
 }

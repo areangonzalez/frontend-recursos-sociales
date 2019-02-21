@@ -12,29 +12,43 @@ import { map, catchError } from "rxjs/operators";
   styleUrls: ['./form-persona.component.sass']
 })
 export class FormPersonaComponent implements OnInit {
+  /**
+   * @var personaid identificador de la persona
+   * @var getDatos evento que consigue datos para el componente padre
+   * @var cancelarForm evento que ejecuta la cancelación del formulario
+   */
   @Input("personaid") public personaid: number;
   @Output("getDatos") public getDatos = new EventEmitter();
   @Output("cancelarForm") public cancelarForm = new EventEmitter();
-
+  /**
+   * @var formPersona [FormGroup] contiene las variables que conforman el formulario
+   * @var submitted [boolean] permite mostrar los mensajes de errores del formulario
+   * @var sexoLista [array] listado de sexos
+   * @var generoLista [array] listado de generos
+   * @var estadoCivilLista [array] listado de estados civiles
+   * @var personaModel [model] modelo de persona
+   * @var cuil_medio [string] guarda el número de documento que conforma el cuil
+   */
   public formPersona: FormGroup;
   public submitted: boolean = false;
   public sexoLista: any = [];
   public generoLista: any = [];
   public estadoCivilLista: any = [];
-  //public personaModel = new PersonaModel('','','','','','',0,0,0,'','',{barrio:'',calle:'',altura:'',depto:'',escalera:'',piso:'',localidadid:0});
   public personaModel = new PersonaModel();
-
-
-  public setDocumento: string = '';
-
-  /**
-   * @var cuil_medio [string] guarda el número que conforma el cuil
-   */
   public cuil_medio:string = '';
 
+  /**
+   * constructor
+   * @param _fb construye el formulario
+   * @param _util gestiona funciones utiles para aplicar formatos.
+   * @param _mensajeService gestiona los mensajes para el cliente
+   * @param _sexoService servicio para obtener los sexos
+   * @param _generoService servicio para obtener los generos
+   * @param _estadoCivilService servicio para obtener los estados civiles
+   * @param _personaService servicio para obtener/crear/editar persona
+   */
   constructor(
     private _fb: FormBuilder,
-    private _router: Router,
     private _util: UtilService,
     private _mensajeService: MensajesService,
     private _sexoService: SexoService,
@@ -137,42 +151,43 @@ export class FormPersonaComponent implements OnInit {
   public formatFechaNacimiento(obj:any){
     this.formPersona.controls.fecha_nacimiento.setValue(this._util.formatearFecha(obj.day, obj.month, obj.year, "yyyy-MM-dd"));
   }
-
-  public obtenerDatos(persona:object){
-    //desarrollar submit
-    console.log(persona);
-    this.getDatos.emit(persona);
+  /**
+   * @function obtenerIdPersona Envio el id de persona al modal.
+   * @param personaid identificador de la persona guardada.
+   */
+  public obtenerIdPersona(personaid:number){
+    this.getDatos.emit(personaid);
   }
 
   /* Funcionalidad para los listados */
 
+  /**
+   * @function listarSexo obtengo el listado de sexos para el select del formulario
+   */
   public listarSexo(){
     this._sexoService.listar().subscribe(
-      datos => {
-        this.sexoLista = datos;
-      }, error => {
-        this._mensajeService.cancelado(error, [{name:''}]);
-      });
+      datos => { this.sexoLista = datos; },
+      error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
-
+  /**
+   * @function listarGenero obtengo el listado de generos para el select del formulario
+   */
   public listarGenero(){
     this._generoService.listar().subscribe(
-      datos => {
-        this.generoLista = datos;
-      }, error => {
-        this._mensajeService.cancelado(error, [{name:''}]);
-      });
+      datos => { this.generoLista = datos; },
+      error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
-
+  /**
+   * @function listarEstadoCivil obtengo el listado de estados civiles para el select del formulario
+   */
   public listarEstadoCivil(){
     this._estadoCivilService.listar().subscribe(
-      datos => {
-        this.estadoCivilLista = datos;
-      }, error => {
-        this._mensajeService.cancelado(error, [{name:''}]);
-      });
+      datos => { this.estadoCivilLista = datos; },
+      error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
-
+  /**
+   * @function validarPersona valido la persona mediante el submitt del formulario
+   */
   public validarPersona() {
     this.submitted = true;
     if (this.formPersona.invalid) { // verifico la validación en los campos del formulario
@@ -185,31 +200,36 @@ export class FormPersonaComponent implements OnInit {
 
     }
   }
-
+  /**
+   * @function guardarPersona Crear/Editar una persona.
+   */
   public guardarPersona(params:object, id:number) {
     if (id != 0) {
       this._personaService.guardar(params, id).subscribe(
         resultado => {
-          this.obtenerDatos(params);
+          this.obtenerIdPersona(id);
           this._mensajeService.exitoso("Se han actualizado los datos de la persona con éxito.", [{name:''}]);
         }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
     }else{
       this._personaService.guardar(params, 0).subscribe(
         resultado => {
-          params["id"] = resultado.id;
-          this.obtenerDatos(params);
+          this.obtenerIdPersona(resultado.id);
           this._mensajeService.exitoso("Se ha guardado la persona con éxito.", [{name:''}]);
-
         }, error => {
           this._mensajeService.cancelado(error, [{name:''}]);
         });
     }
   }
-
+  /**
+   * @function cancelar el formulario enviando un dato booleano para el cierre del modal.
+   */
   public cancelar(){
     this.cancelarForm.emit(true);
   }
-
+  /**
+   * @function personaPorId obtengo la persona mediante su id para editarla
+   * @param personaid identificador de una persona
+   */
   public personaPorId(personaid) {
     this._personaService.personaPorId(personaid)
     .pipe(map(vPersona => {
@@ -230,6 +250,7 @@ export class FormPersonaComponent implements OnInit {
       if (vPersona["cuil"] != '') {
         vDatos["cuil_prin"] = vPersona["cuil"].substring(0, 2);
         vDatos["cuil_fin"] = vPersona["cuil"].substring(10);
+        this.cuil_medio = vPersona["nro_documento"];
       }
       this.validarCuil(vPersona["nro_documento"]);
       // verifico que exista y armo la fecha de nacimiento
@@ -242,9 +263,7 @@ export class FormPersonaComponent implements OnInit {
     }))
     .subscribe(
       persona => {
-        console.log(persona);
         this.formPersona.patchValue(persona);
-
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]) });
   }
 

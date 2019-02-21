@@ -28,10 +28,9 @@ export class VistaInfoPersonaComponent implements OnInit {
   ngOnInit() {
   }
 
-  personaEditada(persona) {
-    this._personaService.personaPorId(persona.id).subscribe(
+  personaEditada(personaid) {
+    this._personaService.personaPorId(personaid).subscribe(
       datos => {
-        console.log("datos: ", datos);
         this.persona = datos;
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]) });
   }

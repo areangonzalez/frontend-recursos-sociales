@@ -24,7 +24,7 @@
             <div class="input-group">
                 <input class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2"
                 (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (datosPersona.cuil_prin.invalid && submitted)}">
-                <div class="input-group-addon div-cuil-num-center">{{(setDocumento != '')?setDocumento:cuil_medio}}</div>
+                <div class="input-group-addon div-cuil-num-center">{{cuil_medio}}</div>
                 <input class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_fin" maxlength="1"
                 (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (datosPersona.cuil_fin.invalid && submitted)}">
                 <div *ngIf="(datosPersona.cuil_prin.invalid && submitted)" class="text-danger">

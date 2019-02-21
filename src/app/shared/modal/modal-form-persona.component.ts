@@ -11,11 +11,17 @@ export class ModalFormPersonaContent {
   @Input("personaid") public personaid: any;
 
   constructor(public activeModal: NgbActiveModal) {}
-
-  public guardar(datos:any) {
-    this.activeModal.close(datos);
+  /**
+   * Envio el id de persona al componente padre del modal-content
+   * @param personaid identificador de la persona que ha sido guardada
+   */
+  public guardar(personaid:any) {
+    this.activeModal.close(personaid);
   }
-
+  /**
+   * cancelo el modal y lo cierro.
+   * @param cancelar cierra el modal si el valor es true
+   */
   public cancelar(cancelar:boolean) {
     this.activeModal.close('closed');
   }
@@ -55,6 +61,7 @@ export class ModalFormPersonaComponent {
       (result) => {
         if (result == 'closed'){
         }else{
+          // obtengo el id persona desde el content.
           return this.obtenerPersona.emit(result);
         }
       }
