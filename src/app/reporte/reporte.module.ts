@@ -3,6 +3,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from "@angular/router";
 
 import { ReporteComponent } from "./reporte.component";
+import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent } from "./busqueda";
+import { ListaRecursoComponent, ListaBeneficiarioComponent } from "./lista";
 import { SharedModule } from "../shared";
 import { ReporteRoutingModule } from "./reporte-routing.module";
 
@@ -13,7 +15,9 @@ import { ReporteRoutingModule } from "./reporte-routing.module";
         ReporteRoutingModule
     ],
     declarations: [
-        ReporteComponent
+        ReporteComponent,
+        BusquedaRecursoComponent, BusquedaBeneficiarioComponent,
+        ListaRecursoComponent, ListaBeneficiarioComponent
     ],
     providers: [
     ],

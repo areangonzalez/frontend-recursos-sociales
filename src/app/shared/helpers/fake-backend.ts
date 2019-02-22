@@ -123,11 +123,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let page: number = parseInt(request.params.get("page"));
               // variables de uso general
               //let search = (global_search != '') ? global_search.split(" ") : [] ;
-              console.log("entra: ", programaid);
+              let search = [''];
               if (global_search){
-                let search = global_search.split(" ");
-              }else{
-                let search = [''];
+                search = global_search.split(" ");
               }
               let totalPaginas = 0;
               let recursosEncontrados: any[] = [];
