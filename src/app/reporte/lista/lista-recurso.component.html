@@ -1,1 +1,38 @@
-<h2>Hola soy una lista de prestaciones</h2>
+<div class="mt-2 bg-white p-3 rounded">
+    <div class="row mt-2 pl-3 pr-3">
+      <table class="table table-hover table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Nro. Documento</th>
+            <th scope="col">Apellido y nombre</th>
+            <th class="text-center" scope="col">Localidad</th>
+            <th scope="col">Fecha de alta</th>
+            <th class="text-center" scope="col">Programa</th>
+            <th scope="col">Proposito</th>
+            <th class="text-center" scope="col">Monto</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="(recursosLista.length == 0)">
+          <tr>
+            <td rowspan="1" colspan="7" class="text-center"> <h5>No se han encontrado resultados.</h5> </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="(recursosLista.length > 0)">
+          <tr *ngFor="let recurso of recursosLista" >
+            <td scope="row">{{recurso.persona.nro_documento}}</td>
+            <td>
+              {{recurso.persona.apellido}}, {{recurso.persona.nombre}}
+            </td>
+            <td class="text-center">{{recurso.persona.lugar.localidad}}</td>
+            <td>{{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</td>
+            <td class="text-center">{{recurso.programa}}</td>
+            <td>{{recurso.proposito}}</td>
+            <td class="text-center">{{recurso.monto}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class=" d-flex justify-content-center">
+        <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination"></ngb-pagination>
+    </div>
+</div>

@@ -1,4 +1,19 @@
-<div class="mb-3 bg-white  p-3 rounded">
+
+<ngb-tabset>
+  <ngb-tab title="Prestaciones">
+    <ng-template ngbTabContent>
+      <lista-recurso [recursosLista]="recursosLista" [configPaginacion]="configPaginacion" (cambioDePagina)="cambioPagina($event)" ></lista-recurso>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Beneficiarios">
+    <ng-template ngbTabContent>
+      <lista-beneficiario></lista-beneficiario>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
+
+
+<!-- <div class="mb-3 bg-white  p-3 rounded">
     <div class="form-group">
         <div class="input-group">
           <input type="text" class="form-control" [(ngModel)]="globalSearch" id="buscar-reporte" placeholder="">
@@ -102,4 +117,4 @@
         <div class=" d-flex justify-content-center">
             <ngb-pagination *ngIf="(colleccionSize > 0)"  [collectionSize]="colleccionSize" [(page)]="page" [pageSize]="pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(page)" aria-label="Default pagination"></ngb-pagination>
         </div>
-</div>
+</div> -->

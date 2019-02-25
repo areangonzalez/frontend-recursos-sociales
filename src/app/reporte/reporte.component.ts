@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { LocalidadService, ProgramaService, TipoRecursoService, MensajesService, RecursoSocialService } from '../core/services';
 import { UtilService } from '../core/utils';
 
 @Component({
   selector: 'app-reporte',
   templateUrl: './reporte.component.html',
-  styleUrls: ['./reporte.component.sass']
+  styleUrls: ['./reporte.component.sass'],
+  providers: [NgbTabsetConfig]
 })
 export class ReporteComponent implements OnInit {
   public globalSearch:string = '';
@@ -16,9 +18,7 @@ export class ReporteComponent implements OnInit {
   public programasLista: any[] = [];
   public tipoRecursosLista: any[] =[];
   public recursosLista: any[] = [];
-  public page:number = 1;
-  public pageSize:number = 0;
-  public colleccionSize:number = 0;
+  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1 };
 
   constructor(
     private _fb: FormBuilder,
@@ -27,8 +27,12 @@ export class ReporteComponent implements OnInit {
     private _tipoRecursoService: TipoRecursoService,
     private _mensajeService: MensajesService,
     private _util: UtilService,
-    private _recursoService: RecursoSocialService
+    private _recursoService: RecursoSocialService,
+    private _configTabSet: NgbTabsetConfig
   ){
+    _configTabSet.justify = 'center';
+    _configTabSet.type = 'pills';
+    // creacion de fomulario para busqueda avanzada
     this.busquedaAvanzada = _fb.group({
       localidadid: '',
       programaid: '',
@@ -94,8 +98,8 @@ export class ReporteComponent implements OnInit {
   public listarRecursos(params:object){
     this._recursoService.buscar(params).subscribe(
       recursos => {
-        this.colleccionSize = recursos.total_filtrado;
-        this.pageSize= recursos.pagesize;
+        this.configPaginacion.colleccionSize = recursos.total_filtrado;
+        this.configPaginacion.pageSize = recursos.pagesize;
         this.recursosLista = recursos.resultado;
       },
       error => { this._mensajeService.cancelado(error, [{name:''}]); });
