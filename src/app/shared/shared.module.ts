@@ -11,7 +11,10 @@ import { FormContactoComponent } from "./formulario/contacto";
 import { FormRecursoComponent } from "./formulario/recurso";
 import { ListaPersonaComponent } from './lista';
 import { VistaInfoPersonaComponent, VistaInfoRecursoComponent } from "./vista";
-import { ModalFormPersonaComponent, ModalFormPersonaContent } from "./modal";
+import {
+  ModalFormPersonaComponent, ModalFormPersonaContent,
+  ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent
+} from "./modal";
 import { ProgramaComponent } from "./programa";
 
 
@@ -35,6 +38,7 @@ import { ProgramaComponent } from "./programa";
       ListaPersonaComponent,
       VistaInfoPersonaComponent, VistaInfoRecursoComponent,
       ModalFormPersonaComponent, ModalFormPersonaContent,
+      ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
       ProgramaComponent
     ],
     exports: [
@@ -50,6 +54,7 @@ import { ProgramaComponent } from "./programa";
         ListaPersonaComponent,
         VistaInfoPersonaComponent, VistaInfoRecursoComponent,
         ModalFormPersonaComponent, ModalFormPersonaContent,
+        ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
         ProgramaComponent
     ],
     entryComponents: [ModalFormPersonaComponent, ModalFormPersonaContent]
