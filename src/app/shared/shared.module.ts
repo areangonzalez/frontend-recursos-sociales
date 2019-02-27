@@ -57,6 +57,9 @@ import { ProgramaComponent } from "./programa";
         ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
         ProgramaComponent
     ],
-    entryComponents: [ModalFormPersonaComponent, ModalFormPersonaContent]
+    entryComponents: [
+      ModalFormPersonaComponent, ModalFormPersonaContent,
+      ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent
+    ]
 })
 export class SharedModule { }

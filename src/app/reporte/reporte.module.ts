@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from "@angular/router";
 
@@ -21,6 +21,7 @@ import { ReporteRoutingModule } from "./reporte-routing.module";
     ],
     providers: [
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ReporteModule {
     constructor() {

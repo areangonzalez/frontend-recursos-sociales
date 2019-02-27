@@ -20,7 +20,7 @@
           <tr *ngFor="let recurso of recursosLista" >
             <td scope="row">{{recurso.persona.nro_documento}}</td>
             <td>
-              {{recurso.persona.apellido}}, {{recurso.persona.nombre}}
+              <modal-info-persona-prestacion-component [texto]="recurso.persona.apellido + ', ' + recurso.persona.nombre"></modal-info-persona-prestacion-component>
             </td>
             <td class="text-center">{{recurso.persona.lugar.localidad}}</td>
             <td>{{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</td>

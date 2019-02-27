@@ -4,7 +4,7 @@ import { ModalConfig, BotonDisenio } from 'src/app/core/models';
 
 @Component({
   selector: 'modal-info-persona-prestacion-content',
-  templateUrl: './modal-info-persona-prestacion-content.html'
+  templateUrl: './modal-info-persona-prestacion.content.html'
 })
 export class ModalInfoPersonaPrestacionContent {
   @Input("configModal") public configModal:ModalConfig;
@@ -55,10 +55,10 @@ export class ModalInfoPersonaPrestacionComponent {
   }
 
   open() {
-    const modalRef = this.modalService.open(ModalInfoPersonaPrestacionComponent, {size: 'lg'});
+    const modalRef = this.modalService.open(ModalInfoPersonaPrestacionContent, {size: 'lg'});
     //modalRef.componentInstance.configModal = this.configModal;
     modalRef.componentInstance.personaid = this.personaid;
-    modalRef.result.then(
+    /* modalRef.result.then(
       (result) => {
         if (result == 'closed'){
         }else{
@@ -66,6 +66,6 @@ export class ModalInfoPersonaPrestacionComponent {
       //    return this.obtenerPersona.emit(result);
         }
       }
-    )
+    ) */
   }
 }
