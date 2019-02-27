@@ -26,26 +26,26 @@
               </div>
               <div class="form-group col-md-4">
                   <label for="programa" class="prioridad">Programa:</label>
-                  <select class="form-control" id="programa" formControlName="programaid">
-                    <option value="">Seleccione Localidad</option>
+                  <select class="form-control" id="programa" formControlName="programaid" (change)="listarTipoRecursos($event.target.value)" >
+                    <option value="">Seleccione Programa</option>
                     <option *ngFor="let programa of programasLista" value="{{programa.id}}">{{programa.nombre}}</option>
                   </select>
               </div>
               <div class="form-group col-md-4">
                   <label for="tipo_recurso" class="prioridad">Tipo prestación:</label>
                   <select class="form-control" id="tipo_recurso" formControlName="tipo_recursoid">
-                    <option value="">Seleccione Localidad</option>
+                    <option value="">Seleccione Tipo de prestación</option>
                     <option *ngFor="let tipo_recurso of tipoRecursosLista" value="{{tipo_recurso.id}}">{{tipo_recurso.nombre}}</option>
                   </select>
               </div>
               <div class="form-group col-md-4">
-                  <label for="fecha_desde" class="prioridad">Fecha desde:</label>
+                  <label for="fecha_desde" class="prioridad">Fecha desde/hasta:</label>
                   <div class="input-group">
-                      <input class="form-control input-append" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fbd="ngbDatepicker"
+                      <input class="form-control input-append" #c1 placeholder="Desde: dd/mm/yyyy" ngbDatepicker #fbd="ngbDatepicker"
                       id="fecha_desde" formControlName="fechaAltaDesde" (ngModelChange)="formatFecha($event, 'fecha_alta_desde'); onDateSelection($event);"
                       [displayMonths]="2" [navigation]="'select'" [dayTemplate]="t" [autoClose]="false"
                       >
-                      <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fb="ngbDatepicker"
+                      <input class="form-control" #c1 placeholder="Hasta: dd/mm/yyyy" ngbDatepicker #fb="ngbDatepicker"
                       id="fecha_hasta" formControlName="fechaAltaHasta" (ngModelChange)="formatFecha($event, 'fecha_alta_hasta')"
                       >
                       <div class="input-group-prepend">
@@ -65,6 +65,22 @@
                           </span>
                         </ng-template>
                   </div>
+              </div>
+              <div class="form-group col-md-4">
+                  <div class="form-check mtop-checkbox">
+                      <input class="form-check-input" type="checkbox" formControlName="acreditacion" id="defaultCheck1">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Acreditación
+                      </label>
+                    </div>
+              </div>
+              <div class="form-group col-md-4">
+                  <div class="form-check mtop-checkbox">
+                      <input class="form-check-input" type="checkbox" formControlName="baja" id="defaultCheck1">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Baja
+                      </label>
+                    </div>
               </div>
             </div>
           </fieldset>
