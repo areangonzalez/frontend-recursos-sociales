@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
-import { LocalidadService, ProgramaService, TipoRecursoService, MensajesService, RecursoSocialService } from '../core/services';
+import { MensajesService, RecursoSocialService } from '../core/services';
 import { UtilService } from '../core/utils';
 
 @Component({
@@ -10,6 +10,8 @@ import { UtilService } from '../core/utils';
   providers: [NgbTabsetConfig]
 })
 export class ReporteComponent implements OnInit {
+
+  public busqueda: any = {page: 1, pagesize: 20};
   public recursosLista: any[] = [];
   public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1 };
 
@@ -25,17 +27,13 @@ export class ReporteComponent implements OnInit {
 
   ngOnInit() {
 
-    this.buscar(' ', 1);
+    this.buscar(this.busqueda);
   }
 
-  public buscar(busqueda:string, page:number) {
-    let busquedaAvanzada = this.busquedaAvanzada.value;
-    let apiBusqueda:object = {page:page, pagesize:20, global_param: busqueda};
-    for (const clave in busquedaAvanzada) {
-      if(busquedaAvanzada[clave] !== '') {
-        apiBusqueda[clave] = busquedaAvanzada[clave];
-      }
-    }
+  public buscar(apiBusqueda:any) {
+    apiBusqueda["page"] = 1;
+    apiBusqueda["pagesize"] = 20;
+    this.busqueda = apiBusqueda;
     this.listarRecursos(apiBusqueda);
   }
 
@@ -51,8 +49,9 @@ export class ReporteComponent implements OnInit {
       error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
-  public cambioPagina(page){
-    //this.buscar(this.globalSearch, page);
-    this.buscar(' ', page);
+  public cambioPagina(page:any){
+    this.busqueda["page"] = page;
+    this.listarRecursos(this.busqueda);
   }
 }
+

@@ -1,4 +1,3 @@
-<div class="mt-2 bg-white p-3 rounded">
     <div class="row mt-2 pl-3 pr-3">
       <table class="table table-hover table-sm">
         <thead>
@@ -35,4 +34,3 @@
     <div class=" d-flex justify-content-center">
         <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination"></ngb-pagination>
     </div>
-</div>
