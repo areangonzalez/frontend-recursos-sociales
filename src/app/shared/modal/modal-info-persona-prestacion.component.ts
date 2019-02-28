@@ -44,10 +44,7 @@ export class ModalInfoPersonaPrestacionComponent {
    * @var recursoid {number} identificador de un recurso
    * @function {Object} devuelve los datos de la persona
    */
-  // @Input("disenioBoton") public disenioBoton: BotonDisenio;
-  // @Input("configModal") public configModal: ModalConfig;
   @Input("recursoid") public recursoid: any;
-  //@Output("obtenerPersona") public obtenerPersona = new EventEmitter();
 
   constructor(
     private modalService: NgbModal,
@@ -59,16 +56,6 @@ export class ModalInfoPersonaPrestacionComponent {
 
   open() {
     const modalRef = this.modalService.open(ModalInfoPersonaPrestacionContent, {size: 'lg'});
-    //modalRef.componentInstance.configModal = this.configModal;
     modalRef.componentInstance.recursoid = this.recursoid;
-    /* modalRef.result.then(
-      (result) => {
-        if (result == 'closed'){
-        }else{
-          // obtengo el id persona desde el content.
-      //    return this.obtenerPersona.emit(result);
-        }
-      }
-    ) */
   }
 }
