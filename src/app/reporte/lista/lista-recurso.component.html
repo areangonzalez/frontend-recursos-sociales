@@ -9,6 +9,7 @@
             <th class="text-center" scope="col">Programa</th>
             <th scope="col">Proposito</th>
             <th class="text-center" scope="col">Monto</th>
+            <th></th>
           </tr>
         </thead>
         <tbody *ngIf="(recursosLista.length == 0)">
@@ -20,13 +21,20 @@
           <tr *ngFor="let recurso of recursosLista" >
             <td scope="row">{{recurso.persona.nro_documento}}</td>
             <td>
-              <modal-info-persona-prestacion-component [texto]="recurso.persona.apellido + ', ' + recurso.persona.nombre"></modal-info-persona-prestacion-component>
+              {{recurso.persona.apellido}}, {{recurso.persona.nombre}}
             </td>
             <td class="text-center">{{recurso.persona.lugar.localidad}}</td>
             <td>{{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</td>
             <td class="text-center">{{recurso.programa}}</td>
             <td>{{recurso.proposito}}</td>
             <td class="text-center">{{recurso.monto}}</td>
+            <td>
+              <div class="btn-group">
+                <modal-info-persona-prestacion-component [recursoid]="recurso.id" ></modal-info-persona-prestacion-component>
+                <button type="button" class="btn btn-outline-success btn-sm" ngbTooltip="Acreditar prestación"><i class="fas fa-hand-holding-usd"></i></button>
+                <button type="button" class="btn btn-outline-danger btn-sm" ngbTooltip="Baja prestación"><i class="fa fa-arrow-down"></i></button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
