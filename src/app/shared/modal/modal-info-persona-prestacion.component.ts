@@ -1,29 +1,35 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfig, BotonDisenio } from 'src/app/core/models';
+import { RecursoSocialService, MensajesService } from 'src/app/core/services';
 
 @Component({
   selector: 'modal-info-persona-prestacion-content',
   templateUrl: './modal-info-persona-prestacion.content.html'
 })
-export class ModalInfoPersonaPrestacionContent {
-  @Input("configModal") public configModal:ModalConfig;
-  @Input("personaid") public personaid: any;
+export class ModalInfoPersonaPrestacionContent implements OnInit {
+  @Input("recursoid") public recursoid: any;
+  public recurso: any;
 
-  constructor(public activeModal: NgbActiveModal) {}
-  /**
-   * Envio el id de persona al componente padre del modal-content
-   * @param personaid identificador de la persona que ha sido guardada
-   */
-  public guardar(personaid:any) {
-    this.activeModal.close(personaid);
+  constructor(
+    public activeModal: NgbActiveModal,
+    private _recursoService: RecursoSocialService,
+    private _mensajeService: MensajesService
+  ) {}
+
+  ngOnInit(){
+    this.obtenerRecurso(this.recursoid);
   }
+
   /**
-   * cancelo el modal y lo cierro.
-   * @param cancelar cierra el modal si el valor es true
+   * Obtengo el recurso mediante su identificador
+   * @param recursoid identificador del recurso
    */
-  public cancelar(cancelar:boolean) {
-    this.activeModal.close('closed');
+  public obtenerRecurso(recursoid:any) {
+    this._recursoService.recursoPorId(recursoid).subscribe(
+      recurso => {
+        this.recurso = recurso;
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 }
 
@@ -35,15 +41,12 @@ export class ModalInfoPersonaPrestacionContent {
 })
 export class ModalInfoPersonaPrestacionComponent {
   /**
-   * @var disenioBoton {Object} define el diseño del boton por Ej.: {class: "", iconoClass: "",  text: ""}
-   * @var configModal {Object} define la configuracion del modal y diseño Ej.: {title: ""}
-   * @var personaid {number} identificador de una persona
+   * @var recursoid {number} identificador de un recurso
    * @function {Object} devuelve los datos de la persona
    */
   // @Input("disenioBoton") public disenioBoton: BotonDisenio;
   // @Input("configModal") public configModal: ModalConfig;
-  @Input("texto") public texto: string;
-  @Input("personaid") public personaid: any;
+  @Input("recursoid") public recursoid: any;
   //@Output("obtenerPersona") public obtenerPersona = new EventEmitter();
 
   constructor(
@@ -57,7 +60,7 @@ export class ModalInfoPersonaPrestacionComponent {
   open() {
     const modalRef = this.modalService.open(ModalInfoPersonaPrestacionContent, {size: 'lg'});
     //modalRef.componentInstance.configModal = this.configModal;
-    modalRef.componentInstance.personaid = this.personaid;
+    modalRef.componentInstance.recursoid = this.recursoid;
     /* modalRef.result.then(
       (result) => {
         if (result == 'closed'){
