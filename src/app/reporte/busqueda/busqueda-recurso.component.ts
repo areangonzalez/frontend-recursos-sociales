@@ -19,6 +19,7 @@ export class BusquedaRecursoComponent implements OnInit {
   public tipoRecursosLista: any[] =[];
   public globalParam:string = '';
   public mostrar: boolean = false;
+  public btnSeleccion: boolean = false;
 
   public hoveredDate: NgbDate;
   public fromDate: NgbDate;
@@ -55,6 +56,12 @@ export class BusquedaRecursoComponent implements OnInit {
     this.listarTipoRecursos(5);
   }
 
+  marcarCampo(valor: any){
+    let marcar:boolean = false;
+    marcar = (valor != null && valor != '') ? true : false;
+    return marcar;
+  }
+
   public listarLocalidades(){
     this._localidadService.listar().subscribe(
       localidades => { this.localidadesLista = localidades; },
@@ -84,15 +91,50 @@ export class BusquedaRecursoComponent implements OnInit {
   public buscar() {
     let busquedaAvanzada = this.busquedaAvanzada.value;
     let apiBusqueda:any = {};
+    let esTrue: boolean = false;
     //let apiBusqueda:object = {page:this.config page, pagesize:20};
     for (const clave in busquedaAvanzada) {
       if (clave == 'fechaAltaDesde' || clave == 'fechaAltaHasta'){
       }else if(busquedaAvanzada[clave] !== '') {
-        apiBusqueda[clave] = busquedaAvanzada[clave];
+        if (clave == 'fecha_alta_desde'){
+          if (busquedaAvanzada['fechaAltaDesde'] != null) {
+            apiBusqueda[clave] = busquedaAvanzada[clave];
+            esTrue = true;
+          }
+        }else if (clave == 'baja') {
+          if (busquedaAvanzada[clave]){
+            apiBusqueda[clave] = busquedaAvanzada[clave];
+          }
+        }else if (clave == 'acreditacion') {
+          if (busquedaAvanzada[clave]){
+            apiBusqueda[clave] = busquedaAvanzada[clave];
+          }
+        }else{
+          apiBusqueda[clave] = busquedaAvanzada[clave];
+          esTrue = true;
+        }
       }
     }
     this.obtenerBusqueda.emit(apiBusqueda);
-    //this.listarRecursos(apiBusqueda);
+    this.btnSeleccion = esTrue;
+    if (!esTrue) {
+      this.mostrarBusquedaAvanzada();
+    }
+  }
+
+  public limpiarCampos(){
+    let busqueda: any = this.busquedaAvanzada.value;
+    for (const key in busqueda) {
+      if (key == 'fechaAltaDesde') {
+        busqueda[key] = null;
+      }else if (key == 'fechaAltaHasta') {
+        busqueda[key] = null;
+      }else {
+        busqueda[key] = '';
+      }
+    }
+    this.busquedaAvanzada.patchValue(busqueda);
+    this.buscar();
   }
 
   public mostrarBusquedaAvanzada(){
