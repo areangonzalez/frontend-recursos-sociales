@@ -22,7 +22,7 @@ export class RecursoSocialService {
 
   public guardar(params:object, id:number) {
     if (id !== 0) {
-      // update
+      return this._apiService.put('/recursos/' + id, params);
     }else{
       return this._apiService.post('/recursos',params);
     }

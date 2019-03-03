@@ -39,7 +39,7 @@ export class ModalAcreditarContent {
       this._mensajeService.cancelado("No se ha ingresado ninguna fecha de acreditación", [{name:''}]);
       return;
     }else{
-      let param = {fecha_acreditacion: this.FormatFecha(this.formAcreditar.get('fechaAcreditacion'))}
+      let param = {fecha_acreditacion: this.FormatFecha(this.formAcreditar.value.fechaAcreditacion)}
       this._recursoService.guardar(param, this.recursoid).subscribe(
         result => {
           this._mensajeService.exitoso('Se ha confirmado la acreditación.', [{name:''}]);
@@ -84,6 +84,7 @@ export class ModalAcreditarComponent {
 
   open() {
     const modalRef = this.modalService.open(ModalAcreditarContent, {size: 'sm'});
+    modalRef.componentInstance.recursoid = this.recursoid;
     modalRef.result.then(
       (result) => {
         if (result == 'closed'){

@@ -110,6 +110,55 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               //console.log(tipos);
               return of(new HttpResponse({ status: 200, body: personaEncontrada }));
             }
+
+            // Actualizar recurso por ID
+            if(request.url.match(/\/apimock\/recursos\/\d+$/) && request.method === 'PUT') {
+              let urlParts = request.url.split('/');
+              let id = parseInt(urlParts[urlParts.length - 1]);
+              let recursoUpdate = request.body;
+              let recurso = recursos.filter(recurso => { return recurso.id === id; });
+              let recursoEncontrado = recurso.length ? recurso[0] : null;
+              let error:boolean = false;
+
+              if (recursoUpdate["fecha_acreditacion"]) {
+                recursoEncontrado["fecha_acreditacion"] = recursoUpdate.fecha_acreditacion;
+              }else if(recursoUpdate["fecha_baja"]) {
+                recursoEncontrado["fecha_baja"] = recursoUpdate.fecha_baja;
+                recursoEncontrado["descripcion_baja"] = recursoUpdate.descripcion_baja;
+              }else{
+                error = true;
+              }
+
+              if (!error) {
+                let recursoAgregados = [];
+                if (localStorage.getItem('recursos')) {
+                  let existe = false;
+                  recursoAgregados = [JSON.parse(localStorage.getItem('recursos'))];
+                  for (let i = 0; i < recursoAgregados[0].length; i++) {
+                    if (recursoAgregados[0][i].id === id){
+                      recursoAgregados[0][i] = recursoEncontrado;
+                      existe = true;
+                    }
+                  }
+                  if (!existe) {
+                    recursoAgregados[0].push(recursoEncontrado);
+                  }
+                  localStorage.setItem('recursos', JSON.stringify(recursoAgregados[0]));
+                }else{
+                  recursoAgregados.push(recursoEncontrado);
+                  localStorage.setItem('recursos', JSON.stringify(recursoAgregados));
+                }
+                for (let i = 0; i < recursos.length; i++) {
+                  if (recursos[i].id === id) {
+                    recursos[i] = recursoEncontrado;
+                  }}
+
+                return of(new HttpResponse({ status: 200, body: id }));
+              }else{
+                return throwError({ error: { message: 'Unauthorised' } });
+              }
+            }
+
             // get buscador de recurso social
             if(request.url.endsWith('/apimock/recursos') && request.method === 'GET') {
               // parametros
