@@ -31,7 +31,8 @@
             <td>
               <div class="btn-group">
                 <modal-info-persona-prestacion-component [recursoid]="recurso.id" ></modal-info-persona-prestacion-component>
-                <button type="button" class="btn btn-outline-success btn-sm" ngbTooltip="Acreditar prestación"><i class="fas fa-hand-holding-usd"></i></button>
+                <modal-acreditar-component [recursoid]="recurso.id" ngbTooltip="Acreditar prestación"></modal-acreditar-component>
+                <!-- <button type="button" class="btn btn-outline-success btn-sm"><i class="fas fa-hand-holding-usd"></i></button> -->
                 <button type="button" class="btn btn-outline-danger btn-sm" ngbTooltip="Baja prestación"><i class="fa fa-arrow-down"></i></button>
               </div>
             </td>

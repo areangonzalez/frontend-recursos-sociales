@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h4 class="modal-title">Prestación</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('closed')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formAcreditar">
+        <div class="form-group">
+            <label for="fecha_acreditacion" class="prioridad">Fecha acreditación (<span>*</span>):</label>
+            <div class="input-group">
+                <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fpd="ngbDatepicker"
+                id="fecha_acreditacion" formControlName="fechaAcreditacion" (ngModelChange)="FormatFecha($event)" [ngClass]="{'is-invalid': (form.fechaAcreditacion.invalid && submitted)}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-info" (click)="fpd.toggle()" type="button"
+                        [ngClass]="{'btn-outline-danger': (form.fechaAcreditacion.invalid && submitted), 'is-invalid': (form.fechaAcreditacion.invalid && submitted)}">
+                        <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="(form.fechaAcreditacion.invalid && submitted)" class="text-danger">
+                <div *ngIf="form.fechaAcreditacion.errors.required">Por favor, ingrese una fecha. </div>
+            </div>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="guardar()">Save</button>
+  </div>
