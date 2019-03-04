@@ -84,7 +84,7 @@ export class ModalAcreditarComponent {
   }
 
   open() {
-    const modalRef = this.modalService.open(ModalAcreditarContent, {size: 'sm'});
+    const modalRef = this.modalService.open(ModalAcreditarContent, {  centered: true });
     modalRef.componentInstance.recursoid = this.recursoid;
     modalRef.result.then(
       (result) => {
