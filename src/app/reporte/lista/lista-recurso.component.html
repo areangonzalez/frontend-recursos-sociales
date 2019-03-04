@@ -18,7 +18,7 @@
           </tr>
         </tbody>
         <tbody *ngIf="(recursosLista.length > 0)">
-          <tr *ngFor="let recurso of recursosLista" >
+          <tr *ngFor="let recurso of recursosLista" [ngClass]="{'table-success': (recurso.acreditacion), 'table-danger': (recurso.baja)}" ngbTooltip="{{infoAdicional(recurso.fecha_acreditacion, recurso.fecha_baja)}}" >
             <td scope="row">{{recurso.persona.nro_documento}}</td>
             <td>
               {{recurso.persona.apellido}}, {{recurso.persona.nombre}}
@@ -30,11 +30,9 @@
             <td class="text-center">{{recurso.monto}}</td>
             <td>
               <div class="btn-group">
-                <modal-info-persona-prestacion-component [recursoid]="recurso.id" ></modal-info-persona-prestacion-component>
-                <modal-acreditar-component *ngIf="(!recurso.acreditacion)" [recursoid]="recurso.id" (obtenerRecurso)="actualizarLista($event)" ngbTooltip="Acreditar prestación"></modal-acreditar-component>
-                <modal-baja-component [recursoid]="recurso.id" (obtenerRecurso)="actualizarLista($event)" ></modal-baja-component>
-                <!-- <button type="button" class="btn btn-outline-success btn-sm"><i class="fas fa-hand-holding-usd"></i></button> -->
-                <!-- <button type="button" *ngIf="(!recurso.baja)" class="btn btn-outline-danger btn-sm" ngbTooltip="Baja prestación"><i class="fa fa-arrow-down"></i></button> -->
+                <modal-info-persona-prestacion-component class="btn-group" [recursoid]="recurso.id" ></modal-info-persona-prestacion-component>
+                <modal-acreditar-component class="btn-group" *ngIf="(!recurso.acreditacion && !recurso.baja)" [recursoid]="recurso.id" (obtenerRecurso)="actualizarLista($event)" ngbTooltip="Acreditar prestación"></modal-acreditar-component>
+                <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" *ngIf="(!recurso.baja)" [recursoid]="recurso.id" (obtenerRecurso)="actualizarLista($event)" ></modal-baja-component>
               </div>
             </td>
           </tr>

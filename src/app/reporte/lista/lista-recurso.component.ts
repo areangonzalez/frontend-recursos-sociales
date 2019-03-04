@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import { DatePipe } from "@angular/common";
 @Component({
   selector: 'lista-recurso',
   templateUrl: './lista-recurso.component.html',
@@ -20,9 +20,24 @@ export class ListaRecursoComponent implements OnInit {
   }
 
   public actualizarLista(estado:any){
-    console.log("actualizar listado: ", estado);
     if (estado){
       this.cambioDePagina.emit(this.configPaginacion.page);
+    }
+  }
+
+  public infoAdicional(acreditacion, baja) {
+    let datePipe = new DatePipe('en-US');
+    if (acreditacion && baja) {
+      let fechaA = datePipe.transform(acreditacion, 'dd/MM/yyyy');
+      let fechaB = datePipe.transform(baja, 'dd/MM/yyyy');
+      let info = "acreditacion: " + fechaA + " - Baja: " + fechaB;
+      return info;
+    }else if (acreditacion) {
+      let fecha =datePipe.transform(acreditacion, 'dd/MM/yyyy');
+      return "Acreditacion: " + fecha;
+    }else if (baja) {
+      let fecha = datePipe.transform(baja, 'dd/MM/yyyy');
+      return "Baja: " + fecha;
     }
   }
 

@@ -45,11 +45,13 @@ export class ReporteComponent implements OnInit {
         this.configPaginacion.colleccionSize = recursos.total_filtrado;
         this.configPaginacion.pageSize = recursos.pagesize;
         this.recursosLista = recursos.resultado;
+        console.log(recursos.resultado);
       },
       error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
   public cambioPagina(page:any){
+    console.log(page);
     this.busqueda["page"] = page;
     this.listarRecursos(this.busqueda);
   }
