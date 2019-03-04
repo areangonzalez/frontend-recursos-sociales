@@ -13,7 +13,6 @@ export class ModalBajaContent {
   @Output("darBaja") public darBaja = new EventEmitter();
   public formBaja: FormGroup;
   public submitted: boolean = false;
-  private fecha_baja: string;
 
   constructor(
     private modalService: NgbModal,
@@ -68,10 +67,9 @@ export class ModalBajaContent {
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
-/*
   confirmar() {
     if (this.validar() !== false){
-      const modalReferencia = this.modalService.open(modalConfirmacionContent, {
+      const modalReferencia = this.modalService.open(ModalConfirmacionContent, {
         centered: true
       });
 
@@ -85,7 +83,7 @@ export class ModalBajaContent {
         });
     }
 
-  } */
+  }
 }
 
 @Component({
@@ -117,7 +115,7 @@ export class ModalBajaComponent {
       (result) => {
         if (result == 'closed'){
         }else{
-          // obtengo el id persona desde el content.
+          // obtengo el resultado de la operacion.
           return this.obtenerRecurso.emit(result);
         }
       }
@@ -125,13 +123,13 @@ export class ModalBajaComponent {
   }
 }
 
-/* @Component({
+@Component({
   templateUrl: './modal-confirmacion-baja.content.html'
 })
-export class modalConfirmacionContent {
+export class ModalConfirmacionContent {
   constructor(public activeModal: NgbActiveModal) {}
 
   public confirmacion(confirma: boolean) {
     this.activeModal.close(confirma);
   }
-} */
+}

@@ -15,7 +15,7 @@ import {
   ModalFormPersonaComponent, ModalFormPersonaContent,
   ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
   ModalAcreditarComponent, ModalAcreditarContent,
-  ModalBajaComponent, ModalBajaContent
+  ModalBajaComponent, ModalConfirmacionContent, ModalBajaContent
 } from "./modal";
 import { ProgramaComponent } from "./programa";
 
@@ -42,7 +42,7 @@ import { ProgramaComponent } from "./programa";
       ModalFormPersonaComponent, ModalFormPersonaContent,
       ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
       ModalAcreditarComponent, ModalAcreditarContent,
-      ModalBajaComponent, ModalBajaContent,
+      ModalBajaComponent, ModalConfirmacionContent, ModalBajaContent,
       ProgramaComponent
     ],
     exports: [
@@ -60,14 +60,14 @@ import { ProgramaComponent } from "./programa";
         ModalFormPersonaComponent, ModalFormPersonaContent,
         ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
         ModalAcreditarComponent, ModalAcreditarContent,
-        ModalBajaComponent, ModalBajaContent,
+        ModalBajaComponent, ModalConfirmacionContent, ModalBajaContent,
         ProgramaComponent
     ],
     entryComponents: [
       ModalFormPersonaComponent, ModalFormPersonaContent,
       ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
       ModalAcreditarComponent, ModalAcreditarContent,
-      ModalBajaComponent, ModalBajaContent
+      ModalBajaComponent, ModalConfirmacionContent, ModalBajaContent
     ]
 })
 export class SharedModule { }

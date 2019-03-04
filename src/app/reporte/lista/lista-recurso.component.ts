@@ -20,6 +20,7 @@ export class ListaRecursoComponent implements OnInit {
   }
 
   public actualizarLista(estado:any){
+    console.log("actualizar listado: ", estado);
     if (estado){
       this.cambioDePagina.emit(this.configPaginacion.page);
     }
