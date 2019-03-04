@@ -39,7 +39,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             for (let i = 0; i < recursoStorage.length; i++) {
               for (let j = 0; j < recursos.length; j++) {
                 if (recursoStorage[i].id === recursos[j].id){
-                  //recursos[j] = recursoStorage[i]; // si se edito
+                  recursos[j] = recursoStorage[i]; // si se edito
                   existe = true;
                 }
               }
@@ -187,9 +187,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               };
               // esto facilita la busqueda de un recurso con la persona y su dirección
               for (let i = 0; i < recursos.length; i++) {
+                recursos[i]["acreditacion"] = (recursos[i]["fecha_acreditacion"]) ? true : false ;
+                recursos[i]["baja"] = (recursos[i]["fecha_baja"]) ? true : false ;
                 recursos[i]["programa"] = nombrePorId(recursos[i]["programaid"], programas);
                 for (let j = 0; j < personas.length; j++) {
-                  // preguntar si los id's soinciden
+                  // preguntar si los id's coinciden
                   if (recursos[i]["personaid"] == personas[j]["id"]){
                     // actualizo las localidades
                     personas[j]["lugar"]["localidad"] = nombrePorId(personas[j]["lugar"]["localidadid"], localidades);

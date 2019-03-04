@@ -43,7 +43,7 @@ export class ModalAcreditarContent {
       this._recursoService.guardar(param, this.recursoid).subscribe(
         result => {
           this._mensajeService.exitoso('Se ha confirmado la acreditación.', [{name:''}]);
-          this.activeModal.close('closed');
+          this.activeModal.close(true);
         }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
     }
   }
@@ -73,6 +73,7 @@ export class ModalAcreditarComponent {
    * @function {Object} devuelve los datos de la persona
    */
   @Input("recursoid") public recursoid: any;
+  @Output("obtenerRecurso") public obtenerRecurso = new EventEmitter();
 
   constructor(
     private modalService: NgbModal,
@@ -90,7 +91,7 @@ export class ModalAcreditarComponent {
         if (result == 'closed'){
         }else{
           // obtengo el id persona desde el content.
-          //return this.obtenerPersona.emit(result);
+          return this.obtenerRecurso.emit(result);
         }
       }
     )
