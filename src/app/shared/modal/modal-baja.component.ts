@@ -10,41 +10,39 @@ import { RecursoSocialService, MensajesService } from 'src/app/core/services';
 })
 export class ModalBajaContent {
   @Input("recursoid") public recursoid: any;
-  public formAcreditar: FormGroup;
+  @Output("darBaja") public darBaja = new EventEmitter();
+  public formBaja: FormGroup;
   public submitted: boolean = false;
-  private fecha_acreditacion: string;
+  private fecha_baja: string;
 
   constructor(
+    private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     private _fb: FormBuilder,
     private _utilService: UtilService,
     private _recursoService: RecursoSocialService,
     private _mensajeService: MensajesService
   ) {
-    this.formAcreditar = _fb.group({
-      fechaAcreditacion: ['', Validators.required]
+    this.formBaja = _fb.group({
+      fechaBaja: ['', Validators.required],
+      descripcion_baja: ''
     });
   }
 
-  get form(){return this.formAcreditar.controls;}
+  get form(){return this.formBaja.controls;}
 
   /**
    * Envio el id de persona al componente padre del modal-content
    * @param recursoid identificador de la persona que ha sido guardada
    */
-  public guardar() {
+  public validar() {
     this.submitted = true;
 
-    if (this.formAcreditar.invalid) {
-      this._mensajeService.cancelado("No se ha ingresado ninguna fecha de acreditación", [{name:''}]);
-      return;
+    if (this.formBaja.invalid) {
+      this._mensajeService.cancelado("No se ha ingresado ninguna fecha de baja", [{name:''}]);
+      return false;
     }else{
-      let param = {fecha_acreditacion: this.FormatFecha(this.formAcreditar.value.fechaAcreditacion)}
-      this._recursoService.guardar(param, this.recursoid).subscribe(
-        result => {
-          this._mensajeService.exitoso('Se ha confirmado la acreditación.', [{name:''}]);
-          this.activeModal.close(true);
-        }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+      return true;
     }
   }
   /**
@@ -59,6 +57,35 @@ export class ModalBajaContent {
     let fecha = this._utilService.formatearFecha(obj.day, obj.month, obj.year, 'yyyy-MM-dd');
     return fecha;
   }
+
+  private guardar() {
+    let param = {fecha_baja: this.FormatFecha(this.formBaja.value.fechaBaja), descripcion_baja: this.formBaja.value.descripcion_baja}
+
+    this._recursoService.guardar(param, this.recursoid).subscribe(
+      result => {
+        this._mensajeService.exitoso('Se ha confirmado la baja.', [{name:''}]);
+        this.activeModal.close(true);
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+  }
+
+/*
+  confirmar() {
+    if (this.validar() !== false){
+      const modalReferencia = this.modalService.open(modalConfirmacionContent, {
+        centered: true
+      });
+
+      modalReferencia.result.then(
+        result => {
+          if (result == false) {
+            this.activeModal.close();
+          }else{
+            this.guardar();
+          }
+        });
+    }
+
+  } */
 }
 
 @Component({
@@ -97,3 +124,14 @@ export class ModalBajaComponent {
     )
   }
 }
+
+/* @Component({
+  templateUrl: './modal-confirmacion-baja.content.html'
+})
+export class modalConfirmacionContent {
+  constructor(public activeModal: NgbActiveModal) {}
+
+  public confirmacion(confirma: boolean) {
+    this.activeModal.close(confirma);
+  }
+} */
