@@ -13,7 +13,7 @@ export class ReporteComponent implements OnInit {
 
   public busqueda: any = {page: 0, pagesize: 20};
   public recursosLista: any[] = [];
-  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1 };
+  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_total": 0 };
 
   constructor(
     private _mensajeService: MensajesService,
@@ -44,8 +44,8 @@ export class ReporteComponent implements OnInit {
       recursos => {
         this.configPaginacion.colleccionSize = recursos.total_filtrado;
         this.configPaginacion.pageSize = recursos.pagesize;
+        this.configPaginacion.monto_total = recursos.monto_total;
         this.recursosLista = recursos.resultado;
-        console.log(recursos.resultado);
       },
       error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }

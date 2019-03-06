@@ -25,25 +25,25 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: loadInicioModule, // dev
-            //loadChildren: './inicio/inicio.module#InicioModule', // production
+            // loadChildren: loadInicioModule, // dev
+            loadChildren: './inicio/inicio.module#InicioModule', // production
           },
           {
             path: 'crear-prestacion',
-            loadChildren: loadRecursoModule, // dev
-            //loadChildren: './recurso/recurso.module#RecursoModule', // production
+            // loadChildren: loadRecursoModule, // dev
+            loadChildren: './recurso/recurso.module#RecursoModule', // production
             data: { preload: true, breadcrumb: 'Crear prestación' }
           },
           {
               path: 'reporte',
-              loadChildren: loadReporteModule, // dev
-              //loadChildren: './reporte/reporte.module#ReporteModule', // production
+              // loadChildren: loadReporteModule, // dev
+              loadChildren: './reporte/reporte.module#ReporteModule', // production
               data: { preload: true, breadcrumb: 'Reportes' }
           },
           {
             path: 'vista',
-            loadChildren: loadVistaModule, // dev
-            //loadChildren: './vista/vista.module#VistaModule', // production
+            // loadChildren: loadVistaModule, // dev
+            loadChildren: './vista/vista.module#VistaModule', // production
             data: { preload: true, breadcrumb: 'Visualizar prestación' }
           }
         ]

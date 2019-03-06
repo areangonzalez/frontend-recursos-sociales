@@ -22,7 +22,7 @@ export class RecursoSocialService {
 
   public guardar(params:object, id:number) {
     if (id !== 0) {
-      return this._apiService.put('/recursos/' + id, params);
+      //return this._apiService.put('/recursos/' + id, params);
     }else{
       return this._apiService.post('/recursos',params);
     }
@@ -32,5 +32,12 @@ export class RecursoSocialService {
     return this._apiService.get('/recursos/' + id);
   }
 
+  public acreditar(params:object, id:number) {
+    return this._apiService.put('/recursos/acreditar/' + id, params);
+  }
+
+  public baja(params:object, id:number) {
+    return this._apiService.put('/recursos/baja/' + id, params);
+  }
 
 }

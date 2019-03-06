@@ -1,4 +1,9 @@
-    <div class="row mt-2 pl-3 pr-3">
+    <div class="d-flex justify-content-between mt-2 border-top">
+      <div class="p-2 font-weight-bold">Total Gral: {{configPaginacion.colleccionSize}} </div>
+      <div class="p-2 font-weight-bold">Página {{configPaginacion.page}} de {{recursosLista.length}}</div>
+      <div class="p-2 font-weight-bold">Monto Total: {{configPaginacion.monto_total | currency:'USD':true:'2.2'}}</div>
+    </div>
+    <div class="row pl-3 pr-3">
       <table class="table table-hover table-sm">
         <thead>
           <tr>

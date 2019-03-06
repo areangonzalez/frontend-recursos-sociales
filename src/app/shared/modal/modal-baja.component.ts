@@ -60,7 +60,7 @@ export class ModalBajaContent {
   private guardar() {
     let param = {fecha_baja: this.FormatFecha(this.formBaja.value.fechaBaja), descripcion_baja: this.formBaja.value.descripcion_baja}
 
-    this._recursoService.guardar(param, this.recursoid).subscribe(
+    this._recursoService.baja(param, this.recursoid).subscribe(
       result => {
         this._mensajeService.exitoso('Se ha confirmado la baja.', [{name:''}]);
         this.activeModal.close(true);

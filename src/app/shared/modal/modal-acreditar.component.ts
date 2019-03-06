@@ -40,7 +40,7 @@ export class ModalAcreditarContent {
       return;
     }else{
       let param = {fecha_acreditacion: this.FormatFecha(this.formAcreditar.value.fechaAcreditacion)}
-      this._recursoService.guardar(param, this.recursoid).subscribe(
+      this._recursoService.acreditar(param, this.recursoid).subscribe(
         result => {
           this._mensajeService.exitoso('Se ha confirmado la acreditación.', [{name:''}]);
           this.activeModal.close(true);
