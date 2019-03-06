@@ -27,7 +27,7 @@
             <td>{{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</td>
             <td class="text-center">{{recurso.programa}}</td>
             <td>{{recurso.proposito}}</td>
-            <td class="text-center">{{recurso.monto}}</td>
+            <td class="text-center">{{recurso.monto | currency:'USD':true:'2.2'}}</td>
             <td>
               <div class="btn-group">
                 <modal-info-persona-prestacion-component class="btn-group" [recursoid]="recurso.id" ></modal-info-persona-prestacion-component>
