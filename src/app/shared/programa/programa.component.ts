@@ -22,7 +22,7 @@ export class ProgramaComponent implements OnInit {
   }
 
   public contarRecursoSociales(programaid:number) {
-    this._recursoSocialService.buscar({programaid: programaid, pagesize:0}).subscribe(
+    this._recursoSocialService.buscar({programaid: programaid}).subscribe(
       recursos => {
         console.log(recursos);
         this.cantidadRecursos = recursos.total_filtrado;

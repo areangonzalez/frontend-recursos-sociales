@@ -11,7 +11,7 @@ import { UtilService } from '../core/utils';
 })
 export class ReporteComponent implements OnInit {
 
-  public busqueda: any = {page: 1, pagesize: 20};
+  public busqueda: any = {page: 0, pagesize: 20};
   public recursosLista: any[] = [];
   public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1 };
 
@@ -31,7 +31,7 @@ export class ReporteComponent implements OnInit {
   }
 
   public buscar(apiBusqueda:any) {
-    apiBusqueda["page"] = 1;
+    apiBusqueda["page"] = 0;
     apiBusqueda["pagesize"] = 20;
     this.busqueda = apiBusqueda;
     this.listarRecursos(apiBusqueda);
@@ -51,8 +51,7 @@ export class ReporteComponent implements OnInit {
   }
 
   public cambioPagina(page:any){
-    console.log(page);
-    this.busqueda["page"] = page;
+    this.busqueda["page"] = page - 1;
     this.listarRecursos(this.busqueda);
   }
 }

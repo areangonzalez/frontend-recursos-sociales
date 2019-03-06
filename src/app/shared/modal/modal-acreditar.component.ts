@@ -51,7 +51,7 @@ export class ModalAcreditarContent {
    * cancelo el modal y lo cierro.
    * @param cancelar cierra el modal si el valor es true
    */
-  public cancelar(cancelar:boolean) {
+  public cancelar() {
     this.activeModal.close('closed');
   }
 
