@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
-import { MensajesService, RecursoSocialService } from '../core/services';
+import { MensajesService, RecursoSocialService, LoaderService } from '../core/services';
 import { UtilService } from '../core/utils';
 
 @Component({
@@ -19,7 +19,8 @@ export class ReporteComponent implements OnInit {
     private _mensajeService: MensajesService,
     private _util: UtilService,
     private _recursoService: RecursoSocialService,
-    private _configTabSet: NgbTabsetConfig
+    private _configTabSet: NgbTabsetConfig,
+    private _loaderService: LoaderService
   ){
     _configTabSet.justify = 'center';
     _configTabSet.type = 'pills';
