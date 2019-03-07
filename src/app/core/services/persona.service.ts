@@ -29,4 +29,8 @@ export class PersonaService {
   public personaPorId(id:number){
     return this._apiService.get('/personas/' + id);
   }
+
+  public guardarContacto(params:object, id:number) {
+    return this._apiService.put('/personas/contacto/' + id, params);
+  }
 }

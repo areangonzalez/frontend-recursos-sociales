@@ -58,13 +58,13 @@ export class RecursoComponent implements OnInit {
   }
 
   public guardar(recurso:object) {
-    console.log(this.datosPersona.id);
+    //console.log(this.datosPersona.id);
     if (this.datosPersona.id !== undefined ) {
       // agrego el id de persona
       recurso["personaid"] = this.datosPersona.id;
       recurso["monto"] = parseFloat(recurso["monto"]);
 
-      this._personaService.guardar(this.contactosForm.value.contacto, this.datosPersona.id).subscribe(
+      this._personaService.guardarContacto(this.contactosForm.value.contacto, this.datosPersona.id).subscribe(
         resultado =>{
           this.guardarRecurso(recurso);
         }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });

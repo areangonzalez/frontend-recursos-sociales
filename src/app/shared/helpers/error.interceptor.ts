@@ -35,7 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               return throwError(error);
             }
             }),
-            finalize(() => this._loadService.hide())
+            finalize(() => this._loadService.hide());
         )
     }
 
