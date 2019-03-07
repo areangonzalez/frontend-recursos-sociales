@@ -117,8 +117,8 @@ export class BusquedaRecursoComponent implements OnInit {
     }
     this.obtenerBusqueda.emit(apiBusqueda);
     this.btnSeleccion = esTrue;
-    if (!esTrue) {
-      this.mostrarBusquedaAvanzada();
+    if (esTrue) {
+      this.mostrar = true;
     }
   }
 
