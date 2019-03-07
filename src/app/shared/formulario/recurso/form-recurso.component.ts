@@ -140,7 +140,7 @@ export class FormRecursoComponent implements OnInit {
           for (let i = 0; i < this.listaAlumnos.length; i++) {
             alumno.push({ alumnoid: this.listaAlumnos[i].id });
           }
-          recurso["alumnos"] = alumno;
+          recurso["alumno_lista"] = alumno;
           this.obtenerDatos.emit(recurso);
         }else{
           this._mensajeService.cancelado('La lista de alumnos deberia de tener al menos una persona.', [{name:''}]);

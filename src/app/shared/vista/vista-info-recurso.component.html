@@ -36,6 +36,26 @@
               </dl>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha de acreditación:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.fecha_acreditacion}}</dd>
+              </dl>
+            </div>
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha de baja:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.fecha_baja}}</dd>
+              </dl>
+            </div>
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Descripción baja:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.descripcion_baja}}</dd>
+              </dl>
+            </div>
+          </div>
         </div>
         <div class="d-flex justify-content-between" *ngIf="(recurso.alumnos !== undefined)">
           <div class="col-4 pt-1"><hr></div>
