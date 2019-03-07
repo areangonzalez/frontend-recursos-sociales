@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, of, timer } from 'rxjs';
 import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET } from "@angular/router";
 import { LoaderService } from 'src/app/core/services';
 import { LoaderState } from 'src/app/core/models';
+import { debounce } from 'rxjs/operators';
 
 @Component({
     selector: 'angular-loader',
@@ -54,6 +55,7 @@ export class LoaderComponent implements OnInit {
     });
 
         this.subscription = this.loaderService.loaderState
+        .pipe(debounce(() => timer(600)))
             .subscribe((state: LoaderState) => {
                 this.show = state.show;
             });

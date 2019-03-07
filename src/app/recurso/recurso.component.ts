@@ -53,10 +53,6 @@ export class RecursoComponent implements OnInit {
     this.contactosForm.reset();
   }
 
-  public editarPersona(){
-    console.log("Hacer algo");
-  }
-
   public guardar(recurso:object) {
     //console.log(this.datosPersona.id);
     if (this.datosPersona.id !== undefined ) {
@@ -83,7 +79,7 @@ export class RecursoComponent implements OnInit {
   public guardarRecurso(params:object){
     this._recursoService.guardar(params, 0).subscribe(
       resultado => {
-        this._mensajeService.confirmar("Se ha guardado correctamente la prestación", [{name: 'inicio/vista/prestacion', param:resultado["id"], tipo:'vista'}]);
+        this._mensajeService.confirmar("Se ha guardado correctamente la prestación", [{name: 'inicio/vista/prestacion', param:resultado["data"]["id"], tipo:'vista'}]);
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
 

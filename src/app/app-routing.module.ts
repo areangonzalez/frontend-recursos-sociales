@@ -32,19 +32,19 @@ const routes: Routes = [
             path: 'crear-prestacion',
             // loadChildren: loadRecursoModule, // dev
             loadChildren: './recurso/recurso.module#RecursoModule', // production
-            data: { preload: true, breadcrumb: 'Crear prestación' }
+            data: { loading: true, preload: true, breadcrumb: 'Crear prestación', title: 'Crear prestación' }
           },
           {
               path: 'reporte',
               // loadChildren: loadReporteModule, // dev
               loadChildren: './reporte/reporte.module#ReporteModule', // production
-              data: { preload: true, breadcrumb: 'Reportes' }
+              data: { loading: true, preload: true, breadcrumb: 'Reportes', title: 'Reportes' }
           },
           {
             path: 'vista',
             // loadChildren: loadVistaModule, // dev
             loadChildren: './vista/vista.module#VistaModule', // production
-            data: { preload: true, breadcrumb: 'Visualizar prestación' }
+            data: { loading: true, preload: true, breadcrumb: 'Visualizar prestación', title: 'Visualizar prestación' }
           }
         ]
     },
