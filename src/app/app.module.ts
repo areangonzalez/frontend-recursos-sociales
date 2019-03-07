@@ -61,7 +61,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     BreadcrumbsService,
 
     // facke-backend providers
-    fakeBackendProvider
+    //fakeBackendProvider
 
   ],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
     <div class="d-flex justify-content-between mt-2 border-top">
       <div class="p-2 font-weight-bold">Total Gral: {{configPaginacion.colleccionSize}} </div>
       <div class="p-2 font-weight-bold">Página {{configPaginacion.page}} de {{recursosLista.length}}</div>
-      <div class="p-2 font-weight-bold">Monto Total: {{configPaginacion.monto_total | currency:'USD':true:'2.2'}}</div>
+      <div class="p-2 font-weight-bold">Monto Total: {{configPaginacion.monto_total | currency:'USD':'symbol-narrow':'2.2'}}</div>
     </div>
     <div class="row pl-3 pr-3">
       <table class="table table-hover table-sm">
@@ -32,7 +32,7 @@
             <td>{{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</td>
             <td class="text-center">{{recurso.programa}}</td>
             <td>{{recurso.proposito}}</td>
-            <td class="text-center">{{recurso.monto | currency:'USD':true:'2.2'}}</td>
+            <td class="text-center">{{recurso.monto | currency:'USD':'symbol-narrow':'2.2'}}</td>
             <td>
               <div class="btn-group">
                 <modal-info-persona-prestacion-component class="btn-group" [recursoid]="recurso.id" ></modal-info-persona-prestacion-component>

@@ -64,7 +64,9 @@ export class ModalBajaContent {
       result => {
         this._mensajeService.exitoso('Se ha confirmado la baja.', [{name:''}]);
         this.activeModal.close(true);
-      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+      }, error => {
+        this._mensajeService.cancelado(error, [{name:''}]);
+      });
   }
 
   confirmar() {

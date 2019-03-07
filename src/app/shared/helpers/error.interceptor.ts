@@ -17,16 +17,39 @@ export class ErrorInterceptor implements HttpInterceptor {
         console.log("url: ",request.url);
         return next.handle(request).pipe(
           catchError(err => {
+            //console.log("err interceptor: ",err);
+
             if (err.status === 401) {
               // auto logout if 401 response returned from api
               //              this.authenticationService.logout();
               location.reload(true);
             }
-            const error = err.error.message || err.statusText;
-            console.log(error);
-                return throwError(error);
+            // error.message viene como objeto
+            if (err.status === 400){
+              let mensaje = this.recorrerErrorObjeto(JSON.parse(err.error.message));
+              // envio el mensaje como texto.
+              return throwError(mensaje);
+            }else{ // cualquier otro error
+              const error = err.error.message || err.statusText;
+              console.log("error interceptor: ",error);
+              return throwError(error);
+            }
             }),
             finalize(() => this._loadService.hide())
         )
+    }
+
+    private recorrerErrorObjeto(error:object) {
+      let mensaje = ""; // variable que arma el mensaje en string
+      for (const key in error) { // recorro el array
+        let concatMsj = ""; // variable que concatena el/los mensajes que pueden existir dentro de los items
+        mensaje += (mensaje != "") ? "\n" : "";
+        mensaje += key.replace("_", " ") + ":"; // remplazo los guiones bajos por espacios.
+        for (let i = 0; i < error[key].length; i++) { // recorro el objeto segun su clave
+          concatMsj += (concatMsj != "") ? "," : " " + error[key][i];
+        }
+        mensaje += concatMsj;
+      }
+      return mensaje;
     }
 }
