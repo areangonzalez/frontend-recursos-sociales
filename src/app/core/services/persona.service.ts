@@ -18,8 +18,8 @@ export class PersonaService {
     return this._apiService.get('/personas',httpParams);
   }
 
-  public guardar(params:object, id:number) {
-    if( id !== 0 ){ //editar persona
+  public guardar(params:object, id:any) {
+    if( id !== '' ){ //editar persona
       return this._apiService.put('/personas/' + id, params);
     }else{ // crear persona
       return this._apiService.post('/personas', params);
