@@ -35,14 +35,8 @@ export class VistaRecursoComponent implements OnInit {
     this._recursoService.recursoPorId(recursoid).subscribe(
       recurso => {
         this.recurso = recurso;
-        this.obtenerPersona(recurso["personaid"]);
+        this.persona = recurso.persona;
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
 
-  public obtenerPersona(personaid:number) {
-    this._personaService.personaPorId(personaid).subscribe(
-      persona => {
-        this.persona = persona;
-      }, error => { this._mensajeService.cancelado(error, [{name: ''}]) })
-  }
 }
