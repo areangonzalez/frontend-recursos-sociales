@@ -57,7 +57,7 @@ export class FormPersonaComponent implements OnInit {
     private _personaService: PersonaService
   ){
     this.formPersona = _fb.group({
-        id: 0,
+        id: '',
         nro_documento: ['', [Validators.required, Validators.minLength(7)]],
         apellido: ['', [Validators.required, Validators.minLength(3)]],
         nombre: ['', [Validators.required, Validators.minLength(3)]],
@@ -76,7 +76,7 @@ export class FormPersonaComponent implements OnInit {
           red_social: ''
         }),
         lugar: _fb.group({
-          id: 0,
+          id: '',
           localidadid: ['', Validators.required],
           calle: ['', [Validators.required, Validators.minLength(3)]],
           altura: ['', Validators.required],
@@ -203,8 +203,8 @@ export class FormPersonaComponent implements OnInit {
   /**
    * @function guardarPersona Crear/Editar una persona.
    */
-  public guardarPersona(params:object, id:number) {
-    if (id != 0) {
+  public guardarPersona(params:object, id:any) {
+    if (id != '') {
       this._personaService.guardar(params, id).subscribe(
         resultado => {
           this.obtenerIdPersona(id);

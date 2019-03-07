@@ -1,25 +1,34 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfig, BotonDisenio } from 'src/app/core/models';
-import { RecursoSocialService, MensajesService } from 'src/app/core/services';
+import { RecursoSocialService, MensajesService, LoaderService } from 'src/app/core/services';
 
 @Component({
   selector: 'modal-info-persona-prestacion-content',
   templateUrl: './modal-info-persona-prestacion.content.html'
 })
-export class ModalInfoPersonaPrestacionContent implements OnInit {
+export class ModalInfoPersonaPrestacionContent implements OnInit, AfterViewInit {
   @Input("recursoid") public recursoid: any;
   public recurso: any;
+  public persona: any;
 
   constructor(
     public activeModal: NgbActiveModal,
     private _recursoService: RecursoSocialService,
-    private _mensajeService: MensajesService
+    private _mensajeService: MensajesService,
+    private _loaderService: LoaderService
+
   ) {}
 
   ngOnInit(){
     this.obtenerRecurso(this.recursoid);
   }
+
+  ngAfterViewInit(){
+    this._loaderService.hide();
+  }
+
+
 
   /**
    * Obtengo el recurso mediante su identificador
@@ -29,6 +38,7 @@ export class ModalInfoPersonaPrestacionContent implements OnInit {
     this._recursoService.recursoPorId(recursoid).subscribe(
       recurso => {
         this.recurso = recurso;
+        this.persona = recurso.persona;
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 }
@@ -48,7 +58,8 @@ export class ModalInfoPersonaPrestacionComponent {
 
   constructor(
     private modalService: NgbModal,
-    private config: NgbModalConfig
+    private config: NgbModalConfig,
+    private _loaderService: LoaderService
   ) {
     config.backdrop = true;
     config.keyboard = true;
