@@ -447,7 +447,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               }
               personas.push(nuevaPersona);
               // respond 200 OK
-              return of(new HttpResponse({ status: 200, body: {id: id} }));
+              return of(new HttpResponse({ status: 200, body: {data:{id: id}} }));
             }
             // Actualizacion de una persona
             if (request.url.match(/\/apimock\/personas\/\d+$/) && request.method === 'PUT') {

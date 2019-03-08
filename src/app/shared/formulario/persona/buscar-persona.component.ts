@@ -63,8 +63,8 @@ export class BuscarPersonaComponent implements OnInit {
     this.buscar(this.busqueda, page);
   }
 
-  public personaCreada(persona) {
-    const datos: object = {id:persona.id, persona:persona};
+  public personaCreada(personaid) {
+    const datos: object = {id: personaid};
     this.personaElegida.emit(datos);
   }
 

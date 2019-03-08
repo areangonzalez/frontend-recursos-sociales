@@ -204,6 +204,7 @@ export class FormPersonaComponent implements OnInit {
    * @function guardarPersona Crear/Editar una persona.
    */
   public guardarPersona(params:object, id:any) {
+    console.log(id);
     if (id != '') {
       this._personaService.guardar(params, id).subscribe(
         resultado => {
@@ -213,7 +214,7 @@ export class FormPersonaComponent implements OnInit {
     }else{
       this._personaService.guardar(params, 0).subscribe(
         resultado => {
-          this.obtenerIdPersona(resultado.id);
+          this.obtenerIdPersona(resultado.data.id);
           this._mensajeService.exitoso("Se ha guardado la persona con éxito.", [{name:''}]);
         }, error => {
           this._mensajeService.cancelado(error, [{name:''}]);

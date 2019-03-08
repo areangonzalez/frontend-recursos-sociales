@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilService } from 'src/app/core/utils';
-import { TipoRecursoService, MensajesService, ProgramaService } from 'src/app/core/services';
+import { TipoRecursoService, MensajesService, ProgramaService, PersonaService } from 'src/app/core/services';
 
 
 @Component({
@@ -27,7 +27,8 @@ export class FormRecursoComponent implements OnInit {
     private _utilService: UtilService,
     private _tipoRecursoService: TipoRecursoService,
     private _mensajeService: MensajesService,
-    private _programaService: ProgramaService
+    private _programaService: ProgramaService,
+    private _personaService: PersonaService
   ) {
     this.formRecurso = _fb.group({
       programaid: ['', Validators.required],
@@ -89,7 +90,8 @@ export class FormRecursoComponent implements OnInit {
 
   public agregarAlumnos(alumno:any){
     if (this.alumnoDuplicado(alumno.id) === true){
-      this.listaAlumnos.push(alumno.persona);
+      this.buscarPersonaPorId(alumno.id);
+      //this.listaAlumnos.push(alumno.persona);
     }else{
       this._mensajeService.cancelado("Este alumno ya fue ingresado.", [{name: ''}]);
     }
@@ -120,6 +122,13 @@ export class FormRecursoComponent implements OnInit {
     this._programaService.buscarPorId(programaid).subscribe(
       programa => {
         this.programaLista = [programa];
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+  }
+
+  public buscarPersonaPorId(personaid:number){
+    this._personaService.personaPorId(personaid).subscribe(
+      persona => {
+        this.listaAlumnos.push(persona);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 

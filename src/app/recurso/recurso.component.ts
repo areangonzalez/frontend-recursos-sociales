@@ -44,6 +44,8 @@ export class RecursoComponent implements OnInit {
       this.infoPersona = true;
       this.datosPersona = datos.persona;
       this.contactosForm.controls.contacto.patchValue(datos.persona);
+    }else if (datos.id != undefined) {
+      this.personaEditada(datos.id);
     }
   }
 
