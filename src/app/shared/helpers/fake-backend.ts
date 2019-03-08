@@ -361,7 +361,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               }
               recursos.push(nuevoRecurso);
 
-              return of(new HttpResponse({ status: 200, body: {id:recursoid} }));
+              return of(new HttpResponse({ status: 200, body: {data:{id:recursoid}} }));
             }
             // get Buscador de personas
             if(request.url.endsWith('/apimock/personas') && request.method === 'GET') {
@@ -532,6 +532,64 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   return throwError({ error: { message: 'Unauthorised' } });
               } */
           }
+
+          // Actualizacion de contactos de una persona
+          if (request.url.match(/\/apimock\/personas\/contacto\/\d+$/) && request.method === 'PUT') {
+            // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+            //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // find user by id in users array
+                let urlParts = request.url.split('/');
+                let personaid = parseInt(urlParts[urlParts.length - 1]);
+                let datosPersona = request.body;
+
+                let persona = personas.filter(persona => { return persona.id === personaid; });
+                let personaEncontrada = persona.length ? persona[0] : null;
+
+                if (personaEncontrada["contacto"] !== undefined) {
+                  delete personaEncontrada["contacto"];
+                }
+                if (personaEncontrada["hogar"] !== undefined) {
+                  delete personaEncontrada["hogar"];
+                }
+                if (personaEncontrada["estudios"] !== undefined) {
+                  delete personaEncontrada["estudios"];
+                }
+
+                /* ACTUALIZO DATOS DE CONTACTOS DE UNA PERSONA */
+                personaEncontrada["celular"]    = datosPersona.celular;
+                personaEncontrada["red_social"] = datosPersona.red_social;
+                personaEncontrada["telefono"]   = datosPersona.telefono;
+                personaEncontrada["email"]      = datosPersona.email;
+
+                let personasAgregadas = [];
+                if (localStorage.getItem('personas')) {
+                  let existe = false;
+                  personasAgregadas = [JSON.parse(localStorage.getItem('personas'))];
+                  for (let i = 0; i < personasAgregadas[0].length; i++) {
+                    if (personasAgregadas[0][i].id === personaid){
+                      personasAgregadas[0][i] = personaEncontrada;
+                      existe = true;
+                    }
+                  }
+                  if (!existe) {
+                    personasAgregadas[0].push(personaEncontrada);
+                  }
+                  localStorage.setItem('personas', JSON.stringify(personasAgregadas[0]));
+                }else{
+                  personasAgregadas.push(personaEncontrada);
+                  localStorage.setItem('personas', JSON.stringify(personasAgregadas));
+                }
+                for (let i = 0; i < personas.length; i++) {
+                  if (personas[i].id === personaid) {
+                    personas[i] = personaEncontrada;
+                  }}
+
+                return of(new HttpResponse({ status: 200, body: {data:{id:personaid}} }));
+            /* } else {
+                // return 401 not authorised if token is null or invalid
+                return throwError({ error: { message: 'Unauthorised' } });
+            } */
+        }
 
             /* ----------------------  LISTAS GENERALES  --------------------------- */
             // get TIPO RECURSO SOCIAL por programa id
