@@ -13,7 +13,7 @@ export class ReporteComponent implements OnInit {
 
   public busqueda: any = {page: 0, pagesize: 20};
   public recursosLista: any[] = [];
-  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_total": 0 };
+  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_total": 0, "cantRegistros": 0, "totalRegistros": 0 };
 
   constructor(
     private _mensajeService: MensajesService,
@@ -46,6 +46,23 @@ export class ReporteComponent implements OnInit {
         this.configPaginacion.colleccionSize = recursos.total_filtrado;
         this.configPaginacion.pageSize = recursos.pagesize;
         this.configPaginacion.monto_total = recursos.monto_total;
+        // calculo los rangos por pagina.
+        if ( this.configPaginacion.page == 1 ) {
+          this.configPaginacion.cantRegistros = 1;
+          this.configPaginacion.totalRegistros = recursos.pagesize;
+        }else {
+          // sumo la cantidad de registros anterior mas la longitud de la pagina
+          this.configPaginacion.cantRegistros = this.configPaginacion.cantRegistros + recursos.pagesize;
+          if ( recursos.resultado.length > recursos.pagesize) {
+            // duplico la longitud de lapagina
+            this.configPaginacion.totalRegistros = (recursos.pagesize * 2);
+          }else{
+            // pongo el total general de la coleccion
+            this.configPaginacion.totalRegistros = recursos.colleccionSize;
+          }
+        }
+
+
         this.recursosLista = recursos.resultado;
       },
       error => { this._mensajeService.cancelado(error, [{name:''}]); });

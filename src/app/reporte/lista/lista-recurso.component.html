@@ -1,7 +1,9 @@
     <div class="d-flex justify-content-between mt-2 border-top">
-      <div class="p-2 font-weight-bold">Total Gral: {{configPaginacion.colleccionSize}} </div>
-      <div class="p-2 font-weight-bold">Página {{configPaginacion.page}} de {{recursosLista.length}}</div>
-      <div class="p-2 font-weight-bold">Monto Total: {{configPaginacion.monto_total | currency:'USD':'symbol-narrow':'2.2'}}</div>
+      <div class="d-flex align-items-center p-2 font-weight-bold">Registros: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}} </div>
+      <div class="d-flex align-items-center p-2 font-weight-bold">
+        <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination" style="margin-bottom: -15px;" ></ngb-pagination>
+      </div>
+      <div class="d-flex align-items-center p-2 font-weight-bold">Monto Total: {{configPaginacion.monto_total | currency:'USD':'symbol-narrow':'2.2'}}</div>
     </div>
     <div class="row pl-3 pr-3">
       <table class="table table-hover table-sm">
