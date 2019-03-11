@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpEventType } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
+import { catchError, finalize, tap } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
 import { LoaderService } from 'src/app/core/services';
 //import { AuthenticationService } from '../services/authentication.service';
@@ -9,6 +9,8 @@ import { LoaderService } from 'src/app/core/services';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+    private envios = 0;
+    private recibidos = 0;
     //constructor(private authenticationService: AuthenticationService, private _loadService: LoaderService) { }
     constructor(private _loadService: LoaderService){}
 
@@ -16,9 +18,22 @@ export class ErrorInterceptor implements HttpInterceptor {
         this._loadService.show();
         console.log("url: ",request.url);
         return next.handle(request).pipe(
-          catchError(err => {
-            //console.log("err interceptor: ",err);
+          tap(res => {
+            if (res.type === HttpEventType.Sent) {
+              // cuento los envios
+              this.envios++;
+            }
 
+            if (res.type === HttpEventType.Response) {
+              // cuento los recibidos
+              this.recibidos++;
+              // comparo y si son iguales oculto el spinner
+              if (this.envios == this.recibidos){
+                this._loadService.hide()
+              }
+            }
+          }),
+          catchError(err => {
             if (err.status === 401) {
               // auto logout if 401 response returned from api
               //              this.authenticationService.logout();
@@ -34,8 +49,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               console.log("error interceptor: ",error);
               return throwError(error);
             }
-            }),
-            finalize(() => this._loadService.hide())
+          })
         )
     }
 

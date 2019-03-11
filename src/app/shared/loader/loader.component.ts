@@ -55,7 +55,7 @@ export class LoaderComponent implements OnInit {
     });
 
         this.subscription = this.loaderService.loaderState
-        .pipe(debounce(() => timer(600)))
+        .pipe(debounce(() => timer(200)))
             .subscribe((state: LoaderState) => {
                 this.show = state.show;
             });

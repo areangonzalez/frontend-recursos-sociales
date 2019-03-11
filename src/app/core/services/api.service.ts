@@ -5,12 +5,14 @@ import { Observable } from 'rxjs';
 
 //import { JwtService } from './jwt.service';
 import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
+import { LoaderService } from './loader.service';
 
 @Injectable()
 export class ApiService {
     constructor(
         private http: HttpClient,
+        private _loaderService: LoaderService
   //      private jwtService: JwtService
     ) { }
 
@@ -27,7 +29,9 @@ export class ApiService {
 
     get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
         return this.http.get(`${environment.baseUrl}${path}`, { params })
-            .pipe(catchError(this.formatErrors));
+            .pipe(
+              catchError(this.formatErrors)
+            );
     }
 
     put(path: string, body: Object = {}): Observable<any> {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgramaService, MensajesService } from '../core/services';
+import { ProgramaService, MensajesService, LoaderService } from '../core/services';
 
 
 @Component({
@@ -13,7 +13,8 @@ export class InicioComponent implements OnInit {
 
   constructor(
     private _programaService: ProgramaService,
-    private _mensajeService: MensajesService
+    private _mensajeService: MensajesService,
+    private _loaderService: LoaderService
   ){}
 
   ngOnInit() {
@@ -22,6 +23,7 @@ export class InicioComponent implements OnInit {
 
 
   private listarProgramas() {
+    this._loaderService.show();
     this._programaService.listar().subscribe(
       programas => {
         this.programaLista = programas;

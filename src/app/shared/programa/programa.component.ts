@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MensajesService, RecursoSocialService } from 'src/app/core/services';
+import { MensajesService, RecursoSocialService, LoaderService } from 'src/app/core/services';
 
 @Component({
   selector: 'shared-programa',
@@ -14,7 +14,8 @@ export class ProgramaComponent implements OnInit {
 
   constructor(
     private _mensajeService: MensajesService,
-    private _recursoSocialService: RecursoSocialService
+    private _recursoSocialService: RecursoSocialService,
+    private _loaderService: LoaderService
   ){}
 
   ngOnInit() {
@@ -25,7 +26,9 @@ export class ProgramaComponent implements OnInit {
     this._recursoSocialService.buscar({programaid: programaid}).subscribe(
       recursos => {
         this.cantidadRecursos = recursos.total_filtrado;
-      }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
+      }, error => { this._mensajeService.cancelado(error, [{name: ''}]);}
+
+      )
   }
 
 }
