@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
           tap(res => {
             if (res.type === HttpEventType.Sent) { // prod
-            //if (0 === HttpEventType.Sent) { // dev
+            // if (0 === HttpEventType.Sent) { // dev
               // cuento los envios
               this.envios++;
             }

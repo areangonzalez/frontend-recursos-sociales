@@ -223,6 +223,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let fecha_hasta: string = request.params.get('fecha_hasta');
               let global_search: string = request.params.get('global_param');
               let page: number = parseInt(request.params.get("page"));
+              let acreditacion = request.params.get('acreditacion');
+              let baja = request.params.get('baja');
               // variables de uso general
               //let search = (global_search != '') ? global_search.split(" ") : [] ;
               let search = [''];
@@ -307,6 +309,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   if (tipo_recursoid) {
                     recursosEncontrados = recursosEncontrados.filter(recurso => { return parseInt(tipo_recursoid) === parseInt(recurso.tipo_recursoid); });
                   }
+                  if (acreditacion) {
+                    recursosEncontrados = recursosEncontrados.filter(recurso => { return recurso.fecha_acreditacion != undefined; });
+                  }
+                  if (baja) {
+                    recursosEncontrados = recursosEncontrados.filter(recurso => { return recurso.fecha_baja != undefined; });
+                  }
                   // sumo los montos filtrados
                   for (let i = 0; i < recursosEncontrados.length; i++) {
                     sumarMonto = recursosEncontrados[i]["monto"] + sumarMonto;
@@ -321,7 +329,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   listaRecursos.pages = totalPagina;
                   listaRecursos.monto_total = sumarMonto;
                   if (page > 0) {
-                    page = page - 1;
+                    page = page;
                     let pageStart = page * pageSize;
                     let pageEnd = pageStart + pageSize;
                     listaRecursos.resultado = recursosEncontrados.slice(pageStart, pageEnd);

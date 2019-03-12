@@ -104,10 +104,12 @@ export class BusquedaRecursoComponent implements OnInit {
         }else if (clave == 'baja') {
           if (busquedaAvanzada[clave]){
             apiBusqueda[clave] = busquedaAvanzada[clave];
+            esTrue = true;
           }
         }else if (clave == 'acreditacion') {
           if (busquedaAvanzada[clave]){
             apiBusqueda[clave] = busquedaAvanzada[clave];
+            esTrue = true;
           }
         }else if(clave === "global_param") {
           apiBusqueda[clave] = busquedaAvanzada[clave];
@@ -117,6 +119,7 @@ export class BusquedaRecursoComponent implements OnInit {
         }
       }
     }
+    console.log(apiBusqueda);
     this.obtenerBusqueda.emit(apiBusqueda);
     this.btnSeleccion = esTrue;
     this.mostrar = esTrue;
