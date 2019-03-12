@@ -47,24 +47,9 @@ export class ReporteComponent implements OnInit {
         this.configPaginacion.colleccionSize = recursos.total_filtrado;
         this.configPaginacion.pageSize = recursos.pagesize;
         this.configPaginacion.monto_total = recursos.monto_total;
-        // calculo los rangos por pagina.
-        if ( this.configPaginacion.page == 1 ) {
-          this.configPaginacion.cantRegistros = 1;
-          // verifico que la cantidad de registro sea mayor al tamaño de pagina
-          this.configPaginacion.totalRegistros = (recursos.resultado.length > recursos.pagesize) ? recursos.pagesize : recursos.resultado.length ;
-        }else {
-          // sumo la cantidad de registros anterior mas la longitud de la pagina
-          this.configPaginacion.cantRegistros = this.configPaginacion.cantRegistros + recursos.pagesize;
-          if ( recursos.resultado.length > recursos.pagesize) {
-            // duplico la longitud de lapagina
-            this.configPaginacion.totalRegistros = (recursos.pagesize * 2);
-          }else{
-            // pongo el total general de la coleccion
-            this.configPaginacion.totalRegistros = recursos.total_filtrado;
-          }
-        }
-
-
+        this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, recursos.total_filtrado, recursos.pagesize);
+        this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, recursos.total_filtrado, recursos.pagesize);
+        // total de registros
         this.recursosLista = recursos.resultado;
       },
       error => { this._mensajeService.cancelado(error, [{name:''}]); });
@@ -74,5 +59,33 @@ export class ReporteComponent implements OnInit {
     this.busqueda["page"] = page - 1;
     this.listarRecursos(this.busqueda);
   }
+
+  /**
+     * @function rangoInicialXpagina funcion que calcula el rango inicial
+     * @param pagina numero de pagina
+     * @param total cantidad de registros
+     */
+    public rangoInicialXpagina(pagina: number, total: number, pagesize: number){
+      let paginaReal = pagina - 1;
+      let rangoInicial: number = 0;
+      if (total !== 0){
+        rangoInicial = paginaReal * pagesize + 1;
+      }
+      return rangoInicial;
+    }
+    /**
+     * @function rangoFinalXpagina funcion que calcula el rango final
+     * @param pagina numero de pagina
+     * @param total cantidad de registros
+     */
+    rangoFinalXpagina(pagina: number, total: number, pagesize:number){
+      let cantRegistrosXpag = (pagina * pagesize);
+      let rangoFinal: number = 0;
+      if (total !== 0){
+        rangoFinal = (cantRegistrosXpag < total) ? cantRegistrosXpag : total;
+      }
+      return rangoFinal;
+    }
+
 }
 
