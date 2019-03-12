@@ -109,6 +109,8 @@ export class BusquedaRecursoComponent implements OnInit {
           if (busquedaAvanzada[clave]){
             apiBusqueda[clave] = busquedaAvanzada[clave];
           }
+        }else if(clave === "global_param") {
+          apiBusqueda[clave] = busquedaAvanzada[clave];
         }else{
           apiBusqueda[clave] = busquedaAvanzada[clave];
           esTrue = true;
@@ -117,9 +119,7 @@ export class BusquedaRecursoComponent implements OnInit {
     }
     this.obtenerBusqueda.emit(apiBusqueda);
     this.btnSeleccion = esTrue;
-    if (esTrue) {
-      this.mostrar = true;
-    }
+    this.mostrar = esTrue;
   }
 
   public limpiarCampos(){

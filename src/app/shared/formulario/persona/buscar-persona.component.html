@@ -1,7 +1,6 @@
-
-  <div class="form-group">
+<div class="form-group">
     <div class="input-group">
-      <input type="text" class="form-control" [(ngModel)]="busqueda" id="buscar-persona" placeholder="burcar por DNI, nombre, apellido">
+      <input type="text" #buscarPersona class="form-control" [(ngModel)]="busqueda" id="buscar-persona" placeholder="burcar por DNI, nombre, apellido" (keyup.enter)="buscar(buscarPersona.value, page)">
       <div class="input-group-append btn-group">
         <button type="button" class="btn btn-primary" (click)="buscar(busqueda, page)" ngbTooltip="Buscar persona" ><i class="fas fa-search"></i></button>
         <button type="button" class="btn btn-danger" ngbTooltip="Limpiar busqueda" (click)="limpiarBusqueda()" ><i class="fas fa-trash-alt"></i></button>

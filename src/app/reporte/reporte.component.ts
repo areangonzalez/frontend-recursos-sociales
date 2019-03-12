@@ -49,7 +49,8 @@ export class ReporteComponent implements OnInit {
         // calculo los rangos por pagina.
         if ( this.configPaginacion.page == 1 ) {
           this.configPaginacion.cantRegistros = 1;
-          this.configPaginacion.totalRegistros = recursos.pagesize;
+          // verifico que la cantidad de registro sea mayor al tamaño de pagina
+          this.configPaginacion.totalRegistros = (recursos.resultado.length > recursos.pagesize) ? recursos.pagesize : recursos.resultado.length ;
         }else {
           // sumo la cantidad de registros anterior mas la longitud de la pagina
           this.configPaginacion.cantRegistros = this.configPaginacion.cantRegistros + recursos.pagesize;
@@ -58,7 +59,7 @@ export class ReporteComponent implements OnInit {
             this.configPaginacion.totalRegistros = (recursos.pagesize * 2);
           }else{
             // pongo el total general de la coleccion
-            this.configPaginacion.totalRegistros = recursos.colleccionSize;
+            this.configPaginacion.totalRegistros = recursos.total_filtrado;
           }
         }
 

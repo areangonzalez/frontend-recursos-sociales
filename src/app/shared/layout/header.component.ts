@@ -7,7 +7,6 @@ import { Router, RouterLinkActive } from '@angular/router';
     styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent implements OnInit {
-
     public isCollapsed = true;
     public mostrar: boolean = false;
 
@@ -33,5 +32,7 @@ export class HeaderComponent implements OnInit {
     ocultarMenu(){
       this.mostrar = false;
     }
+
+
 
 }

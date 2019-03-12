@@ -1,7 +1,7 @@
 <fieldset [formGroup]="busquedaAvanzada">
     <div class="form-group" >
       <div class="input-group">
-        <input type="text" class="form-control" formControlName="global_param" id="buscar-reporte" placeholder="burcar por DNI, nombre, apellido">
+        <input type="text" #buscarReporte class="form-control" formControlName="global_param" id="buscar-reporte" placeholder="burcar por DNI, nombre, apellido" (keyup.enter)="buscar()">
         <div class="input-group-append btn-group">
           <button type="button" class="btn btn-primary" (click)="buscar()" ngbTooltip="Buscar" ><i class="fas fa-search"></i></button>
           <button type="button" class="btn btn-danger" ngbTooltip="Limpiar busqueda" (click)="limpiarCampos()" ><i class="fas fa-trash-alt"></i></button>

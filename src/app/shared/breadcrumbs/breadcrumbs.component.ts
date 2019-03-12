@@ -8,7 +8,7 @@ import { BreadcrumbsService } from "./breadcrumbs.service";
 @Component({
   selector: "breadcrumb",
   templateUrl: './breadcrumbs.component.html',
-  styleUrls: ['./breadcrumbs.component.css'],
+  styleUrls: ['./breadcrumbs.component.sass'],
   encapsulation: ViewEncapsulation.None
 })
 
