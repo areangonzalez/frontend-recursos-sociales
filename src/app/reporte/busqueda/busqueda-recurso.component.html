@@ -5,11 +5,12 @@
         <div class="input-group-append btn-group">
           <button type="button" class="btn btn-primary" (click)="buscar()" ngbTooltip="Buscar" ><i class="fas fa-search"></i></button>
           <button type="button" class="btn btn-danger" ngbTooltip="Limpiar busqueda" (click)="limpiarCampos()" ><i class="fas fa-trash-alt"></i></button>
+          <!-- <a href=""></a> -->
         </div>
       </div>
     </div>
     <button type="button" class="btn btn-md" (click)="mostrarBusquedaAvanzada()" [ngClass]="{'btn-success': btnSeleccion, 'btn-primary': !btnSeleccion}">
-      busqueda avanzada &nbsp;
+      Búsqueda Avanzada &nbsp;
       <i class="fas fa-caret-down" *ngIf="!mostrar" ></i>
       <i class="fas fa-caret-up" *ngIf="mostrar" ></i>
     </button>
@@ -32,14 +33,14 @@
                   </select>
               </div>
               <div class="form-group col-md-4">
-                  <label for="tipo_recurso" class="prioridad">Tipo prestación:</label>
+                  <label for="tipo_recurso" class="prioridad">Tipo Prestación:</label>
                   <select class="form-control" id="tipo_recurso" formControlName="tipo_recursoid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.tipo_recursoid.value)}">
-                    <option value="">Seleccione Tipo de prestación</option>
+                    <option value="">Seleccione Tipo de Prestación</option>
                     <option *ngFor="let tipo_recurso of tipoRecursosLista" value="{{tipo_recurso.id}}">{{tipo_recurso.nombre}}</option>
                   </select>
               </div>
               <div class="form-group col-md-4">
-                  <label for="fecha_desde" class="prioridad">Fecha desde/hasta:</label>
+                  <label for="fecha_desde" class="prioridad">Fecha Desde/Hasta:</label>
                   <div class="input-group">
                       <input class="form-control input-append" #c1 placeholder="Desde: dd/mm/yyyy" ngbDatepicker #fbd="ngbDatepicker"
                       id="fecha_desde" formControlName="fechaAltaDesde" (ngModelChange)="formatFecha($event, 'fecha_alta_desde'); onDateSelection($event)" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.fechaAltaDesde.value)}"

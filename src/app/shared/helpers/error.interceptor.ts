@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpEventType } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
-import { environment } from "../../../environments/environment";
 import { LoaderService } from 'src/app/core/services';
 //import { AuthenticationService } from '../services/authentication.service';
 
@@ -38,15 +37,17 @@ export class ErrorInterceptor implements HttpInterceptor {
               // auto logout if 401 response returned from api
               //              this.authenticationService.logout();
               location.reload(true);
+              this._loadService.hide();
             }
             // error.message viene como objeto
             if (err.status === 400){
               let mensaje = this.recorrerErrorObjeto(JSON.parse(err.error.message));
               // envio el mensaje como texto.
+              this._loadService.hide();
               return throwError(mensaje);
             }else{ // cualquier otro error
               const error = err.error.message || err.statusText;
-              console.log("error interceptor: ",error);
+              this._loadService.hide();
               return throwError(error);
             }
           })
