@@ -34,6 +34,7 @@ export class ReporteComponent implements OnInit {
   public buscar(apiBusqueda:any) {
     apiBusqueda["page"] = 0;
     apiBusqueda["pagesize"] = 20;
+    this.configPaginacion.page = 1;
     this.busqueda = apiBusqueda;
     this.listarRecursos(apiBusqueda);
   }
