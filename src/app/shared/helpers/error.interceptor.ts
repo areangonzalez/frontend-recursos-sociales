@@ -33,6 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
           }),
           catchError(err => {
+            this.recibidos++;
             if (err.status === 401) {
               // auto logout if 401 response returned from api
               //              this.authenticationService.logout();
