@@ -5,7 +5,7 @@
         <div class="input-group-append btn-group">
           <button type="button" class="btn btn-primary" (click)="buscar()" ngbTooltip="Buscar" ><i class="fas fa-search"></i></button>
           <button type="button" class="btn btn-danger" ngbTooltip="Limpiar b&uacute;squeda" (click)="limpiarCampos()" ><i class="fas fa-trash-alt"></i></button>
-          <!-- <a class="btn btn-success"  ></a> -->
+          <a class="btn btn-success" ngbTooltip="Crear prestación" [routerLink]="['/inicio/crear-prestacion']"><i class="fas fa-hands-helping"></i></a>
         </div>
       </div>
     </div>
