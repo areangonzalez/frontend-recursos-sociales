@@ -24,7 +24,7 @@ export class ModalBajaContent {
   ) {
     this.formBaja = _fb.group({
       fechaBaja: ['', Validators.required],
-      descripcion_baja: ''
+      descripcion_baja: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
@@ -38,7 +38,7 @@ export class ModalBajaContent {
     this.submitted = true;
 
     if (this.formBaja.invalid) {
-      this._mensajeService.cancelado("No se ha ingresado ninguna fecha de baja", [{name:''}]);
+      this._mensajeService.cancelado("¡Error! Campo/s sin completar.", [{name:''}]);
       return false;
     }else{
       return true;
