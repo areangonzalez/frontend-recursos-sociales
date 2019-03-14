@@ -14,9 +14,9 @@
   </div>
   <div class="form-group col-md-3">
     <label for="email" class="prioridad">Email:</label>
-    <input type="email" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (datosContacto.email.invalid && submitted)}">
-    <div *ngIf="(datosContacto.email.invalid && submitted)" class="text-danger">
-      <div *ngIf="datosContacto.email.errors.pattern">El email es invalido.</div>
+    <input type="email" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (contacto.get('email').invalid && submitted)}">
+    <div *ngIf="(contacto.get('email').invalid && submitted)" class="text-danger">
+      <div *ngIf="contacto.get('email').hasError('pattern')">El email es invalido.</div>
     </div>
   </div>
   <div class="form-group col-md-3">
