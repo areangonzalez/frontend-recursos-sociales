@@ -51,7 +51,7 @@
                       >
                       <div class="input-group-prepend">
                           <button class="btn btn-outline-info" (click)="abrirDp()" type="button">
-                              <span class="oi oi-calendar" title="Fecha desde" aria-hidden="true"></span>
+                              <span class="oi oi-calendar" title="Fecha desde/hasta" aria-hidden="true"></span>
                           </button>
                       </div>
                       <ngb-datepicker #db (select)="onDateSelection($event)" class="dp-style" [ngClass]="{'d-block': mostrarDp, 'd-none': !mostrarDp}" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" ></ngb-datepicker>

@@ -3,45 +3,45 @@
     <div class="row">
         <div class="form-group col-md-3">
           <label for="tipo_recurso">Programa (<span class="text-obligatorio">*</span>):</label>
-          <select class="form-control" id="tipo_recurso" formControlName="programaid" [ngClass]="{'is-invalid': (datosRecurso.programaid.invalid && submitted)}" (change)="listarTipoPrestacion($event.target.value);esEmprender($event)" >
-            <option value="">Seleccione tipo de prestación</option>
+          <select class="form-control" id="tipo_recurso" formControlName="programaid" [ngClass]="{'is-invalid': (formRecurso.get('programaid').invalid && submitted)}" (change)="listarTipoPrestacion($event.target.value);esEmprender($event)" >
+            <option value="">Seleccione Programa</option>
             <option *ngFor="let programa of programaLista" value="{{programa.id}}">{{programa.nombre}}</option>
           </select>
-          <div *ngIf="(datosRecurso.programaid.invalid && submitted)" class="text-danger">
-              <div *ngIf="datosRecurso.programaid.errors.required">Por favor Seleccione un tipo de prestación. </div>
+          <div *ngIf="(formRecurso.get('programaid').invalid && submitted)" class="text-danger">
+              <div *ngIf="formRecurso.get('programaid').hasError('required')">Por favor Seleccione un programa. </div>
           </div>
         </div>
       <div class="form-group col-md-3">
         <label for="tipo_recurso">Tipo de prestación (<span class="text-obligatorio">*</span>):</label>
-        <select class="form-control" id="tipo_recurso" formControlName="tipo_recursoid" [ngClass]="{'is-invalid': (datosRecurso.tipo_recursoid.invalid && submitted)}">
+        <select class="form-control" id="tipo_recurso" formControlName="tipo_recursoid" [ngClass]="{'is-invalid': (formRecurso.get('tipo_recursoid').invalid && submitted)}">
           <option value="">Seleccione tipo de prestación</option>
           <option *ngFor="let tipo of tipoPrestacionLista" value="{{tipo.id}}">{{tipo.nombre}}</option>
         </select>
-        <div *ngIf="(datosRecurso.tipo_recursoid.invalid && submitted)" class="text-danger">
-            <div *ngIf="datosRecurso.tipo_recursoid.errors.required">Por favor Seleccione un tipo de prestación. </div>
+        <div *ngIf="(formRecurso.get('tipo_recursoid').invalid && submitted)" class="text-danger">
+            <div *ngIf="formRecurso.get('tipo_recursoid').hasError('required')">Por favor Seleccione un tipo de prestación. </div>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label for="proposito">Propósito (<span class="text-obligatorio">*</span>):</label>
         <input type="text" id="proposito" placeholder="Propósito..." class="form-control" formControlName="proposito">
-        <div *ngIf="(datosRecurso.proposito.invalid && submitted)" class="text-danger">
-          <div *ngIf="datosRecurso.proposito.errors.required">Por favor ingrese un propósito. </div>
+        <div *ngIf="(formRecurso.get('proposito').invalid && submitted)" class="text-danger">
+          <div *ngIf="formRecurso.get('proposito').hasError('required')">Por favor ingrese un propósito. </div>
         </div>
       </div>
       <div class="form-group col-md-3">
         <label for="fecha_alta" class="prioridad">Fecha Alta (<span class="text-obligatorio">*</span>):</label>
         <div class="input-group">
-          <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #frd="ngbDatepicker"
+          <input class="form-control" #c1 placeholder="Ej.: dd/mm/yyyy" ngbDatepicker #frd="ngbDatepicker"
           id="fecha_alta" formControlName="fechaAlta" (ngModelChange)="formatFechaAlta($event)">
           <div class="input-group-append">
               <button class="btn btn-outline-info" (click)="frd.toggle()" type="button"
-                  [ngClass]="{'btn-outline-danger': (datosRecurso.fechaAlta.invalid && submitted), 'is-invalid': (datosRecurso.fechaAlta.invalid && submitted)}">
-                  <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
+                  [ngClass]="{'btn-outline-danger': (formRecurso.get('fechaAlta').invalid && submitted), 'is-invalid': (formRecurso.get('fechaAlta').invalid && submitted)}">
+                  <span class="oi oi-calendar" title="Fecha alta" aria-hidden="true"></span>
               </button>
             </div>
         </div>
-        <div *ngIf="(datosRecurso.fechaAlta.invalid && submitted)" class="text-danger">
-            <div *ngIf="datosRecurso.fechaAlta.errors.required">Por favor ingrese una fecha. </div>
+        <div *ngIf="(formRecurso.get('fechaAlta').invalid && submitted)" class="text-danger">
+            <div *ngIf="formRecurso.get('fechaAlta').hasError('required')">Por favor ingrese una fecha de alta. </div>
         </div>
       </div>
     </div>
@@ -56,8 +56,8 @@
                 </div>
                 <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validarMoneda($event.target)" >
               </div>
-              <div *ngIf="(datosRecurso.monto.invalid && submitted)" class="text-danger">
-                <div *ngIf="datosRecurso.monto.errors.required">Por favor ingrese un monto. </div>
+              <div *ngIf="(formRecurso.get('monto').invalid && submitted)" class="text-danger">
+                <div *ngIf="formRecurso.get('monto').hasError('required')">Por favor ingrese un monto. </div>
               </div>
             </div>
         </div>

@@ -17,8 +17,8 @@ export class ErrorInterceptor implements HttpInterceptor {
         console.log("url: ",request.url);
         return next.handle(request).pipe(
           tap(res => {
-            // if (res.type === HttpEventType.Sent) { // prod
-            if (0 === HttpEventType.Sent) { // dev
+            if (res.type === HttpEventType.Sent) { // prod
+            // if (0 === HttpEventType.Sent) { // dev
               // cuento los envios
               this.envios++;
             }
