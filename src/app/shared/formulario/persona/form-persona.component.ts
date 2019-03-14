@@ -5,6 +5,7 @@ import { UtilService } from 'src/app/core/utils';
 import { SexoService, GeneroService, EstadoCivilService, MensajesService, PersonaService } from 'src/app/core/services';
 import { PersonaModel } from 'src/app/core/models';
 import { map, catchError } from "rxjs/operators";
+import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'shared-form-persona',
@@ -54,8 +55,12 @@ export class FormPersonaComponent implements OnInit {
     private _sexoService: SexoService,
     private _generoService: GeneroService,
     private _estadoCivilService: EstadoCivilService,
-    private _personaService: PersonaService
+    private _personaService: PersonaService,
+    private _configNgbDate: NgbDatepickerConfig
   ){
+    // configuracion de fecha minima
+    _configNgbDate.minDate = {year: 1950, month: 1, day: 1};
+    // formulario de persona
     this.formPersona = _fb.group({
         id: '',
         nro_documento: ['', [Validators.required, Validators.minLength(7)]],

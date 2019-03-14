@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilService } from 'src/app/core/utils';
 import { TipoRecursoService, MensajesService, ProgramaService, PersonaService } from 'src/app/core/services';
+import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -28,8 +29,12 @@ export class FormRecursoComponent implements OnInit {
     private _tipoRecursoService: TipoRecursoService,
     private _mensajeService: MensajesService,
     private _programaService: ProgramaService,
-    private _personaService: PersonaService
+    private _personaService: PersonaService,
+    private _configNgbDate: NgbDatepickerConfig
   ) {
+    // configuro la fecha minima
+    _configNgbDate.minDate = {year: 1950, month: 1, day: 1};
+    // formulario de recurso
     this.formRecurso = _fb.group({
       programaid: ['', Validators.required],
       tipo_recursoid: ['', Validators.required],

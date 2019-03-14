@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { LocalidadService, ProgramaService, TipoRecursoService, MensajesService } from 'src/app/core/services';
 import { UtilService } from 'src/app/core/utils';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -33,8 +33,11 @@ export class BusquedaRecursoComponent implements OnInit {
     private _tipoRecursoService: TipoRecursoService,
     private _mensajeService: MensajesService,
     private _util: UtilService,
-    private _calendar: NgbCalendar
+    private _calendar: NgbCalendar,
+    private _configNgbDate: NgbDatepickerConfig
   ){
+    // configuracion de fecha minima
+    _configNgbDate.minDate = {year: 1950, month: 1, day: 1};
     // creacion de fomulario para busqueda avanzada
     this.busquedaAvanzada = _fb.group({
       global_param: '',
