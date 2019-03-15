@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpEventType } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
+import { environment } from "../../../environments/environment";
 import { LoaderService } from 'src/app/core/services';
 //import { AuthenticationService } from '../services/authentication.service';
 
@@ -17,7 +18,8 @@ export class ErrorInterceptor implements HttpInterceptor {
         console.log("url: ",request.url);
         return next.handle(request).pipe(
           tap(res => {
-            if (res.type === HttpEventType.Sent) { // prod
+            let tipoRespuesta = (environment.production) ? res.type : 0 ;
+            if (tipoRespuesta === HttpEventType.Sent) { // prod
             // if (0 === HttpEventType.Sent) { // dev
               // cuento los envios
               this.envios++;

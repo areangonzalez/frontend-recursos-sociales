@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { environment } from '../environments/environment';
 
 import { InicioModule } from "./inicio/inicio.module";
 export function loadInicioModule() { return InicioModule; }
@@ -12,48 +13,41 @@ export function loadVistaModule() { return VistaModule; }
 
 import { CustomPreloadingStrategy } from "./custom-preloading-strategy";
 
+function cambiarRutas() {
+  if (environment.production == true) { // prod
+    return [
+      { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+      { path: 'inicio', data: { loading: true, preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
+          children: [
+            { path: '', loadChildren: './inicio/inicio.module#InicioModule' },
+            { path: 'crear-prestacion', loadChildren: './recurso/recurso.module#RecursoModule',
+              data: { loading: true, preload: true, breadcrumb: 'Crear prestación', title: 'Crear prestación' } },
+            { path: 'reporte', loadChildren: './reporte/reporte.module#ReporteModule',
+              data: { loading: true, preload: true, breadcrumb: 'Reportes', title: 'Reportes' } },
+            { path: 'vista', loadChildren: './vista/vista.module#VistaModule',
+              data: { loading: true, preload: true, breadcrumb: 'Visualizar prestación', title: 'Visualizar prestación' } }
+          ]
+      },{ path: '**', redirectTo: 'inicio', pathMatch: 'full' },
+    ];
+  }else{ // dev
+    return [
+      { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+      { path: 'inicio', data: { loading: true, preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
+          children: [
+            { path: '', loadChildren: loadInicioModule, },
+            { path: 'crear-prestacion', loadChildren: loadRecursoModule,
+              data: { loading: true, preload: true, breadcrumb: 'Crear prestación', title: 'Crear prestación' } },
+            { path: 'reporte', loadChildren: loadReporteModule,
+              data: { loading: true, preload: true, breadcrumb: 'Reportes', title: 'Reportes' } },
+            { path: 'vista', loadChildren: loadVistaModule,
+              data: { loading: true, preload: true, breadcrumb: 'Visualizar prestación', title: 'Visualizar prestación' } }
+          ]
+      },{ path: '**', redirectTo: 'inicio', pathMatch: 'full' }
+    ];
+  }
+}
 
-const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'inicio',
-        pathMatch: 'full'
-    },
-    {
-        path: 'inicio',
-        data: { loading: true, preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
-        children: [
-          {
-            path: '',
-            // loadChildren: loadInicioModule, // dev
-            loadChildren: './inicio/inicio.module#InicioModule', // production
-          },
-          {
-            path: 'crear-prestacion',
-            // loadChildren: loadRecursoModule, // dev
-            loadChildren: './recurso/recurso.module#RecursoModule', // production
-            data: { loading: true, preload: true, breadcrumb: 'Crear prestación', title: 'Crear prestación' }
-          },
-          {
-            path: 'reporte',
-            // loadChildren: loadReporteModule, // dev
-            loadChildren: './reporte/reporte.module#ReporteModule', // production
-            data: { loading: true, preload: true, breadcrumb: 'Reportes', title: 'Reportes' }
-          },
-          {
-            path: 'vista',
-            // loadChildren: loadVistaModule, // dev
-            loadChildren: './vista/vista.module#VistaModule', // production
-            data: { loading: true, preload: true, breadcrumb: 'Visualizar prestación', title: 'Visualizar prestación' }
-          }
-        ]
-    },
-    {
-        path: '**',
-        redirectTo: 'inicio',
-        pathMatch: 'full'
-    },
-];
+const routes: Routes = cambiarRutas();
 
 @NgModule({
     imports: [
