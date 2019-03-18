@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
-import { MensajesService, RecursoSocialService, LoaderService } from '../core/services';
+import { MensajesService, RecursoSocialService, LoaderService, BeneficiarioService } from '../core/services';
 import { UtilService } from '../core/utils';
 
 @Component({
@@ -19,6 +19,7 @@ export class ReporteComponent implements OnInit {
     private _mensajeService: MensajesService,
     private _util: UtilService,
     private _recursoService: RecursoSocialService,
+    private _beneficiariosService: BeneficiarioService,
     private _configTabSet: NgbTabsetConfig,
     private _loaderService: LoaderService
   ){
@@ -30,7 +31,10 @@ export class ReporteComponent implements OnInit {
 
     this.buscar(this.busqueda);
   }
-
+  /**
+   * @function buscar busca en listado
+   * @param apiBusqueda parametros de filtracion
+   */
   public buscar(apiBusqueda:any) {
     apiBusqueda["page"] = 0;
     apiBusqueda["pagesize"] = 20;
@@ -40,7 +44,10 @@ export class ReporteComponent implements OnInit {
   }
 
 
-
+  /**
+   * @function listarRecursos obtiene el listado de prestaciones segun sus parametros
+   * @param params parametros de busquedas para las prestaciones
+   */
   public listarRecursos(params:object){
     this._recursoService.buscar(params).subscribe(
       recursos => {
@@ -55,6 +62,17 @@ export class ReporteComponent implements OnInit {
       error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
+  public listarBeneficiarios(params: object) {
+    this._beneficiariosService.listar().subscribe(
+      beneficiarios => {
+        console.log(beneficiarios);
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+  }
+
+  /**
+   * @function cambioPagina realiza el cambio de pagina
+   * @param page numero de pagina
+   */
   public cambioPagina(page:any){
     this.busqueda["page"] = page - 1;
     this.listarRecursos(this.busqueda);
