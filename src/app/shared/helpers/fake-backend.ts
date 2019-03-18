@@ -10,6 +10,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        function sum(nums) {
+          return nums.reduce((a, b) => a + b)
+        }
+
         function getPersonas(){
           let personas = (<any>data).personas;
           let existe = false;
@@ -650,6 +654,25 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                for (let i = 0; i < programas.length; i++) {
+                  // obtengo cantidad de los recursos por programa
+                  let recursoPrograma = recursos.filter(recurso => { return parseInt(recurso.programaid) === parseInt(programas[i].id); });
+                  programas[i]["recurso_cantidad"] = recursoPrograma.length;
+                  // sumo los monto de cada programa
+                  let montoTotalPrograma = recursoPrograma.map(recurso => {
+                    return recurso.monto;
+                  });
+                  programas[i]["monto"] = (montoTotalPrograma.length != 0) ? sum(montoTotalPrograma) : 0 ;
+                  // cuento las pesona por programa
+                  var hash = {};
+                  let cantPersonas = recursoPrograma.filter(recurso => {
+                    var exists = !hash[parseInt(recurso.personaid)] || false;
+                    hash[parseInt(recurso.personaid)] = true;
+                    return exists;
+                  });
+                  programas[i]["persona_cantidad"] = cantPersonas.length;
+                }
+                console.log(programas);
                   return of(new HttpResponse({ status: 200, body: programas }));
               //} else {
                   // return 401 not authorised if token is null or invalid

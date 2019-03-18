@@ -17,27 +17,28 @@ const routes: Routes = [
   { path: 'inicio', data: { loading: true, preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
       children: [
         { path: '',
-          // loadChildren: loadInicioModule, // dev
-          loadChildren: './inicio/inicio.module#InicioModule' // prod
+          loadChildren: loadInicioModule, // dev
+          // loadChildren: './inicio/inicio.module#InicioModule' // prod
         },
         { path: 'crear-prestacion',
-          // loadChildren: loadRecursoModule, // dev
-          loadChildren: './recurso/recurso.module#RecursoModule', // prod
+          loadChildren: loadRecursoModule, // dev
+          // loadChildren: './recurso/recurso.module#RecursoModule', // prod
           data: { loading: true, preload: true, breadcrumb: 'Crear prestación', title: 'Crear prestación' } },
         { path: 'reporte',
-          // loadChildren: loadReporteModule, // dev
-          loadChildren: './reporte/reporte.module#ReporteModule', // prod
+          loadChildren: loadReporteModule, // dev
+          // loadChildren: './reporte/reporte.module#ReporteModule', // prod
           data: { loading: true, preload: true, breadcrumb: 'Reportes', title: 'Reportes' } },
         { path: 'vista',
-          // loadChildren: loadVistaModule, // dev
-          loadChildren: './vista/vista.module#VistaModule', // prod
+          loadChildren: loadVistaModule, // dev
+          // loadChildren: './vista/vista.module#VistaModule', // prod
           data: { loading: true, preload: true, breadcrumb: 'Visualizar prestación', title: 'Visualizar prestación' } }
       ]
   },{ path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes,{
+        RouterModule.forRoot(routes
+          ,{
             // preload all modules; optionally we could
             // implement a custom preloading strategy for just some
             // of the modules (PRs welcome 😉)

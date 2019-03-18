@@ -18,9 +18,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         console.log("url: ",request.url);
         return next.handle(request).pipe(
           tap(res => {
+            // res.type is prod and zero is dev
             let tipoRespuesta = (environment.production) ? res.type : 0 ;
-            if (tipoRespuesta === HttpEventType.Sent) { // prod
-            // if (0 === HttpEventType.Sent) { // dev
+            if (tipoRespuesta === HttpEventType.Sent) {
               // cuento los envios
               this.envios++;
             }
