@@ -14,7 +14,7 @@ export class BuscarPersonaComponent implements OnInit {
   @Output("personaElegida") public personaElegida = new EventEmitter();
   public busqueda = "";
   public listaPersonas: any = [];
-  public configModal: ModalConfig = {title:"Crear persona"};
+  public configModal: ModalConfig = {title:"Crear beneficiario"};
   public botonAgregar: BotonDisenio = {class: "btn btn-success", iconoClass: "fas fa-user-plus",  text: ""};
   public page:number = 1;
   public pageSize:number = 0;
