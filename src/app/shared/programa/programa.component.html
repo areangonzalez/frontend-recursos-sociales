@@ -1,12 +1,13 @@
 <div class="card mb-4 shadow-sm">
     <div class="card-header">
-      <h4 class="my-0 font-weight-normal">{{programaNombre}}</h4>
+      <h4 class="my-0 font-weight-normal">{{programa.nombre}}</h4>
     </div>
     <div class="card-body">
-      <h1 class="card-title pricing-card-title">{{cantidadRecursos}} <small class="text-muted">/ prestaciones</small></h1>
+      <h1 class="card-title pricing-card-title">{{programa.recurso_cantidad}} <small class="text-muted">/ prestaciones</small></h1>
       <ul class="list-unstyled mt-3 mb-4">
-        <li>10 personas</li>
+        <li>{{programa.persona_cantidad}} / beneficiarios</li>
+        <li>{{programa.monto | currency:'USD':'symbol-narrow':'2.2'}} / monto</li>
       </ul>
-      <a [routerLink]="['crear-prestacion', programaId]" class="btn btn-lg btn-block btn-outline-success"> <i class="fas fa-hands-helping"></i> Crear prestación</a>
+      <a [routerLink]="['crear-prestacion', programa.id]" class="btn btn-lg btn-block btn-outline-success"> <i class="fas fa-hands-helping"></i> Crear prestación</a>
     </div>
 </div>

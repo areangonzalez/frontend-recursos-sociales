@@ -1,7 +1,7 @@
 <div class="container">
   <div class="mb-3 bg-white  padding-container rounded">
     <div class="card-deck text-center d-flex justify-content-center">
-        <shared-programa class="col-md-4" *ngFor="let programa of programaLista" [programaId]="programa.id" [programaNombre]="programa.nombre"></shared-programa>
+        <shared-programa class="col-md-4" *ngFor="let programa of programaLista" [programa]="programa" ></shared-programa>
     </div>
   </div>
 </div>

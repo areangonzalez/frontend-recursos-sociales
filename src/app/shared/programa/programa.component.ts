@@ -7,28 +7,11 @@ import { MensajesService, RecursoSocialService, LoaderService } from 'src/app/co
   styleUrls: ['./programa.component.sass'],
 })
 export class ProgramaComponent implements OnInit {
-  @Input("programaId") public programaId: number;
-  @Input("programaNombre") public programaNombre: string;
-
-  public cantidadRecursos:number = 0;
+  @Input("programa") public programa: any;
 
   constructor(
-    private _mensajeService: MensajesService,
-    private _recursoSocialService: RecursoSocialService,
-    private _loaderService: LoaderService
   ){}
 
   ngOnInit() {
-    this.contarRecursoSociales(this.programaId);
   }
-
-  public contarRecursoSociales(programaid:number) {
-    this._recursoSocialService.buscar({programaid: programaid}).subscribe(
-      recursos => {
-        this.cantidadRecursos = recursos.total_filtrado;
-      }, error => { this._mensajeService.cancelado(error, [{name: ''}]);}
-
-      )
-  }
-
 }
