@@ -15,7 +15,8 @@ import {
   GeneroService,
   EstadoCivilService,
   LocalidadService,
-  RecursoSocialService
+  RecursoSocialService,
+  BeneficiarioService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -38,7 +39,8 @@ import { UtilService } from "./utils";
     GeneroService,
     EstadoCivilService,
     LocalidadService,
-    RecursoSocialService
+    RecursoSocialService,
+    BeneficiarioService
     /*
     AuthGuard,
     JwtService,
