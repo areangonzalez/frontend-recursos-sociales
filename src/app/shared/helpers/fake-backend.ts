@@ -606,6 +606,57 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             } */
         }
 
+        // get beneficiarios
+        if (request.url.endsWith('/apimock/beneficiarios') && request.method === 'GET') {
+          //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+            let filtroBeneficiario = {
+              "success": true,
+              "pagesize": 20,
+              "pages": 0,
+              "total_filtrado": 0,
+              "resultado": []
+            };
+            var hash = {};
+            let cantPersonas = recursos.filter(recurso => {
+              var exists = !hash[parseInt(recurso.personaid)] || false;
+              hash[parseInt(recurso.personaid)] = true;
+              return exists;
+            });
+
+            const beneficiarios: any = [];
+            for (let i = 0; i < cantPersonas.length; i++) {
+              // filtro la cantidad de recursos que tiene una persona
+              let cantRecursos = recursos.filter(recurso => { return cantPersonas[i].personaid == recurso.personaid; });
+              // busco los datos de la persona
+              let persona = personas.filter(persona => { return persona.id === cantPersonas[i].personaid; });
+              // sumo los montos de los recursos de una persona
+              let montoTotal = cantRecursos.map(recurso => {
+                  return recurso.monto;
+              });
+              // armo el array de los beneficiarios
+              beneficiarios.push({
+                "personaid": cantPersonas[i].personaid,
+                "recurso_cantidad": cantRecursos.length,
+                "persona": persona[0],
+                "monto": (montoTotal.length != 0) ? sum(montoTotal) : 0
+              });
+            }
+            let totalFiltrado: number = beneficiarios.length;
+            let total:number = totalFiltrado/filtroBeneficiario.pagesize;
+            let numEntero = Math.floor(total);
+            let totalPagina:number = (total > numEntero) ? numEntero + 1 : total;
+
+            filtroBeneficiario.total_filtrado = beneficiarios.length;
+            filtroBeneficiario.pages = totalPagina;
+            filtroBeneficiario.resultado = beneficiarios;
+
+            return of(new HttpResponse({ status: 200, body: filtroBeneficiario }));
+          //} else {
+              // return 401 not authorised if token is null or invalid
+          //     return throwError({ error: { message: 'Unauthorised' } });
+          // }
+        }
+
             /* ----------------------  LISTAS GENERALES  --------------------------- */
             // get TIPO RECURSO SOCIAL por programa id
             if(request.url.endsWith('/apimock/tipo-recursos') && request.method === 'GET') {
@@ -672,7 +723,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   });
                   programas[i]["persona_cantidad"] = cantPersonas.length;
                 }
-                console.log(programas);
                   return of(new HttpResponse({ status: 200, body: programas }));
               //} else {
                   // return 401 not authorised if token is null or invalid

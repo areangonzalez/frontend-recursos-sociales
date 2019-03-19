@@ -30,6 +30,7 @@ export class ReporteComponent implements OnInit {
   ngOnInit() {
 
     this.buscar(this.busqueda);
+    this.listarBeneficiarios();
   }
   /**
    * @function buscar busca en listado
@@ -62,7 +63,8 @@ export class ReporteComponent implements OnInit {
       error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
-  public listarBeneficiarios(params: object) {
+  //public listarBeneficiarios(params: object) {
+  public listarBeneficiarios() {
     this._beneficiariosService.listar().subscribe(
       beneficiarios => {
         console.log(beneficiarios);
