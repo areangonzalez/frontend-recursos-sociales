@@ -13,6 +13,4 @@ export class MenuListaComponent implements OnInit {
 
     ngOnInit() {
     }
-
-
 }

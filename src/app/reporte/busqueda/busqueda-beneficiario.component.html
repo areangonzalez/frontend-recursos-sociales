@@ -1,0 +1,32 @@
+<fieldset [formGroup]="busquedaAvanzada">
+    <div class="form-group" >
+      <div class="input-group">
+        <input type="text" #buscarReporte class="form-control" formControlName="global_param" id="buscar-reporte" placeholder="Buscar por DNI, nombre, apellido" (keyup.enter)="buscar()">
+        <div class="input-group-append btn-group">
+          <button type="button" class="btn btn-primary" (click)="buscar()" ngbTooltip="Buscar" ><i class="fas fa-search"></i></button>
+          <button type="button" class="btn btn-danger" ngbTooltip="Limpiar b&uacute;squeda" (click)="limpiarCampos()" ><i class="fas fa-trash-alt"></i></button>
+          <a class="btn btn-success" ngbTooltip="Crear prestación" [routerLink]="['/inicio/crear-prestacion']"><i class="fas fa-hands-helping"></i></a>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-md" (click)="mostrarBusquedaAvanzada()" [ngClass]="{'btn-success': btnSeleccion, 'btn-primary': !btnSeleccion}">
+      Búsqueda Avanzada &nbsp;
+      <i class="fas fa-caret-down" *ngIf="!mostrar" ></i>
+      <i class="fas fa-caret-up" *ngIf="mostrar" ></i>
+    </button>
+    <div class="card mt-1" *ngIf="mostrar">
+        <div class="card-body">
+            <fieldset>
+            <div class="row">
+              <div class="form-group col-md-4">
+                  <label for="localidad" class="prioridad">Localidad:</label>
+                  <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.localidadid.value)}" >
+                    <option value="">Seleccione Localidad</option>
+                    <option *ngFor="let localidad of localidadesLista" value="{{localidad.id}}">{{localidad.nombre}}</option>
+                  </select>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+    </div>
+</fieldset>
