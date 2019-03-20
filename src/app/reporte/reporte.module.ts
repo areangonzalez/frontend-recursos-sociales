@@ -2,11 +2,12 @@ import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from "@angular/router";
 
+import { SharedModule } from "../shared";
+import { ReporteRoutingModule } from "./reporte-routing.module";
 import { ReporteComponent } from "./reporte.component";
 import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent } from "./busqueda";
 import { ListaRecursoComponent, ListaBeneficiarioComponent } from "./lista";
-import { SharedModule } from "../shared";
-import { ReporteRoutingModule } from "./reporte-routing.module";
+import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent } from "./menu-list";
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { ReporteRoutingModule } from "./reporte-routing.module";
     declarations: [
         ReporteComponent,
         BusquedaRecursoComponent, BusquedaBeneficiarioComponent,
-        ListaRecursoComponent, ListaBeneficiarioComponent
+        ListaRecursoComponent, ListaBeneficiarioComponent,
+        MenuListaComponent, PrestacionesComponent, BeneficiariosComponent
     ],
     providers: [
     ],

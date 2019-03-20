@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
-import { MensajesService, RecursoSocialService, LoaderService, BeneficiarioService } from '../core/services';
-import { UtilService } from '../core/utils';
+import { MensajesService, RecursoSocialService, LoaderService, BeneficiarioService } from '../../../core/services';
+import { UtilService } from '../../../core/utils';
 
 @Component({
-  selector: 'app-reporte',
-  templateUrl: './reporte.component.html',
-  styleUrls: ['./reporte.component.sass'],
+  selector: 'reporte-prestaciones',
+  templateUrl: './prestaciones.component.html',
+  // styleUrls: ['./reporte.component.sass'],
   providers: [NgbTabsetConfig]
 })
-export class ReporteComponent implements OnInit {
+export class PrestacionesComponent implements OnInit {
 
   public busqueda: any = {page: 0, pagesize: 20};
   public recursosLista: any[] = [];
@@ -32,7 +32,6 @@ export class ReporteComponent implements OnInit {
   ngOnInit() {
 
     this.buscar(this.busqueda);
-    this.listarBeneficiarios(this.busqueda);
   }
   /**
    * @function buscar busca en listado
@@ -42,24 +41,9 @@ export class ReporteComponent implements OnInit {
     apiBusqueda["page"] = 0;
     apiBusqueda["pagesize"] = 20;
     this.busqueda = apiBusqueda;
-    switch (apiBusqueda.tipo) {
-      case "prestacion":
-        this.configPaginacion.page = 1;
-        this.listarRecursos(apiBusqueda);
-        break;
-      case "beneficiario":
-        this.configPagBeneficiario.page = 1;
-        this.listarBeneficiarios(apiBusqueda);
-      break;
-      default:
-        // prestacion
-        this.configPaginacion.page = 1;
-        this.listarRecursos(apiBusqueda);
-        // beneficiario
-        this.configPagBeneficiario.page = 1;
-        this.listarBeneficiarios(apiBusqueda);
-      break;
-    }
+    // prestacion
+    this.configPaginacion.page = 1;
+    this.listarRecursos(apiBusqueda);
   }
 
 
@@ -81,35 +65,13 @@ export class ReporteComponent implements OnInit {
       error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
-  //public listarBeneficiarios(params: object) {
-  public listarBeneficiarios(params:object) {
-    this._beneficiariosService.listar().subscribe(
-      beneficiarios => {
-        this.configPagBeneficiario
-        this.configPagBeneficiario.colleccionSize = beneficiarios.total_filtrado;
-        this.configPagBeneficiario.pageSize = beneficiarios.pagesize;
-        this.configPagBeneficiario.monto_total = beneficiarios.monto_total;
-        this.configPagBeneficiario.cantRegistros = this.rangoInicialXpagina(this.configPagBeneficiario.page, beneficiarios.total_filtrado, beneficiarios.pagesize);
-        this.configPagBeneficiario.totalRegistros = this.rangoFinalXpagina(this.configPagBeneficiario.page, beneficiarios.total_filtrado, beneficiarios.pagesize);
-        // total de registros
-        this.beneficiariosLista = beneficiarios.resultado;
-      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
-  }
-
   /**
    * @function cambioPagina realiza el cambio de pagina
    * @param page numero de pagina
    */
-  public cambioPagina(datos:any){
-    this.busqueda["page"] = datos.page - 1;
-    switch (datos.tipo) {
-      case "beneficiario":
-        this.listarBeneficiarios(this.busqueda);
-        break;
-      case "prestacion":
-        this.listarRecursos(this.busqueda);
-      break;
-    }
+  public cambioPagina(page:number){
+    this.busqueda["page"] = page - 1;
+    this.listarRecursos(this.busqueda);
   }
 
   /**
@@ -140,4 +102,3 @@ export class ReporteComponent implements OnInit {
     }
 
 }
-

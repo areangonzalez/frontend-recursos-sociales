@@ -15,4 +15,10 @@ export class BeneficiarioService {
     return this._apiService.get('/beneficiarios');
   }
 
+  public buscar(params:object) {
+    let httpParams = new HttpParams();
+    httpParams = this._apiService.formatParams(httpParams, params);
+
+    return this._apiService.get('/beneficiarios',httpParams);
+  }
 }

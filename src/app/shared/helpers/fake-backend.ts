@@ -609,9 +609,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // get beneficiarios
         if (request.url.endsWith('/apimock/beneficiarios') && request.method === 'GET') {
           //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+            //let pageSize: number = parseInt(request.params.get('pagesize'));
+            //let page: number = parseInt(request.params.get("page"));
+            let pageSize: number = 5;
+            let page: number = 1;
+
             let filtroBeneficiario = {
               "success": true,
-              "pagesize": 20,
+              "pagesize": pageSize,
               "pages": 0,
               "total_filtrado": 0,
               "resultado": []
@@ -642,13 +647,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               });
             }
             let totalFiltrado: number = beneficiarios.length;
-            let total:number = totalFiltrado/filtroBeneficiario.pagesize;
+            let total:number = totalFiltrado/pageSize;
             let numEntero = Math.floor(total);
             let totalPagina:number = (total > numEntero) ? numEntero + 1 : total;
 
             filtroBeneficiario.total_filtrado = beneficiarios.length;
             filtroBeneficiario.pages = totalPagina;
             filtroBeneficiario.resultado = beneficiarios;
+
+            if (page > 0) {
+              page = page;
+              let pageStart = page * pageSize;
+              let pageEnd = pageStart + pageSize;
+              filtroBeneficiario.resultado = beneficiarios.slice(pageStart, pageEnd);
+            }else{
+              filtroBeneficiario.resultado = beneficiarios.slice(0,pageSize);
+            }
 
             return of(new HttpResponse({ status: 200, body: filtroBeneficiario }));
           //} else {
