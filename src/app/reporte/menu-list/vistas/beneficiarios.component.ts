@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MensajesService, RecursoSocialService, LoaderService, BeneficiarioService } from '../../../core/services';
 import { UtilService } from '../../../core/utils';
 
@@ -7,7 +6,6 @@ import { UtilService } from '../../../core/utils';
   selector: 'reporte-beneficiarios',
   templateUrl: './beneficiarios.component.html',
   // styleUrls: ['./reporte.component.sass'],
-  providers: [NgbTabsetConfig]
 })
 export class BeneficiariosComponent implements OnInit {
 
@@ -18,14 +16,9 @@ export class BeneficiariosComponent implements OnInit {
   constructor(
     private _mensajeService: MensajesService,
     private _util: UtilService,
-    private _recursoService: RecursoSocialService,
     private _beneficiariosService: BeneficiarioService,
-    private _configTabSet: NgbTabsetConfig,
     private _loaderService: LoaderService
-  ){
-    _configTabSet.justify = 'center';
-    _configTabSet.type = 'pills';
-  }
+  ){}
 
   ngOnInit() {
 
@@ -38,7 +31,7 @@ export class BeneficiariosComponent implements OnInit {
    */
   public buscar(apiBusqueda:any) {
     apiBusqueda["page"] = 0;
-    apiBusqueda["pagesize"] = 20;
+    apiBusqueda["pagesize"] = 5;
     this.busqueda = apiBusqueda;
     this.configPaginacion.page = 1;
     this.listarBeneficiarios(apiBusqueda);
@@ -46,7 +39,7 @@ export class BeneficiariosComponent implements OnInit {
 
   //public listarBeneficiarios(params: object) {
   public listarBeneficiarios(params:object) {
-    this._beneficiariosService.listar().subscribe(
+    this._beneficiariosService.buscar(params).subscribe(
       beneficiarios => {
         this.configPaginacion.colleccionSize = beneficiarios.total_filtrado;
         this.configPaginacion.pageSize = beneficiarios.pagesize;

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MensajesService, RecursoSocialService, LoaderService, BeneficiarioService } from '../../../core/services';
 import { UtilService } from '../../../core/utils';
 
@@ -7,13 +6,11 @@ import { UtilService } from '../../../core/utils';
   selector: 'reporte-prestaciones',
   templateUrl: './prestaciones.component.html',
   // styleUrls: ['./reporte.component.sass'],
-  providers: [NgbTabsetConfig]
 })
 export class PrestacionesComponent implements OnInit {
 
   public busqueda: any = {page: 0, pagesize: 20};
   public recursosLista: any[] = [];
-  public beneficiariosLista: any[] = [];
   public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_total": 0, "cantRegistros": 0, "totalRegistros": 0 };
   public configPagBeneficiario:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_total": 0, "cantRegistros": 0, "totalRegistros": 0 };
 
@@ -21,13 +18,8 @@ export class PrestacionesComponent implements OnInit {
     private _mensajeService: MensajesService,
     private _util: UtilService,
     private _recursoService: RecursoSocialService,
-    private _beneficiariosService: BeneficiarioService,
-    private _configTabSet: NgbTabsetConfig,
     private _loaderService: LoaderService
-  ){
-    _configTabSet.justify = 'center';
-    _configTabSet.type = 'pills';
-  }
+  ){}
 
   ngOnInit() {
 

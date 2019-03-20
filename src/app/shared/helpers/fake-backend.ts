@@ -609,10 +609,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // get beneficiarios
         if (request.url.endsWith('/apimock/beneficiarios') && request.method === 'GET') {
           //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-            //let pageSize: number = parseInt(request.params.get('pagesize'));
-            //let page: number = parseInt(request.params.get("page"));
-            let pageSize: number = 5;
-            let page: number = 1;
+            let pageSize: number = parseInt(request.params.get('pagesize'));
+            let page: number = parseInt(request.params.get("page"));
+            // let pageSize: number = 5;
+            // let page: number = 1;
 
             let filtroBeneficiario = {
               "success": true,
