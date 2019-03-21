@@ -40,7 +40,8 @@
         <td class="text-center">{{beneficiario.programa}}</td> -->
         <td>
           <div class="btn-group">
-            <modal-info-persona-prestacion-component class="btn-group" [recursoid]="beneficiario.personaid" ></modal-info-persona-prestacion-component>
+            <modal-info-beneficiario-component [beneficiarioid]="beneficiario.personaid"></modal-info-beneficiario-component>
+            <!-- <modal-info-persona-prestacion-component class="btn-group" [recursoid]="beneficiario.personaid" ></modal-info-persona-prestacion-component> -->
             <!-- <modal-acreditar-component class="btn-group" *ngIf="(!beneficiario.acreditacion && !beneficiario.baja)" [recursoid]="beneficiario.id" (obtenerRecurso)="actualizarLista($event)" ngbTooltip="Acreditar prestación"></modal-acreditar-component>
             <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" *ngIf="(!beneficiario.baja)" [recursoid]="beneficiario.id" (obtenerRecurso)="actualizarLista($event)" ></modal-baja-component> -->
           </div>
