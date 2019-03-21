@@ -709,6 +709,30 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           //     return throwError({ error: { message: 'Unauthorised' } });
           // }
         }
+        // conseguir beneficiario
+        if(request.url.match(/\/apimock\/beneficiarios\/\d+$/) && request.method === 'GET') {
+          let urlParts = request.url.split('/');
+          let id = parseInt(urlParts[urlParts.length - 1]);
+          // obtengo los datos del beneficiarios
+          let persona = personas.filter(persona => { return persona.id === id; });
+          let personaEncontrada = persona.length ? persona[0] : null;
+          // busco los recursos del beneficiario
+          let recursosEncontrados = recursos.filter(recurso => { return recurso.personaid === personaEncontrada.id; });
+          let recuros_lista = {"Emprender":[], "Habitat":[], "Micro_Emprendimientos":[]};
+          let j = 0;
+          for (let i = 0; i < recursosEncontrados.length; i++) {
+            let nombrePrograma = recursosEncontrados[i].programa.replace(" ", "_");
+            for (const programa in recuros_lista) {
+              if (programa === nombrePrograma) {
+                recuros_lista[programa].push(recursosEncontrados[i]);
+              }
+            }
+          }
+          personaEncontrada["recurso_lista"] = recuros_lista;
+
+          //console.log(tipos);
+          return of(new HttpResponse({ status: 200, body: personaEncontrada }));
+        }
 
             /* ----------------------  LISTAS GENERALES  --------------------------- */
             // get TIPO RECURSO SOCIAL por programa id

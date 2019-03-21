@@ -36,7 +36,10 @@ export class ModalInfoBeneficiarioContent implements OnInit, AfterViewInit {
    */
   public obtenerRecurso(beneficiarioid:any) {
     console.log(beneficiarioid);
-    //this._beneficiarioService.
+    this._beneficiarioService.beneficiarioPorId(beneficiarioid).subscribe(
+      beneficiario => {
+        console.log(beneficiario);
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
     /* this._recursoService.recursoPorId(beneficiarioid).subscribe(
       beneficiario => {
         this.persona = beneficiario;

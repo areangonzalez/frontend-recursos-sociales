@@ -21,4 +21,8 @@ export class BeneficiarioService {
 
     return this._apiService.get('/beneficiarios',httpParams);
   }
+
+  public beneficiarioPorId(id:any) {
+    return this._apiService.get('/beneficiarios/' + id);
+  }
 }
