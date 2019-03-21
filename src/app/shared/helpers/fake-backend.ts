@@ -611,8 +611,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
             let pageSize: number = parseInt(request.params.get('pagesize'));
             let page: number = parseInt(request.params.get("page"));
-            // let pageSize: number = 5;
-            // let page: number = 1;
+            let localidadid = request.params.get('localidadid');
+            let global_search = request.params.get('global_param');
+            let search = [''];
+            if(global_search) {
+              search = global_search.split(" ");
+            }
 
             let filtroBeneficiario = {
               "success": true,
@@ -629,6 +633,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             });
 
             const beneficiarios: any = [];
+            // obtengo todos los datos de los beneficiarios
             for (let i = 0; i < cantPersonas.length; i++) {
               // filtro la cantidad de recursos que tiene una persona
               let cantRecursos = recursos.filter(recurso => { return cantPersonas[i].personaid == recurso.personaid; });
@@ -638,14 +643,48 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let montoTotal = cantRecursos.map(recurso => {
                   return recurso.monto;
               });
+              let montoTotalAcreditado = cantRecursos.map(recurso => {
+                return (recurso.fecha_acreditacion != undefined) ? recurso.monto : 0;
+              });
+              let cantRecursosAcreditado = cantRecursos.filter(recurso => {
+                return recurso.fecha_acreditacion != undefined;
+              });
               // armo el array de los beneficiarios
               beneficiarios.push({
                 "personaid": cantPersonas[i].personaid,
                 "recurso_cantidad": cantRecursos.length,
+                "recurso_acreditado_cantidad": cantRecursosAcreditado.length,
                 "persona": persona[0],
-                "monto": (montoTotal.length != 0) ? sum(montoTotal) : 0
+                "monto": (montoTotal.length != 0) ? sum(montoTotal) : 0,
+                "monto_acreditado": (montoTotalAcreditado.length != 0) ? sum(montoTotalAcreditado) : 0
               });
             }
+
+            // aplico la busqueda para el array de beneficiario
+            let beneficiariosEncontrados = beneficiarios.filter(
+              beneficiario => {
+                for (let i = 0; i < search.length; i++) {
+                  let nombre = beneficiario.persona.nombre.split(" ");
+                  for (let j = 0; j < nombre.length; j++) {
+                      if ( nombre[j].toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
+                        return beneficiario;
+                      }
+                  }
+                  if (beneficiario.persona.nro_documento.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ){
+                    return beneficiario;
+                  }
+                  if ( beneficiario.persona.apellido.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ) {
+                    return beneficiario;
+                  }
+                }
+              });
+              if (localidadid) {
+                beneficiariosEncontrados = beneficiariosEncontrados.filter(recurso => { return parseInt(localidadid) === parseInt(recurso.persona.lugar.localidadid); });
+              }
+
+              console.log(beneficiariosEncontrados);
+
+            // despues de la busqueda
             let totalFiltrado: number = beneficiarios.length;
             let total:number = totalFiltrado/pageSize;
             let numEntero = Math.floor(total);
