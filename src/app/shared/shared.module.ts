@@ -10,7 +10,7 @@ import { FormLugarComponent } from "./formulario/lugar";
 import { FormContactoComponent } from "./formulario/contacto";
 import { FormRecursoComponent } from "./formulario/recurso";
 import { ListaPersonaComponent } from './lista';
-import { VistaInfoPersonaComponent, VistaInfoRecursoComponent } from "./vista";
+import { VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent } from "./vista";
 import {
   ModalFormPersonaComponent, ModalFormPersonaContent,
   ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
@@ -39,7 +39,7 @@ import { ProgramaComponent } from "./programa";
       FormPersonaComponent,
       FormRecursoComponent,
       ListaPersonaComponent,
-      VistaInfoPersonaComponent, VistaInfoRecursoComponent,
+      VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent,
       ModalFormPersonaComponent, ModalFormPersonaContent,
       ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
       ModalAcreditarComponent, ModalAcreditarContent,
@@ -58,7 +58,7 @@ import { ProgramaComponent } from "./programa";
         FormPersonaComponent,
         FormRecursoComponent,
         ListaPersonaComponent,
-        VistaInfoPersonaComponent, VistaInfoRecursoComponent,
+        VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent,
         ModalFormPersonaComponent, ModalFormPersonaContent,
         ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
         ModalAcreditarComponent, ModalAcreditarContent,

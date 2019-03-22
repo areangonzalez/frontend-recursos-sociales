@@ -41,4 +41,11 @@ export class UtilService {
     const pattern = /^\d*(\.\d{0,2})?$/;
     return pattern.test(moneda);
   }
+  /**
+   * Eliminacion de acentos
+   * @param texto cadena
+   */
+  public eliminarDiacriticos(texto) {
+    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g,"");
+  }
 }
