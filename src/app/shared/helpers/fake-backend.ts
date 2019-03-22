@@ -87,7 +87,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if(request.url.match(/\/apimock\/recursos\/\d+$/) && request.method === 'GET') {
               let urlParts = request.url.split('/');
               let id = parseInt(urlParts[urlParts.length - 1]);
-              console.log("recurso id: ",id);
               let recurso = recursos.filter(recurso => { return recurso.id === id; });
               let recursoEncontrado = recurso.length ? recurso[0] : null;
               let alumnos: any[] = [];
@@ -260,15 +259,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     recursos[i]["persona"] = personas[j];
                   }
                   // pregunto si alumnos existe en el recurso
-                  if (recursos[i]["alumnos"] !== undefined){
-                    for (let k = 0; k < recursos[i]["alumnos"].length; k++) {
+                  if (recursos[i]["alumno_lista"] !== undefined){
+                    for (let k = 0; k < recursos[i]["alumno_lista"].length; k++) {
                       for (let l = 0; l < personas.length; l++) {
                         // verifico si el alumno tiene el mismo id que la persona
-                        if (recursos[i]["alumnos"][k]["alumnoid"] == personas[l]["id"]) {
+                        if (recursos[i]["alumno_lista"][k]["alumnoid"] == personas[l]["id"]) {
                           // actualizo su localidad
                           personas[l]["lugar"]["localidad"] = nombrePorId(personas[l]["lugar"]["localidadid"], localidades);
                           // creo los alumnos
-                          recursos[i]["alumnos"][k] = personas[l];
+                          recursos[i]["alumno_lista"][k] = personas[l];
                         }
                       }
                     }
@@ -718,15 +717,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let personaEncontrada = persona.length ? persona[0] : null;
           // busco los recursos del beneficiario
           let recursosEncontrados = recursos.filter(recurso => { return recurso.personaid === personaEncontrada.id; });
+
           let recuros_lista = {"Emprender":[], "Habitat":[], "Micro_Emprendimientos":[]};
           let j = 0;
           for (let i = 0; i < recursosEncontrados.length; i++) {
             let nombrePrograma = recursosEncontrados[i].programa.replace(" ", "_");
+            let alumnos: any[] = [];
+            if(recursosEncontrados[i]["alumno_lista"]!== undefined) {
+              for (let j = 0; j < recursosEncontrados[i]["alumno_lista"].length; j++) {
+                let encontrado = personas.filter(alumno => { return alumno.id === recursosEncontrados[i]["alumno_lista"][j].alumnoid; });
+                alumnos.push(encontrado[0]);
+              }
+              recursosEncontrados[i]["alumno_lista"] = alumnos;
+            }
+
             for (const programa in recuros_lista) {
               if (programa === nombrePrograma) {
                 recuros_lista[programa].push(recursosEncontrados[i]);
               }
             }
+
           }
           personaEncontrada["recurso_lista"] = recuros_lista;
 
