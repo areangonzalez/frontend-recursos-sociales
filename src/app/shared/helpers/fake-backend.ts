@@ -102,7 +102,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let personaEncontrada = personas.filter(persona => { return persona.id === recursoEncontrado["personaid"]; });
               recursoEncontrado["persona"] = personaEncontrada[0];
 
-              console.log("recurso encontrado: ",recursoEncontrado);
+              //console.log("recurso encontrado: ",recursoEncontrado);
               //console.log(tipos);
               return of(new HttpResponse({ status: 200, body: recursoEncontrado }));
             }
@@ -680,8 +680,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               if (localidadid) {
                 beneficiariosEncontrados = beneficiariosEncontrados.filter(recurso => { return parseInt(localidadid) === parseInt(recurso.persona.lugar.localidadid); });
               }
-
-              console.log(beneficiariosEncontrados);
 
             // despues de la busqueda
             let totalFiltrado: number = beneficiariosEncontrados.length;

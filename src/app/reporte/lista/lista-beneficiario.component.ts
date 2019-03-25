@@ -26,4 +26,14 @@ export class ListaBeneficiarioComponent implements OnInit {
     }
   }
 
+  public direccion(lugar){
+    let dir = "";
+    dir += lugar['localidad'] + " - " + lugar['barrio'] + ' - ' + lugar['calle'] + ' ' + lugar['altura'];
+    dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
+    dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
+    dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
+
+    return dir;
+  }
+
 }

@@ -31,7 +31,7 @@ export class BeneficiariosComponent implements OnInit {
    */
   public buscar(apiBusqueda:any) {
     apiBusqueda["page"] = 0;
-    apiBusqueda["pagesize"] = 5;
+    apiBusqueda["pagesize"] = 20;
     this.busqueda = apiBusqueda;
     this.configPaginacion.page = 1;
     this.listarBeneficiarios(apiBusqueda);

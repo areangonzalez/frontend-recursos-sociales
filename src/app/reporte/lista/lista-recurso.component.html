@@ -13,7 +13,7 @@
         <thead>
           <tr>
             <th scope="col">Nro Doc</th>
-            <th scope="col">Apellido y nombre</th>
+            <th colspan="2" scope="col">Apellido y nombre</th>
             <th class="text-center" scope="col">Localidad</th>
             <th scope="col">Fecha alta</th>
             <th class="text-center" scope="col">Programa</th>
@@ -32,6 +32,15 @@
             <td scope="row">{{recurso.persona.nro_documento}}</td>
             <td>
               {{recurso.persona.apellido}}, {{recurso.persona.nombre}}
+            </td>
+            <td>
+              <div class="btn-group" *ngIf="(recurso.persona.lugar.localidad != '')">
+                <button ngbTooltip="{{direccion(recurso.persona.lugar)}}" container="body" type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
+                <button *ngIf="(recurso.persona.telefono != '')" ngbTooltip="{{recurso.persona.telefono}}" type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
+                <button *ngIf="(recurso.persona.celular != '')" ngbTooltip="{{recurso.persona.celular}}" type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
+                <button *ngIf="(recurso.persona.email != '')" ngbTooltip="{{recurso.persona.email}}" type="button" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
+                <button *ngIf="(recurso.persona.red_social != undefined && recurso.persona.red_social != '')" ngbTooltip="{{recurso.persona.red_social}}" type="button" class="btn btn-sm btn-light"><i class="fas fa-users"></i></button>
+              </div>
             </td>
             <td class="text-center">{{recurso.persona.lugar.localidad}}</td>
             <td>{{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</td>
