@@ -684,22 +684,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               console.log(beneficiariosEncontrados);
 
             // despues de la busqueda
-            let totalFiltrado: number = beneficiarios.length;
+            let totalFiltrado: number = beneficiariosEncontrados.length;
             let total:number = totalFiltrado/pageSize;
             let numEntero = Math.floor(total);
             let totalPagina:number = (total > numEntero) ? numEntero + 1 : total;
 
-            filtroBeneficiario.total_filtrado = beneficiarios.length;
+            filtroBeneficiario.total_filtrado = beneficiariosEncontrados.length;
             filtroBeneficiario.pages = totalPagina;
-            filtroBeneficiario.resultado = beneficiarios;
+            filtroBeneficiario.resultado = beneficiariosEncontrados;
 
             if (page > 0) {
               page = page;
               let pageStart = page * pageSize;
               let pageEnd = pageStart + pageSize;
-              filtroBeneficiario.resultado = beneficiarios.slice(pageStart, pageEnd);
+              filtroBeneficiario.resultado = beneficiariosEncontrados.slice(pageStart, pageEnd);
             }else{
-              filtroBeneficiario.resultado = beneficiarios.slice(0,pageSize);
+              filtroBeneficiario.resultado = beneficiariosEncontrados.slice(0,pageSize);
             }
 
             return of(new HttpResponse({ status: 200, body: filtroBeneficiario }));

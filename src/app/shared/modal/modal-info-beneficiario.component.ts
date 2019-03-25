@@ -7,8 +7,7 @@ import { UtilService } from 'src/app/core/utils';
 
 @Component({
   selector: 'modal-info-beneficirio-content',
-  templateUrl: './modal-info-beneficiario.content.html',
-  styleUrls: ['./modal-info-beneficiario.sass']
+  templateUrl: './modal-info-beneficiario.content.html'
 })
 export class ModalInfoBeneficiarioContent implements OnInit {
   @Input("beneficiarioid") public beneficiarioid: any;
