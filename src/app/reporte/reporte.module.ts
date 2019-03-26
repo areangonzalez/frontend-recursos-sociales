@@ -7,7 +7,7 @@ import { ReporteRoutingModule } from "./reporte-routing.module";
 import { ReporteComponent } from "./reporte.component";
 import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent } from "./busqueda";
 import { ListaRecursoComponent, ListaBeneficiarioComponent } from "./lista";
-import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent } from "./menu-list";
+import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, ProgramasComponent } from "./menu-list";
 
 @NgModule({
     imports: [
@@ -19,7 +19,7 @@ import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent } fro
         ReporteComponent,
         BusquedaRecursoComponent, BusquedaBeneficiarioComponent,
         ListaRecursoComponent, ListaBeneficiarioComponent,
-        MenuListaComponent, PrestacionesComponent, BeneficiariosComponent
+        MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, ProgramasComponent
     ],
     providers: [
     ],
