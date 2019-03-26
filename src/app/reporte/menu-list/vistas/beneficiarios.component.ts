@@ -11,7 +11,7 @@ export class BeneficiariosComponent implements OnInit {
 
   public busqueda: any = {page: 0, pagesize: 20};
   public beneficiariosLista: any[] = [];
-  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_total": 0, "cantRegistros": 0, "totalRegistros": 0 };
+  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 };
 
   constructor(
     private _mensajeService: MensajesService,
@@ -43,7 +43,9 @@ export class BeneficiariosComponent implements OnInit {
       beneficiarios => {
         this.configPaginacion.colleccionSize = beneficiarios.total_filtrado;
         this.configPaginacion.pageSize = beneficiarios.pagesize;
-        this.configPaginacion.monto_total = beneficiarios.monto_total;
+        this.configPaginacion.monto_acreditado = beneficiarios.monto_acreditado;
+        this.configPaginacion.monto_baja = beneficiarios.monto_baja;
+        this.configPaginacion.monto_total = beneficiarios.monto_general;
         this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, beneficiarios.total_filtrado, beneficiarios.pagesize);
         this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, beneficiarios.total_filtrado, beneficiarios.pagesize);
         // total de registros

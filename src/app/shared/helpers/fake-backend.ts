@@ -622,7 +622,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               "pagesize": pageSize,
               "pages": 0,
               "total_filtrado": 0,
-              "resultado": []
+              "resultado": [],
+              "monto_acreditado": 0,
+              "monto_baja": 0,
+              "monto_general": 0
             };
             var hash = {};
             let cantPersonas = recursos.filter(recurso => {
@@ -643,7 +646,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   return recurso.monto;
               });
               let montoTotalAcreditado = cantRecursos.map(recurso => {
-                return (recurso.fecha_acreditacion != undefined) ? recurso.monto : 0;
+                return (recurso.fecha_acreditacion != undefined && !(recurso.fecha_baja != undefined)) ? recurso.monto : 0;
+              });
+              let montoTotalBaja = cantRecursos.map(recurso => {
+                return (recurso.fecha_baja != undefined) ? recurso.monto : 0;
               });
               let cantRecursosAcreditado = cantRecursos.filter(recurso => {
                 return recurso.fecha_acreditacion != undefined;
@@ -655,7 +661,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "recurso_acreditado_cantidad": cantRecursosAcreditado.length,
                 "persona": persona[0],
                 "monto": (montoTotal.length != 0) ? sum(montoTotal) : 0,
-                "monto_acreditado": (montoTotalAcreditado.length != 0) ? sum(montoTotalAcreditado) : 0
+                "monto_acreditado": (montoTotalAcreditado.length != 0) ? sum(montoTotalAcreditado) : 0,
+                "monto_baja": (montoTotalBaja.length != 0) ? sum(montoTotalBaja) : 0,
               });
             }
 
@@ -680,6 +687,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               if (localidadid) {
                 beneficiariosEncontrados = beneficiariosEncontrados.filter(recurso => { return parseInt(localidadid) === parseInt(recurso.persona.lugar.localidadid); });
               }
+            //console.log("beneficiarios: ",beneficiarios);
+            let monto_acreditado_filtro = 0;
+            let monto_baja_filtro = 0;
+            let monto_total = 0;
+            let cantidad_acreditado_filtro = 0;
+            let cantidad_baja_filtro = 0;
+            for (let k = 0; k < beneficiarios.length; k++) {
+              monto_acreditado_filtro += beneficiariosEncontrados[k].monto_acreditado;
+              monto_baja_filtro += beneficiariosEncontrados[k].monto_baja;
+              // console.log("monto: ",beneficiarios[k].monto);
+              monto_total += beneficiarios[k].monto;
+              //cantidad_acreditado_filtro += beneficiariosEncontrados[k].ca;
+              //monto_acreditado_filtro += beneficiariosEncontrados[k].monto_acreditado;
+            }
 
             // despues de la busqueda
             let totalFiltrado: number = beneficiariosEncontrados.length;
@@ -690,6 +711,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             filtroBeneficiario.total_filtrado = beneficiariosEncontrados.length;
             filtroBeneficiario.pages = totalPagina;
             filtroBeneficiario.resultado = beneficiariosEncontrados;
+            filtroBeneficiario.monto_acreditado = monto_acreditado_filtro;
+            filtroBeneficiario.monto_baja = monto_baja_filtro;
+            //console.log(monto_total);
+            filtroBeneficiario.monto_general = monto_total - monto_acreditado_filtro - monto_baja_filtro;
 
             if (page > 0) {
               page = page;
