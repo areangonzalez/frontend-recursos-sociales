@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-between mt-2 border-top">
+  <div class="d-flex align-items-center p-2 font-weight-bold">
+    <span *ngIf="configPaginacion.totalRegistros > 0">Prestaciones: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
+    <span *ngIf="configPaginacion.totalRegistros == 0">Prestaciones: 0</span>
+  </div>
+  <div class="d-flex align-items-center p-2 font-weight-bold">
+    <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination" style="margin-bottom: -15px;" ></ngb-pagination>
+  </div>
+  <div class="d-flex align-items-center p-2 font-weight-bold">
+    <span ngbTooltip="Monto sin acreditar">
+      MSA: {{configPaginacion.monto_total | currency:'USD':'symbol-narrow':'2.2'}}
+    </span>
+    &nbsp;|&nbsp;
+    <span ngbTooltip="Monto acreditado" class="text-success">
+      MA: {{configPaginacion.monto_acreditado | currency:'USD':'symbol-narrow':'2.2'}}
+    </span>
+    &nbsp;|&nbsp;
+    <span ngbTooltip="Monto baja" class="text-danger">
+      MB: {{configPaginacion.monto_baja | currency:'USD':'symbol-narrow':'2.2'}}
+    </span>
+  </div>
+</div>
+<div class="row pl-3 pr-3">
+  <table class="table table-hover table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Programa</th>
+        <th class="text-center" scope="col">Cant. prestaciones</th>
+        <th class="text-center" scope="col">Cant. beneficiarios</th>
+        <th class="text-center" scope="col">Monto</th>
+        <!-- <th scope="col">Propósito</th>
+        <th class="text-center" scope="col">Programa</th> -->
+        <!-- <th></th> -->
+      </tr>
+    </thead>
+    <tbody *ngIf="(prestacionesLista.length == 0)">
+      <tr>
+        <td rowspan="1" colspan="7" class="text-center"> <h5>No se han encontrado resultados.</h5> </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(prestacionesLista.length > 0)">
+      <tr *ngFor="let prestacion of prestacionesLista">
+        <td scope="row">{{prestacion.nombre}}</td>
+        <td class="text-center">{{prestacion.recurso_cantidad}}</td>
+        <td class="text-center">{{prestacion.persona_cantidad}}</td>
+        <!-- <td>
+          <div class="btn-group" *ngIf="(prestacion.persona.lugar.localidad != '')">
+            <button ngbTooltip="{{direccion(prestacion.persona.lugar)}}" container="body" type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
+            <button *ngIf="(prestacion.persona.telefono != '')" ngbTooltip="{{prestacion.persona.telefono}}" type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
+            <button *ngIf="(prestacion.persona.celular != '')" ngbTooltip="{{prestacion.persona.celular}}" type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
+            <button *ngIf="(prestacion.persona.email != '')" ngbTooltip="{{prestacion.persona.email}}" type="button" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
+            <button *ngIf="(prestacion.persona.red_social != undefined && prestacion.persona.red_social != '')" ngbTooltip="{{prestacion.persona.red_social}}" type="button" class="btn btn-sm btn-light"><i class="fas fa-users"></i></button>
+          </div>
+        </td> -->
+        <td class="text-center">{{prestacion.monto | currency:'USD':'symbol-narrow':'2.2'}}</td>
+        <!-- <td>
+          <div class="btn-group">
+            <modal-info-beneficiario-component [beneficiarioid]="prestacion.persona.id"></modal-info-prestacion-component>
+          </div>
+        </td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class=" d-flex justify-content-center">
+    <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination"></ngb-pagination>
+</div>

@@ -6,8 +6,9 @@ import { SharedModule } from "../shared";
 import { ReporteRoutingModule } from "./reporte-routing.module";
 import { ReporteComponent } from "./reporte.component";
 import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent } from "./busqueda";
-import { ListaRecursoComponent, ListaBeneficiarioComponent } from "./lista";
-import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, ProgramasComponent } from "./menu-list";
+import { ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent } from "./lista";
+import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent } from "./menu-list";
+import { ChartProgramaMontoComponent } from './chart'
 
 @NgModule({
     imports: [
@@ -18,8 +19,9 @@ import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, Prog
     declarations: [
         ReporteComponent,
         BusquedaRecursoComponent, BusquedaBeneficiarioComponent,
-        ListaRecursoComponent, ListaBeneficiarioComponent,
-        MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, ProgramasComponent
+        ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent,
+        ChartProgramaMontoComponent,
+        MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent
     ],
     providers: [
     ],

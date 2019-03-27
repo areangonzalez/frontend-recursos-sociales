@@ -1,6 +1,7 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule, NgbDatepickerI18n, NgbDateStruct, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsModule } from "ng2-charts";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PixelSpinnerModule } from "angular-epic-spinners";
 
@@ -42,6 +43,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
   ],
   imports: [
     BrowserModule,
+    ChartsModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     NgbTooltipModule.forRoot(),
