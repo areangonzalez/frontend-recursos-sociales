@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { MensajesService, ProgramaService } from 'src/app/core/services';
 
 @Component({
   selector: 'reporte-programa-monto',
@@ -9,33 +10,58 @@ import { Chart } from 'chart.js';
 export class ChartProgramaMontoComponent implements OnInit {
 
   public chart:any;
-  public pieChartLabels = ['Emprender', 'Habitat', 'Micro Emprenimientos', 'Río negro presente', 'subsidio'];
-  public pieChartData = [120, 150, 180, 90, 30];
-  public pieChartType = 'pie';
+  /* public nombreProgramas = ['Emprender', 'Habitat', 'Micro Emprenimientos', 'Río negro presente', 'subsidio'];
+  public montoBaja = [];
+  public montoAcreditado = [];
+  public montoSinAcreditar = []; */
+  /* public pieChartType = 'pie'; */
 
-  constructor(){}
+  constructor(
+    private _mensajeService: MensajesService,
+    private _programaService: ProgramaService
+  ){
+
+  }
 
   ngOnInit() {
-    this.chart = new Chart('canvas', {
+    this.mostrarGrafico();
+    this.obtenerDatosPrograma();
+  }
+
+  private obtenerDatosPrograma(){
+    this._programaService.listar()
+    /* .pipe(map(vPrograma => {
+      let vDatos = [];
+
+      this.chart.data.labels.push(vPrograma)
+
+    })) */
+    .subscribe(programa => {
+      console.log(programa);
+    }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+  }
+
+  private mostrarGrafico(){
+    this.chart = new Chart('programa-monto', {
       type: 'bar',
       data: {
-        labels: this.pieChartLabels,
+        labels: [],
         datasets: [
           {
             label: 'Baja',
-            data: [0, 10, 20, 0, 0],
+            data: [],
             backgroundColor: 'red',
             fill: false
           },
           {
             label: 'Acreditado',
-            data: [20, 50, 80, 10, 5],
+            data: [],
             backgroundColor: 'green',
             fill: false
           },
           {
             label: 'Sin acreditar',
-            data: this.pieChartData,
+            data: [],
             backgroundColor: 'gray',
             fill: false
           }
@@ -49,9 +75,6 @@ export class ChartProgramaMontoComponent implements OnInit {
           xAxes: [{
             barPercentage: 0.5,
             stacked: true,
-            //barThickness: 6,
-            //maxBarThickness: 8,
-            //minBarLength: 31,
             gridLines: {
                 offsetGridLines: true
             }
@@ -64,4 +87,5 @@ export class ChartProgramaMontoComponent implements OnInit {
       }
     });
   }
+
 }

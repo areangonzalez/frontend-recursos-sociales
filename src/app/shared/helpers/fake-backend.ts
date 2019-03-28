@@ -832,7 +832,32 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return exists;
                   });
                   programas[i]["persona_cantidad"] = cantPersonas.length;
+                  // monto acreditado por programa
+                  let montoTotalAcreditado = recursoPrograma.map(recurso => {
+                    return (recurso.fecha_acreditacion != undefined && !(recurso.fecha_baja != undefined)) ? recurso.monto : 0;
+                  });
+                  programas[i]["monto_acreditado"] = (montoTotalAcreditado.length != 0) ? sum(montoTotalAcreditado) : 0;
+                  // monto baja por programa
+                  let montoTotalBaja = recursoPrograma.map(recurso => {
+                    return (recurso.fecha_baja != undefined) ? recurso.monto : 0;
+                  });
+                  programas[i]["monto_baja"] = (montoTotalBaja.length != 0) ? sum(montoTotalBaja) : 0;
+                  // cantidad recursos acreditados
+                  let cantRecursosAcreditado = recursoPrograma.filter(recurso => {
+                    return ( recurso.fecha_acreditacion != undefined && !(recurso.fecha_baja != undefined) );
+                  });
+                  programas[i]["recurso_acreditado_cantidad"] = cantRecursosAcreditado.length;
+                  // cantidad recursos baja
+                  let cantRecursosBaja = recursoPrograma.filter(recurso => {
+                    return ( recurso.fecha_baja != undefined );
+                  });
+                  programas[i]["recurso_acreditado_cantidad"] = cantRecursosAcreditado.length;
+                  // monto sin acreditar = monto_total - monto_acreditar - monto_baja
+                  programas[i]["monto_sin_acreditar"] = programas[i]["monto"] - programas[i]["monto_acreditado"] - programas[i]["monto_baja"];
                 }
+
+
+
                   return of(new HttpResponse({ status: 200, body: programas }));
               //} else {
                   // return 401 not authorised if token is null or invalid
