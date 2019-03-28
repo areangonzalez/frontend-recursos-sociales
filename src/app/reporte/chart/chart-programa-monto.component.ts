@@ -1,20 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 import { MensajesService, ProgramaService } from 'src/app/core/services';
 
 @Component({
   selector: 'reporte-programa-monto',
-  templateUrl: './chart-programa-monto.component.html',
-  // styleUrls: ['./reporte.component.sass'],
+  templateUrl: './chart-programa-monto.component.html'
 })
 export class ChartProgramaMontoComponent implements OnInit {
 
   public chart:any;
-  /* public nombreProgramas = ['Emprender', 'Habitat', 'Micro Emprenimientos', 'Río negro presente', 'subsidio'];
-  public montoBaja = [];
-  public montoAcreditado = [];
-  public montoSinAcreditar = []; */
-  /* public pieChartType = 'pie'; */
 
   constructor(
     private _mensajeService: MensajesService,
@@ -30,14 +24,18 @@ export class ChartProgramaMontoComponent implements OnInit {
 
   private obtenerDatosPrograma(){
     this._programaService.listar()
-    /* .pipe(map(vPrograma => {
-      let vDatos = [];
-
-      this.chart.data.labels.push(vPrograma)
-
-    })) */
     .subscribe(programa => {
-      console.log(programa);
+
+      programa.forEach((val, i) => {
+        this.chart.data.labels.push(programa[i].nombre);
+        // baja
+        this.chart.data.datasets[0].data.push(programa[i].monto_baja);
+        // acreditado
+        this.chart.data.datasets[1].data.push(programa[i].monto_acreditado);
+        // sin acreditar
+        this.chart.data.datasets[2].data.push(programa[i].monto_sin_acreditar);
+        this.chart.update();
+      });
     }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
@@ -87,5 +85,6 @@ export class ChartProgramaMontoComponent implements OnInit {
       }
     });
   }
+
 
 }
