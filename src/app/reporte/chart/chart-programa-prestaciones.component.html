@@ -1,4 +1,16 @@
-<div style="display: block">
-  <!-- <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"></canvas> -->
-  <canvas id="programa-prestaciones" height="100">{{chart}}</canvas>
+<div class="row">
+  <div class="col-md-6 d-flex align-items-center ">
+    <ul>
+      <li *ngFor="let programa of datosPrograma">
+        <span [ngStyle]="{color: programa.color, background: programa.color}" >@</span> {{programa.nombre}}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div style="display: block">
+      <canvas id="programa-prestaciones" >{{chart}}</canvas>
+    </div>
+  </div>
 </div>
+
+
