@@ -8,7 +8,7 @@ import { ReporteComponent } from "./reporte.component";
 import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent } from "./busqueda";
 import { ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent } from "./lista";
 import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent } from "./menu-list";
-import { ChartProgramaMontoComponent } from './chart'
+import { ChartProgramaMontoComponent, ChartProgramaPrestacionesComponent } from './chart'
 
 @NgModule({
     imports: [
@@ -20,7 +20,7 @@ import { ChartProgramaMontoComponent } from './chart'
         ReporteComponent,
         BusquedaRecursoComponent, BusquedaBeneficiarioComponent,
         ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent,
-        ChartProgramaMontoComponent,
+        ChartProgramaMontoComponent, ChartProgramaPrestacionesComponent,
         MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent
     ],
     providers: [

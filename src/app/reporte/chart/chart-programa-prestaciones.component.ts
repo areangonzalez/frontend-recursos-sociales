@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
-  selector: 'reporte-programa-monto',
-  templateUrl: './chart-programa-monto.component.html',
+  selector: 'reporte-programa-prestaciones',
+  templateUrl: './chart-programa-prestaciones.component.html',
   // styleUrls: ['./reporte.component.sass'],
 })
-export class ChartProgramaMontoComponent implements OnInit {
+export class ChartProgramaPrestacionesComponent implements OnInit {
 
   public chart:any;
   public pieChartLabels = ['Emprender', 'Habitat', 'Micro Emprenimientos', 'Río negro presente', 'subsidio'];
@@ -16,8 +16,8 @@ export class ChartProgramaMontoComponent implements OnInit {
   constructor(){}
 
   ngOnInit() {
-    this.chart = new Chart('canvas', {
-      type: 'bar',
+    this.chart = new Chart('programa-prestaciones', {
+      type: 'pie',
       data: {
         labels: this.pieChartLabels,
         datasets: [
@@ -47,7 +47,7 @@ export class ChartProgramaMontoComponent implements OnInit {
         },
         scales: {
           xAxes: [{
-            barPercentage: 0.5,
+            //barPercentage: 0.5,
             stacked: true,
             //barThickness: 6,
             //maxBarThickness: 8,
@@ -57,7 +57,7 @@ export class ChartProgramaMontoComponent implements OnInit {
             }
           }],
           yAxes: [{
-            stacked: true,
+            //stacked: true,
             display: true
           }],
         }
