@@ -34,7 +34,7 @@ export class ChartProgramaMontoComponent implements OnInit {
             fill: false
           },
           {
-            label: 'general',
+            label: 'Sin acreditar',
             data: this.pieChartData,
             backgroundColor: 'gray',
             fill: false

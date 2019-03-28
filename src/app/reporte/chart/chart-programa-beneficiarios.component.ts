@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
-  selector: 'reporte-programa-prestaciones',
-  templateUrl: './chart-programa-prestaciones.component.html',
-  // styleUrls: ['./reporte.component.sass'],
+  selector: 'reporte-programa-beneficiarios',
+  templateUrl: './chart-programa-beneficiarios.component.html',
 })
-export class ChartProgramaPrestacionesComponent implements OnInit {
+export class ChartProgramaBeneficiariosComponent implements OnInit {
 
   public chart:any;
   public pieChartLabels = ['Emprender', 'Habitat', 'Micro Emprenimientos', 'Río negro presente', 'subsidio'];
@@ -16,14 +15,14 @@ export class ChartProgramaPrestacionesComponent implements OnInit {
   constructor(){}
 
   ngOnInit() {
-    this.chart = new Chart('programa-prestaciones', {
+    this.chart = new Chart('programa-beneficiarios', {
       type: 'pie',
       data: {
         labels: this.pieChartLabels,
         datasets: [
           {
-            label: 'Prestaciones',
-            data: [35, 10, 20, 10, 70],
+            label: 'Beneficiarios',
+            data: [45, 50, 20, 5, 180],
             backgroundColor: ['red', 'orange', 'yellow', 'green', 'blue'],
             fill: false
           }
