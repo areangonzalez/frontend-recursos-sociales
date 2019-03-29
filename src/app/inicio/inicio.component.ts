@@ -26,6 +26,7 @@ export class InicioComponent implements OnInit {
     this._loaderService.show();
     this._programaService.listar().subscribe(
       programas => {
+        console.log(programas);
         this.programaLista = programas;
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
