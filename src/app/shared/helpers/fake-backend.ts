@@ -319,9 +319,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     recursosEncontrados = recursosEncontrados.filter(recurso => { return recurso.fecha_baja != undefined; });
                   }
                   // sumo los montos filtrados
+                  let monto_acreditado:any;
+                  let monto_baja:any;
                   for (let i = 0; i < recursosEncontrados.length; i++) {
                     sumarMonto = recursosEncontrados[i]["monto"] + sumarMonto;
                   }
+                  monto_acreditado = recursosEncontrados.map(recurso => {
+                    return (recurso.fecha_acreditacion != undefined && !(recurso.fecha_baja != undefined)) ? recurso.monto : 0;
+                  });
+                  monto_baja = recursosEncontrados.map(recurso => {
+                    return (recurso.fecha_baja != undefined) ? recurso.monto : 0;
+                  });
+
+              /*  "monto_acreditado": 0,
+                  "monto_baja": 0,
+                  "monto_sin_acreditar": 0 */
                   //console.log(recursosEncontrados);
                   let totalFiltrado:number = recursosEncontrados.length;
                   let total:number = totalFiltrado/pageSize;
@@ -331,6 +343,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   listaRecursos.total_filtrado = recursosEncontrados.length;
                   listaRecursos.pages = totalPagina;
                   listaRecursos.monto_total = sumarMonto;
+                  listaRecursos["monto_acreditado"] = (monto_acreditado.length != 0) ? sum(monto_acreditado) : 0;
+                  listaRecursos["monto_baja"] = (monto_baja.length != 0) ? sum(monto_baja) : 0;
+                  listaRecursos["monto_sin_acreditar"] = sumarMonto - ((monto_acreditado.length != 0) ? sum(monto_acreditado) : 0) - ((monto_baja.length != 0) ? sum(monto_baja) : 0);
                   if (page > 0) {
                     page = page;
                     let pageStart = page * pageSize;
@@ -625,7 +640,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               "resultado": [],
               "monto_acreditado": 0,
               "monto_baja": 0,
-              "monto_general": 0
+              "monto_sin_acreditar": 0
             };
             var hash = {};
             let cantPersonas = recursos.filter(recurso => {
@@ -718,7 +733,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             filtroBeneficiario.monto_acreditado = monto_acreditado_filtro;
             filtroBeneficiario.monto_baja = monto_baja_filtro;
             //console.log(monto_total);
-            filtroBeneficiario.monto_general = monto_total - monto_acreditado_filtro - monto_baja_filtro;
+            filtroBeneficiario["monto_sin_acreditar"] = monto_total - monto_acreditado_filtro - monto_baja_filtro;
 
             if (page > 0) {
               page = page;

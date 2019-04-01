@@ -11,8 +11,7 @@ export class PrestacionesComponent implements OnInit {
 
   public busqueda: any = {page: 0, pagesize: 20};
   public recursosLista: any[] = [];
-  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_total": 0, "cantRegistros": 0, "totalRegistros": 0 };
-  public configPagBeneficiario:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_total": 0, "cantRegistros": 0, "totalRegistros": 0 };
+  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_sin_acreditar": 0, "monto_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 };
 
   constructor(
     private _mensajeService: MensajesService,
@@ -48,7 +47,9 @@ export class PrestacionesComponent implements OnInit {
       recursos => {
         this.configPaginacion.colleccionSize = recursos.total_filtrado;
         this.configPaginacion.pageSize = recursos.pagesize;
-        this.configPaginacion.monto_total = recursos.monto_total;
+        this.configPaginacion.monto_acreditado = recursos.monto_acreditado;
+        this.configPaginacion.monto_baja = recursos.monto_baja;
+        this.configPaginacion.monto_sin_acreditar = recursos.monto_sin_acreditar;
         this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, recursos.total_filtrado, recursos.pagesize);
         this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, recursos.total_filtrado, recursos.pagesize);
         // total de registros

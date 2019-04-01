@@ -41,12 +41,11 @@ export class BeneficiariosComponent implements OnInit {
   public listarBeneficiarios(params:object) {
     this._beneficiariosService.buscar(params).subscribe(
       beneficiarios => {
-        console.log(beneficiarios);
         this.configPaginacion.colleccionSize = beneficiarios.total_filtrado;
         this.configPaginacion.pageSize = beneficiarios.pagesize;
         this.configPaginacion.monto_acreditado = beneficiarios.monto_acreditado;
         this.configPaginacion.monto_baja = beneficiarios.monto_baja;
-        this.configPaginacion.monto_total = beneficiarios.monto_general;
+        this.configPaginacion.monto_sin_acreditar = beneficiarios.monto_sin_acreditar;
         this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, beneficiarios.total_filtrado, beneficiarios.pagesize);
         this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, beneficiarios.total_filtrado, beneficiarios.pagesize);
         // total de registros
