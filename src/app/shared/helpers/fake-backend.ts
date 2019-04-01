@@ -668,6 +668,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "monto": (montoTotal.length != 0) ? sum(montoTotal) : 0,
                 "monto_acreditado": (montoTotalAcreditado.length != 0) ? sum(montoTotalAcreditado) : 0,
                 "monto_baja": (montoTotalBaja.length != 0) ? sum(montoTotalBaja) : 0,
+                "monto_sin_acreditar": ((montoTotal.length != 0) ? sum(montoTotal) : 0) - ((montoTotalAcreditado.length != 0) ? sum(montoTotalAcreditado) : 0) - ((montoTotalBaja.length != 0) ? sum(montoTotalBaja) : 0)
               });
             }
 
@@ -702,11 +703,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             for (let k = 0; k < beneficiarios.length; k++) {
               monto_acreditado_filtro += beneficiariosEncontrados[k].monto_acreditado;
               monto_baja_filtro += beneficiariosEncontrados[k].monto_baja;
-              // console.log("monto: ",beneficiarios[k].monto);
               monto_total += beneficiarios[k].monto;
-              //cantidad_acreditado_filtro += beneficiariosEncontrados[k].ca;
-              //monto_acreditado_filtro += beneficiariosEncontrados[k].monto_acreditado;
-
             }
 
             // despues de la busqueda
