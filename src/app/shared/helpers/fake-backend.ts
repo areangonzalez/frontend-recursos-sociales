@@ -652,13 +652,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return (recurso.fecha_baja != undefined) ? recurso.monto : 0;
               });
               let cantRecursosAcreditado = cantRecursos.filter(recurso => {
-                return recurso.fecha_acreditacion != undefined;
+                return recurso.fecha_acreditacion != undefined && !(recurso.fecha_baja != undefined);
+              });
+              let cantRecursosBaja = cantRecursos.filter(recurso => {
+                return recurso.fecha_baja != undefined;
               });
               // armo el array de los beneficiarios
               beneficiarios.push({
                 "personaid": cantPersonas[i].personaid,
                 "recurso_cantidad": cantRecursos.length,
                 "recurso_acreditado_cantidad": cantRecursosAcreditado.length,
+                "recurso_baja_cantidad": cantRecursosBaja.length,
+                "recurso_sin_acreditar_cantidad": cantRecursos.length - cantRecursosAcreditado.length - cantRecursosBaja.length,
                 "persona": persona[0],
                 "monto": (montoTotal.length != 0) ? sum(montoTotal) : 0,
                 "monto_acreditado": (montoTotalAcreditado.length != 0) ? sum(montoTotalAcreditado) : 0,
@@ -693,6 +698,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             let monto_total = 0;
             let cantidad_acreditado_filtro = 0;
             let cantidad_baja_filtro = 0;
+            // console.log(beneficiarios);
             for (let k = 0; k < beneficiarios.length; k++) {
               monto_acreditado_filtro += beneficiariosEncontrados[k].monto_acreditado;
               monto_baja_filtro += beneficiariosEncontrados[k].monto_baja;
@@ -700,6 +706,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               monto_total += beneficiarios[k].monto;
               //cantidad_acreditado_filtro += beneficiariosEncontrados[k].ca;
               //monto_acreditado_filtro += beneficiariosEncontrados[k].monto_acreditado;
+
             }
 
             // despues de la busqueda
@@ -724,7 +731,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }else{
               filtroBeneficiario.resultado = beneficiariosEncontrados.slice(0,pageSize);
             }
-
             return of(new HttpResponse({ status: 200, body: filtroBeneficiario }));
           //} else {
               // return 401 not authorised if token is null or invalid
