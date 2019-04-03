@@ -22,11 +22,6 @@ import {
   LoaderComponent,
   SharedModule
 } from "./shared";
-import { InicioModule } from "./inicio/inicio.module";
-import { ReporteModule } from "./reporte/reporte.module";
-import { RecursoModule } from "./recurso/recurso.module";
-import { VistaModule } from "./vista/vista.module";
-
 
 import { AppComponent } from './app.component';
 import { HttpClient } from 'selenium-webdriver/http';
@@ -43,18 +38,14 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
   ],
   imports: [
     BrowserModule,
-    ChartsModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     NgbTooltipModule.forRoot(),
     PixelSpinnerModule,
     HttpClientModule,
+    ChartsModule,
     CoreModule,
-    SharedModule,
-    InicioModule,
-    ReporteModule,
-    RecursoModule,
-    VistaModule
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

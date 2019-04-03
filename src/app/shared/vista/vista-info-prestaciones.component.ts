@@ -9,7 +9,6 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class VistaInfoPrestacionesComponent implements OnInit {
   @Input("recursos") public recursos:any;
-  //@Input("mostrarBoton") public mostrarBoton: boolean;
 
   constructor(
     configTooltip: NgbTooltipConfig

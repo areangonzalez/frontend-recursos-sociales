@@ -758,11 +758,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let personaEncontrada = persona.length ? persona[0] : null;
           // busco los recursos del beneficiario
           let recursosEncontrados = recursos.filter(recurso => { return recurso.personaid === personaEncontrada.id; });
-
-          let recuros_lista = {"Emprender":[], "Habitat":[], "Micro_Emprendimientos":[]};
+          let recuros_lista = [];
           let j = 0;
+          let auxPrograma = [];
           for (let i = 0; i < recursosEncontrados.length; i++) {
-            let nombrePrograma = recursosEncontrados[i].programa.replace(" ", "_");
+            //let nombrePrograma = recursosEncontrados[i].programa.replace(" ", "_");
             let alumnos: any[] = [];
             if(recursosEncontrados[i]["alumno_lista"]!== undefined) {
               for (let j = 0; j < recursosEncontrados[i]["alumno_lista"].length; j++) {
@@ -771,17 +771,51 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               }
               recursosEncontrados[i]["alumno_lista"] = alumnos;
             }
-
-            for (const programa in recuros_lista) {
-              if (programa === nombrePrograma) {
-                recuros_lista[programa].push(recursosEncontrados[i]);
+            // lista grupo persona - recurso
+            if (recuros_lista.length > 0 ){
+              console.log("recursos lista no es 0", recuros_lista);
+              let existe = false;
+              let posAux = 0; // posicion del elemento SI EXISTE
+              // recorro el array lista par a verificar
+              for (let k = 0; k < recuros_lista.length; k++) {
+                if (parseInt(recuros_lista[k].programaid) == parseInt(recursosEncontrados[i].programaid)){
+                  existe = true;
+                  posAux = k;
+                }
               }
+              // si no existe creo una nueva prestacion en el listado
+              if (!existe){
+                // creo una variable auxiliar
+                let recursoAux = [];
+                // creo el listado de prestaciones
+                recursoAux.push(recursosEncontrados[i]);
+                // creo la nueva lista del programa
+                recuros_lista.push({
+                  programa: recursosEncontrados[i].programa,
+                  programaid: parseInt(recursosEncontrados[i].programaid),
+                  recurso_cantidad: recursoAux.length,
+                  recursos: recursoAux
+                });
+              }else{// si existe la prestacion la agrego
+                recuros_lista[posAux]["recursos"].push(recursosEncontrados[i]);
+                recuros_lista[posAux]["recurso_cantidad"] = recuros_lista[posAux]["recursos"].length;
+              }
+            }else{
+              //recursoss.push(recursosEncontrados[i]);
+              recuros_lista.push({
+                programa: recursosEncontrados[i].programa,
+                programaid: parseInt(recursosEncontrados[i].programaid),
+                recurso_cantidad: 1,
+                recursos: [recursosEncontrados[i]]
+              });
             }
-
           }
+
           personaEncontrada["recurso_lista"] = recuros_lista;
 
-          //console.log(tipos);
+
+
+          console.log("objeto final: ",personaEncontrada);
           return of(new HttpResponse({ status: 200, body: personaEncontrada }));
         }
 

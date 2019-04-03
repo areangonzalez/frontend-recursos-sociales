@@ -2,7 +2,7 @@
     <ngb-tab *ngFor="let recurso of recursos">
       <ng-template ngbTabTitle>{{recurso.programa}} <span class='badge badge-info'>{{recurso.recurso_cantidad}}</span></ng-template>
         <ng-template  ngbTabContent >
-            <div class="card border-light p-2" *ngFor="let prestacion of recurso.recurso">
+            <div class="card border-light p-2" *ngFor="let prestacion of recurso.recursos">
                 <div class="card-header">
                   <div class="d-flex justify-content-between">
                     <span class="d-flex align-items-center">Alta: {{ prestacion.fecha_alta | date:'dd/MM/yyyy' }}</span>

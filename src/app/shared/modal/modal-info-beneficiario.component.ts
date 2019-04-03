@@ -36,39 +36,10 @@ export class ModalInfoBeneficiarioContent implements OnInit {
     console.log(beneficiarioid);
     this._beneficiarioService.beneficiarioPorId(beneficiarioid)
     .pipe(map(vbenficiario => {
+      console.log(vbenficiario);
       let datos = { persona: {}, recursos: {} };
-      let auxPrograma = [];
 
-      for (const clave in vbenficiario.recurso_lista) {
-        let i = 0;
-        for (const key in vbenficiario.recurso_lista[clave]) {
-          if ( auxPrograma.length > 0 ) {
-            let existe = false;
-            for (const k in auxPrograma) {
-              if ( auxPrograma[k]["programa"] == vbenficiario.recurso_lista[clave][key].programa ) {
-                existe = true;
-              }
-            }
-            if (!existe) {
-              auxPrograma.push({ "programa": vbenficiario.recurso_lista[clave][key].programa });
-            }
-          }else{
-            auxPrograma.push({ "programa": vbenficiario.recurso_lista[clave][key].programa });
-          }
-        }
-      }
-
-      for (const j in vbenficiario.recurso_lista) {
-        for (let k = 0; k < vbenficiario.recurso_lista[j].length; k++) {
-          for (let i = 0; i < auxPrograma.length; i++) {
-            if ( auxPrograma[i].programa == vbenficiario.recurso_lista[j][k].programa ) {
-              auxPrograma[i]["recurso"] = vbenficiario.recurso_lista[j];
-              auxPrograma[i]["recurso_cantidad"] = vbenficiario.recurso_lista[j].length;
-            }
-          }
-        }
-      }
-      datos.recursos = auxPrograma;
+      datos.recursos = vbenficiario.recurso_lista;
       delete vbenficiario.recurso_lista;
       datos.persona = vbenficiario;
 
