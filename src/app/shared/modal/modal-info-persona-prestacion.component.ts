@@ -7,7 +7,7 @@ import { RecursoSocialService, MensajesService, LoaderService } from 'src/app/co
   selector: 'modal-info-persona-prestacion-content',
   templateUrl: './modal-info-persona-prestacion.content.html'
 })
-export class ModalInfoPersonaPrestacionContent implements OnInit, AfterViewInit {
+export class ModalInfoPersonaPrestacionContent implements OnInit {
   @Input("recursoid") public recursoid: any;
   public recurso: any;
   public persona: any;
@@ -23,12 +23,6 @@ export class ModalInfoPersonaPrestacionContent implements OnInit, AfterViewInit 
   ngOnInit(){
     this.obtenerRecurso(this.recursoid);
   }
-
-  ngAfterViewInit(){
-    this._loaderService.hide();
-  }
-
-
 
   /**
    * Obtengo el recurso mediante su identificador
