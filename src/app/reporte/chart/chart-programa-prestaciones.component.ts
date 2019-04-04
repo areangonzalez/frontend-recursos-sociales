@@ -28,7 +28,6 @@ export class ChartProgramaPrestacionesComponent implements OnInit {
   private obtenerDatosPrograma(){
     this._programaService.listar()
     .subscribe(programa => {
-      console.log(programa);
       programa.forEach((val, i) => {
         this.datosPrograma.push({ nombre: programa[i].nombre, color: this.colorsGrafico[i], recurso_cantidad: programa[i].recurso_cantidad });
         // nombre de programas
