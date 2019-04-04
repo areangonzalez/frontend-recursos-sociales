@@ -17,7 +17,7 @@ import { LoginRoutingModule } from "./login-routing.module";
     providers: [
     ],
 })
-export class InicioModule {
+export class LoginModule {
     constructor() {
     }
  }

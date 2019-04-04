@@ -4,11 +4,15 @@ import { CustomPreloadingStrategy } from "./custom-preloading-strategy";
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'inicio', data: { loading: true, preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', data: { loading:true, title: "Iniciar sesión" },
       children: [
         { path: '',
-          loadChildren: './inicio/inicio.module#InicioModule' // prod
+          loadChildren: './login/login.module#LoginModule'
+        },
+        { path: 'inicio',
+          loadChildren: './inicio/inicio.module#InicioModule', // prod
+          data: { loading: true, preload: true, breadcrumb: 'Inicio', tile: 'Inicio' }
         },
         { path: 'crear-prestacion',
           loadChildren: './recurso/recurso.module#RecursoModule', // prod
@@ -20,7 +24,7 @@ const routes: Routes = [
           loadChildren: './vista/vista.module#VistaModule', // prod
           data: { loading: true, preload: true, breadcrumb: 'Visualizar prestación', title: 'Visualizar prestación' } }
       ]
-  },{ path: '**', redirectTo: 'inicio', pathMatch: 'full' },
+  },{ path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 @NgModule({
     imports: [
