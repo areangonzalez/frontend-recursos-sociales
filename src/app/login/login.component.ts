@@ -9,10 +9,9 @@ import { ProgramaService, MensajesService, LoaderService } from '../core/service
 })
 export class LoginComponent implements OnInit {
   //title = 'Reporte';
-  public programaLista: any = [];
 
   constructor(
-    private _mensajeService: MensajesService
+    //private _mensajeService: MensajesService
   ){}
 
   ngOnInit() {

@@ -14,8 +14,6 @@ import { fakeBackendProvider } from "./shared/helpers/fake-backend";
 /* Modulos */
 import { CoreModule } from "./core/core.module";
 import {
-  HeaderComponent,
-  FooterComponent,
   MensajesComponent,
   BreadcrumbComponent, BreadcrumbsService,
   CustomDatepickerI18n,
@@ -30,8 +28,6 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
     MensajesComponent,
     BreadcrumbComponent,
     LoaderComponent

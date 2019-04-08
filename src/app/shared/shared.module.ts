@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 
+import { HeaderComponent, FooterComponent } from "./layout";
 import { FormPersonaComponent, BuscarPersonaComponent } from "./formulario/persona";
 import { FormLugarComponent } from "./formulario/lugar";
 import { FormContactoComponent } from "./formulario/contacto";
@@ -33,6 +34,7 @@ import { ProgramaComponent } from "./programa";
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
+      HeaderComponent, FooterComponent,
       BuscarPersonaComponent,
       FormLugarComponent,
       FormContactoComponent,
@@ -52,6 +54,7 @@ import { ProgramaComponent } from "./programa";
         FormsModule, ReactiveFormsModule,
         HttpClientModule,
         RouterModule,
+        HeaderComponent,
         BuscarPersonaComponent,
         FormLugarComponent,
         FormContactoComponent,
