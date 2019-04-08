@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 
+import { AuthGuard } from "./guards/auth.guard";
+
 import {
+  JwtService,
   TitleService,
   ApiService,
   LoaderService,
@@ -27,6 +30,8 @@ import { UtilService } from "./utils";
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+    AuthGuard,
+    JwtService,
     TitleService,
     UtilService,
     ApiService,
@@ -42,8 +47,7 @@ import { UtilService } from "./utils";
     RecursoSocialService,
     BeneficiarioService
     /*
-    AuthGuard,
-    JwtService,
+
      */
   ],
   declarations: []
