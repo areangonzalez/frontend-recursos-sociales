@@ -69,7 +69,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return fecha.getFullYear() + '-' + fecha.getMonth() + '-' + fecha.getDate();
         }
 
-
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
         let personas = getPersonas();
@@ -83,6 +82,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
+            // authenticate
+            if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
+              if (request.body.username === 'admin' && request.body.password === 'admins') {
+                  // if login details are valid return 200 OK with a fake jwt token
+                  let body = {
+                      username: 'admin',
+                      token: 'fake-jwt-token'
+                  };
+                  return of(new HttpResponse({ status: 200, body }));
+              } else {
+                  // else return 400 bad request
+                  return throwError({ error: { message: 'Username or password is incorrect' } });
+              }
+            }
+
+
             // obtener reurso por ID
             if(request.url.match(/\/apimock\/recursos\/\d+$/) && request.method === 'GET') {
               let urlParts = request.url.split('/');
@@ -102,8 +117,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let personaEncontrada = personas.filter(persona => { return persona.id === recursoEncontrado["personaid"]; });
               recursoEncontrado["persona"] = personaEncontrada[0];
 
-              //console.log("recurso encontrado: ",recursoEncontrado);
-              //console.log(tipos);
               return of(new HttpResponse({ status: 200, body: recursoEncontrado }));
             }
             // Persona por ID
@@ -866,7 +879,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // get PROGRAMAS
             if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+              if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 for (let i = 0; i < programas.length; i++) {
                   // obtengo cantidad de los recursos por programa
                   let recursoPrograma = recursos.filter(recurso => { return parseInt(recurso.programaid) === parseInt(programas[i].id); });
@@ -911,10 +924,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
                   return of(new HttpResponse({ status: 200, body: programas }));
-              //} else {
+              } else {
                   // return 401 not authorised if token is null or invalid
-              //     return throwError({ error: { message: 'Unauthorised' } });
-              // }
+                  return throwError({ error: { message: 'Unauthorised' } });
+              }
             }
             // get PROGRAMAS por id /\/users\/\d+$/
             if (request.url.match(/\/apimock\/programas\/\d+$/) && request.method === 'GET') {
