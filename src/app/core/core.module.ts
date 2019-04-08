@@ -7,6 +7,7 @@ import { AuthGuard } from "./guards/auth.guard";
 
 import {
   JwtService,
+  AuthenticationService,
   TitleService,
   ApiService,
   LoaderService,
@@ -32,6 +33,7 @@ import { UtilService } from "./utils";
     // { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     AuthGuard,
     JwtService,
+    AuthenticationService,
     TitleService,
     UtilService,
     ApiService,
