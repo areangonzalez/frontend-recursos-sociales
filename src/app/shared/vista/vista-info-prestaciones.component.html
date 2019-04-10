@@ -63,7 +63,7 @@
                   <div class="col-4 text-center"><h3><small class="text-muted">Alumnos</small></h3></div>
                   <div class="col-4 pt-1"><hr></div>
                 </div>
-                <shared-lista-persona *ngIf="(prestacion.alumno_lista !== undefined)" [personas]="prestacion.alumno_lista" [mostrar]="false"></shared-lista-persona>
+                <shared-lista-persona *ngIf="(prestacion.alumno_lista != undefined && prestacion.alumno_lista.length > 0)" [personas]="prestacion.alumno_lista" [mostrar]="false"></shared-lista-persona>
               </div>
         </ng-template>
     </ngb-tab>
