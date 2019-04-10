@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgramaService, MensajesService, LoaderService } from '../core/services';
-
+import { AuthenticationService } from '../core/services';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +10,55 @@ import { ProgramaService, MensajesService, LoaderService } from '../core/service
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  //title = 'Reporte';
+  public loginForm: FormGroup;
+  public logueado: boolean = false;
+  public huboError: boolean = false;
+  public mensaje: string = "";
+  public returnUrl: string;
 
   constructor(
-    //private _mensajeService: MensajesService
-  ){}
+    private router: Router,
+    private route: ActivatedRoute,
+    private _auth: AuthenticationService,
+    private _fb: FormBuilder
+  ){
+    this.loginForm = _fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
 
   ngOnInit() {
+    this.isLogin();
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/inicio';
+  }
+
+  public ingresar() {
+
+    this._auth.login(this.loginForm.value)
+            .pipe(first())
+            .subscribe(
+            data => {
+                this.router.navigate([this.returnUrl]);
+            },
+            error => {
+              this.huboError = true;
+              this.mensaje = "Por favor verifique sus datos.";
+            });
+
+    /* this._auth.login(this.loginForm.value).subscribe(
+      datos => {
+        this.router.navigate['/inicio'];
+      }, error => {
+        this.huboError = true;
+        this.mensaje = "Por favor verifique sus datos.";
+      }); */
+  }
+
+  private isLogin(){
+    this.logueado = (localStorage.getItem('token-rrss'))? false : true;
   }
 
 }

@@ -1,16 +1,26 @@
-<form class="form-signin">
-  <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
+<div class="app-login d-flex justify-content-center align-items-center">
+  <div>
+    <form [formGroup]="loginForm" class="form-signin">
+      <!-- <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+      <h1 class="h3 mb-3 font-weight-normal text-white text-center">Gestor de Prestaciones</h1>
+
+      <label for="nombre_usuario" class="sr-only">Usuario</label>
+      <input type="text" id="nombre_usuario" class="form-control" placeholder="Usuario" formControlName="username">
+
+      <label for="pass_usuario" class="sr-only">Contraseña</label>
+      <input type="password" id="pass_usuario" class="form-control" placeholder="Contraseña" formControlName="password">
+
+      <div class="mb-3">
+        <div class="text-danger text-center mt-2" *ngIf="huboError"><b>{{mensaje}}</b></div>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" type="button" (click)="ingresar()">Ingresar</button>
+      <p class="mt-5 mb-3 text-muted">
+        <img src="../../../assets/img/logomarcarn.png" width="60" height="40" alt="Ministerio desarrollo social">
+        <span class="text-uppercase text-white ml-2">Ministerio de Desarrollo Social</span>
+      </p>
+    </form>
   </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
-</form>
+</div>
+
 

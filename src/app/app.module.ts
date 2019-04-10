@@ -24,6 +24,7 @@ import {
 import { AppComponent } from './app.component';
 import { HttpClient } from 'selenium-webdriver/http';
 import { ErrorInterceptor } from './shared/helpers/error.interceptor';
+import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     SharedModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
     Title,
