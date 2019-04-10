@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDateARParserFormatter } from './shared';
 import { TitleService, JwtService } from './core/services';
+import { environment } from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,12 @@ export class AppComponent implements OnInit {
   ){}
 
   ngOnInit() {
-    this.estaLogueado();
+    if (!environment.production){
+      this.estaLogueado();
+    }else{
+      this.logueado = true;
+    }
+    console.log(this.logueado);
     this._titleService.init();
   }
 
