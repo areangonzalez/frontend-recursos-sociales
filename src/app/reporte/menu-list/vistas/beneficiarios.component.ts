@@ -41,7 +41,6 @@ export class BeneficiariosComponent implements OnInit {
 
   //public listarBeneficiarios(params: object) {
   public listarBeneficiarios(params:object) {
-    console.log(params);
     this._beneficiariosService.buscar(params).subscribe(
       beneficiarios => {
         this.configPaginacion.colleccionSize = beneficiarios.total_filtrado;

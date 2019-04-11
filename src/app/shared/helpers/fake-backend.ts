@@ -115,6 +115,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 recursoEncontrado["alumno_lista"] = alumnos;
               }
 
+              recursoEncontrado["acreditacion"] = (recursoEncontrado["fecha_acreditacion"]) ? true : false ;
+              recursoEncontrado["baja"] = (recursoEncontrado["fecha_baja"]) ? true : false ;
+
               let personaEncontrada = personas.filter(persona => { return persona.id === recursoEncontrado["personaid"]; });
               recursoEncontrado["persona"] = personaEncontrada[0];
 
