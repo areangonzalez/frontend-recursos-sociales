@@ -43,7 +43,7 @@
                   <label for="fecha_desde" class="prioridad">Fecha Desde/Hasta:</label>
                   <div class="input-group">
                       <input class="form-control input-append" #c1 placeholder="Desde: dd/mm/yyyy" ngbDatepicker #fbd="ngbDatepicker"
-                      id="fecha_desde" formControlName="fechaAltaDesde" (ngModelChange)="formatFecha($event, 'fecha_alta_desde'); onDateSelection($event)" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.fechaAltaDesde.value)}"
+                      id="fecha_desde" formControlName="fechaAltaDesde" (ngModelChange)="formatFecha($event, 'fecha_alta_desde');" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.fechaAltaDesde.value)}"
                       [displayMonths]="2" [navigation]="'select'" [dayTemplate]="t" [autoClose]="false"
                       >
                       <input class="form-control" #c1 placeholder="Hasta: dd/mm/yyyy" ngbDatepicker #fb="ngbDatepicker"

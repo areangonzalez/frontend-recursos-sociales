@@ -4,6 +4,7 @@ import { LocalidadService, ProgramaService, TipoRecursoService, MensajesService 
 import { UtilService } from 'src/app/core/utils';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { isEmpty } from 'rxjs/operators';
+import { debug } from 'util';
 
 @Component({
   selector: 'busqueda-recurso',
@@ -92,32 +93,15 @@ export class BusquedaRecursoComponent implements OnInit {
   }
 
   public buscar() {
+    // busqueda avanzada de los valores del formulario
     let busquedaAvanzada = this.busquedaAvanzada.value;
     let apiBusqueda:any = {};
     let esTrue: boolean = false;
-    //let apiBusqueda:object = {page:this.config page, pagesize:20};
+    // busco dentro del objeto segun la clave
     for (const clave in busquedaAvanzada) {
-      if (clave == 'fechaAltaDesde' || clave == 'fechaAltaHasta'){
-      }else if(busquedaAvanzada[clave] !== '') {
-        if (clave == 'fecha_alta_desde'){
-          if (busquedaAvanzada['fechaAltaDesde'] != null) {
-            apiBusqueda[clave] = busquedaAvanzada[clave];
-            esTrue = true;
-          }
-        }else if (clave == 'baja') {
-          if (busquedaAvanzada[clave]){
-            apiBusqueda[clave] = busquedaAvanzada[clave];
-            esTrue = true;
-          }
-        }else if (clave == 'acreditacion') {
-          if (busquedaAvanzada[clave]){
-            apiBusqueda[clave] = busquedaAvanzada[clave];
-            esTrue = true;
-          }
-        }else if(clave === "global_param") {
-          apiBusqueda[clave] = busquedaAvanzada[clave];
-        }else{
-          apiBusqueda[clave] = busquedaAvanzada[clave];
+      if (clave !== 'fechaAltaDesde' && clave !== 'fechaAltaHasta'){
+        if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
+          Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
           esTrue = true;
         }
       }

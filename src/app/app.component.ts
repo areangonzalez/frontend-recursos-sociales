@@ -19,12 +19,7 @@ export class AppComponent implements OnInit {
   ){}
 
   ngOnInit() {
-    if (!environment.production){
-      this.estaLogueado();
-    }else{
-      this.logueado = true;
-    }
-    console.log(this.logueado);
+    this.estaLogueado();
     this._titleService.init();
   }
 

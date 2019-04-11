@@ -51,16 +51,11 @@ export class BusquedaBeneficiarioComponent implements OnInit {
     let esTrue: boolean = false;
     //let apiBusqueda:object = {page:this.config page, pagesize:20};
     for (const clave in busquedaAvanzada) {
-      if (busquedaAvanzada[clave] != '') {
-        if(clave === "global_param") {
-          apiBusqueda[clave] = busquedaAvanzada[clave];
-        }else{
-          apiBusqueda[clave] = busquedaAvanzada[clave];
-          esTrue = true;
-        }
+      if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
+        Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
+        esTrue = true;
       }
     }
-    console.log()
     this.obtenerBusqueda.emit(apiBusqueda);
     this.btnSeleccion = esTrue;
     this.mostrar = esTrue;

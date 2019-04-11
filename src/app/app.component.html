@@ -1,9 +1,12 @@
 <angular-loader></angular-loader>
-<layout-header *ngIf="logueado" ></layout-header>
-<div class="app-container" [ngClass]="{'container-header-top': logueado}">
+<!-- <layout-header *ngIf="logueado" ></layout-header> -->
+<layout-header></layout-header>
+<!-- <div class="app-container" [ngClass]="{'container-header-top': logueado}"> -->
+<div class="app-container container-header-top" >
   <div class="container-fluid">
     <mensajes-alert></mensajes-alert>
-    <breadcrumb *ngIf="logueado" ></breadcrumb>
+    <!-- <breadcrumb *ngIf="logueado" ></breadcrumb> -->
+    <breadcrumb></breadcrumb>
 
     <!-- <h2>{{title | async}}</h2> -->
 

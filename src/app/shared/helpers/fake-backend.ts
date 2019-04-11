@@ -728,11 +728,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             let monto_total = 0;
             let cantidad_acreditado_filtro = 0;
             let cantidad_baja_filtro = 0;
-            // console.log(beneficiarios);
-            for (let k = 0; k < beneficiarios.length; k++) {
-              monto_acreditado_filtro += beneficiariosEncontrados[k].monto_acreditado;
-              monto_baja_filtro += beneficiariosEncontrados[k].monto_baja;
-              monto_total += beneficiarios[k].monto;
+            // console.log(beneficiariosEncontrados);
+            if (beneficiariosEncontrados.length > 0){
+              for (let k = 0; k < beneficiarios.length; k++) {
+                monto_acreditado_filtro += beneficiariosEncontrados[k].monto_acreditado;
+                monto_baja_filtro += beneficiariosEncontrados[k].monto_baja;
+                monto_total += beneficiarios[k].monto;
+              }
             }
 
             // despues de la busqueda

@@ -29,11 +29,13 @@ export class PrestacionesComponent implements OnInit {
    * @param apiBusqueda parametros de filtracion
    */
   public buscar(apiBusqueda:any) {
-    apiBusqueda["page"] = 0;
-    apiBusqueda["pagesize"] = 20;
-    this.busqueda = apiBusqueda;
-    // prestacion
+    // Agrego la paginacion a la busqueda avanzada
+    Object.assign(apiBusqueda, {"page": 0, "pagesize": 20});
+    // agrego la busqueda en la nueva variable
+    Object.assign(this.busqueda, apiBusqueda);
+    // configuro para que se dirija a la primera pagina
     this.configPaginacion.page = 1;
+    // realizo la busqueda
     this.listarRecursos(apiBusqueda);
   }
 
@@ -64,7 +66,8 @@ export class PrestacionesComponent implements OnInit {
    * @param page numero de pagina
    */
   public cambioPagina(page:number){
-    this.busqueda["page"] = page - 1;
+    let newPage = page - 1
+    Object.assign(this.busqueda,{"page": newPage});
     this.listarRecursos(this.busqueda);
   }
 
