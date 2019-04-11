@@ -9,7 +9,8 @@
                     <span class="d-flex align-items-center text-success" *ngIf="(prestacion.acreditacion)">Acreditacion: {{prestacion.fecha_acreditacion | date:'dd/MM/yyyy'}}</span>
                     <span class="d-flex align-items-center text-danger" *ngIf="(prestacion.acreditacion)" >Baja: {{prestacion.fecha_baja | date:'dd/MM/yyyy'}}</span>
                     <span class="d-flex align-items-end">
-                      botones
+                        <modal-acreditar-component class="btn-group" *ngIf="(!prestacion.acreditacion && !prestacion.baja)" [recursoid]="prestacion.id" (obtenerRecurso)="mostrarFA($event)" ngbTooltip="Acreditar prestación" placement="bottom"></modal-acreditar-component>
+                        <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" placement="bottom" *ngIf="(!prestacion.baja)" [recursoid]="prestacion.id" (obtenerRecurso)="mostrarFB($event)" ></modal-baja-component>
                     </span>
                   </div>
                 </div>
@@ -34,26 +35,6 @@
                       </dl>
                     </div>
                   </div>
-                  <!-- <div class="row">
-                    <div class="col-md-4">
-                      <dl class="row">
-                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha de acreditación:</dt>
-                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{prestacion.fecha_acreditacion | date:'dd/MM/yyyy'}}</dd>
-                      </dl>
-                    </div>
-                    <div class="col-md-4">
-                      <dl class="row">
-                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha de baja:</dt>
-                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{prestacion.fecha_baja | date:'dd/MM/yyyy'}}</dd>
-                      </dl>
-                    </div>
-                    <div class="col-md-4">
-                      <dl class="row">
-                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Descripción baja:</dt>
-                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{prestacion.descripcion_baja}}</dd>
-                      </dl>
-                    </div>
-                  </div> -->
                 </div>
                 <div class="row">
                   <div class="col-md-12">

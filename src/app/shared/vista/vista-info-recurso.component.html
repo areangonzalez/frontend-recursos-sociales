@@ -8,7 +8,8 @@
             <span class="d-flex align-items-center text-success" *ngIf="(recurso.acreditacion)">Acreditacion: {{recurso.fecha_acreditacion | date:'dd/MM/yyyy'}}</span>
             <span class="d-flex align-items-center text-danger" *ngIf="(recurso.acreditacion)" >Baja: {{recurso.fecha_baja | date:'dd/MM/yyyy'}}</span>
             <span class="d-flex align-items-end">
-              botones
+                <modal-acreditar-component class="btn-group" *ngIf="(!recurso.acreditacion && !recurso.baja)" [recursoid]="recurso.id" (obtenerRecurso)="mostrarFA($event)" ngbTooltip="Acreditar prestación"></modal-acreditar-component>
+                <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" *ngIf="(!recurso.baja)" [recursoid]="recurso.id" (obtenerRecurso)="mostrarFB($event)" ></modal-baja-component>
             </span>
           </div>
         </div>
@@ -43,13 +44,13 @@
           </div>
         </div>
         <div class="row" *ngIf="(recurso.baja)">
-            <div class="col-md-12">
-              <dl class="row">
-                <dt class="col-2 col-sm-2 col-md-2 col-lg-2" style="margin-left: 0.8rem;">Descripción baja:</dt>
-                <dd class="col-3 col-sm-9 col-md-9 col-lg-9">{{recurso.descripcion_baja}}</dd>
-              </dl>
-            </div>
+          <div class="col-md-12">
+            <dl class="row">
+              <dt class="col-2 col-sm-2 col-md-2 col-lg-2" style="margin-left: 0.8rem;">Descripción baja:</dt>
+              <dd class="col-3 col-sm-9 col-md-9 col-lg-9">{{recurso.descripcion_baja}}</dd>
+            </dl>
           </div>
+        </div>
         <div class="d-flex justify-content-between" *ngIf="(recurso.alumno_lista !== undefined)">
           <div class="col-4 pt-1"><hr></div>
           <div class="col-4 text-center"><h3><small class="text-muted">Alumnos</small></h3></div>

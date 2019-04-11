@@ -90,7 +90,7 @@ export class ModalAcreditarComponent {
       (result) => {
         if (result == 'closed'){
         }else{
-          // obtengo el id persona desde el content.
+          // obtengo el resultado de la operación.
           return this.obtenerRecurso.emit(result);
         }
       }

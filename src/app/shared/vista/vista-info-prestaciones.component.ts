@@ -19,4 +19,14 @@ export class VistaInfoPrestacionesComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  mostrarFA(estado:any){
+    console.log(estado);
+  }
+
+
+  mostrarFB(estado:any){
+    console.log(estado);
+  }
+
 }
