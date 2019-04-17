@@ -59,11 +59,11 @@
                                   {{(persona.lugar.depto != "")?persona.lugar.depto:""}}
                                 </span>
                             </ng-template>
-                            <button type="button" class="btn btn-sm btn-light" [autoClose]="'outside'" [ngbTooltip]="direccionContent" container="body"><i class="fas fa-home"></i></button>
-                            <button *ngIf="(mostrarBoton && persona.telefono != '')" type="button" ngbTooltip="{{persona.telefono}}" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
-                            <button *ngIf="(mostrarBoton && persona.celular != '')" type="button" ngbTooltip="{{persona.celular}}" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
-                            <button *ngIf="(mostrarBoton && persona.email != '')" type="button" ngbTooltip="{{persona.email}}" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
-                            <button *ngIf="(mostrarBoton && persona.red_social != '')" type="button" ngbTooltip="{{persona.red_social}}" class="btn btn-sm btn-light"><i class="fas fa-users"></i></button>
+                            <button type="button" class="btn btn-sm btn-light" container="body" triggers="click" [autoClose]="'outside'" [ngbTooltip]="direccionContent" container="body"><i class="fas fa-home"></i></button>
+                            <button *ngIf="(mostrarBoton && persona.telefono != '')" triggers="click" [autoClose]="'outside'" type="button" ngbTooltip="{{persona.telefono}}" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
+                            <button *ngIf="(mostrarBoton && persona.celular != '')" triggers="click" [autoClose]="'outside'" type="button" ngbTooltip="{{persona.celular}}" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
+                            <button *ngIf="(mostrarBoton && persona.email != '')" triggers="click" [autoClose]="'outside'" type="button" ngbTooltip="{{persona.email}}" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
+                            <button *ngIf="(mostrarBoton && persona.red_social != '' && (persona.red_social))" container="body" triggers="click" [autoClose]="'outside'" type="button" ngbTooltip="{{persona.red_social}}" class="btn btn-sm btn-light"><i class="fas fa-users"></i></button>
                         </div>
                       </div>
                     </div>
