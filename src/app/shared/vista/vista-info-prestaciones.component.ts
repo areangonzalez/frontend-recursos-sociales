@@ -20,13 +20,13 @@ export class VistaInfoPrestacionesComponent implements OnInit {
   ngOnInit() {
   }
 
-  mostrarFA(estado:any){
-    console.log(estado);
+  mostrarFA(estado:any, i:number){
+    this.recursos[i].acreditacion = (estado == true) ? true : false;
   }
 
 
-  mostrarFB(estado:any){
-    console.log(estado);
+  mostrarFB(estado:any, i:number){
+    this.recursos[i].baja = (estado == true) ? true : false;
   }
 
 }

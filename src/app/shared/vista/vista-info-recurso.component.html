@@ -6,10 +6,10 @@
           <div class="d-flex justify-content-between">
             <span class="d-flex align-items-center">Alta: {{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</span>
             <span class="d-flex align-items-center text-success" *ngIf="(recurso.acreditacion)">Acreditacion: {{recurso.fecha_acreditacion | date:'dd/MM/yyyy'}}</span>
-            <span class="d-flex align-items-center text-danger" *ngIf="(recurso.acreditacion)" >Baja: {{recurso.fecha_baja | date:'dd/MM/yyyy'}}</span>
-            <span class="d-flex align-items-end">
+            <span class="d-flex align-items-center text-danger" *ngIf="(recurso.baja)" >Baja: {{recurso.fecha_baja | date:'dd/MM/yyyy'}}</span>
+            <span class="d-flex align-items-end" *ngIf="(!recurso.baja)">
                 <modal-acreditar-component class="btn-group" *ngIf="(!recurso.acreditacion && !recurso.baja)" [recursoid]="recurso.id" (obtenerRecurso)="mostrarFA($event)" ngbTooltip="Acreditar prestación"></modal-acreditar-component>
-                <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" *ngIf="(!recurso.baja)" [recursoid]="recurso.id" (obtenerRecurso)="mostrarFB($event)" ></modal-baja-component>
+                <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" [recursoid]="recurso.id" (obtenerRecurso)="mostrarFB($event)" ></modal-baja-component>
             </span>
           </div>
         </div>

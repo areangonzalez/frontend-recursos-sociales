@@ -7,5 +7,5 @@
   <div class="modal-body">
       <shared-vista-info-persona *ngIf="(persona != null)" [persona]="persona" [mostrarBoton]="true" ></shared-vista-info-persona>
       <br>
-      <shared-vista-info-recurso *ngIf="(recurso != null)" [recurso]="recurso" ></shared-vista-info-recurso>
+      <shared-vista-info-recurso *ngIf="(recurso != null)" [recurso]="recurso" (cambioEstado)="actualizarRecurso($event)"></shared-vista-info-recurso>
   </div>

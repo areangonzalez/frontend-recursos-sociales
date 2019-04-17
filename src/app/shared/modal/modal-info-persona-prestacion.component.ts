@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit } from '@
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfig, BotonDisenio } from 'src/app/core/models';
 import { RecursoSocialService, MensajesService, LoaderService } from 'src/app/core/services';
+import { RecursoRoutingModule } from 'src/app/recurso/recurso-routing.module';
 
 @Component({
   selector: 'modal-info-persona-prestacion-content',
@@ -9,6 +10,7 @@ import { RecursoSocialService, MensajesService, LoaderService } from 'src/app/co
 })
 export class ModalInfoPersonaPrestacionContent implements OnInit {
   @Input("recursoid") public recursoid: any;
+  @Input("recursos") public recursos: any;
   public recurso: any;
   public persona: any;
 
@@ -35,6 +37,22 @@ export class ModalInfoPersonaPrestacionContent implements OnInit {
         this.persona = recurso.persona;
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
+
+  public actualizarRecurso(estado:any){
+    if (estado){
+      this.obtenerRecurso(this.recursoid);
+      this.actualizarListaRecursos(this.recursoid, estado);
+
+    }
+  }
+
+  public actualizarListaRecursos(idRecurso: number, estado: boolean){
+    for (let i = 0; i < this.recursos.length; i++) {
+      if ( this.recursos[i].id == idRecurso) {
+        this.recursos[i].baja = estado;
+      }
+    }
+  }
 }
 
 @Component({
@@ -46,9 +64,10 @@ export class ModalInfoPersonaPrestacionContent implements OnInit {
 export class ModalInfoPersonaPrestacionComponent {
   /**
    * @var recursoid {number} identificador de un recurso
-   * @function {Object} devuelve los datos de la persona
+   * @var recursos {array} listado de los recursos
    */
   @Input("recursoid") public recursoid: any;
+  @Input("recursos") public recursos: any;
 
   constructor(
     private modalService: NgbModal,
@@ -62,5 +81,6 @@ export class ModalInfoPersonaPrestacionComponent {
   open() {
     const modalRef = this.modalService.open(ModalInfoPersonaPrestacionContent, {size: 'lg'});
     modalRef.componentInstance.recursoid = this.recursoid;
+    modalRef.componentInstance.recursos = this.recursos;
   }
 }
