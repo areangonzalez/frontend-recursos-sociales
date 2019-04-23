@@ -78,6 +78,6 @@ export class ModalInfoPersonaPrestacionComponent {
     modalRef.componentInstance.recursos = this.recursos;
     modalRef.componentInstance.cambioEstado.subscribe(($e) => {
       this.cambioEstado.emit($e);
-    })
+    });
   }
 }

@@ -11,6 +11,7 @@ import { UtilService } from 'src/app/core/utils';
 })
 export class ModalInfoBeneficiarioContent implements OnInit {
   @Input("beneficiarioid") public beneficiarioid: any;
+  @Output("cambioEstado") public cambioEstado = new EventEmitter();
   public recursos: any;
   public persona: any;
 
@@ -33,10 +34,8 @@ export class ModalInfoBeneficiarioContent implements OnInit {
    * @param beneficiarioid identificador del beneficiario
    */
   public obtenerRecurso(beneficiarioid:any) {
-    console.log(beneficiarioid);
     this._beneficiarioService.beneficiarioPorId(beneficiarioid)
     .pipe(map(vbenficiario => {
-      console.log(vbenficiario);
       let datos = { persona: {}, recursos: {} };
 
       datos.recursos = vbenficiario.recurso_lista;
@@ -49,9 +48,17 @@ export class ModalInfoBeneficiarioContent implements OnInit {
       beneficiario => {
         this.recursos = beneficiario.recursos;
         this.persona = beneficiario.persona;
-        console.log(beneficiario);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
+
+  actualizarInfoBeneficiario(estado){
+    //console.log(estado);
+    if (estado){
+      this.obtenerRecurso(this.beneficiarioid);
+      this.cambioEstado.emit(estado);
+    }
+  }
+
 }
 
 @Component({
@@ -65,6 +72,7 @@ export class ModalInfoBeneficiarioComponent {
    * @var beneficiarioid {number} identificador de un beneficiario
    */
   @Input("beneficiarioid") public beneficiarioid: any;
+  @Output("cambioEstado") public cambioEstado = new EventEmitter();
 
   constructor(
     private modalService: NgbModal,
@@ -78,5 +86,8 @@ export class ModalInfoBeneficiarioComponent {
   open() {
     const modalRef = this.modalService.open(ModalInfoBeneficiarioContent, {size: 'lg'});
     modalRef.componentInstance.beneficiarioid = this.beneficiarioid;
+    modalRef.componentInstance.cambioEstado.subscribe(($e) => {
+      this.cambioEstado.emit($e);
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,6 +9,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class VistaInfoPrestacionesComponent implements OnInit {
   @Input("recursos") public recursos:any;
+  @Output("cambioEstado") public cambioEstado = new EventEmitter();
 
   constructor(
     configTooltip: NgbTooltipConfig
@@ -22,11 +23,13 @@ export class VistaInfoPrestacionesComponent implements OnInit {
 
   mostrarFA(estado:any, i:number){
     this.recursos[i].acreditacion = (estado == true) ? true : false;
+    this.cambioEstado.emit(estado);
   }
 
 
   mostrarFB(estado:any, i:number){
     this.recursos[i].baja = (estado == true) ? true : false;
+    this.cambioEstado.emit(estado);
   }
 
 }

@@ -62,7 +62,7 @@
         <td class="text-center">{{beneficiario.monto_sin_acreditar | currency:'USD':'symbol-narrow':'2.2'}} ({{beneficiario.recurso_sin_acreditar_cantidad}})</td>
         <td>
           <div class="btn-group">
-            <modal-info-beneficiario-component [beneficiarioid]="beneficiario.personaid"></modal-info-beneficiario-component>
+            <modal-info-beneficiario-component [beneficiarioid]="beneficiario.personaid" (cambioEstado)="actualizarLista($event)"></modal-info-beneficiario-component>
           </div>
         </td>
       </tr>
