@@ -63,7 +63,8 @@ export class ErrorInterceptor implements HttpInterceptor {
       for (const key in error) { // recorro el array
         let concatMsj = ""; // variable que concatena el/los mensajes que pueden existir dentro de los items
         mensaje += (mensaje != "") ? "\n" : "";
-        mensaje += key.replace("_", " ") + ":"; // remplazo los guiones bajos por espacios.
+        let tituloMensaje = key.replace("_", " "); // remplazo los guiones bajos por espacios.
+        mensaje += this.ucWords(tituloMensaje) + ":"
         for (let i = 0; i < error[key].length; i++) { // recorro el objeto segun su clave
           concatMsj += (concatMsj != "") ? "," : " " + error[key][i];
         }
@@ -71,4 +72,24 @@ export class ErrorInterceptor implements HttpInterceptor {
       }
       return mensaje;
     }
+
+    private ucWords(string){
+      let arrayWords: any;
+      let returnString = "";
+      let len:number;
+      arrayWords = string.split(" ");
+      len = arrayWords.length;
+      for(let i=0;i < len ;i++){
+        if(i != (len-1)){
+          returnString = returnString+this.ucFirst(arrayWords[i])+" ";
+        }else{
+          returnString = returnString+this.ucFirst(arrayWords[i]);
+        }
+      }
+      return returnString;
+     }
+
+     private ucFirst(string){
+      return string.substr(0,1).toUpperCase()+string.substr(1,string.length).toLowerCase();
+     }
 }
