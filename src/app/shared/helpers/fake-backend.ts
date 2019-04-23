@@ -781,7 +781,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let j = 0;
           let auxPrograma = [];
           for (let i = 0; i < recursosEncontrados.length; i++) {
-            //let nombrePrograma = recursosEncontrados[i].programa.replace(" ", "_");
+            //Verifico si estan acreditado o dado de baja
+            recursosEncontrados[i]["acreditacion"] = (recursosEncontrados[i]["fecha_acreditacion"]) ? true : false ;
+            recursosEncontrados[i]["baja"] = (recursosEncontrados[i]["fecha_baja"]) ? true : false ;
+
             let alumnos: any[] = [];
             if(recursosEncontrados[i]["alumno_lista"]!== undefined) {
               for (let j = 0; j < recursosEncontrados[i]["alumno_lista"].length; j++) {
@@ -792,7 +795,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // lista grupo persona - recurso
             if (recuros_lista.length > 0 ){
-              console.log("recursos lista no es 0", recuros_lista);
               let existe = false;
               let posAux = 0; // posicion del elemento SI EXISTE
               // recorro el array lista par a verificar
@@ -834,7 +836,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
 
-          console.log("objeto final: ",personaEncontrada);
+          // console.log("objeto final: ",personaEncontrada);
           return of(new HttpResponse({ status: 200, body: personaEncontrada }));
         }
 

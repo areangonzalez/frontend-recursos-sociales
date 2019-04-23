@@ -43,16 +43,7 @@ export class ModalInfoPersonaPrestacionContent implements OnInit {
     if (estado){
       this.obtenerRecurso(this.recursoid);
       this.cambioEstado.emit(estado);
-      //this.actualizarListaRecursos(this.recursoid, estado);
 
-    }
-  }
-
-  public actualizarListaRecursos(idRecurso: number, estado: boolean){
-    for (let i = 0; i < this.recursos.length; i++) {
-      if ( this.recursos[i].id == idRecurso) {
-        this.recursos[i].baja = estado;
-      }
     }
   }
 }
@@ -87,7 +78,6 @@ export class ModalInfoPersonaPrestacionComponent {
     modalRef.componentInstance.recursos = this.recursos;
     modalRef.componentInstance.cambioEstado.subscribe(($e) => {
       this.cambioEstado.emit($e);
-      // console.log("Evento modal: ",$e);
     })
   }
 }

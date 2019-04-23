@@ -24,10 +24,10 @@ export class VistaInfoRecursoComponent implements OnInit {
 
   mostrarFA(estado:any){
     this.recurso.acreditacion = (estado == true) ? true : false;
+    this.cambioEstado.emit(estado);
   }
 
   mostrarFB(estado:any){
-    console.log("baja: ", estado);
     this.recurso.baja = (estado == true) ? true : false;
     this.cambioEstado.emit(estado);
   }

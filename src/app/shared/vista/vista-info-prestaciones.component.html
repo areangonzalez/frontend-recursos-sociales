@@ -7,7 +7,7 @@
                   <div class="d-flex justify-content-between">
                     <span class="d-flex align-items-center">Alta: {{ prestacion.fecha_alta | date:'dd/MM/yyyy' }}</span>
                     <span class="d-flex align-items-center text-success" *ngIf="(prestacion.acreditacion)">Acreditacion: {{prestacion.fecha_acreditacion | date:'dd/MM/yyyy'}}</span>
-                    <span class="d-flex align-items-center text-danger" *ngIf="(prestacion.acreditacion)" >Baja: {{prestacion.fecha_baja | date:'dd/MM/yyyy'}}</span>
+                    <span class="d-flex align-items-center text-danger" *ngIf="(prestacion.baja)" >Baja: {{prestacion.fecha_baja | date:'dd/MM/yyyy'}}</span>
                     <span class="d-flex align-items-end" *ngIf="(!prestacion.baja)">
                         <modal-acreditar-component class="btn-group" *ngIf="(!prestacion.acreditacion && !prestacion.baja)" [recursoid]="prestacion.id" (obtenerRecurso)="mostrarFA($event, i)" ngbTooltip="Acreditar prestación" placement="bottom"></modal-acreditar-component>
                         <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" placement="bottom" [recursoid]="prestacion.id" (obtenerRecurso)="mostrarFB($event, i)" ></modal-baja-component>
