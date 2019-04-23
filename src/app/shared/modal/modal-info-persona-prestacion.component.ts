@@ -11,6 +11,7 @@ import { RecursoRoutingModule } from 'src/app/recurso/recurso-routing.module';
 export class ModalInfoPersonaPrestacionContent implements OnInit {
   @Input("recursoid") public recursoid: any;
   @Input("recursos") public recursos: any;
+  @Input("cambioEstado") public cambioEstado = new EventEmitter();
   public recurso: any;
   public persona: any;
 
@@ -41,7 +42,8 @@ export class ModalInfoPersonaPrestacionContent implements OnInit {
   public actualizarRecurso(estado:any){
     if (estado){
       this.obtenerRecurso(this.recursoid);
-      this.actualizarListaRecursos(this.recursoid, estado);
+      this.cambioEstado.emit(estado);
+      //this.actualizarListaRecursos(this.recursoid, estado);
 
     }
   }
@@ -68,6 +70,7 @@ export class ModalInfoPersonaPrestacionComponent {
    */
   @Input("recursoid") public recursoid: any;
   @Input("recursos") public recursos: any;
+  @Output("cambioEstado") public cambioEstado = new EventEmitter();
 
   constructor(
     private modalService: NgbModal,
@@ -82,5 +85,9 @@ export class ModalInfoPersonaPrestacionComponent {
     const modalRef = this.modalService.open(ModalInfoPersonaPrestacionContent, {size: 'lg'});
     modalRef.componentInstance.recursoid = this.recursoid;
     modalRef.componentInstance.recursos = this.recursos;
+    modalRef.componentInstance.cambioEstado.subscribe(($e) => {
+      this.cambioEstado.emit($e);
+      // console.log("Evento modal: ",$e);
+    })
   }
 }
