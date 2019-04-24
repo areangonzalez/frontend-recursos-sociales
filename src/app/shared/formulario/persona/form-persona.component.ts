@@ -127,14 +127,6 @@ export class FormPersonaComponent implements OnInit {
     return this.cuil_medio;
   }
   /**
-   * @function validarPersonaPorNroDocumento obtiene la validacion de una persona mediante su número de documento
-   * @param nroDocumento valor que sirve para la validación de una persona.
-   */
-  public validarPersonaPorNroDocumento(nroDocumento:string){
-    // aplicar servicio
-    return true;
-  }
-  /**
    * @function armarCuil funcion que arma el cuil uniendo las variables de los formularios
    */
   public armarCuil(){

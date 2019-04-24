@@ -6,12 +6,11 @@
       <div class="col-4 pt-1"><hr></div>
     </div>
     <div class="row">
-    <!-- <div class="col-md-6"> -->
         <div class="form-group col-md-3">
             <label for="nro_documento" class="prioridad">Nro. documento (<span>*</span>):</label>
             <div class="input-group">
                 <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" placeholder="Ej.: 23123987"
-                 (keyup)="soloNumero($event.target)" (change)="[validarCuil($event.target.value), validarPersonaPorNroDocumento($event.target.value)]" [ngClass]="{'is-invalid': (formPersona.get('nro_documento').invalid && submitted)}">
+                 (keyup)="soloNumero($event.target)" (change)="validarCuil($event.target.value)" [ngClass]="{'is-invalid': (formPersona.get('nro_documento').invalid && submitted)}">
             </div>
             <div *ngIf="(formPersona.get('nro_documento').invalid && submitted)" class="text-danger">
                 <div *ngIf="formPersona.get('nro_documento').hasError('required')">Este campo es requerido. </div>
@@ -35,8 +34,6 @@
                 </div>
             </div>
         </div>
-    <!-- </div> -->
-    <!-- <div class="row"> -->
         <div class="form-group col-md-3">
             <label for="apellido" class="prioridad">Apellido (<span>*</span>):</label>
             <input type="text" id="apellido" placeholder="Apellido" class="form-control" formControlName="apellido" [ngClass]="{'is-invalid': (formPersona.get('apellido').invalid && submitted)}">

@@ -370,6 +370,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     listaRecursos.resultado = recursosEncontrados.slice(pageStart, pageEnd);
                   }else{
                     listaRecursos.resultado = recursosEncontrados.slice(0,pageSize);
+
                   }
 
 
