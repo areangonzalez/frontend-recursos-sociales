@@ -26,4 +26,14 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('token-rrss');
     }
+
+    loggedIn() {
+      let userLogin = localStorage.getItem('token-rrss');
+      if(userLogin) {
+        return true;
+      }else{
+        return false;
+      }
+    }
+
 }

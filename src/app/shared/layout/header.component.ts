@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
+import { AuthenticationService } from "../../core/services";
 
 @Component({
     selector: 'layout-header',
@@ -12,6 +13,7 @@ export class HeaderComponent implements OnInit {
 
     constructor(
         private _router: Router,
+        private _authentication: AuthenticationService
     ) { }
 
     ngOnInit() {
@@ -22,7 +24,8 @@ export class HeaderComponent implements OnInit {
     }
 
     cerrarSesion(){
-      console.log("cierre");
+      this._authentication.logout();
+      this._router.navigate(['/login']);
     }
 
     mostrarMenu(){
