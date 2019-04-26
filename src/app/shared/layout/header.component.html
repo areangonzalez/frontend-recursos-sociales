@@ -16,9 +16,12 @@
           </li>
         </ul>
       <ul class="navbar-nav flex-row ml-md-auto d-md-flex" *ngIf="estoyLogueado">
-          <li class="nav-item">
-            <a class="nav-link" (click)="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-        </li>
+          <div ngbDropdown placement="bottom-right" class="d-inline-block">
+              <button class="btn btn-outline-primary-dp btn-margin-dropdown" id="dropdownBasic1" ngbDropdownToggle><i class="fas fa-user-tie"></i> {{nombreUsuario}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <li class="dropdown-item"><a class="nav-link" (click)="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+              </div>
+            </div>
       </ul>
   </div>
 </nav>

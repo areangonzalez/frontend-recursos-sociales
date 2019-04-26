@@ -10,6 +10,7 @@ import { AuthenticationService } from "../../core/services";
 export class HeaderComponent implements OnInit {
     public isCollapsed = true;
     public mostrar: boolean = false;
+    public nombreUsuario: string = "";
 
     constructor(
         private _router: Router,
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+      this.nombreUsuario = this._authentication.getUserName();
     }
 
     estoyLogueado(){
@@ -35,7 +37,5 @@ export class HeaderComponent implements OnInit {
     ocultarMenu(){
       this.mostrar = false;
     }
-
-
 
 }

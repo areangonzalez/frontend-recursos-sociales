@@ -35,4 +35,10 @@ export class AuthenticationService {
       }
     }
 
+    getUserName() {
+      let userLogin = JSON.parse(localStorage.getItem('token-rrss'));
+
+      return userLogin.username;
+    }
+
 }
