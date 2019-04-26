@@ -888,7 +888,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // get PROGRAMAS
             if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-              /* if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') { */
+              console.log(request.headers.get('Authorization'));
+              if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 for (let i = 0; i < programas.length; i++) {
                   // obtengo cantidad de los recursos por programa
                   let recursoPrograma = recursos.filter(recurso => { return parseInt(recurso.programaid) === parseInt(programas[i].id); });
@@ -933,10 +934,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
                   return of(new HttpResponse({ status: 200, body: programas }));
-              /* } else {
+              } else {
                   // return 401 not authorised if token is null or invalid
                   return throwError({ error: { message: 'Unauthorised' } });
-              } */
+              }
             }
             // get PROGRAMAS por id /\/users\/\d+$/
             if (request.url.match(/\/apimock\/programas\/\d+$/) && request.method === 'GET') {
