@@ -13,7 +13,6 @@ export class AuthenticationService {
             .pipe(map((res: any) => {
               // login successful if there's a jwt token in the response
               if (res && res.access_token) {
-                console.log(res);
                   let username = res.username;
                     // store username and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('token-rrss', JSON.stringify({ username, token: res.access_token }));

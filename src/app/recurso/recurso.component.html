@@ -12,6 +12,4 @@
     <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.controls.contacto"></shared-form-contacto>
 
   </div>
-  <div class="mb-3 bg-white  p-3 rounded">
-    <shared-form-recurso [programaid]="programaid" (obtenerDatos)="guardar($event)" (cancelar)="cancelar($event)" ></shared-form-recurso>
-  </div>
+  <shared-form-recurso [programaid]="programaid" (obtenerDatos)="guardar($event)" (cancelar)="cancelar($event)" ></shared-form-recurso>

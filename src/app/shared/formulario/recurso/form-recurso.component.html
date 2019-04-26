@@ -1,102 +1,111 @@
 <form [formGroup]="formRecurso">
-  <fieldset>
-    <div class="row">
+  <div class="mb-3 bg-white  p-3 rounded">
+    <fieldset>
+      <div class="row">
+          <div class="form-group col-md-3">
+            <label for="tipo_recurso">Programa (<span class="text-obligatorio">*</span>):</label>
+            <select class="form-control" id="tipo_recurso" formControlName="programaid" [ngClass]="{'is-invalid': (formRecurso.get('programaid').invalid && submitted)}" (change)="listarTipoPrestacion($event.target.value);esEmprender($event)" >
+              <option value="">Seleccione Programa</option>
+              <option *ngFor="let programa of programaLista" value="{{programa.id}}">{{programa.nombre}}</option>
+            </select>
+            <div *ngIf="(formRecurso.get('programaid').invalid && submitted)" class="text-danger">
+                <div *ngIf="formRecurso.get('programaid').hasError('required')">Por favor Seleccione un programa. </div>
+            </div>
+          </div>
         <div class="form-group col-md-3">
-          <label for="tipo_recurso">Programa (<span class="text-obligatorio">*</span>):</label>
-          <select class="form-control" id="tipo_recurso" formControlName="programaid" [ngClass]="{'is-invalid': (formRecurso.get('programaid').invalid && submitted)}" (change)="listarTipoPrestacion($event.target.value);esEmprender($event)" >
-            <option value="">Seleccione Programa</option>
-            <option *ngFor="let programa of programaLista" value="{{programa.id}}">{{programa.nombre}}</option>
+          <label for="tipo_recurso">Tipo de prestación (<span class="text-obligatorio">*</span>):</label>
+          <select class="form-control" id="tipo_recurso" formControlName="tipo_recursoid" [ngClass]="{'is-invalid': (formRecurso.get('tipo_recursoid').invalid && submitted)}">
+            <option value="">Seleccione tipo de prestación</option>
+            <option *ngFor="let tipo of tipoPrestacionLista" value="{{tipo.id}}">{{tipo.nombre}}</option>
           </select>
-          <div *ngIf="(formRecurso.get('programaid').invalid && submitted)" class="text-danger">
-              <div *ngIf="formRecurso.get('programaid').hasError('required')">Por favor Seleccione un programa. </div>
+          <div *ngIf="(formRecurso.get('tipo_recursoid').invalid && submitted)" class="text-danger">
+              <div *ngIf="formRecurso.get('tipo_recursoid').hasError('required')">Por favor Seleccione un tipo de prestación. </div>
           </div>
         </div>
-      <div class="form-group col-md-3">
-        <label for="tipo_recurso">Tipo de prestación (<span class="text-obligatorio">*</span>):</label>
-        <select class="form-control" id="tipo_recurso" formControlName="tipo_recursoid" [ngClass]="{'is-invalid': (formRecurso.get('tipo_recursoid').invalid && submitted)}">
-          <option value="">Seleccione tipo de prestación</option>
-          <option *ngFor="let tipo of tipoPrestacionLista" value="{{tipo.id}}">{{tipo.nombre}}</option>
-        </select>
-        <div *ngIf="(formRecurso.get('tipo_recursoid').invalid && submitted)" class="text-danger">
-            <div *ngIf="formRecurso.get('tipo_recursoid').hasError('required')">Por favor Seleccione un tipo de prestación. </div>
+        <div class="form-group col-md-3">
+          <label for="proposito">Propósito (<span class="text-obligatorio">*</span>):</label>
+          <input type="text" id="proposito" placeholder="Propósito..." class="form-control" formControlName="proposito">
+          <div *ngIf="(formRecurso.get('proposito').invalid && submitted)" class="text-danger">
+            <div *ngIf="formRecurso.get('proposito').hasError('required')">Por favor ingrese un propósito. </div>
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="fecha_alta" class="prioridad">Fecha Alta (<span class="text-obligatorio">*</span>):</label>
+          <div class="input-group">
+            <input class="form-control" #c1 placeholder="Ej.: dd/mm/yyyy" ngbDatepicker #frd="ngbDatepicker"
+            id="fecha_alta" formControlName="fechaAlta" (ngModelChange)="formatFechaAlta($event)">
+            <div class="input-group-append">
+                <button class="btn btn-outline-info" (click)="frd.toggle()" type="button"
+                    [ngClass]="{'btn-outline-danger': (formRecurso.get('fechaAlta').invalid && submitted), 'is-invalid': (formRecurso.get('fechaAlta').invalid && submitted)}">
+                    <span class="oi oi-calendar" title="Fecha alta" aria-hidden="true"></span>
+                </button>
+              </div>
+          </div>
+          <div *ngIf="(formRecurso.get('fechaAlta').invalid && submitted)" class="text-danger">
+              <div *ngIf="formRecurso.get('fechaAlta').hasError('required')">Por favor ingrese una fecha de alta. </div>
+          </div>
         </div>
       </div>
-      <div class="form-group col-md-3">
-        <label for="proposito">Propósito (<span class="text-obligatorio">*</span>):</label>
-        <input type="text" id="proposito" placeholder="Propósito..." class="form-control" formControlName="proposito">
-        <div *ngIf="(formRecurso.get('proposito').invalid && submitted)" class="text-danger">
-          <div *ngIf="formRecurso.get('proposito').hasError('required')">Por favor ingrese un propósito. </div>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label for="fecha_alta" class="prioridad">Fecha Alta (<span class="text-obligatorio">*</span>):</label>
-        <div class="input-group">
-          <input class="form-control" #c1 placeholder="Ej.: dd/mm/yyyy" ngbDatepicker #frd="ngbDatepicker"
-          id="fecha_alta" formControlName="fechaAlta" (ngModelChange)="formatFechaAlta($event)">
-          <div class="input-group-append">
-              <button class="btn btn-outline-info" (click)="frd.toggle()" type="button"
-                  [ngClass]="{'btn-outline-danger': (formRecurso.get('fechaAlta').invalid && submitted), 'is-invalid': (formRecurso.get('fechaAlta').invalid && submitted)}">
-                  <span class="oi oi-calendar" title="Fecha alta" aria-hidden="true"></span>
-              </button>
-            </div>
-        </div>
-        <div *ngIf="(formRecurso.get('fechaAlta').invalid && submitted)" class="text-danger">
-            <div *ngIf="formRecurso.get('fechaAlta').hasError('required')">Por favor ingrese una fecha de alta. </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="row">
-            <div class="form-group col-md-12">
-              <label for="monto">Monto (<span class="text-obligatorio">*</span>):</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">$</div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="row">
+              <div class="form-group col-md-12">
+                <label for="monto">Monto (<span class="text-obligatorio">*</span>):</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">$</div>
+                  </div>
+                  <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validarMoneda($event.target)" >
                 </div>
-                <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validarMoneda($event.target)" >
+                <div *ngIf="(formRecurso.get('monto').invalid && submitted)" class="text-danger">
+                  <div *ngIf="formRecurso.get('monto').hasError('required')">Por favor ingrese un monto. </div>
+                </div>
               </div>
-              <div *ngIf="(formRecurso.get('monto').invalid && submitted)" class="text-danger">
-                <div *ngIf="formRecurso.get('monto').hasError('required')">Por favor ingrese un monto. </div>
-              </div>
-            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-9">
+          <label for="observacion">Observación:</label>
+          <textarea class="form-control" id="observacion" cols="30" rows="1" placeholder="Descripcion..." formControlName="observacion" ></textarea>
         </div>
       </div>
-      <div class="form-group col-md-9">
-        <label for="observacion">Observación:</label>
-        <textarea class="form-control" id="observacion" cols="30" rows="1" placeholder="Descripcion..." formControlName="observacion" ></textarea>
-      </div>
-    </div>
-  </fieldset>
-  <fieldset *ngIf="(emprender)" >
-    <div class="d-flex justify-content-between">
-      <div class="col-4 pt-1"><hr></div>
-      <div class="col-4 text-center"><h3><small class="text-muted">Buscar alumnos</small></h3></div>
-      <div class="col-4 pt-1"><hr></div>
-    </div>
-    <div class="row" >
-      <div class="col-md-12">
-        <shared-buscar-persona (personaElegida)="agregarAlumnos($event)" ></shared-buscar-persona>
-      </div>
-    </div>
-    <div class="d-flex justify-content-between">
+    </fieldset>
+    <hr class="pt1" *ngIf="(!emprender)">
+    <fieldset *ngIf="(!emprender)">
+        <div class="float-right">
+          <button type="button" class="btn btn-danger" (click)="cancelarForm()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>&nbsp;
+          <button type="button" class="btn btn-success" (click)="validarForm()" ><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
+        </div>
+    </fieldset>
+  </div>
+  <div class="mb-3 bg-white  p-3 rounded" *ngIf="(emprender)">
+    <fieldset >
+      <div class="d-flex justify-content-between">
         <div class="col-4 pt-1"><hr></div>
-        <div class="col-4 text-center"><h3><small class="text-muted">Listado de alumnos</small></h3></div>
+        <div class="col-4 text-center"><h3><small class="text-muted">Buscar alumnos</small></h3></div>
         <div class="col-4 pt-1"><hr></div>
       </div>
-    <div class="row">
-      <div class="col-md-12">
-        <shared-lista-persona [personas]="listaAlumnos" (borrarPersona)="borrarAlumno($event)" [mostrar]="(true)"></shared-lista-persona>
+      <div class="row" >
+        <div class="col-md-12">
+          <shared-buscar-persona (personaElegida)="agregarAlumnos($event)" ></shared-buscar-persona>
+        </div>
       </div>
-    </div>
-  </fieldset>
-
-  <hr class="pt1">
-  <fieldset>
-    <div class="float-right">
-      <button type="button" class="btn btn-danger" (click)="cancelarForm()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>&nbsp;
-      <button type="button" class="btn btn-success" (click)="validarForm()" ><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
-    </div>
-  </fieldset>
-
+      <div class="d-flex justify-content-between">
+          <div class="col-4 pt-1"><hr></div>
+          <div class="col-4 text-center"><h3><small class="text-muted">Listado de alumnos</small></h3></div>
+          <div class="col-4 pt-1"><hr></div>
+        </div>
+      <div class="row">
+        <div class="col-md-12">
+          <shared-lista-persona [personas]="listaAlumnos" (borrarPersona)="borrarAlumno($event)" [mostrar]="(true)"></shared-lista-persona>
+        </div>
+      </div>
+    </fieldset>
+    <hr class="pt1">
+    <fieldset>
+        <div class="float-right">
+          <button type="button" class="btn btn-danger" (click)="cancelarForm()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>&nbsp;
+          <button type="button" class="btn btn-success" (click)="validarForm()" ><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
+        </div>
+    </fieldset>
+  </div>
 </form>

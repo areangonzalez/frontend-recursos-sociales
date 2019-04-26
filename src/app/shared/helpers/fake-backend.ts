@@ -90,7 +90,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       username: 'admin',
                       access_token: 'fake-jwt-token'
                   };
-                  console.log(body);
                   return of(new HttpResponse({ status: 200, body }));
               } else {
                   // else return 400 bad request
@@ -888,7 +887,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // get PROGRAMAS
             if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-              console.log(request.headers.get('Authorization'));
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 for (let i = 0; i < programas.length; i++) {
                   // obtengo cantidad de los recursos por programa
