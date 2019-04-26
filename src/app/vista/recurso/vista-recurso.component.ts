@@ -10,21 +10,20 @@ import { RecursoSocialService, MensajesService, PersonaService } from 'src/app/c
 export class VistaRecursoComponent implements OnInit {
   public persona:any;
   public recurso:object;
+  public recursoId: any;
 
   constructor(
     private _route: ActivatedRoute,
-    private _router: Router,
     private _recursoService: RecursoSocialService,
     private _mensajeService: MensajesService,
-    private _personaService: PersonaService
-
   ){}
 
   ngOnInit() {
     // id del recurso (prestación)
-    let recursoid = this._route.snapshot.paramMap.get('recursoid');
+    let recursoid = (this._route.snapshot.paramMap.get('recursoid'));
     if(recursoid){
-      this.obtenerRecurso(parseInt(recursoid));
+      this.recursoId = parseInt(recursoid);
+      this.obtenerRecurso(this.recursoId);
     }else{
 
     }
@@ -37,6 +36,12 @@ export class VistaRecursoComponent implements OnInit {
         this.recurso = recurso;
         this.persona = recurso.persona;
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
+  }
+
+  public actualizarRecurso(estado: any) {
+    if(estado){
+      this.obtenerRecurso(this.recursoId);
+    }
   }
 
 }
