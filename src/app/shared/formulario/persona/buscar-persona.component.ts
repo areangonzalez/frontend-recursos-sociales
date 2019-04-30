@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { PersonaService, MensajesService } from 'src/app/core/services';
 import { ModalConfig, BotonDisenio } from 'src/app/core/models';
@@ -21,18 +21,16 @@ export class BuscarPersonaComponent implements OnInit {
   public colleccionSize:number = 0;
 
   constructor(
-    private _route: Router,
+    private _cd: ChangeDetectorRef,
     private _personaService: PersonaService,
     private _mensajeService: MensajesService
   ){}
 
-  ngOnInit() {
-  }
+  ngOnInit(){}
 
   public buscar(busqueda:string, pagina:number){
     let pag = pagina - 1;
     const params: object = {global_param:busqueda, pagesize: 3, page: pag};
-
     this._personaService.buscar(params).subscribe(
       datos => {
         this.colleccionSize = datos.total_filtrado;
@@ -71,5 +69,12 @@ export class BuscarPersonaComponent implements OnInit {
   limpiarBusqueda() {
     this.busqueda = "";
     this.listaPersonas = [];
+  }
+
+  public isEnter(e:any) {
+//    this._cd.detectChanges();
+    if (e.keyCode == 13){
+      this.buscar(this.busqueda, this.page);
+    }
   }
 }

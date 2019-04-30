@@ -22,7 +22,6 @@ export class FormRecursoComponent implements OnInit {
   public listaAlumnos = [];
   public submitted = false;
 
-
   constructor(
     private _fb: FormBuilder,
     private _utilService: UtilService,
@@ -30,7 +29,8 @@ export class FormRecursoComponent implements OnInit {
     private _mensajeService: MensajesService,
     private _programaService: ProgramaService,
     private _personaService: PersonaService,
-    private _configNgbDate: NgbDatepickerConfig
+    private _configNgbDate: NgbDatepickerConfig,
+
   ) {
     // configuro la fecha minima
     _configNgbDate.minDate = {year: 1950, month: 1, day: 1};

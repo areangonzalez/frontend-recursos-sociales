@@ -29,6 +29,7 @@ export class PrestacionesComponent implements OnInit {
    * @param apiBusqueda parametros de filtracion
    */
   public buscar(apiBusqueda:any) {
+    this.busqueda = {};
     // Agrego la paginacion a la busqueda avanzada
     Object.assign(apiBusqueda, {"page": 0, "pagesize": 20});
     // agrego la busqueda en la nueva variable
@@ -45,6 +46,7 @@ export class PrestacionesComponent implements OnInit {
    * @param params parametros de busquedas para las prestaciones
    */
   public listarRecursos(params:object){
+    console.log(params);
     this._recursoService.buscar(params).subscribe(
       recursos => {
         this.configPaginacion.colleccionSize = recursos.total_filtrado;
