@@ -30,7 +30,7 @@ export class ListaRecursoComponent implements OnInit {
     if (acreditacion && baja) {
       let fechaA = datePipe.transform(acreditacion, 'dd/MM/yyyy');
       let fechaB = datePipe.transform(baja, 'dd/MM/yyyy');
-      let info = "acreditacion: " + fechaA + " - Baja: " + fechaB;
+      let info = "Acreditacion: " + fechaA + " - Baja: " + fechaB;
       return info;
     }else if (acreditacion) {
       let fecha =datePipe.transform(acreditacion, 'dd/MM/yyyy');
