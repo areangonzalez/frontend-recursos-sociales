@@ -8,7 +8,7 @@
       <input type="text" id="nombre_usuario" class="form-control" placeholder="Usuario" formControlName="username">
 
       <label for="pass_usuario" class="sr-only">Contraseña</label>
-      <input type="password" id="pass_usuario" class="form-control" placeholder="Contraseña" formControlName="password">
+      <input type="password" id="pass_usuario" class="form-control" placeholder="Contraseña" formControlName="password" (keyup.enter)="ingresar()">
 
       <div class="mb-3">
         <div class="text-danger text-center mt-2" *ngIf="huboError"><b>{{mensaje}}</b></div>
