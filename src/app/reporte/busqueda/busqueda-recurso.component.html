@@ -68,6 +68,22 @@
                   </div>
               </div>
               <div class="form-group col-md-4">
+                <label for="acreditacion" class="prioridad">Estado:</label>
+                <select class="form-control" id="acreditacion" formControlName="estado" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.acreditacion)}" >
+                  <option value="">Seleccione un estado</option>
+                  <option value="acreditar">Acreditados</option>
+                  <option value="sin-acreditar">Sin Acreditar</option>
+                  <option value="baja">Baja</option>
+                </select>
+              </div>
+              <!-- <div class="form-group col-md-4">
+                <label for="localidad" class="prioridad">Localidad:</label>
+                <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.localidadid.value)}" >
+                  <option value="">Seleccione Localidad</option>
+                  <option *ngFor="let localidad of localidadesLista" value="{{localidad.id}}">{{localidad.nombre}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
                   <div class="form-check mtop-checkbox">
                       <input class="form-check-input" type="checkbox" formControlName="acreditacion" id="defaultCheck1">
                       <label class="form-check-label" for="defaultCheck1">
@@ -82,7 +98,7 @@
                         Baja
                       </label>
                     </div>
-              </div>
+              </div> -->
             </div>
           </fieldset>
         </div>

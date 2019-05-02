@@ -49,8 +49,7 @@ export class BusquedaRecursoComponent implements OnInit {
       fechaAltaDesde: null,
       fecha_alta_hasta: '',
       fechaAltaHasta: null,
-      acreditacion: false,
-      baja: false
+      estado: '',
   });
   }
 
@@ -106,7 +105,6 @@ export class BusquedaRecursoComponent implements OnInit {
         }
       }
     }
-    console.log(apiBusqueda);
     this.obtenerBusqueda.emit(apiBusqueda);
     this.btnSeleccion = esTrue;
     this.mostrar = esTrue;
