@@ -15,7 +15,7 @@ export class RecursoComponent implements OnInit {
   public contactosForm: FormGroup;
   public programaid: any;
   public configModal: ModalConfig = { title: "Editar beneficiario" };
-  public configBotonModal: BotonDisenio = { class: 'btn btn-md btn-light mb-2', iconoClass: 'fas fa-pencil-alt', text:'' };
+  public configBotonModal: BotonDisenio = { class: 'btn btn-md btn-light btn-altura', iconoClass: 'fas fa-pencil-alt', text:'' };
 
 
   constructor(

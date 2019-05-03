@@ -7,15 +7,21 @@
     <div class="col-2 text-center"><h3><small class="text-muted">Beneficiario</small></h3></div>
     <div class="col-5 pt-1"><hr></div>
   </div>
-  <div class="d-flex flex-row-reverse">
-    <div class="btn-group">
-      <modal-form-persona-component class="btn-group" ngbTooltip="Editar beneficiario" [configModal]="configModal" [disenioBoton]="configBotonModal" (obtenerPersona)="personaEditada($event)" [personaid]="datosPersona['id']" *ngIf="infoPersona" ></modal-form-persona-component>
-      <button type="button" class="btn btn-md btn-info mb-2" ngbTooltip="Cambiar beneficiario" (click)="cambiarPersona()" *ngIf="infoPersona"><i class="fas fa-sync"></i></button>
+
+    <div class="row" *ngIf="infoPersona">
+      <div class="col-12 pr-0 col-vista-beneficiario-mw">
+        <shared-vista-info-persona  [persona]="datosPersona" [mostrarBoton]="false" ></shared-vista-info-persona>
+      </div>
+      <div class="col-1 pr-0 pl-0 col-btn-mw">
+        <div class="btn-group-vertical">
+          <modal-form-persona-component class="btn-group" ngbTooltip="Editar beneficiario" [configModal]="configModal" [disenioBoton]="configBotonModal" (obtenerPersona)="personaEditada($event)" [personaid]="datosPersona['id']" ></modal-form-persona-component>
+          <button type="button" class="btn btn-md btn-info btn-altura" ngbTooltip="Cambiar beneficiario" (click)="cambiarPersona()"><i class="fas fa-sync"></i></button>
+        </div>
+      </div>
     </div>
-  </div>
   <shared-buscar-persona *ngIf="!(infoPersona)" (personaElegida)="seleccionarPersona($event)" ></shared-buscar-persona>
 
-  <shared-vista-info-persona *ngIf="infoPersona" [persona]="datosPersona" [mostrarBoton]="false" ></shared-vista-info-persona>
+
   <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.controls.contacto"></shared-form-contacto>
 
 </div>
