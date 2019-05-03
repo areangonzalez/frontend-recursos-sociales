@@ -1,15 +1,22 @@
+<div class="d-flex flex-row-reverse">
+  <h2>Crear prestación</h2>
+</div>
 <div class="mb-3 bg-white  p-3 rounded">
-    <div class="d-flex justify-content-between">
-      <h2>Crear prestación</h2>
-      <div class="btn-group">
-        <modal-form-persona-component class="btn-group" ngbTooltip="Editar beneficiario" [configModal]="configModal" [disenioBoton]="configBotonModal" (obtenerPersona)="personaEditada($event)" [personaid]="datosPersona['id']" *ngIf="infoPersona" ></modal-form-persona-component>
-        <button type="button" class="btn btn-md btn-info mb-2" ngbTooltip="Cambiar beneficiario" (click)="cambiarPersona()" *ngIf="infoPersona"><i class="fas fa-sync"></i></button>
-      </div>
-    </div>
-    <shared-buscar-persona *ngIf="!(infoPersona)" (personaElegida)="seleccionarPersona($event)" ></shared-buscar-persona>
-
-    <shared-vista-info-persona *ngIf="infoPersona" [persona]="datosPersona" [mostrarBoton]="false" ></shared-vista-info-persona>
-    <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.controls.contacto"></shared-form-contacto>
-
+  <div class="d-flex justify-content-between">
+    <div class="col-5 pt-1"><hr></div>
+    <div class="col-2 text-center"><h3><small class="text-muted">Beneficiario</small></h3></div>
+    <div class="col-5 pt-1"><hr></div>
   </div>
-  <shared-form-recurso [programaid]="programaid" [personaid]="datosPersona['id']" (obtenerDatos)="guardar($event)" (cancelar)="cancelar($event)" ></shared-form-recurso>
+  <div class="d-flex flex-row-reverse">
+    <div class="btn-group">
+      <modal-form-persona-component class="btn-group" ngbTooltip="Editar beneficiario" [configModal]="configModal" [disenioBoton]="configBotonModal" (obtenerPersona)="personaEditada($event)" [personaid]="datosPersona['id']" *ngIf="infoPersona" ></modal-form-persona-component>
+      <button type="button" class="btn btn-md btn-info mb-2" ngbTooltip="Cambiar beneficiario" (click)="cambiarPersona()" *ngIf="infoPersona"><i class="fas fa-sync"></i></button>
+    </div>
+  </div>
+  <shared-buscar-persona *ngIf="!(infoPersona)" (personaElegida)="seleccionarPersona($event)" ></shared-buscar-persona>
+
+  <shared-vista-info-persona *ngIf="infoPersona" [persona]="datosPersona" [mostrarBoton]="false" ></shared-vista-info-persona>
+  <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.controls.contacto"></shared-form-contacto>
+
+</div>
+<shared-form-recurso [programaid]="programaid" [personaid]="datosPersona['id']" (obtenerDatos)="guardar($event)" (cancelar)="cancelar($event)" ></shared-form-recurso>

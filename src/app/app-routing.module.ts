@@ -16,7 +16,7 @@ const routes: Routes = [
       { path: 'crear-prestacion',
         loadChildren: './recurso/recurso.module#RecursoModule', // prod
         canActivate: [AuthGuard],
-        data: { loading: true, preload: true, breadcrumb: 'Crear prestación', title: 'Crear prestación' } },
+        data: { loading: true, preload: true, breadcrumb: 'Prestación' } },
       { path: 'reporte',
         canActivate: [AuthGuard],
         loadChildren: './reporte/reporte.module#ReporteModule', // prod
