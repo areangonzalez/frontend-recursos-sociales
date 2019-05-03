@@ -23,7 +23,7 @@
         </tr>
       </tbody>
       <tbody *ngIf="(listaPersonas.length > 0)">
-        <tr *ngFor="let persona of listaPersonas" (click)="seleccionarPersona(persona.id, persona)">
+        <tr *ngFor="let persona of listaPersonas" (click)="seleccionarPersona(persona.id, persona)" container="body" ngbTooltip="Seleccionar">
           <td scope="row">{{persona.nro_documento}}</td>
           <td >
             {{persona.apellido}}, {{persona.nombre}}

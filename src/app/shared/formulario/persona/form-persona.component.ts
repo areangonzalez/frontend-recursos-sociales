@@ -201,7 +201,6 @@ export class FormPersonaComponent implements OnInit {
    * @function guardarPersona Crear/Editar una persona.
    */
   public guardarPersona(params:object, id:any) {
-    console.log(id);
     if (id != '') {
       this._personaService.guardar(params, id).subscribe(
         resultado => {

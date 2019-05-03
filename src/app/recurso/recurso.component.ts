@@ -82,7 +82,6 @@ export class RecursoComponent implements OnInit {
     this._recursoService.guardar(params, 0).subscribe(
       resultado => {
         this._mensajeService.confirmar("Se ha guardado correctamente la prestación", [{name: 'inicio/vista/prestacion', param:resultado["data"]["id"], tipo:'vista'}, {name: 'inicio/crear-prestacion', tipo: 'reload'}]);
-        console.log(this._mensajeService.getMessage());
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
 

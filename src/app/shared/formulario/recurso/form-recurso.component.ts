@@ -12,6 +12,7 @@ import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FormRecursoComponent implements OnInit {
   @Input("programaid") public programaid: any;
+  @Input("personaid") public personaid: any;
   @Output("cancelar") public cancelar = new EventEmitter();
   @Output("obtenerDatos") public obtenerDatos = new EventEmitter();
 
@@ -94,11 +95,15 @@ export class FormRecursoComponent implements OnInit {
   }
 
   public agregarAlumnos(alumno:any){
-    if (this.alumnoDuplicado(alumno.id) === true){
-      this.buscarPersonaPorId(alumno.id);
-      //this.listaAlumnos.push(alumno.persona);
+    if ( alumno.id !== this.personaid ){
+      if (this.alumnoDuplicado(alumno.id) === true){
+        this.buscarPersonaPorId(alumno.id);
+        //this.listaAlumnos.push(alumno.persona);
+      }else{
+        this._mensajeService.cancelado("Este alumno ya fue ingresado.", [{name: ''}]);
+      }
     }else{
-      this._mensajeService.cancelado("Este alumno ya fue ingresado.", [{name: ''}]);
+      this._mensajeService.cancelado("No puede ingresar al beneficiario como un alumno", [{name:''}]);
     }
   }
 
@@ -145,6 +150,7 @@ export class FormRecursoComponent implements OnInit {
     this.submitted = true;
 
     if (this.formRecurso.invalid) {
+      this._mensajeService.cancelado("Campos sin completar!! Por favor verifique el formulario.", [{name:''}]);
       return;
     }else{
       let recurso:object = this.formRecurso.value;

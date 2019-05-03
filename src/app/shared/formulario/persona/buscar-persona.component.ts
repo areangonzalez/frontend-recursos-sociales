@@ -30,7 +30,7 @@ export class BuscarPersonaComponent implements OnInit {
 
   public buscar(busqueda:string, pagina:number){
     let pag = pagina - 1;
-    const params: object = {global_param:busqueda, pagesize: 3, page: pag};
+    const params: object = {global_param:busqueda, pagesize: 8, page: pag};
     this._personaService.buscar(params).subscribe(
       datos => {
         this.colleccionSize = datos.total_filtrado;
@@ -72,7 +72,6 @@ export class BuscarPersonaComponent implements OnInit {
   }
 
   public isEnter(e:any) {
-//    this._cd.detectChanges();
     if (e.keyCode == 13){
       this.buscar(this.busqueda, this.page);
     }
