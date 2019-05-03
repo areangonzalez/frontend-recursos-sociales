@@ -95,15 +95,19 @@ export class FormRecursoComponent implements OnInit {
   }
 
   public agregarAlumnos(alumno:any){
-    if ( alumno.id !== this.personaid ){
-      if (this.alumnoDuplicado(alumno.id) === true){
-        this.buscarPersonaPorId(alumno.id);
-        //this.listaAlumnos.push(alumno.persona);
+    if (this.personaid != undefined) {
+      if ( alumno.id !== this.personaid ){
+        if (this.alumnoDuplicado(alumno.id) === true){
+          this.buscarPersonaPorId(alumno.id);
+          //this.listaAlumnos.push(alumno.persona);
+        }else{
+          this._mensajeService.cancelado("Este alumno ya fue ingresado.", [{name: ''}]);
+        }
       }else{
-        this._mensajeService.cancelado("Este alumno ya fue ingresado.", [{name: ''}]);
+        this._mensajeService.cancelado("No puede ingresar al beneficiario como un alumno", [{name:''}]);
       }
     }else{
-      this._mensajeService.cancelado("No puede ingresar al beneficiario como un alumno", [{name:''}]);
+      this._mensajeService.cancelado("Por favor ingrese a un beneficiario.", [{name:''}]);
     }
   }
 
