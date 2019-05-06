@@ -27,10 +27,20 @@
             <th scope="col">Nro Doc</th>
             <th colspan="2" scope="col">Apellido y nombre</th>
             <th class="text-center" scope="col">Localidad</th>
-            <th scope="col">Fecha alta</th>
+            <th scope="col" style="cursor: pointer;" (click)="ordenarFecha()">
+              Fecha alta&nbsp;
+              <i *ngIf="(fechaAlta == '')" class="fas fa-sort"></i>
+              <i *ngIf="(fechaAlta == 'fecha_alta')" class="fas fa-sort-up"></i>
+              <i *ngIf="(fechaAlta == '-fecha_alta')" class="fas fa-sort-down"></i>
+            </th>
             <th class="text-center" scope="col">Programa</th>
             <th scope="col">Propósito</th>
-            <th class="text-center" scope="col">Monto</th>
+            <th class="text-center" scope="col" style="cursor: pointer;" (click)="ordenarMonto()">
+              Monto&nbsp;
+              <i *ngIf="(monto == '')" class="fas fa-sort"></i>
+              <i *ngIf="(monto == 'monto')" class="fas fa-sort-up"></i>
+              <i *ngIf="(monto == '-monto')" class="fas fa-sort-down"></i>
+            </th>
             <th></th>
           </tr>
         </thead>
@@ -46,7 +56,7 @@
               {{recurso.persona.apellido}}, {{recurso.persona.nombre}}
             </td>
             <td>
-              <div class="btn-group" *ngIf="(recurso.persona.lugar.localidad != '')">
+              <div class="btn-group" *ngIf="(recurso.persona.lugar != undefined && recurso.persona.lugar.localidad != '')">
                 <button ngbTooltip="{{direccion(recurso.persona.lugar)}}" container="body" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
                 <button *ngIf="(recurso.persona.telefono != '')" ngbTooltip="{{recurso.persona.telefono}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
                 <button *ngIf="(recurso.persona.celular != '')" ngbTooltip="{{recurso.persona.celular}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>

@@ -99,4 +99,9 @@ export class PrestacionesComponent implements OnInit {
       return rangoFinal;
     }
 
+    public ordenarLista(sort:string) {
+      this.buscar(sort);
+      /* console.log(sort); */
+    }
+
 }
