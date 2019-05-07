@@ -19,10 +19,10 @@
         </div>
       </div>
     </div>
-  <shared-buscar-persona *ngIf="!(infoPersona)" (personaElegida)="seleccionarPersona($event)" ></shared-buscar-persona>
+  <shared-buscar-persona *ngIf="!(infoPersona)" (personaElegida)="seleccionarPersona($event)"></shared-buscar-persona>
 
 
-  <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.controls.contacto"></shared-form-contacto>
+  <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.get('contacto')"></shared-form-contacto>
 
 </div>
 <shared-form-recurso [programaid]="programaid" [personaid]="datosPersona['id']" (obtenerDatos)="guardar($event)" (cancelar)="cancelar($event)" ></shared-form-recurso>

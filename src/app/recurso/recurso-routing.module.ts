@@ -5,7 +5,7 @@ import { RecursoComponent } from './recurso.component';
 const routes: Routes = [
     {
       path: '', component: RecursoComponent,
-      data: { loading: true, preload: true, breadcrumb: 'Crear' }
+      data: { loading: true, preload: true, breadcrumb: 'Crear' },
     },
     {
       path: ':programaid', component: RecursoComponent,
@@ -15,6 +15,6 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class RecursoRoutingModule { }

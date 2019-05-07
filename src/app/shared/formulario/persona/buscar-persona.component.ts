@@ -69,6 +69,8 @@ export class BuscarPersonaComponent implements OnInit {
   limpiarBusqueda() {
     this.busqueda = "";
     this.listaPersonas = [];
+    this.colleccionSize = 0;
+    this.page = 1;
   }
 
   public isEnter(e:any) {
