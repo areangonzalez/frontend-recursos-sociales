@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { HttpParams } from '@angular/common/http';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { Observable } from "rxjs";
 import { ApiService } from './api.service';
 
 @Injectable()
-export class ProgramaService {
-  //private programaId: IProgramaId;
+export class ProgramaService implements Resolve<any> {
 
   constructor(
     private _apiService: ApiService
@@ -17,5 +17,12 @@ export class ProgramaService {
   public buscarPorId(id:number) {
     return this._apiService.get('/programas/' + id);
   }
+
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+    ): Observable<any>|Promise<any>|any {
+    return this._apiService.get('/programas');
+    }
 
 }

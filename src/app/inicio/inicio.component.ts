@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgramaService, MensajesService, LoaderService } from '../core/services';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -8,25 +7,13 @@ import { ProgramaService, MensajesService, LoaderService } from '../core/service
   styleUrls: ['./inicio.component.sass']
 })
 export class InicioComponent implements OnInit {
-  //title = 'Reporte';
   public programaLista: any = [];
 
   constructor(
-    private _programaService: ProgramaService,
-    private _mensajeService: MensajesService,
-    private _loaderService: LoaderService
+    private _route: ActivatedRoute,
   ){}
 
   ngOnInit() {
-    this.listarProgramas();
-  }
-
-
-  private listarProgramas() {
-    this._loaderService.show();
-    this._programaService.listar().subscribe(
-      programas => {
-        this.programaLista = programas;
-      }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
+    this.programaLista = this._route.snapshot.data["programas"];
   }
 }
