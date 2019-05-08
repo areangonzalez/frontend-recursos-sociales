@@ -11,7 +11,7 @@
             <label for="tipo_recurso">Programa (<span class="text-obligatorio">*</span>):</label>
             <select class="form-control" id="tipo_recurso" formControlName="programaid" [ngClass]="{'is-invalid': (formRecurso.get('programaid').invalid && submitted)}" (change)="listarTipoPrestacion($event.target.value);esEmprender($event)" >
               <option value="">Seleccione Programa</option>
-              <option *ngFor="let programa of programaLista" value="{{programa.id}}">{{programa.nombre}}</option>
+              <option *ngFor="let programa of listaPrograma" value="{{programa.id}}">{{programa.nombre}}</option>
             </select>
             <div *ngIf="(formRecurso.get('programaid').invalid && submitted)" class="text-danger">
                 <div *ngIf="formRecurso.get('programaid').hasError('required')">Por favor Seleccione un programa. </div>

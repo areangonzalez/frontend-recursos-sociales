@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MensajesService, RecursoSocialService, LoaderService, BeneficiarioService } from '../../../core/services';
+import { MensajesService, RecursoSocialService, LoaderService } from '../../../core/services';
 import { UtilService } from '../../../core/utils';
 
 @Component({
