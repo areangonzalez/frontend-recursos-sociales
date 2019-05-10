@@ -23,7 +23,6 @@ export class ProgramaService implements Resolve<any> {
     state: RouterStateSnapshot,
     ): Observable<any>|Promise<any>|any {
       let programaid = route.params.programaid;
-      console.log(programaid);
       if (programaid) {
         return this._apiService.get('/programas/' + parseInt(programaid));
       }else{

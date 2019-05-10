@@ -2,33 +2,39 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
+import { ApiService } from './api.service';
+import { JwtService } from './jwt.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     url: string = environment.baseUrl + '/usuarios/login';
-    constructor(private http: HttpClient) { }
+    constructor(
+      private _apiService: ApiService,
+      private _jwtService: JwtService,
+    ) { }
 
     login(params) {
-        return this.http.post<any>(this.url, { username: params.username, password_hash: params.password })
+        //return this.http.post<any>(this.url, { username: params.username, password_hash: params.password })
+        return this._apiService.post(this.url, { username: params.username, password_hash: params.password })
             .pipe(map((res: any) => {
               // login successful if there's a jwt token in the response
               if (res && res.access_token) {
-                  let username = res.username;
-                    // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('token-rrss', JSON.stringify({ username, token: res.access_token }));
-                    //return true;
+                  let data = { username: '', token:'' };
+                  data.username = res.username;
+                  data.token = res.access_token;
+                  this._jwtService.saveToken(data);
                 }
             }));
     }
 
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('token-rrss');
+        this._jwtService.destroyToken();
     }
 
     loggedIn() {
-      let userLogin = localStorage.getItem('token-rrss');
-      if(userLogin) {
+      let userLogin = this._jwtService.getToken();
+      if(userLogin && userLogin.datosToken) {
         return true;
       }else{
         return false;
@@ -36,9 +42,9 @@ export class AuthenticationService {
     }
 
     getUserName() {
-      let userLogin = JSON.parse(localStorage.getItem('token-rrss'));
+      let userLogin = this._jwtService.getToken();
 
-      return userLogin.username;
+      return userLogin.datosToken.username;
     }
 
 }

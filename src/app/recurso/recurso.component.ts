@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
-import { MensajesService, PersonaService, RecursoSocialService } from '../core/services';
+import { MensajesService, PersonaService, RecursoSocialService, LoaderService } from '../core/services';
 import { ModalConfig, BotonDisenio } from '../core/models';
 
 @Component({

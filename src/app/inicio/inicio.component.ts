@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoaderService } from '../core/services';
 
 @Component({
   selector: 'app-inicio',
@@ -11,9 +12,11 @@ export class InicioComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
+    private _load: LoaderService
   ){}
 
   ngOnInit() {
+    this._load.hide();
     this.programaLista = this._route.snapshot.data["programas"];
   }
 }

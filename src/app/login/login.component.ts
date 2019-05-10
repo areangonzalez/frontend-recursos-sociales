@@ -47,14 +47,6 @@ export class LoginComponent implements OnInit {
               this.huboError = true;
               this.mensaje = "Por favor verifique sus datos.";
             });
-
-    /* this._auth.login(this.loginForm.value).subscribe(
-      datos => {
-        this.router.navigate['/inicio'];
-      }, error => {
-        this.huboError = true;
-        this.mensaje = "Por favor verifique sus datos.";
-      }); */
   }
 
   private isLogin(){

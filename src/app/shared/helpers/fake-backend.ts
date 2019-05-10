@@ -93,7 +93,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   return of(new HttpResponse({ status: 200, body }));
               } else {
                   // else return 400 bad request
-                  return throwError({ error: { message: 'Username or password is incorrect' } });
+                  return throwError( { code:0,status: 500, message: 'Username or password is incorrect' } );
               }
             }
 
@@ -934,7 +934,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   return of(new HttpResponse({ status: 200, body: programas }));
               } else {
                   // return 401 not authorised if token is null or invalid
-                  return throwError({ error: { message: 'Unauthorised' } });
+                  return throwError({ status: 401, message: 'Unauthorised' });
               }
             }
             // get PROGRAMAS por id /\/users\/\d+$/

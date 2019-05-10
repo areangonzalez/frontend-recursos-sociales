@@ -3,19 +3,16 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpEventType } f
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
-import { LoaderService, AuthenticationService } from 'src/app/core/services';
-//import { AuthenticationService } from '../services/authentication.service';
+import { LoaderService, AuthenticationService, JwtService } from 'src/app/core/services';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     private envios = 0;
     private recibidos = 0;
-    constructor(private authenticationService: AuthenticationService, private _loadService: LoaderService) { }
-    //constructor(private _loadService: LoaderService){}
+    constructor(private authenticationService: AuthenticationService, private _loadService: LoaderService, private _jwtService: JwtService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this._loadService.show();
-        //console.log("url: ",request.url);
         return next.handle(request).pipe(
           tap(res => {
             // res.type is prod and zero is dev
@@ -35,12 +32,16 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
           }),
           catchError(err => {
-            console.log(err);
-            this.recibidos++;
+            // verifico si existe el acceso del usuario
+            let accessUser = this._jwtService.getToken();
+            if (accessUser && accessUser.datosToken){
+              this.recibidos++;
+            }
+            // error de inahutorizado
             if (err.status === 401) {
               // auto logout if 401 response returned from api
               this.authenticationService.logout();
-              location.reload(true);
+            //  location.reload(true);
               this._loadService.hide();
             }
             // error.message viene como objeto
@@ -50,7 +51,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this._loadService.hide();
               return throwError(mensaje);
             }else{ // cualquier otro error
-              const error = err.error.message || err.statusText;
+              const error = err.message || err.error.message || err.statusText;
               this._loadService.hide();
               return throwError(error);
             }

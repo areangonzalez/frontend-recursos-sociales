@@ -77,13 +77,6 @@ export class FormRecursoComponent implements OnInit {
     }
   }
 
-  /* public listarProgramas(){
-    this._programaService.listar().subscribe(
-      programas => {
-        this.programaLista = programas;
-      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
-  } */
-
   public listarTipoPrestacion(programaid:number) {
     this.formRecurso.controls.tipo_recursoid.setValue('');
     this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(
@@ -129,13 +122,6 @@ export class FormRecursoComponent implements OnInit {
       }
     }
   }
-
-  /* public buscarProgramaPorId(programaid:number){
-    this._programaService.buscarPorId(programaid).subscribe(
-      programa => {
-        this.programaLista = [programa];
-      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
-  } */
 
   public buscarPersonaPorId(personaid:number){
     this._personaService.personaPorId(personaid).subscribe(
