@@ -52,7 +52,6 @@ export class ModalInfoBeneficiarioContent implements OnInit {
   }
 
   actualizarInfoBeneficiario(estado){
-    //console.log(estado);
     if (estado){
       this.obtenerRecurso(this.beneficiarioid);
       this.cambioEstado.emit(estado);
