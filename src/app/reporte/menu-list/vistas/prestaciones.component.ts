@@ -9,7 +9,8 @@ import { UtilService } from '../../../core/utils';
 })
 export class PrestacionesComponent implements OnInit {
 
-  public busqueda: any = {page: 0, pagesize: 20};
+  public orden: string = "-fecha_alta";
+  public busqueda: any = {page: 0, pagesize: 20, sort: this.orden};
   public recursosLista: any[] = [];
   public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_sin_acreditar": 0, "monto_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 };
 
@@ -30,8 +31,11 @@ export class PrestacionesComponent implements OnInit {
    */
   public buscar(apiBusqueda:any) {
     this.busqueda = {};
+    if (Object.entries(apiBusqueda).length == 0) {
+      this.orden = "-fecha_alta";
+    }
     // Agrego la paginacion a la busqueda avanzada
-    Object.assign(apiBusqueda, {"page": 0, "pagesize": 20});
+    Object.assign(apiBusqueda, {"page": 0, "pagesize": 20, "sort": this.orden});
     // agrego la busqueda en la nueva variable
     Object.assign(this.busqueda, apiBusqueda);
     // configuro para que se dirija a la primera pagina
@@ -99,9 +103,10 @@ export class PrestacionesComponent implements OnInit {
       return rangoFinal;
     }
 
-    public ordenarLista(sort:any) {
-      console.log(sort);
-      this.buscar(sort);
+    public ordenarLista(sort:string) {
+      this.orden = sort;
+      Object.assign(this.busqueda, {"sort": sort})
+      this.buscar(this.busqueda);
     }
 
 }

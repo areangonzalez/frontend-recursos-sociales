@@ -1,4 +1,4 @@
 <div class="mt-2 bg-white p-3 rounded">
   <busqueda-recurso (obtenerBusqueda)="buscar($event)" ></busqueda-recurso>
-  <lista-recurso [recursosLista]="recursosLista" [configPaginacion]="configPaginacion" (cambioDePagina)="cambioPagina($event)" (ordenar)="ordenarLista($event)"></lista-recurso>
+  <lista-recurso [recursosLista]="recursosLista" [configPaginacion]="configPaginacion" [ordenarColumna]="orden" (cambioDePagina)="cambioPagina($event)" (ordenar)="ordenarLista($event)"></lista-recurso>
 </div>

@@ -8,11 +8,11 @@ import { DatePipe } from "@angular/common";
 export class ListaRecursoComponent implements OnInit {
   @Input("recursosLista") public recursosLista:any;
   @Input("configPaginacion") public configPaginacion:any;
+  @Input("ordenarMonto") public monto:string = "";
+  @Input("ordenarFechaAlta") public fechaAlta:string = "";
+  @Input("ordenarColumna") public ordenarColumna: any;
   @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
   @Output("ordenar") public ordenar = new EventEmitter();
-
-  public monto: string = "";
-  public fechaAlta: string = "-fecha_alta";
 
   constructor(){}
 
@@ -58,14 +58,12 @@ export class ListaRecursoComponent implements OnInit {
   }
 
   public ordenarMonto() {
-    this.fechaAlta = "";
-    this.monto = (this.monto != "monto") ? this.monto = "monto" : this.monto = "-monto";
-    this.ordenar.emit({sort: this.monto});
+    this.ordenarColumna = (this.ordenarColumna != "monto") ? this.ordenarColumna = "monto" : this.ordenarColumna = "-monto";
+    this.ordenar.emit(this.ordenarColumna);
   }
 
   public ordenarFecha() {
-    this.monto = "";
-    this.fechaAlta = (this.fechaAlta != "fecha_alta") ? this.fechaAlta = "fecha_alta" : this.fechaAlta = "-fecha_alta";
-    this.ordenar.emit({sort: this.fechaAlta});
+    this.ordenarColumna = (this.ordenarColumna != "fecha_alta") ? this.ordenarColumna = "fecha_alta" : this.ordenarColumna = "-fecha_alta";
+    this.ordenar.emit(this.ordenarColumna);
   }
 }

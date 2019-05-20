@@ -29,17 +29,17 @@
             <th class="text-center" scope="col">Localidad</th>
             <th scope="col" style="cursor: pointer;" (click)="ordenarFecha()">
               Fecha alta&nbsp;
-              <i *ngIf="(fechaAlta == '')" class="fas fa-sort"></i>
-              <i *ngIf="(fechaAlta == 'fecha_alta')" class="fas fa-sort-up"></i>
-              <i *ngIf="(fechaAlta == '-fecha_alta')" class="fas fa-sort-down"></i>
+              <i *ngIf="(ordenarColumna == 'monto' || ordenarColumna == '-monto')" class="fas fa-sort"></i>
+              <i *ngIf="(ordenarColumna == 'fecha_alta')" class="fas fa-sort-up"></i>
+              <i *ngIf="(ordenarColumna == '-fecha_alta')" class="fas fa-sort-down"></i>
             </th>
             <th class="text-center" scope="col">Programa</th>
             <th scope="col">Propósito</th>
             <th class="text-center" scope="col" style="cursor: pointer;" (click)="ordenarMonto()">
               Monto&nbsp;
-              <i *ngIf="(monto == '')" class="fas fa-sort"></i>
-              <i *ngIf="(monto == 'monto')" class="fas fa-sort-up"></i>
-              <i *ngIf="(monto == '-monto')" class="fas fa-sort-down"></i>
+              <i *ngIf="(ordenarColumna == 'fecha_alta' || ordenarColumna == '-fecha_alta')" class="fas fa-sort"></i>
+              <i *ngIf="(ordenarColumna == 'monto')" class="fas fa-sort-up"></i>
+              <i *ngIf="(ordenarColumna == '-monto')" class="fas fa-sort-down"></i>
             </th>
             <th></th>
           </tr>
