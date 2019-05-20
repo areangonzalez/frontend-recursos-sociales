@@ -60,12 +60,12 @@ export class ListaRecursoComponent implements OnInit {
   public ordenarMonto() {
     this.fechaAlta = "";
     this.monto = (this.monto != "monto") ? this.monto = "monto" : this.monto = "-monto";
-    this.ordenar.emit("sort=" + this.monto);
+    this.ordenar.emit({sort: this.monto});
   }
 
   public ordenarFecha() {
     this.monto = "";
     this.fechaAlta = (this.fechaAlta != "fecha_alta") ? this.fechaAlta = "fecha_alta" : this.fechaAlta = "-fecha_alta";
-    this.ordenar.emit("sort=" + this.fechaAlta);
+    this.ordenar.emit({sort: this.fechaAlta});
   }
 }
