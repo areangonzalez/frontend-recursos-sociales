@@ -124,7 +124,7 @@ export class FormPersonaComponent implements OnInit {
     }else{
       this.cuil_medio = nroDocumento;
     }
-    return this.cuil_medio;
+    //return this.cuil_medio;
   }
   /**
    * @function armarCuil funcion que arma el cuil uniendo las variables de los formularios

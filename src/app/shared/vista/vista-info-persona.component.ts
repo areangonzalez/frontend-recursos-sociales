@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfig, BotonDisenio } from 'src/app/core/models';
 import { PersonaService, MensajesService } from 'src/app/core/services';
@@ -12,6 +12,7 @@ import { PersonaService, MensajesService } from 'src/app/core/services';
 export class VistaInfoPersonaComponent implements OnInit {
   @Input("persona") public persona:any;
   @Input("mostrarBoton") public mostrarBoton: boolean;
+  @Output("cambioEstado") public cambioEstado = new EventEmitter();
 
   public configModal: ModalConfig = { title: "Editar persona" };
   public configBotonModal: BotonDisenio = { class: 'btn btn-md btn-light mb-2', iconoClass: 'fas fa-pencil-alt', text:'' };
@@ -32,6 +33,7 @@ export class VistaInfoPersonaComponent implements OnInit {
     this._personaService.personaPorId(personaid).subscribe(
       datos => {
         this.persona = datos;
+        this.cambioEstado.emit(true);
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]) });
   }
 }

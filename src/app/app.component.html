@@ -1,18 +1,13 @@
 <angular-loader></angular-loader>
 <layout-header *ngIf="estaLogueado()" ></layout-header>
-<!-- <layout-header></layout-header> -->
 <div class="app-container" [ngClass]="{'container-header-top': estaLogueado()}">
-<!-- <div class="app-container container-header-top" > -->
   <div class="container-fluid">
     <mensajes-alert></mensajes-alert>
     <breadcrumb *ngIf="estaLogueado()" ></breadcrumb>
-    <!-- <breadcrumb></breadcrumb> -->
-
-    <!-- <h2>{{title | async}}</h2> -->
 
     <router-outlet></router-outlet>
+
   </div>
   <div class="clearfix"></div>
-  <!-- <app-pie></app-pie> -->
 </div>
 

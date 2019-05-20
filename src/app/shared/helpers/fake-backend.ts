@@ -105,7 +105,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let recurso = recursos.filter(recurso => { return recurso.id === id; });
               let recursoEncontrado = recurso.length ? recurso[0] : null;
               let alumnos: any[] = [];
-              if(recursoEncontrado["alumno_lista"]!== undefined) {
+              if( recursoEncontrado["alumno_lista"] != null && recursoEncontrado["alumno_lista"] != undefined ) {
                 for (let i = 0; i < recursoEncontrado["alumno_lista"].length; i++) {
                   let encontrado = personas.filter(alumno => { return alumno.id === recursoEncontrado["alumno_lista"][i].alumnoid; });
                   alumnos.push(encontrado[0]);

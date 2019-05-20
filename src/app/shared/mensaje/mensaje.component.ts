@@ -83,8 +83,6 @@ export class MensajesComponent implements OnInit {
                             this._mensajeService.clearMessage();
                             this._router.navigate([this.url[i].name]);
                         }
-                    }else if (this.url[i].tipo == 'reload') {
-                      location.reload(true);
                     }
                 }else{
                     this._mensajeService.clearMessage();
@@ -99,5 +97,9 @@ export class MensajesComponent implements OnInit {
     vistaAmbiente() {
         this._mensajeService.clearMessage();
         this._router.navigate([]);
+    }
+
+    recargarPagina() {
+      location.reload();
     }
 }
