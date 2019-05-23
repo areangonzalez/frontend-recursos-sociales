@@ -27,26 +27,26 @@
             <th scope="col">Nro Doc</th>
             <th colspan="2" scope="col">Apellido y nombre</th>
             <th class="text-center" scope="col">Localidad</th>
-            <th scope="col" style="cursor: pointer;" (click)="ordenarFecha()">
+            <th class="text-center" scope="col" style="cursor: pointer; min-width: 110px !important;" (click)="ordenarFecha()">
               Fecha alta&nbsp;
-              <i *ngIf="(ordenarColumna == 'monto' || ordenarColumna == '-monto')" class="fas fa-sort"></i>
-              <i *ngIf="(ordenarColumna == 'fecha_alta')" class="fas fa-sort-up"></i>
-              <i *ngIf="(ordenarColumna == '-fecha_alta')" class="fas fa-sort-down"></i>
+              <i *ngIf="(ordenarColumna == 'monto' || ordenarColumna == '-monto')" class="fas fa-sort" ngbTooltip="Ordenar" ></i>
+              <i *ngIf="(ordenarColumna == 'fecha_alta')" class="fas fa-sort-up" ngbTooltip="Ascendente" ></i>
+              <i *ngIf="(ordenarColumna == '-fecha_alta')" class="fas fa-sort-down" ngbTooltip="Descendente" ></i>
             </th>
             <th class="text-center" scope="col">Programa</th>
             <th scope="col">Propósito</th>
             <th class="text-center" scope="col" style="cursor: pointer;" (click)="ordenarMonto()">
               Monto&nbsp;
-              <i *ngIf="(ordenarColumna == 'fecha_alta' || ordenarColumna == '-fecha_alta')" class="fas fa-sort"></i>
-              <i *ngIf="(ordenarColumna == 'monto')" class="fas fa-sort-up"></i>
-              <i *ngIf="(ordenarColumna == '-monto')" class="fas fa-sort-down"></i>
+              <i *ngIf="(ordenarColumna == 'fecha_alta' || ordenarColumna == '-fecha_alta')" class="fas fa-sort" ngbTooltip="Ordenar"></i>
+              <i *ngIf="(ordenarColumna == 'monto')" class="fas fa-sort-up" ngbTooltip="Ascendente" ></i>
+              <i *ngIf="(ordenarColumna == '-monto')" class="fas fa-sort-down" ngbTooltip="Descendente" ></i>
             </th>
             <th></th>
           </tr>
         </thead>
         <tbody *ngIf="(recursosLista.length == 0)">
           <tr>
-            <td rowspan="1" colspan="7" class="text-center"> <h5>No se han encontrado resultados.</h5> </td>
+            <td rowspan="1" colspan="9" class="text-center"> <h5>No se han encontrado resultados.</h5> </td>
           </tr>
         </tbody>
         <tbody *ngIf="(recursosLista.length > 0)">
@@ -65,7 +65,7 @@
               </div>
             </td>
             <td class="text-center">{{recurso.persona.lugar.localidad}}</td>
-            <td>{{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</td>
+            <td class="text-center">{{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</td>
             <td class="text-center">{{recurso.programa}}</td>
             <td>{{recurso.proposito}}</td>
             <td class="text-center">{{recurso.monto | currency:'USD':'symbol-narrow':'2.2'}}</td>

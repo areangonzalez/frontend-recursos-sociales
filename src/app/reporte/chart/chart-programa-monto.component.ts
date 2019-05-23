@@ -15,11 +15,13 @@ export class ChartProgramaMontoComponent implements OnInit {
     private _programaService: ProgramaService
   ){
 
+
   }
 
   ngOnInit() {
     this.mostrarGrafico();
     this.obtenerDatosPrograma();
+    this.chart.canvas.parentNode.style.height = '260px';
   }
 
   private obtenerDatosPrograma(){
@@ -66,6 +68,8 @@ export class ChartProgramaMontoComponent implements OnInit {
         ]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         legend: {
           display: true
         },

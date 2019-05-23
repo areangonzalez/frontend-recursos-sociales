@@ -4,8 +4,7 @@ import { MensajesService, ProgramaService } from 'src/app/core/services';
 
 @Component({
   selector: 'reporte-programa-prestaciones',
-  templateUrl: './chart-programa-prestaciones.component.html',
-  // styleUrls: ['./reporte.component.sass'],
+  templateUrl: './chart-programa-prestaciones.component.html'
 })
 export class ChartProgramaPrestacionesComponent implements OnInit {
 
