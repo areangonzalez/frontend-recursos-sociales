@@ -50,7 +50,6 @@ export class PrestacionesComponent implements OnInit {
    * @param params parametros de busquedas para las prestaciones
    */
   public listarRecursos(params:object){
-    console.log(params);
     this._recursoService.buscar(params).subscribe(
       recursos => {
         this.configPaginacion.colleccionSize = recursos.total_filtrado;

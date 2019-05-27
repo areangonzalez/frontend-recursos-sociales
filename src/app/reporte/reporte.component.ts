@@ -1,3 +1,8 @@
+/**
+ * Componente de reporte
+ * Creado 14/02/2019 - Arean Xavier González
+ * Componente que visualiza los reportes.
+ */
 import { Component, OnInit } from '@angular/core';
 
 @Component({
