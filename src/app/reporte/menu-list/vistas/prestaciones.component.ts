@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MensajesService, RecursoSocialService, LoaderService } from '../../../core/services';
 import { UtilService } from '../../../core/utils';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'reporte-prestaciones',
@@ -17,13 +18,14 @@ export class PrestacionesComponent implements OnInit {
   constructor(
     private _mensajeService: MensajesService,
     private _util: UtilService,
+    private _route: ActivatedRoute,
     private _recursoService: RecursoSocialService,
     private _loaderService: LoaderService
   ){}
 
   ngOnInit() {
-
-    this.buscar(this.busqueda);
+    this.listarPrestaciones(this._route.snapshot.data["prestaciones"]);
+    //this.buscar(this.busqueda);
   }
   /**
    * @function buscar busca en listado
@@ -101,11 +103,26 @@ export class PrestacionesComponent implements OnInit {
       }
       return rangoFinal;
     }
-
+    /**
+     * Asigna el parametro para ordenar el listado
+     * @param sort clave para el ordenamiento
+     */
     public ordenarLista(sort:string) {
       this.orden = sort;
       Object.assign(this.busqueda, {"sort": sort})
       this.buscar(this.busqueda);
+    }
+
+    public listarPrestaciones(prestacion) {
+      this.configPaginacion.colleccionSize = prestacion.total_filtrado;
+      this.configPaginacion.pageSize = prestacion.pagesize;
+      this.configPaginacion.monto_acreditado = prestacion.monto_acreditado;
+      this.configPaginacion.monto_baja = prestacion.monto_baja;
+      this.configPaginacion.monto_sin_acreditar = prestacion.monto_sin_acreditar;
+      this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, prestacion.total_filtrado, prestacion.pagesize);
+      this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, prestacion.total_filtrado, prestacion.pagesize);
+      // total de registros
+      this.recursosLista = prestacion.resultado;
     }
 
 }
