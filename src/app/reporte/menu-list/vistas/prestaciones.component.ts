@@ -1,31 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { MensajesService, RecursoSocialService, LoaderService } from '../../../core/services';
-import { UtilService } from '../../../core/utils';
+import { MensajesService, RecursoSocialService } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'reporte-prestaciones',
-  templateUrl: './prestaciones.component.html',
-  // styleUrls: ['./reporte.component.sass'],
+  templateUrl: './prestaciones.component.html'
 })
 export class PrestacionesComponent implements OnInit {
 
-  public orden: string = "-fecha_alta";
-  public busqueda: any = {page: 0, pagesize: 20, sort: this.orden};
-  public recursosLista: any[] = [];
-  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_sin_acreditar": 0, "monto_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 };
-
+  public orden: string = "-fecha_alta"; // ordenamiento del listado predefinido
+  public busqueda: any = {page: 0, pagesize: 20, sort: this.orden}; // parametros de la busqueda
+  public recursosLista: any[] = []; // listado de las prestaciones
+  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_sin_acreditar": 0, "monto_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 }; // configuracion de paginacion
+  public listaProgramas: any[]; // listado de programas
+  public listaLocalidades: any[]; // listado de localidades
+  public listaTipoPrestacion: any[]; // listado de tipo de prestaciones
+  /**
+   * @param _mensajeService [Service] servicio que muestra los mensajes de errores
+   * @param _recursoService [Service] servicio que realiza las busquedas para el listado de prestaciones
+   * @param _route obtiene los listados.
+   */
   constructor(
     private _mensajeService: MensajesService,
-    private _util: UtilService,
     private _route: ActivatedRoute,
-    private _recursoService: RecursoSocialService,
-    private _loaderService: LoaderService
+    private _recursoService: RecursoSocialService
   ){}
 
   ngOnInit() {
+    // se inician las preferencias del componente
+    this.listaProgramas = this._route.snapshot.data["programas"];
+    this.listaLocalidades = this._route.snapshot.data["localidades"];
+    this.listaTipoPrestacion = this._route.snapshot.data["tipoPrestacion"];
     this.listarPrestaciones(this._route.snapshot.data["prestaciones"]);
-    //this.buscar(this.busqueda);
   }
   /**
    * @function buscar busca en listado
@@ -54,15 +60,7 @@ export class PrestacionesComponent implements OnInit {
   public listarRecursos(params:object){
     this._recursoService.buscar(params).subscribe(
       recursos => {
-        this.configPaginacion.colleccionSize = recursos.total_filtrado;
-        this.configPaginacion.pageSize = recursos.pagesize;
-        this.configPaginacion.monto_acreditado = recursos.monto_acreditado;
-        this.configPaginacion.monto_baja = recursos.monto_baja;
-        this.configPaginacion.monto_sin_acreditar = recursos.monto_sin_acreditar;
-        this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, recursos.total_filtrado, recursos.pagesize);
-        this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, recursos.total_filtrado, recursos.pagesize);
-        // total de registros
-        this.recursosLista = recursos.resultado;
+        this.listarPrestaciones(recursos);
       },
       error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
@@ -112,8 +110,11 @@ export class PrestacionesComponent implements OnInit {
       Object.assign(this.busqueda, {"sort": sort})
       this.buscar(this.busqueda);
     }
-
-    public listarPrestaciones(prestacion) {
+    /**
+     * Arma el listado de prestaciones y el paginado
+     * @param prestacion objeto que contiene los parametros de paginacion y prestacion
+     */
+    public listarPrestaciones(prestacion:any) {
       this.configPaginacion.colleccionSize = prestacion.total_filtrado;
       this.configPaginacion.pageSize = prestacion.pagesize;
       this.configPaginacion.monto_acreditado = prestacion.monto_acreditado;

@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { LocalidadService, ProgramaService, TipoRecursoService, MensajesService } from 'src/app/core/services';
+import { TipoRecursoService, MensajesService } from 'src/app/core/services';
 import { UtilService } from 'src/app/core/utils';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { isEmpty } from 'rxjs/operators';
-import { debug } from 'util';
 
 @Component({
   selector: 'busqueda-recurso',
@@ -12,25 +10,31 @@ import { debug } from 'util';
   styleUrls: ['./busqueda-recurso.component.sass']
 })
 export class BusquedaRecursoComponent implements OnInit {
-  @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
+  @Input("localidades") public localidadesLista: any[]; // listado de localidades
+  @Input("programas") public programasLista: any[]; // listado de programas
+  @Input("tipoPrestacion") public tipoRecursosLista: any[]; // listado de tipo prestacion
+  @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter(); // funcion que devuele los parametros de busqueda
 
-  public busquedaAvanzada: FormGroup;
-  public localidadesLista: any[] = [];
-  public programasLista: any[] = [];
-  public tipoRecursosLista: any[] =[];
-  public globalParam:string = '';
-  public mostrar: boolean = false;
-  public btnSeleccion: boolean = false;
+  public busquedaAvanzada: FormGroup; // Formulario de busqueda avanzada
+  public globalParam:string = ''; // se usa para la busqueda general (input)
+  public mostrar: boolean = false; // muestra/oculta el componente de busqueda avanzada
+  public btnSeleccion: boolean = false; // muestra el marco de los campos seleccionados
 
-  public hoveredDate: NgbDate;
-  public fromDate: NgbDate;
-  public toDate: NgbDate;
-  public mostrarDp: boolean = false;
+  public hoveredDate: NgbDate; // Resalta la fecha
+  public fromDate: NgbDate; // fecha desde
+  public toDate: NgbDate; // fecha hasta
+  public mostrarDp: boolean = false; // Muestra el DatePicker
 
+  /**
+   * @param _fb [FormBuilder] Arma el formulario de busqueda avanzada
+   * @param _tipoRecursoService [Service] Servicio para el listado de Tipo prestaciones
+   * @param _mensajeService [Service] Servicio que muestras los mensajes de errores
+   * @param _util [Service] servicio para utilidades generales
+   * @param _calendar Calendario para el DatePicker
+   * @param _configNgbDate [Config] configuracion para el DatePicker
+   */
   constructor(
     private _fb: FormBuilder,
-    private _localidadService: LocalidadService,
-    private _programaService: ProgramaService,
     private _tipoRecursoService: TipoRecursoService,
     private _mensajeService: MensajesService,
     private _util: UtilService,
@@ -53,36 +57,32 @@ export class BusquedaRecursoComponent implements OnInit {
   });
   }
 
-  ngOnInit() {
-    this.listarLocalidades();
-    this.listarProgramas();
-    this.listarTipoRecursos(5);
-  }
+  ngOnInit() {}
 
+  /**
+   * marca el campo que ha sido seleccionado
+   * @param valor [any]
+   * @return [boolean]
+   */
   marcarCampo(valor: any){
     let marcar:boolean = false;
     marcar = (valor != null && valor != '') ? true : false;
     return marcar;
   }
-
-  public listarLocalidades(){
-    this._localidadService.listar().subscribe(
-      localidades => { this.localidadesLista = localidades; },
-      error => { this._mensajeService.cancelado(error, [{name:''}]); });
-  }
-
-  public listarProgramas(){
-    this._programaService.listar().subscribe(
-      programas => { this.programasLista = programas; },
-      error => { this._mensajeService.cancelado(error, [{name:''}]); });
-  }
-
+  /**
+   * Listado para el tipo de prestaciones segun su programa
+   * @param programaid identificador del programa
+   */
   public listarTipoRecursos(programaid:number){
     this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(
       tipoRecursos => { this.tipoRecursosLista = tipoRecursos; },
       error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
-
+  /**
+   * Formatea la fecha para una variable del formulario
+   * @param obj [any] objecto de fecha
+   * @param keyFecha [string] nombre de la variable que sera seteada
+   */
   public formatFecha(obj:any, keyFecha:string){
     if (obj != null){
       this.busquedaAvanzada.controls[keyFecha].setValue(this._util.formatearFecha(obj.day, obj.month, obj.year, "yyyy-MM-dd"));
@@ -90,7 +90,9 @@ export class BusquedaRecursoComponent implements OnInit {
       this.busquedaAvanzada.controls[keyFecha].setValue('');
     }
   }
-
+  /**
+   * funcion que emite la devolucion de parametros al componente padre
+   */
   public buscar() {
     // busqueda avanzada de los valores del formulario
     let busquedaAvanzada = this.busquedaAvanzada.value;
@@ -109,7 +111,9 @@ export class BusquedaRecursoComponent implements OnInit {
     this.btnSeleccion = esTrue;
     this.mostrar = esTrue;
   }
-
+  /**
+   * limpiador de los campos del formulario
+   */
   public limpiarCampos(){
     let busqueda: any = this.busquedaAvanzada.value;
     for (const key in busqueda) {
@@ -124,13 +128,18 @@ export class BusquedaRecursoComponent implements OnInit {
     this.busquedaAvanzada.patchValue(busqueda);
     this.buscar();
   }
-
+  /**
+   * muestra el fomulario de busqueda avanzada
+   */
   public mostrarBusquedaAvanzada(){
     return this.mostrar = !this.mostrar;
   }
 
   /* ### DATE PICKER CONFIG ### */
-
+  /**
+   * Selecciona el rango de fecha DESDE/HASTA
+   * @param date [NgbDate] objeto de fecha del DatePicker
+   */
   public onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
@@ -146,19 +155,15 @@ export class BusquedaRecursoComponent implements OnInit {
       this.busquedaAvanzada.patchValue({fechaAltaHasta: null});
     }
   }
-
   public isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
   }
-
   public isInside(date: NgbDate) {
     return date.after(this.fromDate) && date.before(this.toDate);
   }
-
   public isRange(date: NgbDate) {
     return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
   }
-
   public abrirDp(){
     this.mostrarDp = !this.mostrarDp;
   }

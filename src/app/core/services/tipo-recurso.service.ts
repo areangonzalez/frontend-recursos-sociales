@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { Observable } from "rxjs";
 
 import { ApiService } from './api.service';
 
 @Injectable()
-export class TipoRecursoService {
+export class TipoRecursoService implements Resolve <any> {
 
   constructor(
     private _apiService: ApiService
@@ -17,5 +18,15 @@ export class TipoRecursoService {
 
     return this._apiService.get('/tipo-recursos',httpParams);
   }
+
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+    ): Observable<any>|Promise<any>|any {
+      let httpParams = new HttpParams();
+      httpParams = this._apiService.formatParams(httpParams, {programaid: 5});
+
+      return this._apiService.get('/tipo-recursos',httpParams);
+    }
 
 }

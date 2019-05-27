@@ -47,7 +47,7 @@ export class RecursoSocialService implements Resolve<any> {
     state: RouterStateSnapshot,
     ): Observable<any>|Promise<any>|any {
       let httpParams = new HttpParams();
-      httpParams = this._apiService.formatParams(httpParams, { pagesize: 20, pages: 0 });
+      httpParams = this._apiService.formatParams(httpParams, { pagesize: 20, pages: 0, sort: "-fecha_alta" });
       return this._apiService.get('/recursos', httpParams);
     }
 
