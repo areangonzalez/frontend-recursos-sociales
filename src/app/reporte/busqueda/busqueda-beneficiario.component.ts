@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { LocalidadService, MensajesService } from 'src/app/core/services';
 import { UtilService } from 'src/app/core/utils';
@@ -9,19 +9,19 @@ import { UtilService } from 'src/app/core/utils';
   styleUrls: ['./busqueda-beneficiario.component.sass']
 })
 export class BusquedaBeneficiarioComponent implements OnInit {
+  @Input("localidades") public localidadesLista: any[];
   @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
 
   public busquedaAvanzada: FormGroup;
-  public localidadesLista: any[] = [];
   public globalParam:string = '';
   public mostrar: boolean = false;
   public btnSeleccion: boolean = false;
-
+  /**
+   * Carga los servicios y utilidades de angular que se aplicaran en el componente
+   * @param _fb se utiliza para crear el formulario de la busqueda avanzada
+   */
   constructor(
     private _fb: FormBuilder,
-    private _localidadService: LocalidadService,
-    private _mensajeService: MensajesService,
-    private _util: UtilService,
   ){
     this.busquedaAvanzada = _fb.group({
       global_param: '',
@@ -29,22 +29,19 @@ export class BusquedaBeneficiarioComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.listarLocalidades();
-  }
-
+  ngOnInit() {}
+  /**
+   * Marca los campos que seran utilizados en la busqueda avanzada
+   * @param valor contiene el valor del input seleccionado
+   */
   marcarCampo(valor: any){
     let marcar:boolean = false;
     marcar = (valor != null && valor != '') ? true : false;
     return marcar;
   }
-
-  public listarLocalidades(){
-    this._localidadService.listar().subscribe(
-      localidades => { this.localidadesLista = localidades; },
-      error => { this._mensajeService.cancelado(error, [{name:''}]); });
-  }
-
+  /**
+   * Crea los parametros de busqueda y los envia al componente padre.
+   */
   public buscar() {
     let busquedaAvanzada = this.busquedaAvanzada.value;
     let apiBusqueda:any = {};
@@ -60,7 +57,9 @@ export class BusquedaBeneficiarioComponent implements OnInit {
     this.btnSeleccion = esTrue;
     this.mostrar = esTrue;
   }
-
+  /**
+   * Limpia los campos de busqueda y realiza la busqueda inicial
+   */
   public limpiarCampos(){
     let busqueda: any = this.busquedaAvanzada.value;
     for (const key in busqueda) {
@@ -75,7 +74,9 @@ export class BusquedaBeneficiarioComponent implements OnInit {
     this.busquedaAvanzada.patchValue(busqueda);
     this.buscar();
   }
-
+  /**
+   * Muestra/Oculta los campos de busqueda avanzada
+   */
   public mostrarBusquedaAvanzada(){
     return this.mostrar = !this.mostrar;
   }

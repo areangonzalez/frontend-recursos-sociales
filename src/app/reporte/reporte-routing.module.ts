@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ReporteComponent } from './reporte.component';
 import { PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent } from "./menu-list";
-import { RecursoSocialService, LocalidadService, ProgramaService, TipoRecursoService } from '../core/services';
+import { RecursoSocialService, LocalidadService, ProgramaService, TipoRecursoService, BeneficiarioService } from '../core/services';
 
 const routes: Routes = [
     {
@@ -23,7 +23,12 @@ const routes: Routes = [
               tipoPrestacion: TipoRecursoService
             }
           },
-          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'Beneficiarios' } },
+          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'Beneficiarios' },
+            resolve: {
+              beneficiarios: BeneficiarioService,
+              localidades: LocalidadService
+            }
+          },
           { path: 'estadisticas', component: EstadisticasComponent, data: { breadcrumb: 'Estadísticas' } },
           { path: '', redirectTo: 'prestaciones', pathMatch: 'full' }
         ]
@@ -33,6 +38,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: [RecursoSocialService, ProgramaService, LocalidadService, TipoRecursoService]
+    providers: [RecursoSocialService, ProgramaService, LocalidadService, TipoRecursoService, BeneficiarioService]
 })
 export class ReporteRoutingModule { }

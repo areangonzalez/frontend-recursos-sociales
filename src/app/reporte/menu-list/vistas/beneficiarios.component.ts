@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MensajesService, RecursoSocialService, LoaderService, BeneficiarioService } from '../../../core/services';
-import { UtilService } from '../../../core/utils';
+import { MensajesService, BeneficiarioService } from '../../../core/services';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'reporte-beneficiarios',
@@ -12,17 +12,18 @@ export class BeneficiariosComponent implements OnInit {
   public busqueda: any = {page: 0, pagesize: 20};
   public beneficiariosLista: any[] = [];
   public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 };
+  public listaLocalidades: any[];
 
   constructor(
+    private _route: ActivatedRoute,
     private _mensajeService: MensajesService,
-    private _util: UtilService,
     private _beneficiariosService: BeneficiarioService,
-    private _loaderService: LoaderService
   ){}
 
   ngOnInit() {
-
-    this.buscar(this.busqueda);
+    this.configBeneficiario(this._route.snapshot.data["beneficiarios"]);
+    this.listaLocalidades = this._route.snapshot.data["localidades"];
+    //this.buscar(this.busqueda);
   }
   /**
    * @function buscar busca en listado
@@ -43,15 +44,7 @@ export class BeneficiariosComponent implements OnInit {
   public listarBeneficiarios(params:object) {
     this._beneficiariosService.buscar(params).subscribe(
       beneficiarios => {
-        this.configPaginacion.colleccionSize = beneficiarios.total_filtrado;
-        this.configPaginacion.pageSize = beneficiarios.pagesize;
-        this.configPaginacion.monto_acreditado = beneficiarios.monto_acreditado;
-        this.configPaginacion.monto_baja = beneficiarios.monto_baja;
-        this.configPaginacion.monto_sin_acreditar = beneficiarios.monto_sin_acreditar;
-        this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, beneficiarios.total_filtrado, beneficiarios.pagesize);
-        this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, beneficiarios.total_filtrado, beneficiarios.pagesize);
-        // total de registros
-        this.beneficiariosLista = beneficiarios.resultado;
+        this.configBeneficiario(beneficiarios);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
@@ -90,6 +83,18 @@ export class BeneficiariosComponent implements OnInit {
         rangoFinal = (cantRegistrosXpag < total) ? cantRegistrosXpag : total;
       }
       return rangoFinal;
+    }
+
+    public configBeneficiario(beneficiarios:any) {
+      this.configPaginacion.colleccionSize = beneficiarios.total_filtrado;
+        this.configPaginacion.pageSize = beneficiarios.pagesize;
+        this.configPaginacion.monto_acreditado = beneficiarios.monto_acreditado;
+        this.configPaginacion.monto_baja = beneficiarios.monto_baja;
+        this.configPaginacion.monto_sin_acreditar = beneficiarios.monto_sin_acreditar;
+        this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, beneficiarios.total_filtrado, beneficiarios.pagesize);
+        this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, beneficiarios.total_filtrado, beneficiarios.pagesize);
+        // total de registros
+        this.beneficiariosLista = beneficiarios.resultado;
     }
 
 }
