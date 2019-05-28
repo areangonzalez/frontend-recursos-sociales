@@ -8,11 +8,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReporteComponent } from './reporte.component';
 import { PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent } from "./menu-list";
 import { RecursoSocialService, LocalidadService, ProgramaService, TipoRecursoService, BeneficiarioService } from '../core/services';
+import { AuthGuard } from '../core/guards/auth.guard';
 
 const routes: Routes = [
     {
         path: '',
         component: ReporteComponent,
+        canActivateChild: [AuthGuard],
         children: [
           { path: '', redirectTo: 'prestaciones', pathMatch: 'full' },
           { path: 'prestaciones', component: PrestacionesComponent, data: { breadcrumb: 'Prestaciones', title: 'Reportes de prestaciones' },
