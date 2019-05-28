@@ -15,7 +15,7 @@ const routes: Routes = [
         component: ReporteComponent,
         children: [
           { path: '', redirectTo: 'prestaciones', pathMatch: 'full' },
-          { path: 'prestaciones', component: PrestacionesComponent, data: { breadcrumb: 'Prestaciones' },
+          { path: 'prestaciones', component: PrestacionesComponent, data: { breadcrumb: 'Prestaciones', title: 'Reportes de prestaciones' },
             resolve: {
               prestaciones: RecursoSocialService,
               programas: ProgramaService,
@@ -23,13 +23,13 @@ const routes: Routes = [
               tipoPrestacion: TipoRecursoService
             }
           },
-          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'Beneficiarios' },
+          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'Beneficiarios', title: 'Reportes de beneficiarios' },
             resolve: {
               beneficiarios: BeneficiarioService,
               localidades: LocalidadService
             }
           },
-          { path: 'estadisticas', component: EstadisticasComponent, data: { breadcrumb: 'Estadísticas' } },
+          { path: 'estadisticas', component: EstadisticasComponent, data: { breadcrumb: 'Estadísticas', title: 'Reportes con estadísticas' } },
           { path: '', redirectTo: 'prestaciones', pathMatch: 'full' }
         ]
     }

@@ -6,6 +6,7 @@ const routes: Routes = [
     {
         path: '',
         component: LoginComponent,
+        data: { title: 'Inicio de sesión' }
     }
 ];
 

@@ -6,14 +6,14 @@ import { ProgramaService } from "../core/services";
 const routes: Routes = [
     {
       path: '', component: RecursoComponent,
-      data: { loading: true, preload: true, breadcrumb: 'Crear' },
+      data: { loading: true, preload: true, breadcrumb: 'Crear', title: 'Crear prestación' },
       resolve: {
         programas: ProgramaService
       }
     },
     {
       path: ':programaid', component: RecursoComponent,
-      data: { loading: true, preload: true, breadcrumb: 'Crear' },
+      data: { loading: true, preload: true, breadcrumb: 'Crear', title: 'Crear prestación' },
       resolve: {
         programas: ProgramaService
       }

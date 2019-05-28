@@ -7,7 +7,7 @@ import {filter, map, mergeMap} from 'rxjs/operators';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-const APP_TITLE = 'Recursos sociales - ';
+const APP_TITLE = 'Prestaciones - ';
 const SEPARATOR = ' > ';
 
 @Injectable()

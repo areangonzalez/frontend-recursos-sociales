@@ -7,6 +7,7 @@ const routes: Routes = [
     {
         path: '',
         component: InicioComponent,
+        data: { title: 'Inicio' },
         resolve: {
           programas: ProgramaService
         }
