@@ -44,6 +44,13 @@ export class ErrorInterceptor implements HttpInterceptor {
               location.reload(true);
               this._loadService.hide();
             }
+            if (err.status === 403) {
+              // auto logout if 401 response returned from api
+              this._loadService.hide();
+              console.log(err);
+              let mensaje = err.error.message;
+              return throwError(mensaje);
+            }
             // error.message viene como objeto
             if (err.status === 400){
               let mensaje = this.recorrerErrorObjeto(JSON.parse(err.error.message));
