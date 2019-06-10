@@ -10,7 +10,7 @@ import { debounce } from 'rxjs/operators';
     templateUrl: 'loader.component.html',
     styleUrls: ['loader.component.sass']
 })
-export class LoaderComponent implements OnInit {
+export class LoaderComponent implements OnInit, OnDestroy {
 
     show:boolean = false;
 
@@ -62,6 +62,8 @@ export class LoaderComponent implements OnInit {
     }
 
     ngOnDestroy() {
+      if (this.subscription){
         this.subscription.unsubscribe();
+      }
     }
 }
