@@ -8,7 +8,7 @@ import { RouterModule } from "@angular/router";
 import { HeaderComponent, FooterComponent } from "./layout";
 import { FormPersonaComponent, BuscarPersonaComponent } from "./formulario/persona";
 import { FormLugarComponent } from "./formulario/lugar";
-import { FormContactoComponent } from "./formulario/contacto";
+import { FormContactoComponent, FormRedSocialComponent } from "./formulario/contacto";
 import { FormRecursoComponent } from "./formulario/recurso";
 import { ListaPersonaComponent } from './lista';
 import { VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent } from "./vista";
@@ -37,7 +37,7 @@ import { ProgramaComponent } from "./programa";
       HeaderComponent, FooterComponent,
       BuscarPersonaComponent,
       FormLugarComponent,
-      FormContactoComponent,
+      FormContactoComponent, FormRedSocialComponent,
       FormPersonaComponent,
       FormRecursoComponent,
       ListaPersonaComponent,
@@ -57,7 +57,7 @@ import { ProgramaComponent } from "./programa";
         HeaderComponent,
         BuscarPersonaComponent,
         FormLugarComponent,
-        FormContactoComponent,
+        FormContactoComponent, FormRedSocialComponent,
         FormPersonaComponent,
         FormRecursoComponent,
         ListaPersonaComponent,

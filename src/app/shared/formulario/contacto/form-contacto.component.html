@@ -4,24 +4,25 @@
   <div class="col-5 pt-1"><hr></div>
 </div>
 <div class="row" [formGroup]="contacto">
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4">
     <label for="telefono">Teléfono:</label>
     <input type="text" id="telefono" placeholder="Ej.: (2920) 43 2423" class="form-control" formControlName="telefono">
   </div>
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4">
     <label for="celular">Celular:</label>
     <input type="text" id="celular" placeholder="Ej.: (2920) 43 2423" class="form-control" formControlName="celular">
   </div>
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4">
     <label for="email" class="prioridad">Email:</label>
     <input type="email" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (contacto.get('email').invalid && submitted)}">
     <div *ngIf="(contacto.get('email').invalid && submitted)" class="text-danger">
       <div *ngIf="contacto.get('email').hasError('pattern')">El email es invalido.</div>
     </div>
   </div>
-  <div class="form-group col-md-3">
-      <label for="red_social">Red social:</label>
-      <input type="text" id="red_social" placeholder="Ej.: facebook: Jhon Doe" class="form-control" formControlName="red_social">
-    </div>
+  <div class="form-group col-md-12">
+    <shared-form-red-social></shared-form-red-social>
+      <!-- <label for="red_social">Red social:</label>
+      <input type="text" id="red_social" placeholder="Ej.: facebook: Jhon Doe" class="form-control" formControlName="red_social"> -->
+  </div>
 </div>
 
