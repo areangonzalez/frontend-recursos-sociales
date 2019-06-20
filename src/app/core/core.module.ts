@@ -20,7 +20,8 @@ import {
   EstadoCivilService,
   LocalidadService,
   RecursoSocialService,
-  BeneficiarioService
+  BeneficiarioService,
+  TipoRedSocialService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -47,7 +48,8 @@ import { UtilService } from "./utils";
     EstadoCivilService,
     LocalidadService,
     RecursoSocialService,
-    BeneficiarioService
+    BeneficiarioService,
+    TipoRedSocialService
     /*
 
      */
