@@ -79,6 +79,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let sexos = (<any>data).sexos;
         let generos = (<any>data).generos;
         let estadoCivil = (<any>data).estadoCivils;
+        let tipoRedSocial = (<any>data).tipoRedSocial;
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -937,6 +938,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   return throwError({ status: 401, message: 'Unauthorised' });
               }
             }
+            // get TIPO RED SOCIAL
+            if (request.url.endsWith('/apimock/tipo-red-socials') && request.method === 'GET') {
+              // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+
+                return of(new HttpResponse({ status: 200, body: tipoRedSocial }));
+              //} else {
+                  // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
+            }
+
             // get PROGRAMAS por id /\/users\/\d+$/
             if (request.url.match(/\/apimock\/programas\/\d+$/) && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
@@ -950,6 +963,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               //     return throwError({ error: { message: 'Unauthorised' } });
               // }
             }
+
+
             // pass through any requests not handled above
             return next.handle(request);
 

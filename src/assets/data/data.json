@@ -15,6 +15,12 @@
       {"id":8, "nombre": "Mejoramiento habitacional", "programaid": 4},
       {"id":9, "nombre": "Mejoramiento habitacional", "programaid": 5}
   ],
+  "tipoRedSocial": [
+    {"id": 1, "nombre": "Facebook"},
+    {"id": 1, "nombre": "Instagram"},
+    {"id": 1, "nombre": "Linkedin"},
+    {"id": 1, "nombre": "Twitter"}
+  ],
   "personas": [{
               "id": 1,
               "nombre": "Victoria Margarita",

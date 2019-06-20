@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfig, BotonDisenio } from 'src/app/core/models';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MensajesService } from 'src/app/core/services';
+import { MensajesService, TipoRedSocialService } from 'src/app/core/services';
 
 @Component({
   selector: 'modal-red-social-content',
@@ -16,10 +16,12 @@ export class ModalRedSocialContent implements OnInit {
   public submitted: boolean = false;
   public tipoRedSocialLista = [];
 
-  constructor(public activeModal: NgbActiveModal, private _fb: FormBuilder, private _mensajeService: MensajesService){
+  constructor(public activeModal: NgbActiveModal, private _fb: FormBuilder, private _mensajeService: MensajesService, private _tipoRedSocialService: TipoRedSocialService){
     this.redSocialForm = _fb.group({
-      tipo_red_socialid: ['', Validators.required],
-      perfil: ['', Validators.required]
+      redSocial: _fb.group({
+        tipo_red_socialid: ['', Validators.required],
+        perfil: ['', Validators.required]
+      })
     });
   }
 
@@ -28,12 +30,11 @@ export class ModalRedSocialContent implements OnInit {
   }
 
   public tipoRedSocial() {
-    this.tipoRedSocialLista = [
-      {id: 1, nombre: 'Facebook'},
-      {id: 1, nombre: 'Instagram'},
-      {id: 1, nombre: 'Linkedin'},
-      {id: 1, nombre: 'Twitter'}
-    ]
+    this._tipoRedSocialService.listar().subscribe(
+      datos => {
+        this.tipoRedSocialLista = datos;
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); }
+    );
   }
 
   /**
