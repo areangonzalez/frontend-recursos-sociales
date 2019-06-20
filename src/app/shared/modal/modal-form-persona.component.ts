@@ -31,7 +31,6 @@ export class ModalFormPersonaContent {
   selector: 'modal-form-persona-component',
   templateUrl: './modal-form-persona.component.html',
   providers: [NgbModalConfig, NgbModal]
-
 })
 export class ModalFormPersonaComponent {
   /**
@@ -54,7 +53,7 @@ export class ModalFormPersonaComponent {
   }
 
   open() {
-    const modalRef = this.modalService.open(ModalFormPersonaContent, {size: 'lg'});
+    const modalRef = this.modalService.open(ModalFormPersonaContent, {windowClass: 'ventana-xl'});
     modalRef.componentInstance.configModal = this.configModal;
     modalRef.componentInstance.personaid = this.personaid;
     modalRef.result.then(

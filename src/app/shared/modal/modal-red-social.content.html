@@ -5,8 +5,5 @@
     </button>
 </div>
 <div class="modal-body">
-  Hola mundo
-    <!-- <shared-vista-info-persona *ngIf="(persona != null)" [persona]="persona" [mostrarBoton]="true" (cambioEstado)="actualizarRecurso($event)" ></shared-vista-info-persona>
-    <br>
-    <shared-vista-info-recurso *ngIf="(recurso != null)" [recurso]="recurso" (cambioEstado)="actualizarRecurso($event)"></shared-vista-info-recurso> -->
+    <shared-form-red-social [formRedSocial]="redSocialForm.controls" [listadoTipoRedSocial]="tipoRedSocialLista" ></shared-form-red-social>
 </div>

@@ -83,7 +83,7 @@ export class ModalInfoBeneficiarioComponent {
   }
 
   open() {
-    const modalRef = this.modalService.open(ModalInfoBeneficiarioContent, {size: 'lg'});
+    const modalRef = this.modalService.open(ModalInfoBeneficiarioContent, {windowClass: 'modal-xl'});
     modalRef.componentInstance.beneficiarioid = this.beneficiarioid;
     modalRef.componentInstance.cambioEstado.subscribe(($e) => {
       this.cambioEstado.emit($e);

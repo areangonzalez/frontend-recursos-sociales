@@ -6,7 +6,6 @@ $fa-font-path : '../node_modules/font-awesome/fonts'
 @import '../node_modules/font-awesome/scss/font-awesome'
 
 
-
 .container-header-top
   margin-top: 4.1rem
   //top: 30%
@@ -19,8 +18,12 @@ $fa-font-path : '../node_modules/font-awesome/fonts'
   background: #F1F1F1 !important
 .bg-breadcrumbs
   background: #DEDEDE !important
-.modal-lg
-  max-width: 1224px !important
+.ventana-xl
+  > .modal-dialog
+    max-width: 1224px !important
+.modal-md
+  > .modal-dialog
+    max-width: 824px !important
 .tab-content
   border: 1px solid #dee2e6 !important
   border-top: 0 !important

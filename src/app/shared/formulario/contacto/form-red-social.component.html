@@ -1,16 +1,10 @@
-<table class="table table-hover table-sm">
-  <thead>
-    <th scope="col">Perfil</th>
-    <th scope="col">Tipo Red Social</th>
-    <th scope="col" class="text-center">
-        <modal-red-social-component></modal-red-social-component>
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td scope="col">cep11p</td>
-      <td scope="col">Facebook</td>
-      <td scope="col" class="text-center"><button class="btn btn-sm btn-danger" ><i class="fa fa-close"></i></button></td>
-    </tr>
-  </tbody>
-</table>
+<form [formGroup]="redSocial">
+    <div class="form-group input-group">
+        <!-- <label for="tipo_red_social">Tipo Red Social</label> -->
+        <select class="form-control input-group-prepend maximo-ancho" id="tipo_red_social" formControlName="tipo_red_socialid">
+            <option value="">Seleccione tipo de red social</option>
+            <option *ngFor="let tipoRedSocial of tipoRedSocialLista" value="{{tipoRedSocial.id}}" >{{tipoRedSocial.nombre}}</option>
+          </select>
+          <input type="text" class="form-control border-radius-final" id="perfil" placeholder="Ej: https://wwww.facebook.com/anibal.fernandez o anibal.fernandez" formControlName="perfil">
+    </div>
+</form>
