@@ -5,5 +5,5 @@
     </button>
 </div>
 <div class="modal-body">
-    <shared-form-red-social [formRedSocial]="redSocialForm.get('redSocial')" [listadoTipoRedSocial]="tipoRedSocialLista" ></shared-form-red-social>
+    <shared-form-red-social (cancelarModal)="cancelar($event)" (getDatos)="datosLista($event)" ></shared-form-red-social>
 </div>

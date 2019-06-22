@@ -2,14 +2,23 @@
     <thead>
       <th scope="col">Perfil</th>
       <th scope="col">Tipo Red Social</th>
+      <th scope="col">Icono</th>
       <th scope="col" class="text-center">
-          <modal-red-social-component></modal-red-social-component>
+          <modal-red-social-component (obtenerRedSocial)="agregarRedSocial($event)"></modal-red-social-component>
       </th>
     </thead>
-    <tbody>
+    <tbody *ngIf="(listadoRedSocial.length == 0)">
       <tr>
-        <td scope="col">cep11p</td>
-        <td scope="col">Facebook</td>
+        <td rowspan="1" colspan="4" class="text-center"><h5>No tiene redes sociales</h5></td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(listadoRedSocial.length > 0)">
+      <tr *ngFor="let redsocial of listadoRedSocial; let i = index">
+        <td scope="col"><a href="{{redsocial.perfil}}" target="_blank">{{redsocial.perfil}}</a></td>
+        <td scope="col">{{redsocial.tipo_red_social}}</td>
+        <td scope="col">
+            <button class="btn btn-sm btn-light" ><i class="{{redsocial.icon_class}}"></i></button>
+        </td>
         <td scope="col" class="text-center"><button class="btn btn-sm btn-danger" ><i class="fa fa-close"></i></button></td>
       </tr>
     </tbody>

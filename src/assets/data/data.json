@@ -16,10 +16,10 @@
       {"id":9, "nombre": "Mejoramiento habitacional", "programaid": 5}
   ],
   "tipoRedSocial": [
-    {"id": 1, "nombre": "Facebook"},
-    {"id": 1, "nombre": "Instagram"},
-    {"id": 1, "nombre": "Linkedin"},
-    {"id": 1, "nombre": "Twitter"}
+    {"id": 1, "nombre": "Facebook", "icon_class": "fab fa-facebook-square", "url_1": "https://www.facebook.com/" },
+    {"id": 2, "nombre": "Instagram", "icon_class": "fab fa-instagram", "url_1": "https://www.instagram.com/" },
+    {"id": 3, "nombre": "Linkedin", "icon_class": "fab fa-twitter", "url_1": "https://www.linkedin.com/in/" },
+    {"id": 4, "nombre": "Twitter", "icon_class": "fab fa-linkedin-in", "url_1": "https://twitter.com/" }
   ],
   "personas": [{
               "id": 1,

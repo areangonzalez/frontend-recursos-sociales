@@ -6,15 +6,21 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: []
 })
 export class ListaRedSocialComponent implements OnInit {
-  /* @Input("personas") public personas:any;
-  @Input("mostrar") public mostrar:boolean;
-  @Output("borrarPersona") public borrarPersona = new EventEmitter(); */
+  //@Input("listadoRedSocial") public listadoRedSocial:any;
+  public listadoRedSocial:any = [];
 
   constructor(){}
 
   ngOnInit() {
   }
-
+  /**
+   * agrego un nuevo elemento al listado de red social
+   * @param redSocial datos de una red social
+   */
+  public agregarRedSocial(redSocial:any) {
+    console.log(redSocial);
+    this.listadoRedSocial.push(redSocial);
+  }
 
   /* borrar(id:number){
     this.borrarPersona.emit({id:id});

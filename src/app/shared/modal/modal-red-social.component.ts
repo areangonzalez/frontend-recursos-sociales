@@ -1,82 +1,33 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfig, BotonDisenio } from 'src/app/core/models';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MensajesService, TipoRedSocialService } from 'src/app/core/services';
+
 
 @Component({
   selector: 'modal-red-social-content',
   templateUrl: './modal-red-social.content.html'
 })
-export class ModalRedSocialContent implements OnInit {
-  /* @Input("configModal") public configModal:ModalConfig;
-  @Input("personaid") public personaid: any;
- */
-  public redSocialForm: FormGroup;
-  public submitted: boolean = false;
-  public tipoRedSocialLista = [];
+export class ModalRedSocialContent {
 
-  constructor(public activeModal: NgbActiveModal, private _fb: FormBuilder, private _mensajeService: MensajesService, private _tipoRedSocialService: TipoRedSocialService){
-    this.redSocialForm = _fb.group({
-      redSocial: _fb.group({
-        tipo_red_socialid: ['', Validators.required],
-        perfil: ['', Validators.required]
-      })
-    });
-  }
-
-  ngOnInit(){
-    this.tipoRedSocial();
-  }
-
-  public tipoRedSocial() {
-    this._tipoRedSocialService.listar().subscribe(
-      datos => {
-        this.tipoRedSocialLista = datos;
-      }, error => { this._mensajeService.cancelado(error, [{name:''}]); }
-    );
-  }
-
+  constructor(public activeModal: NgbActiveModal){}
   /**
-   * Valido el formulario antes de guardar
-   * @param recursoid identificador de la persona que ha sido guardada
+   * Recibo los datos del formulario y los envio al listado
+   * @param datos objeto que obtiene los datos de una red social
    */
-  public validar() {
-    this.submitted = true;
-    if (this.redSocialForm.invalid) {
-      this._mensajeService.cancelado("¡Error! Campos sin completar.", [{name:''}]);
-      return false;
-    }else{
-      return true;
-    }
+  public datosLista(datos:any) {
+    this.activeModal.close(datos);
   }
-
 
   /**
    * cancelo el modal y lo cierro.
    * @param cancelar cierra el modal si el valor es true
    */
-  public cancelar() {
-    this.activeModal.close('closed');
-  }
-  /**
-   * Verifico los datos antes de enviar el guardar al listado
-   */
-  public guardar() {
-    this.submitted = true;
-
-    if (this.redSocialForm.invalid) {
-      this._mensajeService.cancelado("¡Error! Campos sin completar", [{name:''}]);
-      return;
-    }else{
-      for (let i = 0; i < this.tipoRedSocialLista.length; i++) {
-        const element = this.tipoRedSocialLista[i];
-
-      }
-      this._mensajeService.exitoso('Se ha creado una nueva red social.', [{name:''}]);
-      this.activeModal.close(true);
+  public cancelar(cancelar:boolean) {
+    if (cancelar){
+      this.activeModal.close('closed');
     }
   }
+
 }
 
 @Component({
@@ -91,10 +42,7 @@ export class ModalRedSocialComponent {
    * @var personaid {number} identificador de una persona
    * @function {Object} devuelve los datos de la persona
    */
-  /* @Input("disenioBoton") public disenioBoton: BotonDisenio;
-  @Input("configModal") public configModal: ModalConfig;
-  @Input("personaid") public personaid: any;
-  @Output("obtenerPersona") public obtenerPersona = new EventEmitter(); */
+  @Output("obtenerRedSocial") public obtenerRedSocial = new EventEmitter();
 
   constructor(
     private modalService: NgbModal,
@@ -106,16 +54,14 @@ export class ModalRedSocialComponent {
 
   open() {
     const modalRef = this.modalService.open(ModalRedSocialContent, {windowClass: 'modal-md'});
-    /* modalRef.componentInstance.configModal = this.configModal;
-    modalRef.componentInstance.personaid = this.personaid;
     modalRef.result.then(
       (result) => {
         if (result == 'closed'){
         }else{
           // obtengo el id persona desde el content.
-          return this.obtenerPersona.emit(result);
+          return this.obtenerRedSocial.emit(result);
         }
       }
-    ) */
+    )
   }
 }
