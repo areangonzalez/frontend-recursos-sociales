@@ -5,7 +5,7 @@
           <option value="">Seleccione tipo de red social</option>
           <option *ngFor="let tipoRedSocial of tipoRedSocialLista" value="{{tipoRedSocial.id}}" >{{tipoRedSocial.nombre}}</option>
         </select>
-        <input type="text" class="form-control border-radius-final" id="perfil" placeholder="Ej: https://wwww.facebook.com/anibal.fernandez o anibal.fernandez" formControlName="perfil" [ngClass]="{'is-invalid': (redSocialForm.get('perfil').invalid && submitted)}">
+        <input type="text" class="form-control border-radius-final" id="perfil" placeholder="Ej: https://wwww.facebook.com/anibal.fernandez o anibal.fernandez" formControlName="perfil" [ngClass]="{'is-invalid': (redSocialForm.get('perfil').invalid && submitted)}" (keyup)="noEspacios($event.target)">
     </div>
     <div *ngIf="(redSocialForm.get('tipo_red_socialid').invalid && submitted)"
           class="text-danger">

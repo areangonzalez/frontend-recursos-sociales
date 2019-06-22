@@ -48,4 +48,12 @@ export class UtilService {
   public eliminarDiacriticos(texto) {
     return texto.normalize('NFD').replace(/[\u0300-\u036f]/g,"");
   }
+
+  public validarEspacios(cadena:string) {
+    if (cadena.indexOf(" ") === -1) {
+      return true;
+    }else{
+        return false;
+    }
+  }
 }

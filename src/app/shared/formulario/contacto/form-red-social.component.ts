@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output,  } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TipoRedSocialService, MensajesService } from 'src/app/core/services';
+import { UtilService } from 'src/app/core/utils';
 
 @Component({
   selector: 'shared-form-red-social',
@@ -14,7 +15,7 @@ export class FormRedSocialComponent implements OnInit {
   public tipoRedSocialLista: any = [];
   public submitted: boolean = false;
 
-  constructor( private _fb: FormBuilder, private _mensajeService: MensajesService, private _tipoRedSocialService: TipoRedSocialService ){
+  constructor( private _fb: FormBuilder, private _mensajeService: MensajesService, private _tipoRedSocialService: TipoRedSocialService, private _util: UtilService ){
     this.redSocialForm = _fb.group({
         tipo_red_socialid: ['', Validators.required],
         perfil: ['', Validators.required]
@@ -68,6 +69,12 @@ export class FormRedSocialComponent implements OnInit {
 
   public cancelar(){
     this.cancelarModal.emit(true);
+  }
+
+  public noEspacios(datos:any) {
+    if (!this._util.validarEspacios(datos.value)) {
+      datos.value = datos.value.substring(0,datos.value.length - 1);
+    }
   }
 
 }
