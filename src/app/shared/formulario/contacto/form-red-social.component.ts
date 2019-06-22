@@ -9,13 +9,14 @@ import { UtilService } from 'src/app/core/utils';
   styleUrls: ['./form-red-social.component.sass']
 })
 export class FormRedSocialComponent implements OnInit {
-  @Output("getDatos") public getDatos = new EventEmitter();
-  @Output("cancelarModal") public cancelarModal = new EventEmitter();
-  public redSocialForm: FormGroup;
-  public tipoRedSocialLista: any = [];
-  public submitted: boolean = false;
+  @Output("getDatos") public getDatos = new EventEmitter(); // devuelve los datos de red social al listado
+  @Output("cancelarModal") public cancelarModal = new EventEmitter(); // cancela y aplica el cierre del modal
+  public redSocialForm: FormGroup; // formulario de red social
+  public tipoRedSocialLista: any = []; // listado de tipos de red social
+  public submitted: boolean = false; // variable auxiliar para mostrar errores del formulario
 
   constructor( private _fb: FormBuilder, private _mensajeService: MensajesService, private _tipoRedSocialService: TipoRedSocialService, private _util: UtilService ){
+    // creo el objeto que contendra los parametros del formulario
     this.redSocialForm = _fb.group({
         tipo_red_socialid: ['', Validators.required],
         perfil: ['', Validators.required]
@@ -25,7 +26,9 @@ export class FormRedSocialComponent implements OnInit {
   ngOnInit() {
     this.tipoRedSocial();
   }
-
+  /**
+   * lista los tipo de redes sociales
+   */
   public tipoRedSocial() {
     this._tipoRedSocialService.listar().subscribe(
       datos => {
@@ -66,11 +69,16 @@ export class FormRedSocialComponent implements OnInit {
       "icon_class": tiporedsocial[0].icon_class
     });
   }
-
+  /**
+   * Envia un booleano para el cierre del modal
+   */
   public cancelar(){
     this.cancelarModal.emit(true);
   }
-
+  /**
+   * Valida el campo de perfil para que no tenga espacios
+   * @param datos objeto que contiene la cadena ingresada.
+   */
   public noEspacios(datos:any) {
     if (!this._util.validarEspacios(datos.value)) {
       datos.value = datos.value.substring(0,datos.value.length - 1);

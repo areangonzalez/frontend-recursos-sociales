@@ -1,11 +1,20 @@
+<ng-template #ayudaTipo>
+    <b>Tipo red social</b>
+   </ng-template>
+<ng-template #ayudaPerfil>
+  <b>Perfil o URL:</b>
+  <br>Ingrese nombre de perfil sin espacios.
+  <br>Utilice . o - para separar.
+  <br>Copie y pegue la URL del perfil.
+  <br>La url debe de coincidir con el tipo de red social.
+ </ng-template>
 <form [formGroup]="redSocialForm">
     <div class="form-group input-group">
-        <!-- <label for="tipo_red_social">Tipo Red Social</label> -->
-        <select class="form-control input-group-prepend maximo-ancho" id="tipo_red_social" formControlName="tipo_red_socialid" [ngClass]="{'is-invalid': (redSocialForm.get('tipo_red_socialid').invalid && submitted)}">
+        <select class="form-control input-group-prepend maximo-ancho" id="tipo_red_social" formControlName="tipo_red_socialid" [ngClass]="{'is-invalid': (redSocialForm.get('tipo_red_socialid').invalid && submitted)}" [ngbTooltip]="ayudaTipo" placement="top" container="body">
           <option value="">Seleccione tipo de red social</option>
           <option *ngFor="let tipoRedSocial of tipoRedSocialLista" value="{{tipoRedSocial.id}}" >{{tipoRedSocial.nombre}}</option>
         </select>
-        <input type="text" class="form-control border-radius-final" id="perfil" placeholder="Ej: https://wwww.facebook.com/anibal.fernandez o anibal.fernandez" formControlName="perfil" [ngClass]="{'is-invalid': (redSocialForm.get('perfil').invalid && submitted)}" (keyup)="noEspacios($event.target)">
+        <input type="text" class="form-control border-radius-final" id="perfil" placeholder="Perfil Ej: https://wwww.facebook.com/anibal.fernandez o anibal.fernandez" formControlName="perfil" [ngClass]="{'is-invalid': (redSocialForm.get('perfil').invalid && submitted)}" (keyup)="noEspacios($event.target)" [ngbTooltip]="ayudaPerfil" placement="bottom" container="body">
     </div>
     <div *ngIf="(redSocialForm.get('tipo_red_socialid').invalid && submitted)"
           class="text-danger">
