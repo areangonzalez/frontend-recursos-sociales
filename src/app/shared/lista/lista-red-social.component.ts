@@ -18,13 +18,14 @@ export class ListaRedSocialComponent implements OnInit {
    * @param redSocial datos de una red social
    */
   public agregarRedSocial(redSocial:any) {
-    console.log(redSocial);
     this.listadoRedSocial.push(redSocial);
   }
 
-  /* borrar(id:number){
-    this.borrarPersona.emit({id:id});
-  } */
+  borrar(id:number, confirmacion: boolean){
+    if (confirmacion){
+      this.listadoRedSocial.splice(id, 1);
+    }
+  }
 
   /* public direccion(lugar){
     let dir = "";

@@ -50,7 +50,9 @@ export class LoginComponent implements OnInit {
   }
 
   private isLogin(){
-    this.logueado = (localStorage.getItem('token-rrss'))? false : true;
+    if (localStorage.getItem('token-rrss') != null) {
+       this.router.navigate(['/inicio']);
+    }
   }
 
 }
