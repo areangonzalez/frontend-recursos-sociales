@@ -97,6 +97,7 @@ export class RecursoComponent implements OnInit {
     this._personaService.personaPorId(personaid).subscribe(
       datos => {
         this.datosPersona = datos;
+        this.listaRedSocial = datos["lista_red_social"];
         this.contactosForm.controls.contacto.patchValue(datos);
       }, error => {
         this._mensajeService.cancelado(error, [{name:''}]);

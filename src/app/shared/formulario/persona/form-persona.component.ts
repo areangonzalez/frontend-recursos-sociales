@@ -80,7 +80,6 @@ export class FormPersonaComponent implements OnInit {
           telefono: '',
           celular: '',
           email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-          red_social: ''
         }),
         lugar: _fb.group({
           id: '',
@@ -244,8 +243,8 @@ export class FormPersonaComponent implements OnInit {
       delete vDatos["celular"];
       vDatos["contacto"]["email"] = vPersona["email"];
       delete vDatos["email"];
-      vDatos["contacto"]["red_social"] = vPersona["red_social"];
-      delete vDatos["red_social"];
+      this.listaRedSocial = vPersona["lista_red_social"];
+      delete vDatos["lista_red_social"];
       // armo numero de cuil
       if (vPersona["cuil"] != '') {
         vDatos["cuil_prin"] = vPersona["cuil"].substring(0, 2);
