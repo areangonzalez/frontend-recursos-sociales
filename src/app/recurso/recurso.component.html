@@ -22,7 +22,7 @@
   <shared-buscar-persona *ngIf="!(infoPersona)" (personaElegida)="seleccionarPersona($event)"></shared-buscar-persona>
 
 
-  <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.get('contacto')"></shared-form-contacto>
+  <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.get('contacto')" [listaRedSocial]="listaRedSocial"></shared-form-contacto>
 
 </div>
 <shared-form-recurso [listaPrograma]="programaLista" [programaid]="programaid" [personaid]="datosPersona['id']" (obtenerDatos)="guardar($event)" (cancelar)="cancelar($event)" ></shared-form-recurso>

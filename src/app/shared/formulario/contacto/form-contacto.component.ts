@@ -8,9 +8,9 @@ import { FormGroup } from "@angular/forms";
 })
 export class FormContactoComponent implements OnInit {
   @Input("formContacto") public contacto: FormGroup;
+  @Input("listaRedSocial") public listaRedSocial: any;
 
   public submitted: boolean = false;
-  public localidadLista: any = [{id: 1, nombre: 'Roca'}, {id: 2, nombre: 'Viedma'}];
 
   constructor(){}
 

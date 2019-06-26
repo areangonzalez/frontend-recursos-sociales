@@ -17,7 +17,7 @@ export class RecursoComponent implements OnInit {
   public configModal: ModalConfig = { title: "Editar beneficiario" };
   public configBotonModal: BotonDisenio = { class: 'btn btn-md btn-light btn-altura', iconoClass: 'fas fa-pencil-alt', text:'' };
   public programaLista: any;
-
+  public listaRedSocial: any = [];
 
   constructor(
     private _fb: FormBuilder,
@@ -67,8 +67,9 @@ export class RecursoComponent implements OnInit {
       // agrego el id de persona
       recurso["personaid"] = this.datosPersona.id;
       recurso["monto"] = parseFloat(recurso["monto"]);
-
-      this._personaService.guardarContacto(this.contactosForm.value.contacto, this.datosPersona.id).subscribe(
+      let contacto: any = this.contactosForm.value.contacto;
+      Object.assign(contacto, {lista_red_social: this.listaRedSocial});
+      this._personaService.guardarContacto(contacto, this.datosPersona.id).subscribe(
         resultado =>{
           this.guardarRecurso(recurso);
         }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });

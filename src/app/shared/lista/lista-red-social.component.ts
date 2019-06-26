@@ -6,8 +6,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: []
 })
 export class ListaRedSocialComponent implements OnInit {
-  //@Input("listadoRedSocial") public listadoRedSocial:any;
-  public listadoRedSocial:any = [];
+  @Input("redesSociales") public listadoRedSocial:any;
+  //public listadoRedSocial:any = [];
 
   constructor(){}
 
