@@ -29,6 +29,7 @@ export class FormPersonaComponent implements OnInit {
    * @var estadoCivilLista [array] listado de estados civiles
    * @var personaModel [model] modelo de persona
    * @var cuil_medio [string] guarda el número de documento que conforma el cuil
+   * @Var listaRedSocial [array] listado que guarda redes sociales de una persona
    */
   public formPersona: FormGroup;
   public submitted: boolean = false;
@@ -37,6 +38,7 @@ export class FormPersonaComponent implements OnInit {
   public estadoCivilLista: any = [];
   public personaModel = new PersonaModel();
   public cuil_medio:string = '';
+  public listaRedSocial: any = [];
 
   /**
    * constructor
@@ -201,6 +203,7 @@ export class FormPersonaComponent implements OnInit {
    * @function guardarPersona Crear/Editar una persona.
    */
   public guardarPersona(params:object, id:any) {
+    Object.assign(params, {'lista_red_social': this.listaRedSocial});
     if (id != '') {
       this._personaService.guardar(params, id).subscribe(
         resultado => {
