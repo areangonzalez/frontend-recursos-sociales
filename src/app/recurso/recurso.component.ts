@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
 import { MensajesService, PersonaService, RecursoSocialService, LoaderService } from '../core/services';
 import { ModalConfig, BotonDisenio } from '../core/models';
+import { ThemeService } from 'ng2-charts';
 
 @Component({
   selector: 'app-recurso',
@@ -49,6 +50,7 @@ export class RecursoComponent implements OnInit {
     if (datos.persona != undefined) {
       this.infoPersona = true;
       this.datosPersona = datos.persona;
+      this.listaRedSocial = datos.persona.lista_red_social;
       this.contactosForm.controls.contacto.patchValue(datos.persona);
     }else if (datos.id != undefined) {
       this.personaEditada(datos.id);
