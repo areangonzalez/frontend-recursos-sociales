@@ -14,7 +14,7 @@
   </div>
   <div class="form-group col-md-4">
     <label for="email" class="prioridad">Email:</label>
-    <input type="email" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (contacto.get('email').invalid && submitted)}">
+    <input type="email" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email" (keyup)="aMinuscula($event.target)" [ngClass]="{'is-invalid': (contacto.get('email').invalid && submitted)}">
     <div *ngIf="(contacto.get('email').invalid && submitted)" class="text-danger">
       <div *ngIf="contacto.get('email').hasError('pattern')">El email es invalido.</div>
     </div>

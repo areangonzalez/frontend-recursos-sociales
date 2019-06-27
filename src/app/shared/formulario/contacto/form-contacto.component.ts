@@ -20,4 +20,7 @@ export class FormContactoComponent implements OnInit {
   // convenience getter for easy access to form fields
   get datosContacto() { return this.contacto.controls; }
 
+  public aMinuscula(palabra:any){
+    palabra.value = palabra.value.toLowerCase();
+  }
 }
