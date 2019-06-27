@@ -63,6 +63,16 @@
                   ]
               },
               "estudios": [],
+              "lista_red_social": [
+                {
+                "tipo_red_socialid":1,
+                "perfil":"cep11p"
+                },
+                {
+                "tipo_red_socialid":2,
+                "perfil":"kar2000"
+                }
+              ],
               "sexo": "Mujer",
               "genero": "",
               "estado_civil": "",

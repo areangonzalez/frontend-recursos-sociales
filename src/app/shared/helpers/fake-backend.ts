@@ -459,7 +459,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }else{
                   listaPersonas.resultado = resultado.slice(0,pageSize);
                 }
-
               return of(new HttpResponse({ status: 200, body: listaPersonas }));
 
             }

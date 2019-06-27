@@ -47,6 +47,7 @@ export class RecursoComponent implements OnInit {
   }
 
   public seleccionarPersona(datos){
+    console.log(datos);
     if (datos.persona != undefined) {
       this.infoPersona = true;
       this.datosPersona = datos.persona;
