@@ -53,7 +53,9 @@
             <button *ngIf="(beneficiario.persona.telefono != '')" ngbTooltip="{{beneficiario.persona.telefono}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
             <button *ngIf="(beneficiario.persona.celular != '')" ngbTooltip="{{beneficiario.persona.celular}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
             <button *ngIf="(beneficiario.persona.email != '')" ngbTooltip="{{beneficiario.persona.email}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
-            <button *ngIf="(beneficiario.persona.red_social != undefined && beneficiario.persona.red_social != '')" ngbTooltip="{{beneficiario.persona.red_social}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-users"></i></button>
+            <div *ngIf="((beneficiario.persona.lista_red_social) && beneficiario.persona.lista_red_social.length > 0 )">
+              <a *ngFor="let redSocial of beneficiario.persona.lista_red_social" href="{{redSocial.perfil}}" target="_blank" ngbTooltip="{{redSocial.tipo_red_social}}" class="btn btn-sm btn-light"><i class="{{redSocial.icono_class}}"></i></a>
+            </div>
           </div>
         </td>
         <td class="text-center">{{beneficiario.persona.lugar.localidad}}</td>
