@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDateARParserFormatter } from './shared';
-import { TitleService, JwtService, AuthenticationService } from './core/services';
-import { environment } from "../environments/environment";
+import { TitleService } from './core/services';
 
 @Component({
   selector: 'app-root',
@@ -11,19 +10,13 @@ import { environment } from "../environments/environment";
   providers: [{ provide: NgbDateParserFormatter, useClass: NgbDateARParserFormatter }]
 })
 export class AppComponent implements OnInit {
-  public logueado: boolean = false;
 
   constructor(
     private _titleService: TitleService,
-    private _auth: AuthenticationService
   ){}
 
   ngOnInit() {
-    this.estaLogueado();
     this._titleService.init();
   }
 
-  public estaLogueado(){
-    return this._auth.loggedIn();
-  }
 }

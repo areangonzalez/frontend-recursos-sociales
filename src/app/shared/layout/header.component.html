@@ -10,10 +10,10 @@
   <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed" *ngIf="estoyLogueado">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
-            <a class="nav-link" [routerLink]="['inicio/crear-prestacion']" ><i class="fas fa-hands-helping"></i> Crear prestación</a>
+            <a class="nav-link" [routerLink]="['crear-prestacion']" ><i class="fas fa-hands-helping"></i> Crear prestación</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
-            <a class="nav-link" [routerLink]="['inicio/reporte']" ><i class="fas fa-file-contract"></i> Reportes</a>
+            <a class="nav-link" [routerLink]="['reporte']" ><i class="fas fa-file-contract"></i> Reportes</a>
           </li>
         </ul>
       <ul class="navbar-nav flex-row ml-md-auto d-md-flex" *ngIf="estoyLogueado">

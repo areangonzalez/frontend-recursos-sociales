@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomPreloadingStrategy } from "./custom-preloading-strategy";
+import { AppLayoutComponent } from "./shared/layout";
 import { AuthGuard } from "./core/guards/auth.guard";
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
-  { path: 'inicio', data: {  preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
+//  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+
+  //{ path: 'inicio', data: {  preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
+  {
+    path: 'inicio', data: {  preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
+    component: AppLayoutComponent,
     children: [
       { path: '',
         canActivate: [AuthGuard],
@@ -24,9 +28,11 @@ const routes: Routes = [
       { path: 'vista',
         canActivate: [AuthGuard],
         loadChildren: './vista/vista.module#VistaModule', // prod
-        data: { loading: true, preload: true, breadcrumb: 'Visualizar prestación', title: 'Visualizar prestación' } }
+        data: { loading: true, preload: true, breadcrumb: 'Vista', title: 'Visualizar prestación' } }
     ]
-  },{ path: '**', redirectTo: 'inicio', pathMatch: 'full' },
+  },
+  { path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
+  { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
 @NgModule({
     imports: [

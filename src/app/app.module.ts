@@ -14,6 +14,7 @@ import { fakeBackendProvider } from "./shared/helpers/fake-backend";
 /* Modulos */
 import { CoreModule } from "./core/core.module";
 import {
+  AppLayoutComponent,
   MensajesComponent,
   BreadcrumbComponent, BreadcrumbsService,
   CustomDatepickerI18n,
@@ -29,6 +30,7 @@ import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
+    AppLayoutComponent,
     MensajesComponent,
     BreadcrumbComponent,
     LoaderComponent

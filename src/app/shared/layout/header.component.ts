@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
 import { AuthenticationService } from "../../core/services";
+import { LoaderService } from "../../core/services";
 
 @Component({
     selector: 'layout-header',
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit {
 
     constructor(
         private _router: Router,
-        private _authentication: AuthenticationService
+        private _authentication: AuthenticationService,
+        private _loaderService: LoaderService
     ) { }
 
     ngOnInit() {
@@ -26,8 +28,12 @@ export class HeaderComponent implements OnInit {
     }
 
     cerrarSesion(){
-      this._authentication.logout();
-      this._router.navigate(['/login']);
+      this._loaderService.show();
+      setTimeout(() => {
+        this._authentication.logout();
+        this._loaderService.hide();
+        this._router.navigate(['/login']);
+       }, 1000);
     }
 
     mostrarMenu(){
