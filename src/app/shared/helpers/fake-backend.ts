@@ -529,7 +529,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     personaEncontrada["id"]                   = datosPersona.id;
                     personaEncontrada["nombre"]               = datosPersona.nombre;
                     personaEncontrada["nro_documento"]        = datosPersona.nro_documento;
-                    personaEncontrada["red_social"]           = datosPersona.red_social;
+                    personaEncontrada["lista_red_social"]     = datosPersona.lista_red_social;
                     personaEncontrada["sexo"]                 = nombrePorId(datosPersona.sexoid, sexos);
                     personaEncontrada["sexoid"]               = datosPersona.sexoid;
                     personaEncontrada["telefono"]             = datosPersona.telefono;
@@ -603,7 +603,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 /* ACTUALIZO DATOS DE CONTACTOS DE UNA PERSONA */
                 personaEncontrada["celular"]    = datosPersona.celular;
-                personaEncontrada["red_social"] = datosPersona.red_social;
+                personaEncontrada["lista_red_social"] = datosPersona.lista_red_social;
                 personaEncontrada["telefono"]   = datosPersona.telefono;
                 personaEncontrada["email"]      = datosPersona.email;
 

@@ -189,7 +189,6 @@ export class FormPersonaComponent implements OnInit {
   public validarPersona() {
     this.submitted = true;
     if (this.formPersona.invalid) { // verifico la validación en los campos del formulario
-      console.log(this.formPersona.get('contacto').value.email);
       if (this.formPersona.get('contacto').value.email !== this.formPersona.get('contacto').value.email.toLowerCase()){
         this._mensajeService.cancelado("El email no puede estar en mayusculas!!", [{name:''}]);
       }else{

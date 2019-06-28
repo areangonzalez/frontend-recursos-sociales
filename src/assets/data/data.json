@@ -16,10 +16,10 @@
       {"id":9, "nombre": "Mejoramiento habitacional", "programaid": 5}
   ],
   "tipoRedSocial": [
-    {"id": 1, "nombre": "Facebook", "icon_class": "fab fa-facebook-square", "url_1": "https://www.facebook.com/" },
-    {"id": 2, "nombre": "Instagram", "icon_class": "fab fa-instagram", "url_1": "https://www.instagram.com/" },
-    {"id": 3, "nombre": "Linkedin", "icon_class": "fab fa-twitter", "url_1": "https://www.linkedin.com/in/" },
-    {"id": 4, "nombre": "Twitter", "icon_class": "fab fa-linkedin-in", "url_1": "https://twitter.com/" }
+    {"id": 1, "nombre": "Facebook", "icono_class": "fab fa-facebook-square", "url_1": "https://www.facebook.com/" },
+    {"id": 2, "nombre": "Instagram", "icono_class": "fab fa-instagram", "url_1": "https://www.instagram.com/" },
+    {"id": 3, "nombre": "Linkedin", "icono_class": "fab fa-twitter", "url_1": "https://www.linkedin.com/in/" },
+    {"id": 4, "nombre": "Twitter", "icono_class": "fab fa-linkedin-in", "url_1": "https://twitter.com/" }
   ],
   "personas": [{
               "id": 1,
@@ -66,11 +66,15 @@
               "lista_red_social": [
                 {
                 "tipo_red_socialid":1,
-                "perfil":"cep11p"
-                },
+                "tipo_red_social": "Facebook",
+                "perfil":"cep11p",
+                "icono_class": "fab fa-facebook-square"
+              },
                 {
-                "tipo_red_socialid":2,
-                "perfil":"kar2000"
+                  "tipo_red_socialid":2,
+                  "tipo_red_social": "Instagram",
+                "perfil":"kar2000",
+                "icono_class": "fab fa-instagram"
                 }
               ],
               "sexo": "Mujer",

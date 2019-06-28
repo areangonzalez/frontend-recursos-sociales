@@ -66,7 +66,7 @@ export class FormRedSocialComponent implements OnInit {
       "tipo_red_socialid": tiporedsocial[0].id,
       "tipo_red_social": tiporedsocial[0].nombre,
       "perfil": perfilUsuario,
-      "icono_class": tiporedsocial[0].icon_class
+      "icono_class": tiporedsocial[0].icono_class
     });
   }
   /**
