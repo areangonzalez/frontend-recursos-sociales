@@ -45,7 +45,7 @@ export class RecursoSocialService implements Resolve<any> {
   public exportarExcel(params: object){
     let httpParams = new HttpParams();
     httpParams = this._apiService.formatParams(httpParams, params);
-    return this._apiService.get('recursos/exportar-prestaciones-xls', httpParams);
+    return this._apiService.get('/recursos/exportar-prestaciones-xls', httpParams);
   }
 
   resolve(
