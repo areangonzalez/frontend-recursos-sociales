@@ -14,11 +14,14 @@ export class BusquedaRecursoComponent implements OnInit {
   @Input("programas") public programasLista: any[]; // listado de programas
   @Input("tipoPrestacion") public tipoRecursosLista: any[]; // listado de tipo prestacion
   @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter(); // funcion que devuele los parametros de busqueda
+  @Output("exportarAExcel") public exportarAExcel = new EventEmitter();
 
   public busquedaAvanzada: FormGroup; // Formulario de busqueda avanzada
   public globalParam:string = ''; // se usa para la busqueda general (input)
   public mostrar: boolean = false; // muestra/oculta el componente de busqueda avanzada
   public btnSeleccion: boolean = false; // muestra el marco de los campos seleccionados
+
+  public btnExportar: boolean = false;
 
   public hoveredDate: NgbDate; // Resalta la fecha
   public fromDate: NgbDate; // fecha desde
@@ -108,6 +111,7 @@ export class BusquedaRecursoComponent implements OnInit {
       }
     }
     this.obtenerBusqueda.emit(apiBusqueda);
+    this.btnExportar = esTrue;
     this.btnSeleccion = esTrue;
     this.mostrar = esTrue;
   }
@@ -133,6 +137,13 @@ export class BusquedaRecursoComponent implements OnInit {
    */
   public mostrarBusquedaAvanzada(){
     return this.mostrar = !this.mostrar;
+  }
+
+  /**
+   * Funcion que indica la exportacion a excel
+   */
+  public exportarExcel(){
+    this.exportarAExcel.emit(true);
   }
 
   /* ### DATE PICKER CONFIG ### */

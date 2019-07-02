@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TitleService, JwtService, AuthenticationService } from '../../core/services';
 
 @Component({
-  selector: 'app-app-layout',
-  templateUrl: './app-layout.component.html'
+  selector: 'app-layout',
+  templateUrl: './app-layout.component.html',
 })
 export class AppLayoutComponent implements OnInit {
   constructor(

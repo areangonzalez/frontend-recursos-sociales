@@ -15,6 +15,7 @@ export class PrestacionesComponent implements OnInit {
   public listaProgramas: any[]; // listado de programas
   public listaLocalidades: any[]; // listado de localidades
   public listaTipoPrestacion: any[]; // listado de tipo de prestaciones
+  public exportBusqueda: any; // contiene el objeto de busqueda para exportar
   /**
    * @param _mensajeService [Service] servicio que muestra los mensajes de errores
    * @param _recursoService [Service] servicio que realiza las busquedas para el listado de prestaciones
@@ -50,6 +51,8 @@ export class PrestacionesComponent implements OnInit {
     this.configPaginacion.page = 1;
     // realizo la busqueda
     this.listarRecursos(apiBusqueda);
+    // Agrego la busqueda para exportar
+    this.exportBusqueda = apiBusqueda;
   }
 
 
@@ -124,6 +127,12 @@ export class PrestacionesComponent implements OnInit {
       this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, prestacion.total_filtrado, prestacion.pagesize);
       // total de registros
       this.recursosLista = prestacion.resultado;
+    }
+
+    public exportarAexcel(exportar:boolean) {
+      if (exportar){
+        console.log("Exportamos: ",exportar);
+      }
     }
 
 }
