@@ -131,7 +131,10 @@ export class PrestacionesComponent implements OnInit {
 
     public exportarAexcel(exportar:boolean) {
       if (exportar){
-        console.log("Exportamos: ",exportar);
+        this._recursoService.exportarExcel(this.exportBusqueda).subscribe(
+          datos => {
+            console.log("son datos: ",datos);
+        }, error => {console.log("errores: ",error);});
       }
     }
 
