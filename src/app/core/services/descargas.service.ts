@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from "../../../environments/environment";
 //import * as FileSaver from "file-saver";
 
 import { JwtService } from './jwt.service';
@@ -10,7 +11,7 @@ import { ApiService } from './api.service';
 
 @Injectable()
 export class DescargasService {
-
+  private url = environment.baseUrl;
     constructor(
         private http: HttpClient,
         private _apiService: ApiService,
@@ -36,7 +37,7 @@ export class DescargasService {
           params: httpParams,
           headers: headers,
         };
-        return this.http.get('/recurso/exportar-prestaciones-xls', options);
+        return this.http.get(this.url + '/recurso/exportar-prestaciones-xls', options);
 
     }
 }
