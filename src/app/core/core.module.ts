@@ -21,7 +21,8 @@ import {
   LocalidadService,
   RecursoSocialService,
   BeneficiarioService,
-  TipoRedSocialService
+  TipoRedSocialService,
+  DescargasService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -49,7 +50,8 @@ import { UtilService } from "./utils";
     LocalidadService,
     RecursoSocialService,
     BeneficiarioService,
-    TipoRedSocialService
+    TipoRedSocialService,
+    DescargasService
     /*
 
      */

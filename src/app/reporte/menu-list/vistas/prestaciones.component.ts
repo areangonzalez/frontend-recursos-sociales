@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MensajesService, RecursoSocialService } from '../../../core/services';
+import { MensajesService, RecursoSocialService, DescargasService } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -24,7 +24,8 @@ export class PrestacionesComponent implements OnInit {
   constructor(
     private _mensajeService: MensajesService,
     private _route: ActivatedRoute,
-    private _recursoService: RecursoSocialService
+    private _recursoService: RecursoSocialService,
+    private _descargasService: DescargasService
   ){}
 
   ngOnInit() {
@@ -131,7 +132,7 @@ export class PrestacionesComponent implements OnInit {
 
     public exportarAexcel(exportar:boolean) {
       if (exportar){
-        this._recursoService.exportarExcel(this.exportBusqueda).subscribe(
+        this._descargasService.exportarExcel(this.exportBusqueda).subscribe(
           datos => {
             console.log("son datos: ",datos);
         }, error => {console.log("errores: ",error);});

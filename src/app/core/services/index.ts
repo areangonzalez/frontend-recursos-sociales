@@ -14,3 +14,5 @@ export * from './recurso-social.service';
 export * from './loader.service';
 export * from './beneficiario.service';
 export * from './tipo-red-social.service';
+export * from './descargas.service';
+
