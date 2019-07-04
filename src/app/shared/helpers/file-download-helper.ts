@@ -8,7 +8,7 @@ import { Response } from '@angular/http';
  * @param fileName name file should be saved as
  */
 export const saveFile = (blobContent: Blob, fileName: string) => {
-    const blob = new Blob([blobContent], { type: 'text/plain;charset=utf-8' });
+    const blob = new Blob([blobContent], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     saveAs(blob, fileName);
 };
 
