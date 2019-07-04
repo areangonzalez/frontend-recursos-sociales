@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MensajesService, RecursoSocialService, DescargasService } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router';
+import { saveFile } from "../../../shared/helpers/file-download-helper";
 
 @Component({
   selector: 'reporte-prestaciones',
@@ -132,8 +133,9 @@ export class PrestacionesComponent implements OnInit {
 
     public exportarAexcel(exportar:boolean) {
       if (exportar){
-        this._descargasService.exportarExcel(this.exportBusqueda).subscribe(
+        this._descargasService.downloadFile(this.exportBusqueda).subscribe(
           datos => {
+            saveFile(datos.blob(), 'prestaciones.xls');
             console.log("son datos: ",datos);
         }, error => {console.log("errores: ",error);});
       }
