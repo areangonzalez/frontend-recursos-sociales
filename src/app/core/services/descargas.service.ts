@@ -52,7 +52,7 @@ export class DescargasService {
       headers.set('X-Requested-With', 'XMLHttpRequest');
 
       let options: object = {
-        responseType: ResponseContentType.Blob,
+        responseType: 'blob',
         params: httpParams,
       };
 
