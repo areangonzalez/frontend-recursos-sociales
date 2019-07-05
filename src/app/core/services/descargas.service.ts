@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
 import { environment } from "../../../environments/environment";
-import { ResponseContentType, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs';
+import { RequestOptions, ResponseContentType, Http } from '@angular/http';
 //import * as FileSaver from "file-saver";
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { JwtService } from './jwt.service';
 import { ApiService } from './api.service';
@@ -11,10 +12,11 @@ import { getFileNameFromResponseContentDisposition, saveFile } from "../../share
 
 @Injectable()
 export class DescargasService {
-  private url = environment.baseUrl;
+  private baseUrl = environment.baseUrl;
     constructor(
         private _apiService: ApiService,
-        private jwtService: JwtService
+        private jwtService: JwtService,
+        private http: HttpClient
     ) { }
 
 
@@ -39,25 +41,33 @@ export class DescargasService {
 
     }
 
-    downloadFile(params) {
-      let headers = new Headers({
-        'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'X-Requested-With': 'XMLHttpRequest',
-        'observe': 'response'
-      });
+    descarga(params) {
+      let headers = new Headers();
       let httpParams = new HttpParams();
       httpParams = this._apiService.formatParams(httpParams, params);
-      /* headers.set('Authorization', 'Bearer ' + datosToken['token']);
-      headers.set('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-      headers.set('X-Requested-With', 'XMLHttpRequest'); */
+      // headers.set('Authorization', 'Bearer ' + datosToken['token']);
+      headers.append('Access-Control-Allow-Origin', "*");
+      headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      headers.append('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      headers.set('X-Requested-With', 'XMLHttpRequest');
 
       let options: object = {
-        responseType: 'blob' as 'json',
+        responseType: ResponseContentType.Blob,
         params: httpParams,
-        headers: headers,
       };
 
+      //let options = new RequestOptions({responseType: 'blob' });
+      //let options = new RequestOptions({headers: headers });
+      //let path = 'https://miro.medium.com/max/700/1*nuFiuHGT-S-QAkt0vbQgZQ.png';
+      //let path_2 = '../../../assets/img/manos-verdes.png';
       // Process the file downloaded
-      return this._apiService.getFile('/recurso/exportar-prestaciones-xls', options);
-  }
+      return this._apiService.getFile('/export/exportar-prestaciones-xls', options);
+//      return this.http.get(path, options);
+    }
+
+    /* downloadFile(params): Observable<Blob> {
+        let options = new RequestOptions({responseType: ResponseContentType.Blob });
+        return this.http.get(this.baseUrl + '/recurso/exportar-prestaciones-xls', options)
+        .pipe(map(res => res.blob()))
+    } */
 }

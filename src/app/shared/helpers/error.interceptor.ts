@@ -13,7 +13,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this._loadService.show();
-        console.log(request);
         return next.handle(request).pipe(
           tap(res => {
             // res.type is prod and zero is dev
