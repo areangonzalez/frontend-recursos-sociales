@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MensajesService, RecursoSocialService, DescargasService } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router';
-//import { saveFile } from "../../../shared/helpers/file-download-helper";
 import {saveAs as importedSaveAs} from "file-saver";
-import { window } from 'rxjs/operators';
 
 @Component({
   selector: 'reporte-prestaciones',
@@ -132,16 +130,15 @@ export class PrestacionesComponent implements OnInit {
       // total de registros
       this.recursosLista = prestacion.resultado;
     }
-
+    /**
+     * Permite descargar un archivo excel con o sin busqueda personalizada
+     */
     public exportarAexcel(exportar:boolean) {
       if (exportar){
-        this._descargasService.descarga(this.exportBusqueda).subscribe(
+        this._descargasService.descargarExcel(this.exportBusqueda).subscribe(
           blob => {
             let filename = 'prestaciones.xls';
             importedSaveAs(blob, filename);
-            //console.log("son datos: ",datos);
-            //saveFile(datos, 'prestaciones.xls');
-
         }, error => {console.log("errores: ",error);});
       }
     }
