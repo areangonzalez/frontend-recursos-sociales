@@ -47,8 +47,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (err.status === 403) {
               // auto logout if 401 response returned from api
               this._loadService.hide();
-              console.log(err);
-              let mensaje = err.error.message;
+              let mensaje = "No tiene permitido ejecutar esta accion";
               return throwError(mensaje);
             }
             // error.message viene como objeto
