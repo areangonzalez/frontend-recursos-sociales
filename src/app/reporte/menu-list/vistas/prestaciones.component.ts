@@ -139,7 +139,7 @@ export class PrestacionesComponent implements OnInit {
           blob => {
             let filename = 'prestaciones.xls';
             importedSaveAs(blob, filename);
-        }, error => {console.log("errores: ",error);});
+        }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
       }
     }
 
