@@ -1,4 +1,5 @@
 import { AppPage } from './app.po';
+import { browser } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -8,6 +9,7 @@ describe('workspace-project App', () => {
   });
 
   it('should display welcome message', () => {
+    browser.waitForAngular("true");
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('Gestor de Prestaciones');
   });

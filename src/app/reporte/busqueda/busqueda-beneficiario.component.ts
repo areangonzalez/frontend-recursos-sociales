@@ -80,4 +80,5 @@ export class BusquedaBeneficiarioComponent implements OnInit {
   public mostrarBusquedaAvanzada(){
     return this.mostrar = !this.mostrar;
   }
+
 }
