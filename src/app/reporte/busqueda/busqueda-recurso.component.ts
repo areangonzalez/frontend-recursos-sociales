@@ -76,10 +76,16 @@ export class BusquedaRecursoComponent implements OnInit {
    * Listado para el tipo de prestaciones segun su programa
    * @param programaid identificador del programa
    */
-  public listarTipoRecursos(programaid:number){
-    this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(
-      tipoRecursos => { this.tipoRecursosLista = tipoRecursos; },
-      error => { this._mensajeService.cancelado(error, [{name:''}]); });
+  public listarTipoRecursos(programaid:any){
+    if (programaid != ""){
+      this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(
+        tipoRecursos => { this.tipoRecursosLista = tipoRecursos; },
+        error => { this._mensajeService.cancelado(error, [{name:''}]); });
+    }else{
+      this._tipoRecursoService.get().subscribe(
+        tipoRecursos => { this.tipoRecursosLista = tipoRecursos; },
+        error => { this._mensajeService.cancelado(error, [{name:''}]); });
+    }
   }
   /**
    * Formatea la fecha para una variable del formulario

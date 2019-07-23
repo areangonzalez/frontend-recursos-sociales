@@ -19,6 +19,10 @@ export class TipoRecursoService implements Resolve <any> {
     return this._apiService.get('/tipo-recursos',httpParams);
   }
 
+  get() {
+    return this._apiService.get('/tipo-recursos');
+  }
+
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
@@ -26,7 +30,7 @@ export class TipoRecursoService implements Resolve <any> {
       let httpParams = new HttpParams();
       httpParams = this._apiService.formatParams(httpParams, {programaid: 5});
 
-      return this._apiService.get('/tipo-recursos',httpParams);
+      return this._apiService.get('/tipo-recursos');
     }
 
 }
