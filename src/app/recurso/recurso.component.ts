@@ -47,7 +47,6 @@ export class RecursoComponent implements OnInit {
   }
 
   public seleccionarPersona(datos){
-    console.log(datos);
     if (datos.persona != undefined) {
       this.infoPersona = true;
       this.datosPersona = datos.persona;
@@ -70,6 +69,7 @@ export class RecursoComponent implements OnInit {
       // agrego el id de persona
       recurso["personaid"] = this.datosPersona.id;
       recurso["monto"] = parseFloat(recurso["monto"]);
+      recurso["localidadid"] = this.datosPersona.localidadid;
       let contacto: any = this.contactosForm.value.contacto;
       Object.assign(contacto, {lista_red_social: this.listaRedSocial});
       this._personaService.guardarContacto(contacto, this.datosPersona.id).subscribe(
