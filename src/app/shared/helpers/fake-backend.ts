@@ -866,6 +866,25 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               //     return throwError({ error: { message: 'Unauthorised' } });
               // }
             }
+            // GET LOCALIDADES POR PROGRAMAS
+            if (request.url.match(/\/apimock\/localidads\/programa-localidad\/\d+$/) && request.method === 'GET') {
+              if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                let urlParts = request.url.split('/');
+                let id = parseInt(urlParts[urlParts.length - 1]);
+                let localidadElegida = localidades.filter(localidad => { return localidad.id === id });
+
+                for (let i = 0; i < programas.length; i++) {
+                  programas[i]['beneficiarios'] = (100+Math.floor(Math.random()*450));
+                }
+
+                localidadElegida[0]["programas"] = programas;
+
+                return of(new HttpResponse({ status: 200, body: localidadElegida[0] }));
+              } else {
+                //return 401 not authorised if token is null or invalid
+                   return throwError({ error: { message: 'Unauthorised' } });
+               }
+            }
             // get estado civil
             if (request.url.endsWith('/apimock/estado-civils') && request.method === 'GET') {
               //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {

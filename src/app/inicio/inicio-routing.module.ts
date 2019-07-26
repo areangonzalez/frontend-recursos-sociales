@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InicioComponent } from './inicio.component';
-import { ProgramaService } from "../core/services";
+import { DetalleProgramaService } from "../core/services";
 
 const routes: Routes = [
     {
@@ -9,7 +9,7 @@ const routes: Routes = [
         component: InicioComponent,
         data: { title: 'Inicio' },
         resolve: {
-          programas: ProgramaService
+          programas: DetalleProgramaService
         }
     }
 ];
@@ -17,6 +17,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: [ProgramaService]
+    providers: [DetalleProgramaService]
 })
 export class InicioRoutingModule { }

@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { Chart } from 'chart.js';
-import { MensajesService, ProgramaService } from 'src/app/core/services';
+import { MensajesService, ProgramaService, LocalidadService } from 'src/app/core/services';
 
 export interface myinterface {
     remove(index: number);
@@ -18,10 +18,14 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
   public compInteraction: myinterface;
   public idCanvas: string;
   public chart:any;
+  public colorsGrafico: any[] = ['red', 'orange', 'yellow', 'green', 'blue'];
+  public datosPrograma: any[] = [];
+  public localidadId:number = 0;
+  public localidadNombre: string = '';
 
   constructor(
     private _mensajeService: MensajesService,
-    private _programaService: ProgramaService,
+    private _localidadService: LocalidadService,
     private _cdRef: ChangeDetectorRef
   ){
 
@@ -34,71 +38,48 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
   }
 
   ngAfterViewChecked() {
-    this.chart.canvas.parentNode.style.height = '260px';
+    this.chart.canvas.parentNode.style.height = '160px';
     this._cdRef.detectChanges();
   }
 
   private obtenerDatosPrograma(){
-    this._programaService.listar()
-    .subscribe(programa => {
+    if (this.localidadId != 0){
 
-      programa.forEach((val, i) => {
-        this.chart.data.labels.push(programa[i].nombre);
-        // baja
-        this.chart.data.datasets[0].data.push(programa[i].monto_baja);
-        // acreditado
-        this.chart.data.datasets[1].data.push(programa[i].monto_acreditado);
-        // sin acreditar
-        this.chart.data.datasets[2].data.push(programa[i].monto_sin_acreditar);
-        this.chart.update();
-      });
-    }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+      this._localidadService.programasPorLocalidad(this.localidadId)
+      .subscribe(datos => {
+        this.localidadNombre = datos["nombre"];
+        datos["programas"].forEach((val, i) => {
+          //this.datosPrograma.push({ nombre: datos["programas"][i].nombre, color: this.colorsGrafico[i], beneficiarios: datos["programas"][i].beneficiarios });
+          // nombre de programas
+          this.chart.data.labels.push(datos["programas"][i].nombre);
+          // cantidad de beneficiarios
+          this.chart.data.datasets[0].data.push(datos["programas"][i].beneficiarios);
+          console.log(this.chart.data);
+          this.chart.update();
+        });
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+    }else{
+      this._mensajeService.cancelado("Error, no se ha seleccionado ninguna localidad", [{name:''}]);
+    }
   }
 
   private mostrarGrafico(){
     this.chart = new Chart(this.idCanvas, {
-      type: 'bar',
+      type: 'pie',
       data: {
         labels: [],
         datasets: [
           {
-            label: 'Baja',
+            label: 'Beneficiarios',
             data: [],
-            backgroundColor: 'red',
-            fill: false
-          },
-          {
-            label: 'Acreditado',
-            data: [],
-            backgroundColor: 'green',
-            fill: false
-          },
-          {
-            label: 'Sin acreditar',
-            data: [],
-            backgroundColor: 'gray',
+            backgroundColor: this.colorsGrafico,
             fill: false
           }
         ]
       },
       options: {
-        responsive: true,
-        maintainAspectRatio: false,
         legend: {
-          display: true
-        },
-        scales: {
-          xAxes: [{
-            barPercentage: 0.5,
-            stacked: true,
-            gridLines: {
-                offsetGridLines: true
-            }
-          }],
-          yAxes: [{
-            stacked: true,
-            display: true
-          }],
+          display: false
         }
       }
     });

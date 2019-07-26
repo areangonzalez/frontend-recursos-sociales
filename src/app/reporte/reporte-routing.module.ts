@@ -31,7 +31,11 @@ const routes: Routes = [
               localidades: LocalidadService
             }
           },
-          { path: 'estadisticas', component: EstadisticasComponent, data: { breadcrumb: 'Estadísticas', title: 'Reportes con estadísticas' } },
+          { path: 'estadisticas', component: EstadisticasComponent, data: { breadcrumb: 'Estadísticas', title: 'Reportes con estadísticas' },
+            resolve: {
+             localidades: LocalidadService
+            },
+          },
           { path: '', redirectTo: 'prestaciones', pathMatch: 'full' }
         ]
     }

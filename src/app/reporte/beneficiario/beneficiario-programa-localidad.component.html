@@ -1,6 +1,22 @@
-<button type="button" (click)="createComponent()">
-    I am Parent, Create Child
-</button>
-<div>
-	<ng-template #viewContainerRef></ng-template>
+<div class="row">
+  <div class="form-group col-md-3">
+    <!-- <label for="localidad" class="prioridad">Localidaes:</label> -->
+    <select class="form-control" id="localidad" [(ngModel)]="localidadId" >
+        <option value="">Seleccione una Localidad</option>
+        <option *ngFor="let localidad of localidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
+    </select>
+    <!-- <div *ngIf="(formPersona.get('localidadesid').invalid && submitted)"
+        class="text-danger">
+        <div *ngIf="formPersona.get('localidadesid').hasError('required')">Por favor Seleccione estado civil. </div>
+    </div> -->
+
+  </div>
+  <div class="col-md-3">
+    <button type="button" class="btn btn-md btn-success" (click)="createComponent()">
+      <i class="fas fa-plus-circle"></i> Agregar torta
+    </button>
+  </div>
+</div>
+<div class="row">
+  <ng-template #viewContainerRef></ng-template>
 </div>

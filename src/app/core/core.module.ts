@@ -22,7 +22,8 @@ import {
   RecursoSocialService,
   BeneficiarioService,
   TipoRedSocialService,
-  DescargasService
+  DescargasService,
+  DetalleProgramaService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -51,10 +52,8 @@ import { UtilService } from "./utils";
     RecursoSocialService,
     BeneficiarioService,
     TipoRedSocialService,
-    DescargasService
-    /*
-
-     */
+    DescargasService,
+    DetalleProgramaService
   ],
   declarations: []
 })
