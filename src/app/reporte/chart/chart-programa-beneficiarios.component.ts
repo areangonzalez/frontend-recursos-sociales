@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-import { MensajesService, ProgramaService } from 'src/app/core/services';
+import { MensajesService, DetalleProgramaService } from 'src/app/core/services';
 
 @Component({
   selector: 'reporte-programa-beneficiarios',
@@ -14,7 +14,7 @@ export class ChartProgramaBeneficiariosComponent implements OnInit {
 
   constructor(
     private _mensajeService: MensajesService,
-    private _programaService: ProgramaService
+    private _detalleProgramaService: DetalleProgramaService
   ){
 
   }
@@ -25,7 +25,7 @@ export class ChartProgramaBeneficiariosComponent implements OnInit {
   }
 
   private obtenerDatosPrograma(){
-    this._programaService.listar()
+    this._detalleProgramaService.info()
     .subscribe(programa => {
       programa.forEach((val, i) => {
         this.datosPrograma.push({ nombre: programa[i].nombre, color: this.colorsGrafico[i] });

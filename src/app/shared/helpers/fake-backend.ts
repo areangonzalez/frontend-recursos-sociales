@@ -903,8 +903,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               //     return throwError({ error: { message: 'Unauthorised' } });
               // }
             }
-            // get PROGRAMAS
-            if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
+            // get DETALLES DE PROGRAMAS
+            if (request.url.endsWith('/apimock/programas/detalle') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 for (let i = 0; i < programas.length; i++) {
@@ -955,6 +955,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   // return 401 not authorised if token is null or invalid
                   return throwError({ status: 401, message: 'Unauthorised' });
               }
+            }
+            // get PROGRAMAS
+            if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
+              // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+              //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+
+                return of(new HttpResponse({ status: 200, body: programas }));
+              //} else {
+                  // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
             }
             // get TIPO RED SOCIAL
             if (request.url.endsWith('/apimock/tipo-red-socials') && request.method === 'GET') {

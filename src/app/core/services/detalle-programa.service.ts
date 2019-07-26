@@ -10,6 +10,10 @@ export class DetalleProgramaService implements Resolve<any> {
     private _apiService: ApiService
   ){}
 
+  info() {
+    return this._apiService.get('/programas/detalle');
+  }
+
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,

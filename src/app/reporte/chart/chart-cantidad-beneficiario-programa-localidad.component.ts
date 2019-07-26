@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { Chart } from 'chart.js';
-import { MensajesService, ProgramaService, LocalidadService } from 'src/app/core/services';
+import { MensajesService, LocalidadService } from 'src/app/core/services';
 
 export interface myinterface {
     remove(index: number);
