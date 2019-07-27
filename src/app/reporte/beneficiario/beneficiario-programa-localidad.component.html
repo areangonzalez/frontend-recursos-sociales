@@ -1,21 +1,22 @@
 <div class="row">
   <div class="form-group col-md-3">
-    <!-- <label for="localidad" class="prioridad">Localidaes:</label> -->
     <select class="form-control" id="localidad" [(ngModel)]="localidadId" >
         <option value="">Seleccione una Localidad</option>
         <option *ngFor="let localidad of localidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
     </select>
-    <!-- <div *ngIf="(formPersona.get('localidadesid').invalid && submitted)"
-        class="text-danger">
-        <div *ngIf="formPersona.get('localidadesid').hasError('required')">Por favor Seleccione estado civil. </div>
-    </div> -->
-
   </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
     <button type="button" class="btn btn-md btn-success" (click)="createComponent()" ngbTooltip="Agregar localidad">
       <i class="fas fa-plus-circle"></i> Agregar localidad
     </button>
   </div>
+  <div class="col-md-7">
+      <ul class="nav nav-fill mt-2">
+        <li class="nav-item" *ngFor="let programa of programaColor">
+            <span [ngStyle]="{color: programa.color, background: programa.color}" >@</span> {{programa.nombre}}
+        </li>
+      </ul>
+    </div>
 </div>
 <div class="row">
   <ng-template #viewContainerRef></ng-template>

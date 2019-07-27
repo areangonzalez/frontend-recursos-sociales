@@ -1,4 +1,4 @@
-import { ComponentRef, ComponentFactoryResolver, Input, ViewContainerRef, ViewChild, Component } from "@angular/core";
+import { ComponentRef, ComponentFactoryResolver, Input, ViewContainerRef, ViewChild, Component, OnInit } from "@angular/core";
 import { ChartBeneficiarioProgramaLocalidadComponent } from '../chart'
 import { MensajesService } from "src/app/core/services";
 
@@ -7,8 +7,9 @@ import { MensajesService } from "src/app/core/services";
   templateUrl: './beneficiario-programa-localidad.component.html',
   //styleUrls: ['./parent.component.css']
 })
-export class BeneficiarioProgramaLocalidadComponent {
+export class BeneficiarioProgramaLocalidadComponent implements OnInit {
   @Input('localidades') public localidades:any;
+  @Input('programas') public programas:any;
   @ViewChild('viewContainerRef', { read: ViewContainerRef }) VCR: ViewContainerRef;
 
   index: number = 0;
@@ -17,11 +18,18 @@ export class BeneficiarioProgramaLocalidadComponent {
 
   public localidadId:any = '';
   public localidadSeleccionadas: any = [];
+  public programaColor:any = [];
 
   constructor(
     private CFR: ComponentFactoryResolver,
     private _mensajesServices: MensajesService,
   ) {}
+
+  ngOnInit(){
+    this.etiquetasProgramas();
+  }
+
+
   /**
    * crea el componente instanciado los valores del mismo.
    */
@@ -79,6 +87,15 @@ export class BeneficiarioProgramaLocalidadComponent {
       }
     }
     return !encontrada;
+  }
+
+  public etiquetasProgramas() {
+    let colorsGrafico: any[] = ['red', 'orange', 'yellow', 'green', 'blue'];
+
+    for (let i = 0; i < this.programas.length; i++) {
+      this.programaColor.push({'nombre': this.programas[i].nombre, 'color': colorsGrafico[i]});
+    }
+
   }
 
 }

@@ -7,12 +7,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EstadisticasComponent implements OnInit {
   public listaLocalidades: any = [];
+  public listaProgramas: any = [];
   constructor(
     private _route: ActivatedRoute
   ){}
 
   ngOnInit() {
     this.listaLocalidades = this._route.snapshot.data["localidades"];
+    this.listaProgramas = this._route.snapshot.data["programas"];
   }
 
 }

@@ -960,7 +960,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-
+              console.log(programas);
                 return of(new HttpResponse({ status: 200, body: programas }));
               //} else {
                   // return 401 not authorised if token is null or invalid
