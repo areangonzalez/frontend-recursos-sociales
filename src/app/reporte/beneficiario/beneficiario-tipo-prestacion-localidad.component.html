@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="form-group col-md-3">
+    <select class="form-control" id="localidades" [(ngModel)]="localidadId" >
+        <option value="">Seleccione una Localidad</option>
+        <option *ngFor="let localidad of localidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button type="button" class="btn btn-md btn-success" (click)="createComponent()" ngbTooltip="Agregar localidad">
+      <i class="fas fa-plus-circle"></i> Agregar localidad
+    </button>
+  </div>
+   <div class="col-md-7">
+      <ul class="nav nav-fill mt-2">
+        <li class="nav-item" *ngFor="let lista of listaPrestacionColor">
+            <span [ngStyle]="{color: lista.color, background: lista.color}" >@</span> {{lista.nombre}}
+        </li>
+      </ul>
+    </div>
+</div>
+<div class="row">
+  <ng-template #viewContainerRef></ng-template>
+</div>
+<!-- <div class="row">
+    <ul class="nav nav-fill mt-2">
+        <li class="nav-item" *ngFor="let colors of colores">
+            <span [ngStyle]="{color: colors, background: colors}" >@</span> {{colors}}
+        </li>
+      </ul>
+</div> -->

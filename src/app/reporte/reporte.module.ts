@@ -8,10 +8,10 @@ import { ReporteComponent } from "./reporte.component";
 import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent } from "./busqueda";
 import { ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent } from "./lista";
 import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent } from "./menu-list";
-import { BeneficiarioProgramaLocalidadComponent } from './beneficiario';
+import { BeneficiarioProgramaLocalidadComponent, BeneficiarioTipoPrestacionLocalidadComponent } from './beneficiario';
 import {
   ChartProgramaMontoComponent, ChartProgramaPrestacionesComponent, ChartProgramaBeneficiariosComponent,
-  ChartBeneficiarioProgramaLocalidadComponent
+  ChartBeneficiarioProgramaLocalidadComponent, ChartBeneficiarioTipoPrestacionLocalidadComponent
  } from './chart';
 
 @NgModule({
@@ -24,13 +24,13 @@ import {
         ReporteComponent,
         BusquedaRecursoComponent, BusquedaBeneficiarioComponent,
         ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent,
-        BeneficiarioProgramaLocalidadComponent,
+        BeneficiarioProgramaLocalidadComponent, BeneficiarioTipoPrestacionLocalidadComponent,
         ChartProgramaMontoComponent, ChartProgramaPrestacionesComponent, ChartProgramaBeneficiariosComponent,
-        ChartBeneficiarioProgramaLocalidadComponent,
+        ChartBeneficiarioProgramaLocalidadComponent, ChartBeneficiarioTipoPrestacionLocalidadComponent,
         MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent
     ],
     entryComponents: [
-      ChartBeneficiarioProgramaLocalidadComponent
+      ChartBeneficiarioProgramaLocalidadComponent, ChartBeneficiarioTipoPrestacionLocalidadComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

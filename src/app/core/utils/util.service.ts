@@ -56,4 +56,25 @@ export class UtilService {
         return false;
     }
   }
+
+  public generarColores() {
+    //creamos los arrays
+    let r = new Array("FF","33","66","99","00");
+    let g = new Array("33","CC","66");
+    let b = new Array("00","99");//,"33","66","99","CC");
+    let lista = new Array();
+
+    //hacemos el bucle anidado
+    for (let i=0;i<r.length;i++) {
+        for (let j=0;j<g.length;j++) {
+            for (let k=0;k<b.length;k++) {
+              //creamos el color
+              let nuevoc = "#" + r[i] + g[j] + b[k];
+              lista.push(nuevoc);
+              //imprimimos el color
+            }
+        }
+    }
+    return lista;
+  }
 }

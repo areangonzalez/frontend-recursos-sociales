@@ -7,15 +7,9 @@
   ],
   "programas": [{ "id": 1, "nombre": "Emprender" }, { "id": 2, "nombre": "Habitat" },{ "id": 3, "nombre": "Micro Emprendimientos" }, { "id": 4, "nombre": "Río Negro Presente" }, { "id": 5, "nombre": "Subsidio" }],
   "tipoRecursoSocials": [
-      {"id":1, "nombre": "Alimentación", "programaid": 4},
-      {"id":2, "nombre": "Alimentación", "programaid": 5},
-      {"id":3, "nombre": "Empleo / Formación laboral", "programaid": 1},
-      {"id":4, "nombre": "Empleo / Formación laboral", "programaid": 4},
-      {"id":5, "nombre": "Empleo / Formación laboral", "programaid": 3},
-      {"id":6, "nombre": "Empleo / Formación laboral", "programaid": 5},
-      {"id":7, "nombre": "Mejoramiento habitacional", "programaid": 2},
-      {"id":8, "nombre": "Mejoramiento habitacional", "programaid": 4},
-      {"id":9, "nombre": "Mejoramiento habitacional", "programaid": 5}
+      {"id":1, "nombre": "Alimentación"},
+      {"id":2, "nombre": "Empleo / Formación laboral"},
+      {"id":3, "nombre": "Mejoramiento habitacional"}
   ],
   "tipoRedSocial": [
     {"id": 1, "nombre": "Facebook", "icono_class": "fab fa-facebook-square", "url_1": "https://www.facebook.com/" },

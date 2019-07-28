@@ -34,7 +34,8 @@ const routes: Routes = [
           { path: 'estadisticas', component: EstadisticasComponent, data: { breadcrumb: 'Estadísticas', title: 'Reportes con estadísticas' },
             resolve: {
              localidades: LocalidadService,
-             programas: ProgramaService
+             programas: ProgramaService,
+             tipoPrestaciones: TipoRecursoService
             },
           },
           { path: '', redirectTo: 'prestaciones', pathMatch: 'full' }

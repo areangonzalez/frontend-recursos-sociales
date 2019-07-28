@@ -1,14 +1,15 @@
 import { ComponentRef, ComponentFactoryResolver, Input, ViewContainerRef, ViewChild, Component, OnInit } from "@angular/core";
-import { ChartBeneficiarioProgramaLocalidadComponent } from '../chart'
+import { ChartBeneficiarioTipoPrestacionLocalidadComponent } from '../chart'
 import { MensajesService } from "src/app/core/services";
+import { UtilService } from "src/app/core/utils";
 
 @Component({
-  selector: 'beneficiario-programa-localidad',
-  templateUrl: './beneficiario-programa-localidad.component.html',
+  selector: 'beneficiario-tipo-prestacion-localidad',
+  templateUrl: './beneficiario-tipo-prestacion-localidad.component.html'
 })
-export class BeneficiarioProgramaLocalidadComponent implements OnInit {
+export class BeneficiarioTipoPrestacionLocalidadComponent implements OnInit {
   @Input('localidades') public localidades:any;
-  @Input('programas') public programas:any;
+  @Input('tipoPrestacion') public tipoPrestacion:any;
   @ViewChild('viewContainerRef', { read: ViewContainerRef }) VCR: ViewContainerRef;
 
   index: number = 0;
@@ -17,15 +18,18 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
 
   public localidadId:any = '';
   public localidadSeleccionadas: any = [];
-  public programaColor:any = [];
+  public listaPrestacionColor:any = [];
+  public colores: any = [];
 
   constructor(
     private CFR: ComponentFactoryResolver,
     private _mensajesServices: MensajesService,
+    private _util: UtilService
   ) {}
 
   ngOnInit(){
-    this.etiquetasProgramas();
+    this.colores = this._util.generarColores();
+    this.etiquetasTipoPrestacion();
   }
 
 
@@ -34,13 +38,19 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
    */
   createComponent() {
     if (this.localidadId != '' && this.buscarLocalidadPorId(this.localidadId)){
-      let componentFactory = this.CFR.resolveComponentFactory(ChartBeneficiarioProgramaLocalidadComponent);
-      let componentRef: ComponentRef<ChartBeneficiarioProgramaLocalidadComponent> = this.VCR.createComponent(componentFactory);
+      let componentFactory = this.CFR.resolveComponentFactory(ChartBeneficiarioTipoPrestacionLocalidadComponent);
+      let componentRef: ComponentRef<ChartBeneficiarioTipoPrestacionLocalidadComponent> = this.VCR.createComponent(componentFactory);
       let currentComponent = componentRef.instance;
       currentComponent.selfRef = currentComponent;
       currentComponent.index = ++this.index;
-      currentComponent.idCanvas = 'torta_programa_localidad_' + currentComponent.index.toString();
+      currentComponent.idCanvas = 'torta_tipo_prestacion_localidad_' + currentComponent.index.toString();
       currentComponent.localidadId = this.localidadId;
+      // separo los colores del objeto y los agrego en un array simple
+      let colores: any[] = [];
+      this.listaPrestacionColor.forEach(el => {
+        colores.push(el.color);
+      });
+      currentComponent.colorsGrafico = colores;
       // instancio la localidad seleccionada
       this.localidadSeleccionadas.push(this.localidadId);
 
@@ -67,7 +77,7 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
       return;
 
     let componentRef = this.componentsReferences.filter(x => x.instance.index == index)[0];
-    let component: ChartBeneficiarioProgramaLocalidadComponent = <ChartBeneficiarioProgramaLocalidadComponent>componentRef.instance;
+    let component: ChartBeneficiarioTipoPrestacionLocalidadComponent = <ChartBeneficiarioTipoPrestacionLocalidadComponent>componentRef.instance;
 
     let vcrIndex: number = this.VCR.indexOf(componentRef)
 
@@ -87,13 +97,12 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
     return !encontrada;
   }
   /**
-   *  genero un listado de colores para cada programa
+   *  genero un listado de colores para cada tipo prestacion
    */
-  public etiquetasProgramas() {
-    let colorsGrafico: any[] = ['red', 'orange', 'yellow', 'green', 'blue'];
+  public etiquetasTipoPrestacion() {
 
-    for (let i = 0; i < this.programas.length; i++) {
-      this.programaColor.push({'nombre': this.programas[i].nombre, 'color': colorsGrafico[i]});
+    for (let i = 0; i < this.tipoPrestacion.length; i++) {
+      this.listaPrestacionColor.push({'id': this.tipoPrestacion[i].id, 'nombre': this.tipoPrestacion[i].nombre, 'color': this.colores[i]});
     }
 
   }

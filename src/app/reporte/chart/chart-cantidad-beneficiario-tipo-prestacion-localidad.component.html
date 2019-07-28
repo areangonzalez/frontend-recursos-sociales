@@ -1,0 +1,10 @@
+      <div style="width: 250px;">
+          <h4 class="d-flex justify-content-center" *ngIf="(localidadNombre != '')" >{{localidadNombre}}</h4>
+          <div style="display: block">
+              <canvas id="{{idCanvas}}"  style="min-height: 10% !important;" >{{chart}}</canvas>
+          </div>
+          <div class="d-flex justify-content-center" *ngIf="(localidadNombre != '')">
+            <button type="button" class="btn btn-danger" (click)="removeMe(index)" ngbTooltip="Borrar localidad" ><i class="far fa-trash-alt"></i></button>
+          </div>
+
+      </div>

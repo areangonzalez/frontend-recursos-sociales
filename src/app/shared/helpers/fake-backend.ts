@@ -843,10 +843,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             /* ----------------------  LISTAS GENERALES  --------------------------- */
             // get TIPO RECURSO SOCIAL por programa id
             if(request.url.endsWith('/apimock/tipo-recursos') && request.method === 'GET') {
-              let programaid = request.params.get('programaid');
-              let tipos = tipoRecurso.filter(recurso => { return recurso.programaid === parseInt(programaid) });
-              return of(new HttpResponse({ status: 200, body: tipos }));
-
+              return of(new HttpResponse({ status: 200, body: tipoRecurso }));
             }
             // get sexos
             if (request.url.endsWith('/apimock/sexos') && request.method === 'GET') {
@@ -878,6 +875,25 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
 
                 localidadElegida[0]["programas"] = programas;
+
+                return of(new HttpResponse({ status: 200, body: localidadElegida[0] }));
+              } else {
+                //return 401 not authorised if token is null or invalid
+                   return throwError({ error: { message: 'Unauthorised' } });
+               }
+            }
+            // GET LOCALIDADES POR TIPO PRESTACION
+            if (request.url.match(/\/apimock\/localidads\/tipo-prestacion-localidad\/\d+$/) && request.method === 'GET') {
+              if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                let urlParts = request.url.split('/');
+                let id = parseInt(urlParts[urlParts.length - 1]);
+                let localidadElegida = localidades.filter(localidad => { return localidad.id === id });
+
+                for (let i = 0; i < tipoRecurso.length; i++) {
+                  tipoRecurso[i]['beneficiarios'] = (100+Math.floor(Math.random()*450));
+                }
+
+                localidadElegida[0]["tipo_prestacion"] = tipoRecurso;
 
                 return of(new HttpResponse({ status: 200, body: localidadElegida[0] }));
               } else {
@@ -960,7 +976,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-              console.log(programas);
                 return of(new HttpResponse({ status: 200, body: programas }));
               //} else {
                   // return 401 not authorised if token is null or invalid

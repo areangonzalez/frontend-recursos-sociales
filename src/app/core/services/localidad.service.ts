@@ -19,6 +19,10 @@ export class LocalidadService implements Resolve<any> {
     return this._apiService.get('/localidads/programa-localidad/' + id);
   }
 
+  TipoPrestacionPorLocalidad(id:number) {
+    return this._apiService.get('/localidads/tipo-prestacion-localidad/' + id);
+  }
+
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
