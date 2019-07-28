@@ -61,9 +61,9 @@ export class BeneficiarioTipoPrestacionLocalidadComponent implements OnInit {
       this.componentsReferences.push(componentRef);
     }else{ // miro el error y mando el mensaje adecuado para el cliente.
       if (!this.buscarLocalidadPorId(this.localidadId)){
-        this._mensajesServices.cancelado('Ya se ha seleccionado esta localidad.', [{name:''}]);
+        this._mensajesServices.cancelado('Ya se ha seleccionado este tipo de prestación.', [{name:''}]);
       }else{
-        this._mensajesServices.cancelado('Por favor seleccione una localidad.', [{name:''}]);
+        this._mensajesServices.cancelado('Por favor seleccione un tipo de prestación.', [{name:''}]);
       }
     }
   }
