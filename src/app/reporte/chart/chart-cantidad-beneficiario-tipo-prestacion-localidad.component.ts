@@ -53,6 +53,10 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
           this.chart.data.labels.push(datos["tipo_prestacion"][i].nombre);
           // cantidad de beneficiarios
           this.chart.data.datasets[0].data.push(datos["tipo_prestacion"][i].beneficiarios);
+
+          //agrego las opciones
+          this.chart.options = this.pieOptions;
+          //actualizo el grafico
           this.chart.update();
         });
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
@@ -74,17 +78,50 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
             fill: false
           }
         ]
-      },
-      options: {
+      }
+      /* ,options: {
         legend: {
           display: false
         }
-      }
+      } */
     });
   }
 
   removeMe(index) {
     this.compInteraction.remove(index)
   }
+
+  public pieOptions = {
+    events: false,
+    legend: { display: false },
+    animation: {
+      duration: 500,
+      //easing: "easeOutQuart",
+      onComplete: function () {
+        var ctx = this.chart.ctx;
+        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+
+        this.data.datasets.forEach(function (dataset) {
+
+          for (var i = 0; i < dataset.data.length; i++) {
+            var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+                mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
+                start_angle = model.startAngle,
+                end_angle = model.endAngle,
+                mid_angle = start_angle + (end_angle - start_angle)/2;
+
+            var x = mid_radius * Math.cos(mid_angle);
+            var y = mid_radius * Math.sin(mid_angle);
+
+            ctx.fillStyle = '#000';
+            ctx.fillText(dataset.data[i], model.x + x, model.y + y - 5);
+          }
+        });
+      }
+    }
+  };
 
 }

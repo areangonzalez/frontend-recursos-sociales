@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit, AfterViewChecked} from '@angular/core';
 import { Chart } from 'chart.js';
 import { MensajesService, LocalidadService } from 'src/app/core/services';
 
@@ -10,7 +10,7 @@ export interface myinterface {
   selector: 'reporte-cantidad-beneficiario-programa-localidad',
   templateUrl: './chart-cantidad-beneficiario-programa-localidad.component.html',
 })
-export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewInit{
+export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewInit {
 
   public index: number;
   public selfRef: ChartBeneficiarioProgramaLocalidadComponent;
@@ -35,6 +35,7 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
   ngAfterViewInit() {
     this.mostrarGrafico();
     this.obtenerDatosPrograma();
+    console.log(this.chart.ctx);
   }
 
   ngAfterViewChecked() {
@@ -49,12 +50,13 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
       .subscribe(datos => {
         this.localidadNombre = datos["nombre"];
         datos["programas"].forEach((val, i) => {
-          //this.datosPrograma.push({ nombre: datos["programas"][i].nombre, color: this.colorsGrafico[i], beneficiarios: datos["programas"][i].beneficiarios });
           // nombre de programas
           this.chart.data.labels.push(datos["programas"][i].nombre);
           // cantidad de beneficiarios
           this.chart.data.datasets[0].data.push(datos["programas"][i].beneficiarios);
-          console.log(this.chart.data);
+          // agrego las opciones al grafico
+          this.chart.options = this.pieOptions;
+          // actualizo el grafico
           this.chart.update();
         });
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
@@ -73,14 +75,8 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
             label: 'Beneficiarios',
             data: [],
             backgroundColor: this.colorsGrafico,
-            fill: false
           }
         ]
-      },
-      options: {
-        legend: {
-          display: false
-        }
       }
     });
   }
@@ -88,5 +84,38 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
   removeMe(index) {
     this.compInteraction.remove(index)
   }
+
+  public pieOptions = {
+    events: false,
+    legend: { display: false },
+    animation: {
+      duration: 500,
+      //easing: "easeOutQuart",
+      onComplete: function () {
+        var ctx = this.chart.ctx;
+        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+
+        this.data.datasets.forEach(function (dataset) {
+
+          for (var i = 0; i < dataset.data.length; i++) {
+            var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+                mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
+                start_angle = model.startAngle,
+                end_angle = model.endAngle,
+                mid_angle = start_angle + (end_angle - start_angle)/2;
+
+            var x = mid_radius * Math.cos(mid_angle);
+            var y = mid_radius * Math.sin(mid_angle);
+
+            ctx.fillStyle = '#FFCCFF';
+            ctx.fillText(dataset.data[i], model.x + x, model.y + y - 5);
+          }
+        });
+      }
+    }
+  };
 
 }
