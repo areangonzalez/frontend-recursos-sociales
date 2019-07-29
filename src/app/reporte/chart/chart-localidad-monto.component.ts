@@ -11,6 +11,7 @@ export class ChartLocalidadMontoComponent implements OnInit {
   public chart:any;
   public colorsGrafico: any[] = ['red','green', 'gray'];
   public datosLocalidad: any[] = [];
+  public rango: number = 5;
 
   constructor(
     private _mensajeService: MensajesService,
@@ -25,7 +26,10 @@ export class ChartLocalidadMontoComponent implements OnInit {
     this.chart.canvas.parentNode.style.height = '460px';
   }
 
-  private obtenerDatosPrograma(rango:number){
+  public obtenerDatosPrograma(rango:number){
+    // remuevo los datos
+    this.removeDataGrafico();
+
     this._localidadService.montosLocalidades(rango)
     .subscribe(localidad => {
       console.log(localidad);
@@ -38,7 +42,6 @@ export class ChartLocalidadMontoComponent implements OnInit {
         this.chart.data.datasets[1].data.push(localidad[i].monto_baja);
         // monto sin acreditar
         this.chart.data.datasets[2].data.push(localidad[i].monto_sin_acreditar);
-
         //actualizo el grafico
         this.chart.update();
       });
@@ -92,5 +95,14 @@ export class ChartLocalidadMontoComponent implements OnInit {
         }
       }
     });
+  }
+
+  private removeDataGrafico() {
+    this.chart.data.labels = [];
+    this.chart.data.datasets.forEach((dataset) => {
+      dataset.data = [];
+    });
+    console.log("borrado:", this.chart.data.labels);
+    this.chart.update();
   }
 }
