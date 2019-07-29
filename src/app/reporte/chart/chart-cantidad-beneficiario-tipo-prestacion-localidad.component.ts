@@ -45,9 +45,8 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
   private obtenerDatosPrograma(){
     if (this.localidadId != 0){
 
-      this._localidadService.TipoPrestacionPorLocalidad(this.localidadId)
+      this._localidadService.tipoPrestacionPorLocalidad(this.localidadId)
       .subscribe(datos => {
-        console.log(this.colorsGrafico);
         this.localidadNombre = datos["nombre"];
         datos["tipo_prestacion"].forEach((val, i) => {
           // nombre de programas

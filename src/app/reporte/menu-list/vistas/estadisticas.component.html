@@ -20,23 +20,34 @@
   <div class="col-md-12">
     <div class="mt-2 bg-white p-3 rounded">
       <div class="d-flex justify-content-between">
-        <div class="col-5 pt-1"><hr></div>
-        <div class="col-2 text-center"><h2><small class="text-muted">Beneficiarios</small></h2></div>
-        <div class="col-5 pt-1"><hr></div>
+        <div class="col-4 pt-1"><hr></div>
+        <div class="col-4 text-center"><h2><small class="text-muted">Beneficiarios en Programas</small></h2></div>
+        <div class="col-4 pt-1"><hr></div>
       </div>
       <h5>Cantidad de beneficiarios en programas por localidad</h5>
         <beneficiario-programa-localidad [localidades]="listaLocalidades" [programas]="listaProgramas" ></beneficiario-programa-localidad>
     </div>
   </div>
   <div class="col-md-12">
-      <div class="mt-2 bg-white p-3 rounded">
-        <div class="d-flex justify-content-between">
-          <div class="col-5 pt-1"><hr></div>
-          <div class="col-2 text-center"><h2><small class="text-muted">Beneficiarios</small></h2></div>
-          <div class="col-5 pt-1"><hr></div>
-        </div>
-        <h5>Cantidad de beneficiarios en tipo de prestaciones por localidad</h5>
-          <beneficiario-tipo-prestacion-localidad [localidades]="listaLocalidades" [tipoPrestacion]="listaTipoPrestaciones" ></beneficiario-tipo-prestacion-localidad>
+    <div class="mt-2 bg-white p-3 rounded">
+      <div class="d-flex justify-content-between">
+        <div class="col-3 pt-1"><hr></div>
+        <div class="col-6 text-center"><h2><small class="text-muted">Beneficiarios en Tipos de Prestación</small></h2></div>
+        <div class="col-3 pt-1"><hr></div>
       </div>
+      <h5>Cantidad de beneficiarios en tipo de prestaciones por localidad</h5>
+        <beneficiario-tipo-prestacion-localidad [localidades]="listaLocalidades" [tipoPrestacion]="listaTipoPrestaciones" ></beneficiario-tipo-prestacion-localidad>
     </div>
+  </div>
+  <div class="col-md-12">
+    <div class="mt-2 bg-white p-3 rounded">
+      <div class="d-flex justify-content-between">
+        <div class="col-4 pt-1"><hr></div>
+        <div class="col-4 text-center"><h2><small class="text-muted">Montos en localidades</small></h2></div>
+        <div class="col-4 pt-1"><hr></div>
+      </div>
+      <h5>Monto "Acreditado, Baja, Sin Acreditar" por rango de localidades</h5>
+        <reporte-localidad-monto></reporte-localidad-monto>
+    </div>
+  </div>
 </div>

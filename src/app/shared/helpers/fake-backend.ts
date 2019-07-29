@@ -901,6 +901,28 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                    return throwError({ error: { message: 'Unauthorised' } });
                }
             }
+            // get RANGO DE LOCALIDADES CON MONTOS
+            if (request.url.match(/\/apimock\/localidads\/monto-localidad\/\d+$/) && request.method === 'GET') {
+              if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                let urlParts = request.url.split('/');
+                let rango = parseInt(urlParts[urlParts.length - 1]);
+                //let localidadElegida = localidades.filter(localidad => { return localidad.id === id });
+                let localidadesElegidas: any[] = [];
+                for (let i = 0; i < rango; i++) {
+                  localidades[i]["monto_acreditado"] = (10000+Math.floor(Math.random()*45000));
+                  localidades[i]["monto_baja"] = (100+Math.floor(Math.random()*4500));
+                  localidades[i]["monto_sin_acreditar"] = (1000+Math.floor(Math.random()*4500));
+
+                  localidadesElegidas.push(localidades[i]);
+                }
+
+
+                return of(new HttpResponse({ status: 200, body: localidadesElegidas }));
+              } else {
+                //return 401 not authorised if token is null or invalid
+                   return throwError({ error: { message: 'Unauthorised' } });
+               }
+            }
             // get estado civil
             if (request.url.endsWith('/apimock/estado-civils') && request.method === 'GET') {
               //if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
