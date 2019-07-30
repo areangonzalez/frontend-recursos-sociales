@@ -97,7 +97,6 @@ export class FormRecursoComponent implements OnInit {
       if ( alumno.id !== this.personaid ){
         if (this.alumnoDuplicado(alumno.id) === true){
           this.buscarPersonaPorId(alumno.id);
-          //this.listaAlumnos.push(alumno.persona);
         }else{
           this._mensajeService.cancelado("Este alumno ya fue ingresado.", [{name: ''}]);
         }

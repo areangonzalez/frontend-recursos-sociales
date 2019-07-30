@@ -27,6 +27,7 @@ export class BusquedaRecursoComponent implements OnInit {
   public fromDate: NgbDate; // fecha desde
   public toDate: NgbDate; // fecha hasta
   public mostrarDp: boolean = false; // Muestra el DatePicker
+  public tipoRecursosListaAux: any[]; // lista auxiliar para el combo de tipo recursos
 
   /**
    * @param _fb [FormBuilder] Arma el formulario de busqueda avanzada
@@ -60,7 +61,9 @@ export class BusquedaRecursoComponent implements OnInit {
   });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tipoRecursosListaAux = this.tipoRecursosLista;
+  }
 
   /**
    * marca el campo que ha sido seleccionado
@@ -78,13 +81,13 @@ export class BusquedaRecursoComponent implements OnInit {
    */
   public listarTipoRecursos(programaid:any){
     if (programaid != ""){
-      this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(
-        tipoRecursos => { this.tipoRecursosLista = tipoRecursos; },
-        error => { this._mensajeService.cancelado(error, [{name:''}]); });
+      for (let i = 0; i < this.programasLista.length; i++) {
+        if (parseInt(programaid) == this.programasLista[i].id){
+          this.tipoRecursosLista = this.programasLista[i].lista_tipo_recurso;
+        }
+      }
     }else{
-      this._tipoRecursoService.get().subscribe(
-        tipoRecursos => { this.tipoRecursosLista = tipoRecursos; },
-        error => { this._mensajeService.cancelado(error, [{name:''}]); });
+      this.tipoRecursosLista = this.tipoRecursosListaAux;
     }
   }
   /**
