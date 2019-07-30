@@ -35,29 +35,35 @@
                       </dl>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <dl class="row">
-                      <dt class="col-2 col-sm-2 col-md-2 col-lg-2" style="margin-left: 0.8rem;">Observación:</dt>
-                      <dd class="col-3 col-sm-9 col-md-9 col-lg-9">{{prestacion.observacion}}</dd>
-                    </dl>
-                  </div>
-                </div>
-                <div class="row" *ngIf="(prestacion.baja)">
-                    <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-4">
                       <dl class="row">
-                        <dt class="col-2 col-sm-2 col-md-2 col-lg-2" style="margin-left: 0.8rem;">Descripción baja:</dt>
-                        <dd class="col-3 col-sm-9 col-md-9 col-lg-9">{{prestacion.descripcion_baja}}</dd>
+                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Localidad:</dt>
+                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{prestacion.localidad}}</dd>
+                      </dl>
+                    </div>
+                    <div class="col-md-8">
+                      <dl class="row">
+                        <dt class="col-2 col-sm-2 col-md-2 col-lg-2" style="margin-left: 0.8rem;">Observación:</dt>
+                        <dd class="col-3 col-sm-9 col-md-9 col-lg-9">{{prestacion.observacion}}</dd>
                       </dl>
                     </div>
                   </div>
-                <div class="d-flex justify-content-between" *ngIf="(prestacion.alumno_lista !== undefined)">
-                  <div class="col-4 pt-1"><hr></div>
-                  <div class="col-4 text-center"><h3><small class="text-muted">Alumnos</small></h3></div>
-                  <div class="col-4 pt-1"><hr></div>
+                  <div class="row" *ngIf="(prestacion.baja)">
+                      <div class="col-md-12">
+                        <dl class="row">
+                          <dt class="col-2 col-sm-2 col-md-2 col-lg-2" style="margin-left: 0.8rem;">Descripción baja:</dt>
+                          <dd class="col-3 col-sm-9 col-md-9 col-lg-9">{{prestacion.descripcion_baja}}</dd>
+                        </dl>
+                      </div>
+                    </div>
+                  <div class="d-flex justify-content-between" *ngIf="(prestacion.alumno_lista !== undefined)">
+                    <div class="col-4 pt-1"><hr></div>
+                    <div class="col-4 text-center"><h3><small class="text-muted">Alumnos</small></h3></div>
+                    <div class="col-4 pt-1"><hr></div>
+                  </div>
+                  <shared-lista-persona *ngIf="(prestacion.alumno_lista != undefined && prestacion.alumno_lista.length > 0)" [personas]="prestacion.alumno_lista" [mostrar]="false"></shared-lista-persona>
                 </div>
-                <shared-lista-persona *ngIf="(prestacion.alumno_lista != undefined && prestacion.alumno_lista.length > 0)" [personas]="prestacion.alumno_lista" [mostrar]="false"></shared-lista-persona>
               </div>
         </ng-template>
     </ngb-tab>
