@@ -140,6 +140,7 @@ export class BusquedaRecursoComponent implements OnInit {
     }
     this.busquedaAvanzada.patchValue(busqueda);
     this.buscar();
+    this.listarTipoRecursos('');
   }
   /**
    * muestra el fomulario de busqueda avanzada
