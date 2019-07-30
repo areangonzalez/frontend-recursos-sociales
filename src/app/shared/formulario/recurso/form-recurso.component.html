@@ -9,7 +9,7 @@
       <div class="row">
           <div class="form-group col-md-3">
             <label for="tipo_recurso">Programa (<span class="text-obligatorio">*</span>):</label>
-            <select class="form-control" id="tipo_recurso" formControlName="programaid" [ngClass]="{'is-invalid': (formRecurso.get('programaid').invalid && submitted)}" (change)="listarTipoPrestacion($event.target.value);esEmprender($event)" >
+            <select class="form-control" id="tipo_recurso" formControlName="programaid" [ngClass]="{'is-invalid': (formRecurso.get('programaid').invalid && submitted)}" (change)="listarTipoRecurso($event.target.value);esEmprender($event)" >
               <option value="">Seleccione Programa</option>
               <option *ngFor="let programa of listaPrograma" value="{{programa.id}}">{{programa.nombre}}</option>
             </select>
@@ -21,7 +21,7 @@
           <label for="tipo_recurso">Tipo de prestación (<span class="text-obligatorio">*</span>):</label>
           <select class="form-control" id="tipo_recurso" formControlName="tipo_recursoid" [ngClass]="{'is-invalid': (formRecurso.get('tipo_recursoid').invalid && submitted)}">
             <option value="">Seleccione tipo de prestación</option>
-            <option *ngFor="let tipo of tipoPrestacionLista" value="{{tipo.id}}">{{tipo.nombre}}</option>
+            <option *ngFor="let tipo of listaTipoRecurso" value="{{tipo.id}}">{{tipo.nombre}}</option>
           </select>
           <div *ngIf="(formRecurso.get('tipo_recursoid').invalid && submitted)" class="text-danger">
               <div *ngIf="formRecurso.get('tipo_recursoid').hasError('required')">Por favor Seleccione un tipo de prestación. </div>

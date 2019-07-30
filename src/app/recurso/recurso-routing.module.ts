@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RecursoComponent } from './recurso.component';
-import { ProgramaService } from "../core/services";
+import { ProgramaService, TipoRecursoService } from "../core/services";
 
 const routes: Routes = [
     {
       path: '', component: RecursoComponent,
       data: { loading: true, preload: true, breadcrumb: 'Crear', title: 'Crear prestación' },
       resolve: {
-        programas: ProgramaService
+        programas: ProgramaService,
+        tipoRecursos: TipoRecursoService
       }
     },
     {
       path: ':programaid', component: RecursoComponent,
       data: { loading: true, preload: true, breadcrumb: 'Crear', title: 'Crear prestación' },
       resolve: {
-        programas: ProgramaService
+        programas: ProgramaService,
+        tipoRecursos: TipoRecursoService
       }
     }
 ];
@@ -23,6 +25,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: [ProgramaService]
+    providers: [ProgramaService, TipoRecursoService]
 })
 export class RecursoRoutingModule { }

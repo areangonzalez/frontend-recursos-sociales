@@ -5,7 +5,13 @@
   "localidads": [
     { "id": 1, "nombre": "Aguada de Guerra" }, { "id": 2, "nombre": "Bariloche" }, { "id": 3, "nombre": "Choele Choel" }, { "id": 4, "nombre": "Cinco Saltos" }, { "id": 5, "nombre": "Cipolletti" }, { "id": 6, "nombre": "Coronel Belisle" }, { "id": 7, "nombre": "General Roca" }, { "id": 8, "nombre": "Río colorado" }, { "id": 9, "nombre": "Viedma" }, { "id": 10, "nombre": "Villa Regina" }
   ],
-  "programas": [{ "id": 1, "nombre": "Emprender" }, { "id": 2, "nombre": "Habitat" },{ "id": 3, "nombre": "Micro Emprendimientos" }, { "id": 4, "nombre": "Río Negro Presente" }, { "id": 5, "nombre": "Subsidio" }],
+  "programas": [
+    { "id": 1, "nombre": "Emprender", "lista_tipo_recurso": [{"id":2, "nombre": "Empleo / Formación laboral"}] },
+    { "id": 2, "nombre": "Habitat", "lista_tipo_recurso": [{"id":3, "nombre": "Mejoramiento habitacional"}] },
+    { "id": 3, "nombre": "Micro Emprendimientos", "lista_tipo_recurso": [{"id":2, "nombre": "Empleo / Formación laboral"}] },
+    { "id": 4, "nombre": "Río Negro Presente", "lista_tipo_recurso": [{"id":1, "nombre": "Alimentación"}, {"id":3, "nombre": "Mejoramiento habitacional"}] },
+    { "id": 5, "nombre": "Subsidio", "lista_tipo_recurso": [{"id":1, "nombre": "Alimentación"}, {"id":3, "nombre": "Mejoramiento habitacional"}] }
+  ],
   "tipoRecursoSocials": [
       {"id":1, "nombre": "Alimentación"},
       {"id":2, "nombre": "Empleo / Formación laboral"},

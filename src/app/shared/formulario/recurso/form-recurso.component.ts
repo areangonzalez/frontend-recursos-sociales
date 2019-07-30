@@ -12,6 +12,7 @@ import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FormRecursoComponent implements OnInit {
   @Input("listaPrograma") public listaPrograma: any;
+  @Input("listaTipoRecurso") public listaTipoRecurso: any;
   @Input("programaid") public programaid: any;
   @Input("personaid") public personaid: any;
   @Output("cancelar") public cancelar = new EventEmitter();
@@ -19,7 +20,7 @@ export class FormRecursoComponent implements OnInit {
 
   public formRecurso: FormGroup;
   public programaLista: any = [];
-  public tipoPrestacionLista: any = [];
+  public listaTipoRecursoAux: any = [];
   public emprender: boolean = false;
   public listaAlumnos = [];
   public submitted = false;
@@ -49,11 +50,12 @@ export class FormRecursoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.listaTipoRecursoAux = this.listarTipoRecurso;
     if (this.programaid) {
       let id: number = parseInt(this.programaid);
       // actualizo el listado de programas
       this.formRecurso.controls.programaid.patchValue(id);
-      this.listarTipoPrestacion(id);
+      this.listarTipoRecurso(id);
     }
   }
 
@@ -77,12 +79,17 @@ export class FormRecursoComponent implements OnInit {
     }
   }
 
-  public listarTipoPrestacion(programaid:number) {
+  public listarTipoRecurso(programaid:any) {
     this.formRecurso.controls.tipo_recursoid.setValue('');
-    this._tipoRecursoService.buscarPorPrograma(programaid).subscribe(
-      prestacion => {
-        this.tipoPrestacionLista = prestacion;
-      }, error => this._mensajeService.cancelado(error, [{name:''}]));
+    if (programaid != ''){
+      for (let i = 0; i < this.listaPrograma.length; i++) {
+        if (parseInt(programaid) == this.listaPrograma[i].id) {
+          this.listaTipoRecurso = this.listaPrograma[i].lista_tipo_recurso;
+        }
+      }
+    }else{
+      this.listaTipoRecurso = this.listaTipoRecursoAux;
+    }
   }
 
   public agregarAlumnos(alumno:any){

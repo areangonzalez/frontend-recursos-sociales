@@ -18,6 +18,7 @@ export class RecursoComponent implements OnInit {
   public configModal: ModalConfig = { title: "Editar beneficiario" };
   public configBotonModal: BotonDisenio = { class: 'btn btn-md btn-light btn-altura', iconoClass: 'fas fa-pencil-alt', text:'' };
   public programaLista: any;
+  public tipoRecursoLista: any;
   public listaRedSocial: any = [];
 
   constructor(
@@ -38,6 +39,7 @@ export class RecursoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tipoRecursoLista = this._route.snapshot.data['tipoRecursos'];
     this.programaid = this._route.snapshot.paramMap.get('programaid');
     if (this.programaid){
       this.programaLista = [this._route.snapshot.data["programas"]];

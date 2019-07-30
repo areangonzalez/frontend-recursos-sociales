@@ -27,8 +27,6 @@ export class TipoRecursoService implements Resolve <any> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
     ): Observable<any>|Promise<any>|any {
-      let httpParams = new HttpParams();
-      httpParams = this._apiService.formatParams(httpParams, {programaid: 5});
 
       return this._apiService.get('/tipo-recursos');
     }
