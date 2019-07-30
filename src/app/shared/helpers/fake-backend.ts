@@ -393,6 +393,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               nuevoRecurso["fecha_inicial"] = hoy();
               nuevoRecurso["tipo_recurso"] = nombrePorId(nuevoRecurso.tipo_recursoid, tipoRecurso);
               nuevoRecurso["programa"] = nombrePorId(nuevoRecurso.programaid, programas);
+              nuevoRecurso["localidad"] = nombrePorId(nuevoRecurso.localidadid, localidades);
 
               delete nuevoRecurso["fechaAlta"];
 
@@ -543,8 +544,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     personaEncontrada["lugar"]["localidadid"] = datosPersona.lugar.localidadid;
                     personaEncontrada["lugar"]["piso"]        = datosPersona.lugar.piso;
                   }else{
+                    personaEncontrada["lista_red_social"]     = datosPersona.lista_red_social;
                     personaEncontrada["celular"]              = datosPersona.celular;
-                    personaEncontrada["red_social"]           = datosPersona.red_social;
                     personaEncontrada["telefono"]             = datosPersona.telefono;
                     personaEncontrada["email"]                = datosPersona.email;
                   }
