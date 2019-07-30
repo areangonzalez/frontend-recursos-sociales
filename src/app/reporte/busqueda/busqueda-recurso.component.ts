@@ -152,8 +152,8 @@ export class BusquedaRecursoComponent implements OnInit {
   /**
    * Funcion que indica la exportacion a excel
    */
-  public exportarExcel(){
-    this.exportarAExcel.emit(true);
+  public exportarExcel(confirmar){
+    this.exportarAExcel.emit(confirmar);
   }
 
   /* ### DATE PICKER CONFIG ### */

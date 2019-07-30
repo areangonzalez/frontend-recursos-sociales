@@ -19,7 +19,8 @@ import {
   ModalBajaComponent, ModalConfirmacionContent, ModalBajaContent,
   ModalInfoBeneficiarioComponent, ModalInfoBeneficiarioContent,
   ModalRedSocialComponent, ModalRedSocialContent,
-  ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent
+  ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
+  ModalConfirmacionDescargaComponent, ModalConfirmacionDescargaContent
 } from "./modal";
 import { ProgramaComponent } from "./programa";
 
@@ -51,6 +52,7 @@ import { ProgramaComponent } from "./programa";
       ModalInfoBeneficiarioComponent, ModalInfoBeneficiarioContent,
       ModalRedSocialComponent, ModalRedSocialContent,
       ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
+      ModalConfirmacionDescargaComponent, ModalConfirmacionDescargaContent,
       ProgramaComponent
     ],
     exports: [
@@ -73,6 +75,7 @@ import { ProgramaComponent } from "./programa";
         ModalInfoBeneficiarioComponent, ModalInfoBeneficiarioContent,
         ModalRedSocialComponent, ModalRedSocialContent,
         ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
+        ModalConfirmacionDescargaComponent, ModalConfirmacionDescargaContent,
         ProgramaComponent
     ],
     entryComponents: [
@@ -82,7 +85,8 @@ import { ProgramaComponent } from "./programa";
       ModalBajaComponent, ModalConfirmacionContent, ModalBajaContent,
       ModalInfoBeneficiarioComponent, ModalInfoBeneficiarioContent,
       ModalRedSocialComponent, ModalRedSocialContent,
-      ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent
+      ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
+      ModalConfirmacionDescargaComponent, ModalConfirmacionDescargaContent
     ]
 })
 export class SharedModule { }
