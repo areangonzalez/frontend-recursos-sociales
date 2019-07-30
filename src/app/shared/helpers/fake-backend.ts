@@ -321,7 +321,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                   });
                   if (localidadid) {
-                    recursosEncontrados = recursosEncontrados.filter(recurso => { return parseInt(localidadid) === parseInt(recurso.persona.lugar.localidadid); });
+                    recursosEncontrados = recursosEncontrados.filter(recurso => { return parseInt(localidadid) === parseInt(recurso.localidadid); });
                   }
                   if (programaid) {
                     recursosEncontrados = recursosEncontrados.filter(recurso => { return parseInt(programaid) === parseInt(recurso.programaid); });
