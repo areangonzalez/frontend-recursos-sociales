@@ -49,7 +49,18 @@ export class ModalBajaContent {
    * @param cancelar cierra el modal si el valor es true
    */
   public cancelar() {
-    this.activeModal.close('closed');
+    // referencia del modal
+    const modRedfonfirmarCancelado = this.modalService.open(ModalConfirmarCanceladoBajaContent, {centered: true});
+
+    modRedfonfirmarCancelado.result.then(
+      result => {
+        if (result){
+          this.activeModal.close('closed');
+        }
+      }
+    )
+
+
   }
 
   public FormatFecha(obj:any){
@@ -129,6 +140,29 @@ export class ModalBajaComponent {
   templateUrl: './modal-confirmacion-baja.content.html'
 })
 export class ModalConfirmacionContent {
+  constructor(public activeModal: NgbActiveModal) {}
+
+  public confirmacion(confirma: boolean) {
+    this.activeModal.close(confirma);
+  }
+}
+
+@Component({
+  selector: 'modal-confirmar-cancelado-baja-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Cancelar Baja</h4>
+    </div>
+    <div class="modal-body">
+      <p>¿Esta seguro que desea cancelar la baja?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="confirmacion(false)">No</button>
+      <button type="button" class="btn btn-success" (click)="confirmacion(true)">Si</button>
+    </div>
+  `
+})
+export class ModalConfirmarCanceladoBajaContent {
   constructor(public activeModal: NgbActiveModal) {}
 
   public confirmacion(confirma: boolean) {
