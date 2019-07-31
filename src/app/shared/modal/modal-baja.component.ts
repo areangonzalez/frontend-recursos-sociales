@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalConfig, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilService } from 'src/app/core/utils';
 import { RecursoSocialService, MensajesService } from 'src/app/core/services';
@@ -16,7 +16,7 @@ export class ModalBajaContent {
 
   constructor(
     private modalService: NgbModal,
-    public activeModal: NgbActiveModal,
+    private activeModal: NgbActiveModal,
     private _fb: FormBuilder,
     private _utilService: UtilService,
     private _recursoService: RecursoSocialService,
@@ -115,10 +115,10 @@ export class ModalBajaComponent {
 
   constructor(
     private modalService: NgbModal,
-    private config: NgbModalConfig
+    private config: NgbModalConfig,
   ) {
     config.backdrop = 'static';
-    config.keyboard = false;
+    config.keyboard = true;
   }
 
   open() {

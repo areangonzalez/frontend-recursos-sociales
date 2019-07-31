@@ -15,7 +15,8 @@ export class ModalAcreditarContent {
   private fecha_acreditacion: string;
 
   constructor(
-    public activeModal: NgbActiveModal,
+    private activeModal: NgbActiveModal,
+    private modalService: NgbModal,
     private _fb: FormBuilder,
     private _utilService: UtilService,
     private _recursoService: RecursoSocialService,
@@ -52,7 +53,12 @@ export class ModalAcreditarContent {
    * @param cancelar cierra el modal si el valor es true
    */
   public cancelar() {
-    this.activeModal.close('closed');
+    const modRefConfirmarCancelarAcreditado = this.modalService.open(ModalConfirmarCanceladoAcreditarContent, {centered:true});
+    modRefConfirmarCancelarAcreditado.result.then( (result) => {
+      if (result){
+        this.activeModal.close('closed');
+      }
+    });
   }
 
   public FormatFecha(obj:any){
@@ -95,5 +101,28 @@ export class ModalAcreditarComponent {
         }
       }
     )
+  }
+}
+
+@Component({
+  selector: 'modal-confirmar-cancelado-acreditar-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Cancelar Acreditación</h4>
+    </div>
+    <div class="modal-body">
+      <p>¿Esta seguro que desea cancelar la acreditación?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="confirmacion(false)">No</button>
+      <button type="button" class="btn btn-success" (click)="confirmacion(true)">Si</button>
+    </div>
+  `
+})
+export class ModalConfirmarCanceladoAcreditarContent {
+  constructor(public activeModal: NgbActiveModal) {}
+
+  public confirmacion(confirma: boolean) {
+    this.activeModal.close(confirma);
   }
 }
