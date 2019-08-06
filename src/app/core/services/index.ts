@@ -16,3 +16,4 @@ export * from './beneficiario.service';
 export * from './tipo-red-social.service';
 export * from './descargas.service';
 export * from './detalle-programa.service'
+export * from './estadistica.service';

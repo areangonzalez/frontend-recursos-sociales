@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef, AfterViewInit, AfterViewChecked} from '@angular/core';
 import { Chart } from 'chart.js';
-import { MensajesService, LocalidadService } from 'src/app/core/services';
+import { MensajesService, EstadisticaService } from 'src/app/core/services';
+import { finalize } from 'rxjs/operators';
 
 export interface myinterface {
     remove(index: number);
@@ -22,20 +23,17 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
   public datosPrograma: any[] = [];
   public localidadId:number = 0;
   public localidadNombre: string = '';
+  public isComplete: boolean = false;
 
   constructor(
     private _mensajeService: MensajesService,
-    private _localidadService: LocalidadService,
+    private _estadisticaService: EstadisticaService,
     private _cdRef: ChangeDetectorRef
-  ){
-
-
-  }
+  ){}
 
   ngAfterViewInit() {
     this.mostrarGrafico();
     this.obtenerDatosPrograma();
-    console.log(this.chart.ctx);
   }
 
   ngAfterViewChecked() {
@@ -46,9 +44,11 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
   private obtenerDatosPrograma(){
     if (this.localidadId != 0){
 
-      this._localidadService.programasPorLocalidad(this.localidadId)
+      this._estadisticaService.programasPorLocalidad(this.localidadId)
+      .pipe(
+        finalize(() => this.isComplete = true)
+      )
       .subscribe(datos => {
-        this.localidadNombre = datos["nombre"];
         datos["programas"].forEach((val, i) => {
           // nombre de programas
           this.chart.data.labels.push(datos["programas"][i].nombre);

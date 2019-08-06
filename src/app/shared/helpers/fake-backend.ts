@@ -864,8 +864,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               //     return throwError({ error: { message: 'Unauthorised' } });
               // }
             }
-            // GET LOCALIDADES POR PROGRAMAS
-            if (request.url.match(/\/apimock\/localidads\/programa-localidad\/\d+$/) && request.method === 'GET') {
+            // GET BENEFICIARIOS POR PROGRAMA EN LOCALIDAD - Estadisticas
+            if (request.url.match(/\/apimock\/estadisticas\/beneficiarios-por-programa-en-localidad\/\d+$/) && request.method === 'GET') {
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 let urlParts = request.url.split('/');
                 let id = parseInt(urlParts[urlParts.length - 1]);
@@ -876,7 +876,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
 
                 localidadElegida[0]["programas"] = programas;
-
+                console.log("cant Beneficiarios: ", localidadElegida[0].programas);
                 return of(new HttpResponse({ status: 200, body: localidadElegida[0] }));
               } else {
                 //return 401 not authorised if token is null or invalid
@@ -884,7 +884,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                }
             }
             // GET LOCALIDADES POR TIPO PRESTACION
-            if (request.url.match(/\/apimock\/localidads\/tipo-prestacion-localidad\/\d+$/) && request.method === 'GET') {
+            if (request.url.match(/\/apimock\/estadisticas\/tipo-prestacion-localidad\/\d+$/) && request.method === 'GET') {
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 let urlParts = request.url.split('/');
                 let id = parseInt(urlParts[urlParts.length - 1]);
@@ -903,7 +903,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                }
             }
             // get RANGO DE LOCALIDADES CON MONTOS
-            if (request.url.match(/\/apimock\/localidads\/monto-localidad\/\d+$/) && request.method === 'GET') {
+            if (request.url.match(/\/apimock\/estadisticas\/monto-localidad\/\d+$/) && request.method === 'GET') {
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 let urlParts = request.url.split('/');
                 let rango = parseInt(urlParts[urlParts.length - 1]);

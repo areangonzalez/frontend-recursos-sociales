@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { Chart } from 'chart.js';
-import { MensajesService, LocalidadService } from 'src/app/core/services';
+import { MensajesService, EstadisticaService } from 'src/app/core/services';
 
 export interface myinterfaces {
     remove(index: number);
@@ -25,12 +25,9 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
 
   constructor(
     private _mensajeService: MensajesService,
-    private _localidadService: LocalidadService,
+    private _estadisticaService: EstadisticaService,
     private _cdRef: ChangeDetectorRef
-  ){
-
-
-  }
+  ){}
 
   ngAfterViewInit() {
     this.mostrarGrafico();
@@ -45,7 +42,7 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
   private obtenerDatosPrograma(){
     if (this.localidadId != 0){
 
-      this._localidadService.tipoPrestacionPorLocalidad(this.localidadId)
+      this._estadisticaService.tipoPrestacionPorLocalidad(this.localidadId)
       .subscribe(datos => {
         this.localidadNombre = datos["nombre"];
         datos["tipo_prestacion"].forEach((val, i) => {

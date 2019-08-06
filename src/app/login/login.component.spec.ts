@@ -4,7 +4,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { CoreModule } from '../core/core.module';
 
 import { LoginComponent } from './login.component';
-import { LoaderComponent, MensajesComponent, BreadcrumbComponent, BreadcrumbsService, SharedModule } from "../shared";
+import { LoaderComponent, MensajesComponent, BreadcrumbComponent, BreadcrumbsService, AppLayoutComponent, SharedModule } from "../shared";
 import { PixelSpinnerModule } from 'angular-epic-spinners';
 import { TitleService, AuthenticationService, LoaderService, ApiService } from '../core/services'
 import { AppRoutingModule } from '../app-routing.module';
@@ -26,6 +26,7 @@ describe('AppComponent', () => {
         LoginRoutingModule
       ],
       declarations: [
+        AppLayoutComponent,
         LoaderComponent,
         BreadcrumbComponent,
         AppComponent,
@@ -40,7 +41,7 @@ describe('AppComponent', () => {
          BreadcrumbsService, TitleService,
          { provide: ActivatedRoute },
         { provide: Router },
-        {provide: APP_BASE_HREF, useValue : '/' } ],
+        {provide: APP_BASE_HREF, useValue : '/login' } ],
 
     }).compileComponents();
   }));

@@ -1,9 +1,9 @@
       <div style="width: 250px;">
-          <h4 class="d-flex justify-content-center" *ngIf="(localidadNombre != '')" >{{localidadNombre}}</h4>
+          <h4 class="d-flex justify-content-center" *ngIf="(isComplete)" >{{localidadNombre}}</h4>
           <div style="display: block">
               <canvas id="{{idCanvas}}" #canvas  style="min-height: 10% !important;" >{{chart}}</canvas>
           </div>
-          <div class="d-flex justify-content-center" *ngIf="(localidadNombre != '')">
+          <div class="d-flex justify-content-center" *ngIf="(isComplete)">
             <button type="button" class="btn btn-danger" (click)="removeMe(index)" ngbTooltip="Borrar localidad" ><i class="far fa-trash-alt"></i></button>
           </div>
 

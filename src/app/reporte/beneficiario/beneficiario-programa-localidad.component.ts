@@ -41,6 +41,7 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
       currentComponent.index = ++this.index;
       currentComponent.idCanvas = 'torta_programa_localidad_' + currentComponent.index.toString();
       currentComponent.localidadId = this.localidadId;
+      currentComponent.localidadNombre = this.obtenerNombreLocalidad(this.localidadId);
       // instancio la localidad seleccionada
       this.localidadSeleccionadas.push(this.localidadId);
 
@@ -95,7 +96,15 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
     for (let i = 0; i < this.programas.length; i++) {
       this.programaColor.push({'nombre': this.programas[i].nombre, 'color': colorsGrafico[i]});
     }
+  }
 
+  private obtenerNombreLocalidad(idLocalidad:number) {
+    for (let i = 0; i < this.localidades.length; i++) {
+      if (this.localidades[i].id == idLocalidad) {
+        return this.localidades[i].nombre;
+      }
+    }
+    return "N/A";
   }
 
 }

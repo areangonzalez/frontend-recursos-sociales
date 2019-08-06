@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
-import { LoaderComponent, MensajesComponent, BreadcrumbComponent, BreadcrumbsService, SharedModule } from "./shared";
+import { AppLayoutComponent, LoaderComponent, MensajesComponent, BreadcrumbComponent, BreadcrumbsService, SharedModule } from "./shared";
 import { PixelSpinnerModule } from 'angular-epic-spinners';
 import { TitleService } from './core/services';
 
@@ -19,6 +19,7 @@ describe('AppComponent', () => {
         AppRoutingModule,
       ],
       declarations: [
+        AppLayoutComponent,
         BreadcrumbComponent,
         LoaderComponent,
         AppComponent,

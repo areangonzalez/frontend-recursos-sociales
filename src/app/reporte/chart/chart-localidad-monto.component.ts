@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-import { MensajesService, DetalleProgramaService, LocalidadService } from 'src/app/core/services';
+import { MensajesService, EstadisticaService } from 'src/app/core/services';
 
 @Component({
   selector: 'reporte-localidad-monto',
@@ -15,10 +15,8 @@ export class ChartLocalidadMontoComponent implements OnInit {
 
   constructor(
     private _mensajeService: MensajesService,
-    private _localidadService: LocalidadService
-  ){
-
-  }
+    private _estadisticaService: EstadisticaService
+  ){}
 
   ngOnInit() {
     this.mostrarGrafico();
@@ -30,9 +28,8 @@ export class ChartLocalidadMontoComponent implements OnInit {
     // remuevo los datos
     this.removeDataGrafico();
 
-    this._localidadService.montosLocalidades(rango)
+    this._estadisticaService.montosLocalidades(rango)
     .subscribe(localidad => {
-      console.log(localidad);
       localidad.forEach((val, i) => {
         // nombre de programas
         this.chart.data.labels.push(localidad[i].nombre);

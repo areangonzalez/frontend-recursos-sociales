@@ -12,7 +12,8 @@ module.exports = function (config) {
       require('karma-selenium-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      require('@angular-devkit/build-angular/plugins/karma'),
+      require('karam-spec-reporter')
     ],
     hostname: 'angulartestkarma',
     client: {

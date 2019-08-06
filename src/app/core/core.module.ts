@@ -23,7 +23,8 @@ import {
   BeneficiarioService,
   TipoRedSocialService,
   DescargasService,
-  DetalleProgramaService
+  DetalleProgramaService,
+  EstadisticaService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -53,7 +54,8 @@ import { UtilService } from "./utils";
     BeneficiarioService,
     TipoRedSocialService,
     DescargasService,
-    DetalleProgramaService
+    DetalleProgramaService,
+    EstadisticaService
   ],
   declarations: []
 })
