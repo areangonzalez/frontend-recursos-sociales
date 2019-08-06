@@ -876,8 +876,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
 
                 localidadElegida[0]["programas"] = programas;
-                console.log("cant Beneficiarios: ", localidadElegida[0].programas);
-                return of(new HttpResponse({ status: 200, body: localidadElegida[0] }));
+                return of(new HttpResponse({ status: 200, body: localidadElegida[0].programas }));
               } else {
                 //return 401 not authorised if token is null or invalid
                    return throwError({ error: { message: 'Unauthorised' } });
@@ -894,9 +893,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   tipoRecurso[i]['beneficiario_cantidad'] = (100+Math.floor(Math.random()*450));
                 }
 
-                localidadElegida[0]["tipo_prestacion"] = tipoRecurso;
+                localidadElegida[0]["tipo_recurso"] = tipoRecurso;
 
-                return of(new HttpResponse({ status: 200, body: localidadElegida[0] }));
+                return of(new HttpResponse({ status: 200, body: localidadElegida[0]["tipo_recurso"] }));
               } else {
                 //return 401 not authorised if token is null or invalid
                    return throwError({ error: { message: 'Unauthorised' } });

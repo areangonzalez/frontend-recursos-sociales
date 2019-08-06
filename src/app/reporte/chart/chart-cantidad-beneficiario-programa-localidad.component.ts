@@ -49,11 +49,11 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
         finalize(() => this.isComplete = true)
       )
       .subscribe(datos => {
-        datos["programas"].forEach((val, i) => {
+        datos.forEach((val, i) => {
           // nombre de programas
-          this.chart.data.labels.push(datos["programas"][i].nombre);
+          this.chart.data.labels.push(datos[i].nombre);
           // cantidad de beneficiarios
-          this.chart.data.datasets[0].data.push(datos["programas"][i].beneficiario_cantidad);
+          this.chart.data.datasets[0].data.push(datos[i].beneficiario_cantidad);
           // agrego las opciones al grafico
           this.chart.options = this.pieOptions;
           // actualizo el grafico

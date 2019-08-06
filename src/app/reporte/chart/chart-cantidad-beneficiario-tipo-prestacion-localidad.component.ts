@@ -49,11 +49,11 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
         finalize(() => this.isComplete = true)
       )
       .subscribe(datos => {
-        datos["tipo_recurso"].forEach((val, i) => {
+        datos.forEach((val, i) => {
           // nombre de programas
-          this.chart.data.labels.push(datos["tipo_recurso"][i].nombre);
+          this.chart.data.labels.push(datos[i].nombre);
           // cantidad de beneficiarios
-          this.chart.data.datasets[0].data.push(datos["tipo_recurso"][i].beneficiario_cantidad);
+          this.chart.data.datasets[0].data.push(datos[i].beneficiario_cantidad);
 
           //agrego las opciones
           this.chart.options = this.pieOptions;
