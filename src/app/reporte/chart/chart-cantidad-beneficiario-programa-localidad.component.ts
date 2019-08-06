@@ -53,7 +53,7 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
           // nombre de programas
           this.chart.data.labels.push(datos["programas"][i].nombre);
           // cantidad de beneficiarios
-          this.chart.data.datasets[0].data.push(datos["programas"][i].beneficiarios);
+          this.chart.data.datasets[0].data.push(datos["programas"][i].beneficiario_cantidad);
           // agrego las opciones al grafico
           this.chart.options = this.pieOptions;
           // actualizo el grafico

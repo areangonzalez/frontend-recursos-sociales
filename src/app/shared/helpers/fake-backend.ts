@@ -872,7 +872,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let localidadElegida = localidades.filter(localidad => { return localidad.id === id });
 
                 for (let i = 0; i < programas.length; i++) {
-                  programas[i]['beneficiarios'] = (100+Math.floor(Math.random()*450));
+                  programas[i]['beneficiario_cantidad'] = (100+Math.floor(Math.random()*450));
                 }
 
                 localidadElegida[0]["programas"] = programas;
