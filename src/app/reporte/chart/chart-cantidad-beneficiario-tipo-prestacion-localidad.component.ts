@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { Chart } from 'chart.js';
 import { MensajesService, EstadisticaService } from 'src/app/core/services';
+import { finalize } from 'rxjs/operators';
 
 export interface myinterfaces {
     remove(index: number);
@@ -22,6 +23,7 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
   public datosPrograma: any[] = [];
   public localidadId:number = 0;
   public localidadNombre: string = '';
+  public isComplete: boolean = false;
 
   constructor(
     private _mensajeService: MensajesService,
@@ -43,13 +45,15 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
     if (this.localidadId != 0){
 
       this._estadisticaService.tipoPrestacionPorLocalidad(this.localidadId)
+      .pipe(
+        finalize(() => this.isComplete = true)
+      )
       .subscribe(datos => {
-        this.localidadNombre = datos["nombre"];
-        datos["tipo_prestacion"].forEach((val, i) => {
+        datos["tipo_recurso"].forEach((val, i) => {
           // nombre de programas
-          this.chart.data.labels.push(datos["tipo_prestacion"][i].nombre);
+          this.chart.data.labels.push(datos["tipo_recurso"][i].nombre);
           // cantidad de beneficiarios
-          this.chart.data.datasets[0].data.push(datos["tipo_prestacion"][i].beneficiarios);
+          this.chart.data.datasets[0].data.push(datos["tipo_recurso"][i].beneficiario_cantidad);
 
           //agrego las opciones
           this.chart.options = this.pieOptions;

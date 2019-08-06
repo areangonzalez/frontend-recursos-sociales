@@ -45,6 +45,7 @@ export class BeneficiarioTipoPrestacionLocalidadComponent implements OnInit {
       currentComponent.index = ++this.index;
       currentComponent.idCanvas = 'torta_tipo_prestacion_localidad_' + currentComponent.index.toString();
       currentComponent.localidadId = this.localidadId;
+      currentComponent.localidadNombre = this.obtenerNombreLocalidad(this.localidadId);
       // separo los colores del objeto y los agrego en un array simple
       let colores: any[] = [];
       this.listaPrestacionColor.forEach(el => {
@@ -104,7 +105,15 @@ export class BeneficiarioTipoPrestacionLocalidadComponent implements OnInit {
     for (let i = 0; i < this.tipoPrestacion.length; i++) {
       this.listaPrestacionColor.push({'id': this.tipoPrestacion[i].id, 'nombre': this.tipoPrestacion[i].nombre, 'color': this.colores[i]});
     }
+  }
 
+  private obtenerNombreLocalidad(idLocalidad:number) {
+    for (let i = 0; i < this.localidades.length; i++) {
+      if (this.localidades[i].id == idLocalidad) {
+        return this.localidades[i].nombre;
+      }
+    }
+    return "N/A";
   }
 
 }
