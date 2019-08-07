@@ -46,12 +46,8 @@ export class BeneficiarioTipoPrestacionLocalidadComponent implements OnInit {
       currentComponent.idCanvas = 'torta_tipo_prestacion_localidad_' + currentComponent.index.toString();
       currentComponent.localidadId = this.localidadId;
       currentComponent.localidadNombre = this.obtenerNombreLocalidad(this.localidadId);
-      // separo los colores del objeto y los agrego en un array simple
-      let colores: any[] = [];
-      this.listaPrestacionColor.forEach(el => {
-        colores.push(el.color);
-      });
-      currentComponent.colorsGrafico = colores;
+      // Agrego el listado de colores por tipo de recurso
+      currentComponent.colorsGrafico = this.listaPrestacionColor;
       // instancio la localidad seleccionada
       this.localidadSeleccionadas.push(this.localidadId);
 

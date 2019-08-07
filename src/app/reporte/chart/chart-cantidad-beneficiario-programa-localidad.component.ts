@@ -19,7 +19,7 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
   public compInteraction: myinterface;
   public idCanvas: string;
   public chart:any;
-  public colorsGrafico: any[] = ['red', 'orange', 'yellow', 'green', 'blue'];
+  public colorsGrafico: any[] = [];
   public datosPrograma: any[] = [];
   public localidadId:number = 0;
   public localidadNombre: string = '';
@@ -54,6 +54,7 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
           this.chart.data.labels.push(datos[i].nombre);
           // cantidad de beneficiarios
           this.chart.data.datasets[0].data.push(datos[i].beneficiario_cantidad);
+          this.chart.data.datasets[0].backgroundColor.push(this.colorPrograma(datos[i].nombre));
           // agrego las opciones al grafico
           this.chart.options = this.pieOptions;
           // actualizo el grafico
@@ -74,11 +75,19 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
           {
             label: 'Beneficiarios',
             data: [],
-            backgroundColor: this.colorsGrafico,
+            backgroundColor: [],
           }
         ]
       }
     });
+  }
+
+  private colorPrograma(nombrePrograma:string) {
+    for (let i = 0; i < this.colorsGrafico.length; i++) {
+      if (this.colorsGrafico[i].nombre == nombrePrograma) {
+        return this.colorsGrafico[i].color;
+      }
+    }
   }
 
   removeMe(index) {

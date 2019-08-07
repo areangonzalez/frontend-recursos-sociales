@@ -23,7 +23,7 @@ export class EstadisticaService {
    * @param localidadid [number] Identificador de localidad
    */
   tipoPrestacionPorLocalidad(localidadid:number) {
-    return this._apiService.get('/estadisticas/tipo-prestacion-localidad/' + localidadid);
+    return this._apiService.get('/estadisticas/beneficiarios-por-tipo-recurso-en-localidad/' + localidadid);
   }
   /**
    * Listado de las localidades que representan los mayores montos

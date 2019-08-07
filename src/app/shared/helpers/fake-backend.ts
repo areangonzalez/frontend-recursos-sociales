@@ -883,7 +883,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                }
             }
             // GET LOCALIDADES POR TIPO PRESTACION
-            if (request.url.match(/\/apimock\/estadisticas\/tipo-prestacion-localidad\/\d+$/) && request.method === 'GET') {
+            if (request.url.match(/\/apimock\/estadisticas\/beneficiarios-por-tipo-recurso-en-localidad\/\d+$/) && request.method === 'GET') {
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 let urlParts = request.url.split('/');
                 let id = parseInt(urlParts[urlParts.length - 1]);

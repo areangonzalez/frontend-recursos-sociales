@@ -42,6 +42,7 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
       currentComponent.idCanvas = 'torta_programa_localidad_' + currentComponent.index.toString();
       currentComponent.localidadId = this.localidadId;
       currentComponent.localidadNombre = this.obtenerNombreLocalidad(this.localidadId);
+      currentComponent.colorsGrafico = this.programaColor;
       // instancio la localidad seleccionada
       this.localidadSeleccionadas.push(this.localidadId);
 

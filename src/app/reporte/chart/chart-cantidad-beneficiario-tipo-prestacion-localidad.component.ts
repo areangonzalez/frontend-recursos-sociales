@@ -54,6 +54,8 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
           this.chart.data.labels.push(datos[i].nombre);
           // cantidad de beneficiarios
           this.chart.data.datasets[0].data.push(datos[i].beneficiario_cantidad);
+          // agrego el color indicado por el tipo de recurso
+          this.chart.data.datasets[0].backgroundColor.push(this.colorTipoRecurso(datos[i].nombre));
 
           //agrego las opciones
           this.chart.options = this.pieOptions;
@@ -75,7 +77,7 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
           {
             label: 'Beneficiarios',
             data: [],
-            backgroundColor: this.colorsGrafico,
+            backgroundColor: [],
             fill: false
           }
         ]
@@ -86,6 +88,14 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
         }
       } */
     });
+  }
+
+  private colorTipoRecurso(nombreTipoRecurso:string) {
+    for (let i = 0; i < this.colorsGrafico.length; i++) {
+      if (this.colorsGrafico[i].nombre == nombreTipoRecurso) {
+        return this.colorsGrafico[i].color;
+      }
+    }
   }
 
   removeMe(index) {
