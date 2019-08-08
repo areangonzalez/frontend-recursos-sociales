@@ -92,7 +92,7 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
    *  genero un listado de colores para cada programa
    */
   public etiquetasProgramas() {
-    let colorsGrafico: any[] = ['red', 'orange', 'yellow', 'green', 'blue'];
+    let colorsGrafico: any[] = ['red', 'orange', 'yellow', 'green', 'lightblue'];
 
     for (let i = 0; i < this.programas.length; i++) {
       this.programaColor.push({'nombre': this.programas[i].nombre, 'color': colorsGrafico[i]});

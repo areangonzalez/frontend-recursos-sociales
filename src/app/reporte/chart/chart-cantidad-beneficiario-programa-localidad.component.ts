@@ -99,8 +99,8 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
     legend: { display: false },
     animation: {
       duration: 500,
-      //easing: "easeOutQuart",
-      onComplete: function () {
+      easing: "easeOutQuart",
+      onProgress: function () {
         var ctx = this.chart.ctx;
         ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
         ctx.textAlign = 'center';
@@ -119,7 +119,7 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
             var x = mid_radius * Math.cos(mid_angle);
             var y = mid_radius * Math.sin(mid_angle);
 
-            ctx.fillStyle = '#FFCCFF';
+            ctx.fillStyle = '#000';
             ctx.fillText(dataset.data[i], model.x + x, model.y + y - 5);
           }
         });

@@ -107,8 +107,8 @@ export class ChartBeneficiarioTipoPrestacionLocalidadComponent implements AfterV
     legend: { display: false },
     animation: {
       duration: 500,
-      //easing: "easeOutQuart",
-      onComplete: function () {
+      easing: "easeOutQuart",
+      onProgress: function () {
         var ctx = this.chart.ctx;
         ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
         ctx.textAlign = 'center';
