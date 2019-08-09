@@ -30,7 +30,7 @@ export class EstadisticaService {
    * @param rango [number] numero de localidades a conseguir.
    */
   montosLocalidades(rango:number) {
-    return this._apiService.get('/estadisticas/monto-localidad/' + rango);
+    return this._apiService.get('/estadisticas/montos-por-localidades/' + rango);
   }
 
 }

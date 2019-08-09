@@ -902,7 +902,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                }
             }
             // get RANGO DE LOCALIDADES CON MONTOS
-            if (request.url.match(/\/apimock\/estadisticas\/monto-localidad\/\d+$/) && request.method === 'GET') {
+            if (request.url.match(/\/apimock\/estadisticas\/montos-por-localidades\/\d+$/) && request.method === 'GET') {
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 let urlParts = request.url.split('/');
                 let rango = parseInt(urlParts[urlParts.length - 1]);
