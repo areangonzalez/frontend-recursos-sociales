@@ -37,7 +37,7 @@ export class ChartLocalidadMontoComponent implements OnInit {
       .subscribe(localidad => {
         localidad.forEach((val, i) => {
           // nombre de programas
-          this.chart.data.labels.push(localidad[i].nombre);
+          this.chart.data.labels.push(localidad[i].localidad);
           // monto acreditado
           this.chart.data.datasets[0].data.push(localidad[i].monto_acreditado);
           // monto baja
