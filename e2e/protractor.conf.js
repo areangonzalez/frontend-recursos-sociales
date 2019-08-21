@@ -12,7 +12,7 @@ exports.config = {
     'browserName': 'chrome'
   },
   seleniumAddress: 'http://selenium:4444/wd/hub',
-  directConnect: true,
+  directConnect: false,
   useAllAngular2AppRoots: true,
   baseUrl: 'http://angulartest:4200/',
   framework: 'jasmine',
