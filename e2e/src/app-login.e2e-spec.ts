@@ -14,7 +14,7 @@ describe('workspace-project App', () => {
     expect(titulo).toEqual('Gestor de Prestaciones');
   });
 
-  it('Completo los campos para el logueo', () => {
+  it('Me logueo como usuario administrador', () => {
     let loginComp = element(by.css('app-login'));
     let usuarioNombre = loginComp.element(by.id('nombre_usuario')).sendKeys("admin");
     let usuarioPass = loginComp.element(by.id('pass_usuario')).sendKeys("admins");
