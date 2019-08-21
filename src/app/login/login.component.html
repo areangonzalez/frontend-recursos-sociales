@@ -11,7 +11,7 @@
       <input type="password" id="pass_usuario" class="form-control" placeholder="Contraseña" formControlName="password" (keyup.enter)="ingresar()">
 
       <div class="mb-3">
-        <div class="text-danger text-center mt-2" *ngIf="huboError"><b>{{mensaje}}</b></div>
+        <div id="login-mensaje" class="text-danger text-center mt-2" *ngIf="huboError"><b>{{mensaje}}</b></div>
       </div>
 
       <button id="ingresar-login" class="btn btn-lg btn-primary btn-block" type="button" (click)="ingresar()">Ingresar</button>

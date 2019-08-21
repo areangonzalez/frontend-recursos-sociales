@@ -1,11 +1,14 @@
-import { AppPage } from './app.po';
+import { AppPage } from './page-object/app.po';
+import { AppLoginPage } from './page-object/app.login-po';
 import { by, element, browser } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
+  let login: AppLoginPage;
 
   beforeEach(() => {
     page = new AppPage();
+    login = new AppLoginPage();
   });
 
   it('Verifico si estoy en el login', () => {
@@ -14,18 +17,32 @@ describe('workspace-project App', () => {
     expect(titulo).toEqual('Gestor de Prestaciones');
   });
 
-  it('Me logueo como usuario administrador', () => {
-    let loginComp = element(by.css('app-login'));
-    let usuarioNombre = loginComp.element(by.id('nombre_usuario')).sendKeys("admin");
-    let usuarioPass = loginComp.element(by.id('pass_usuario')).sendKeys("admins");
+  it('Verifico mensaje de error en login', () => {
+    login.nombreUsuario().sendKeys("usuario");
+    login.passUsuario().sendKeys("contrasenia");
 
-    let btnLogin = loginComp.element(by.id('ingresar-login'));
+    let btnLogin = login.loginComp().element(by.id('ingresar-login'));
+
+    btnLogin.click();
+
+    browser.waitForAngular();
+
+    expect(login.loginComp().element(by.id('login-mensaje')).getText()).toEqual("Por favor verifique sus datos.");
+  });
+
+  it('Me logueo como usuario administrador', () => {
+    // limpio los inputs
+    login.nombreUsuario().clear();
+    login.passUsuario().clear();
+    // Agrego un usuario valido
+    login.nombreUsuario().sendKeys("admin");
+    login.passUsuario().sendKeys("admins");
+
+    let btnLogin = login.loginComp().element(by.id('ingresar-login'));
 
     btnLogin.click();
 
     browser.waitForAngular();
     expect(element(by.tagName('app-inicio')).isPresent()).toBeTruthy();
   });
-
-
 });
