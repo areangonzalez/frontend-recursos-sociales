@@ -2,6 +2,7 @@ import { by, browser, element } from "protractor";
 import { AppLoginPage } from "./page-object/app.login-po";
 import { AppCabeceraPage } from "./page-object/app.cabecera-po";
 import { AppRecursoPage } from "./page-object/app.recurso-po";
+import { elementEnd } from "@angular/core/src/render3/instructions";
 
 describe('obtener listado de alumnos para emprender', () => {
   let login: AppLoginPage;
@@ -58,8 +59,6 @@ describe('obtener listado de alumnos para emprender', () => {
 
   it('buscar y agregar un alumno', () => {
     // selecciono el programa emprender
-    /* let recurso = element(by.tagName('shared-form-recurso'));
-    recurso.element(by.id('programa')).element(by.cssContainingText('option', 'Emprender')).click(); */
     prestacion.programa('Emprender');
     // Espero que angular cargue el componente emprender
     browser.waitForAngular()
@@ -78,6 +77,22 @@ describe('obtener listado de alumnos para emprender', () => {
     prestacion.listaAlumnosComp().element(by.tagName('table tbody')).all(by.tagName('tr')).then(function(alumnos) {
       expect(alumnos.length).toBe(1);
     });
+  });
+
+  it('validar que un alumno no se duplique', () => {
+    // vuelvo a seleccionar el mismo alumno
+    prestacion.buscarPersonaComp().element(by.tagName('table tbody')).all(by.tagName('tr')).then(function(filas) {
+      // selecciono la persona
+      filas[2].click();
+    });
+    // espero respuesta de mensaje de error
+    browser.waitForAngular();
+    // componente mensajes
+    let mensajeComp = element(by.tagName('mensajes-alert'));
+
+    expect(mensajeComp.element(by.tagName('p')).getText()).toEqual('Este alumno ya fue ingresado.');
+
+    mensajeComp.element(by.css('button.btn-danger')).click();
   });
 
   // Cierro la session una vez terminadas las tareas de testing
