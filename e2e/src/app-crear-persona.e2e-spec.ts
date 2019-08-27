@@ -23,7 +23,7 @@ describe('Crear una persona no registrada en el sistema',() =>{
     btnLogin.click();
 
     browser.waitForAngular();
-  })
+  });
 
   beforeEach(() => {
     persona = new AppPersonaPage();
