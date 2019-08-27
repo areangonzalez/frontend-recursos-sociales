@@ -21,10 +21,10 @@
         <div class="form-group col-md-3">
             <label for="form-agente-cuil" class="prioridad">Cuil (<span>*</span>):</label>
             <div class="input-group">
-                <input class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2"
+                <input id="cuil_prin" class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2"
                 (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (formPersona.get('cuil_prin').invalid && submitted)}">
                 <div class="input-group-addon div-cuil-num-center">{{cuil_medio}}</div>
-                <input class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_fin" maxlength="1"
+                <input id="cuil_fin" class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_fin" maxlength="1"
                 (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (formPersona.get('cuil_fin').invalid && submitted)}">
                 <div *ngIf="(formPersona.get('cuil_prin').invalid && submitted)" class="text-danger">
                     <div *ngIf="formPersona.get('cuil_prin').hasError('required')">Este campo es requerido. </div>
