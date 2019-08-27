@@ -93,6 +93,20 @@ describe('obtener listado de alumnos para emprender', () => {
     expect(mensajeComp.element(by.tagName('p')).getText()).toEqual('Este alumno ya fue ingresado.');
 
     mensajeComp.element(by.css('button.btn-danger')).click();
+    browser.waitForAngular();
+  });
+
+  it('Borrar un alumno', () => {
+    // borro el alumno
+    prestacion.listaAlumnosComp().element(by.tagName('table tbody')).all(by.tagName('tr')).then(function(alumnos) {
+      alumnos[0].element(by.css('button.btn-danger')).click();
+    });
+    // espero que se borre el alumno
+    browser.waitForAngular();
+    // reviso el listado de alumnos
+    prestacion.listaAlumnosComp().element(by.tagName('table tbody')).all(by.tagName('tr')).then(function(alumnos) {
+      expect(alumnos[0].element(by.tagName('td')).getText()).toEqual('No hay personas agregadas.');
+    });
   });
 
   // Cierro la session una vez terminadas las tareas de testing
