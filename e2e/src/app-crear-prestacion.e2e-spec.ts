@@ -2,11 +2,13 @@ import { by, browser, element } from "protractor";
 import { AppCabeceraPage } from "./page-object/app.cabecera-po";
 import { AppLoginPage } from "./page-object/app.login-po";
 import { AppRecursoPage } from "./page-object/app.recurso-po";
+import { AppContactoPage } from "./page-object/app.contacto-po";
 
 describe('Crear prestación',  () => {
   let login: AppLoginPage;
   let cabecera: AppCabeceraPage;
   let prestacion: AppRecursoPage;
+  let contacto: AppContactoPage;
   // Inicio de session para realizar tareas de testing
   beforeAll(() => {
     login = new AppLoginPage();
@@ -25,6 +27,7 @@ describe('Crear prestación',  () => {
 
   beforeEach(() => {
     prestacion = new AppRecursoPage();
+    contacto = new AppContactoPage();
   });
 
   it('Selecciono una persona', () => {
@@ -54,6 +57,12 @@ describe('Crear prestación',  () => {
       // verifico que la persona seleccionada sea la correcta
       expect(items[0].element(by.tagName('dl dd')).getText()).toBe('5894228');
     });
+  });
+
+  it('agrego mail en contacto', () => {
+    contacto.email().sendKeys('al_flores@gmail.com');
+
+    expect(contacto.email().getAttribute('value')).toEqual('al_flores@gmail.com');
   });
 
 
