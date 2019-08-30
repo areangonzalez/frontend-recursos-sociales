@@ -15,25 +15,23 @@ export class AppRedSocialPage {
   /**
    * boton agregar a modal de red social
    */
-  abrirModalRedSocial() {
-    return this.redSocialComp().element(by.tagName('modal-red-socail-component'));
+  modalRedSocial() {
+    return element(by.tagName('modal-red-social-component'));
   }
   /**
    * cierra el modal de red social
    */
   cerrarModalRedsocial() {
 
-    return this.abrirModalRedSocial().element(by.tagName('button')).clik();
+    return element(by.tagName('modal-red-social-content')).element(by.tagName('button')).clik();
   }
   /**
    * formulario de red social
    * esta incluido dentro del modal
    */
   formRedSocialComp() {
-    return this.abrirModalRedSocial().element(by.tagName('shared-form-red-social'));
+    return element(by.tagName('shared-form-red-social'));
   }
-
-
   /**
    * Selector de tipo de red social
    * @var opcion [string] opcion del listado
@@ -51,12 +49,12 @@ export class AppRedSocialPage {
    * agregar red social a partir del formulario
    */
   agregar() {
-    return this.formRedSocialComp().element(by.css('btn btn-success')).click();
+    return this.formRedSocialComp().element(by.css('div.float-right')).element(by.css('button.btn-success')).click();
   }
   /**
    * cancelar formulario de red social
    */
   cancelar() {
-    return this.formRedSocialComp().element(by.css('btn btn-dager mr-1')).click();
+    return this.formRedSocialComp().element(by.css('div.float-right')).element(by.css('button.btn-dager')).click();
   }
 }

@@ -3,12 +3,14 @@ import { AppCabeceraPage } from "./page-object/app.cabecera-po";
 import { AppLoginPage } from "./page-object/app.login-po";
 import { AppRecursoPage } from "./page-object/app.recurso-po";
 import { AppContactoPage } from "./page-object/app.contacto-po";
+import { AppRedSocialPage } from "./page-object/app.red-social-po";
 
 describe('Crear prestación',  () => {
   let login: AppLoginPage;
   let cabecera: AppCabeceraPage;
   let prestacion: AppRecursoPage;
   let contacto: AppContactoPage;
+  let redSocial: AppRedSocialPage;
   // Inicio de session para realizar tareas de testing
   beforeAll(() => {
     login = new AppLoginPage();
@@ -28,6 +30,7 @@ describe('Crear prestación',  () => {
   beforeEach(() => {
     prestacion = new AppRecursoPage();
     contacto = new AppContactoPage();
+    redSocial = new AppRedSocialPage();
   });
 
   it('Selecciono una persona', () => {
@@ -64,6 +67,36 @@ describe('Crear prestación',  () => {
 
     expect(contacto.email().getAttribute('value')).toEqual('al_flores@gmail.com');
   });
+
+  describe('agrego una red social', () => {
+
+    it('Abro el modal para visualizar formulario de red social', () => {
+      // abro modal para agregar la red social
+      redSocial.modalRedSocial().click();
+      // espero que angular haga su funcion
+      browser.waitForAngular();
+
+      expect(redSocial.formRedSocialComp().isPresent()).toBeTruthy();
+
+    });
+
+    it('Creo una red social', () => {
+      // Completo formulario
+      redSocial.tipoRedSocial('Facebook');
+      redSocial.perfil('flores.alejandro');
+      //agrego red social
+      redSocial.agregar();
+      browser.waitForAngular();
+      // verifico que se haya agregado en el listado
+      redSocial.redSocialComp().element(by.tagName('table tbody')).all(by.tagName('tr')).then(function(red_social) {
+        // selecciono la persona
+        expect(red_social[1].element(by.css('td a')).getText()).toEqual('https://www.facebook.com/flores.alejandro');
+      });
+
+    });
+
+  });// fin de agregar una red social
+
 
 
   // Cierre de sesion al finalizar las tareas

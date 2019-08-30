@@ -32,7 +32,6 @@ export class FormRedSocialComponent implements OnInit {
   public tipoRedSocial() {
     this._tipoRedSocialService.listar().subscribe(
       datos => {
-        console.log(datos);
         this.tipoRedSocialLista = datos;
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); }
     );
