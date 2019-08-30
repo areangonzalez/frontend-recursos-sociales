@@ -118,6 +118,25 @@ describe('Crear prestación',  () => {
     browser.waitForAngular();
   });
 
+  it('Se visualiza los datos de la persona', () => {
+    let vistaPersonaComp = element(by.tagName('shared-vista-info-persona'));
+
+    vistaPersonaComp.element(by.css('div.card-body div.row')).all(by.css('div.col-md-4'))
+    .then(function(items){
+      //expect(items.length).toBe(3);
+      // verifico si es valido el cuil
+      expect(items[0].element(by.tagName('dl dd')).getText()).toBe('5894228');
+    });
+  });
+
+  it('Se visualiza los datos del recurso', () => {
+    let vistaRecursoComp = element(by.tagName('shared-vista-info-recurso'));
+
+    let titleTab = vistaRecursoComp.element(by.css('li a.active')).getText();
+
+    expect(titleTab).toEqual('Subsidio');
+  });
+
   // Cierre de sesion al finalizar las tareas
   afterAll(() => {
     let cabecera = new AppCabeceraPage();
