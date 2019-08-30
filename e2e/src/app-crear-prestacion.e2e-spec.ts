@@ -97,7 +97,26 @@ describe('Crear prestación',  () => {
 
   });// fin de agregar una red social
 
+  it('completo formulario de recurso', () => {
+    prestacion.programa('Subsidio');
+    prestacion.tipoRecurso('Alimentación');
+    prestacion.proposito('Falta de alimentos basicos para la familia');
+    prestacion.fechaAlta('27/08/2019');
+    prestacion.monto('5000');
+    prestacion.observacion('Este beneficiario necesita alimentos para el hogar.');
+    // cliqueo el boton para guardar la prestacion
+    prestacion.formRecursoComp().element(by.css('fieldset div.float-right')).element(by.css('button.btn-success')).click();
+    // espero a que angular notifique el guardado
+    browser.waitForAngular();
 
+    // verifico el mensaje que se hay guardado exitosamente
+    let mensajeComp = element(by.tagName('mensajes-alert'));
+
+    expect(mensajeComp.element(by.tagName('p')).getText()).toEqual('Se ha guardado correctamente la prestación');
+
+    mensajeComp.element(by.css('button.btn-light')).click();
+    browser.waitForAngular();
+  });
 
   // Cierre de sesion al finalizar las tareas
   afterAll(() => {
