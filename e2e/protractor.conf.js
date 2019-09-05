@@ -7,7 +7,7 @@ exports.config = {
   //allScriptsTimeout: 30000,
   specs: [
     './src/**/*.e2e-spec.ts'
-    //'./src/app-dar-baja-prestacion.e2e-spec.ts'
+    //'./src/app-acreditar-prestacion.e2e-spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome'
