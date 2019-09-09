@@ -89,7 +89,23 @@ describe('busqueda avanzada',  () => {
 
   });
 
+  it('busco por programa habitat en localidad cipolletti', () => {
+    // abro la busqueda avanzada
+    reportes.busquedaAvanzadaComp().element(by.css('button.btn-md.btn-primary')).click();
+    // combo localidad
+    reportes.busquedaAvanzadaComp().element(by.id('localidad')).element(by.cssContainingText('option', 'Cipolletti')).click();
+    // combo programa
+    reportes.busquedaAvanzadaComp().element(by.id('programa')).element(by.cssContainingText('option', 'Habitat')).click();
+    // click al boton buscar
+    reportes.busquedaAvanzadaComp().element(by.css('button.btn-primary')).click();
+    // espero el resultado
+    browser.waitForAngular();
 
+    reportes.listaRecursoComp().element(by.tagName('table tbody')).all(by.tagName('tr')).then(function(resultado) {
+      // muestro la cantidad encontrada y vefrifico el resultado
+      expect(resultado.length).toBe(2);
+    });
+  })
 
   // Cierro la session una vez terminadas las tareas de testing
   afterAll(() => {
