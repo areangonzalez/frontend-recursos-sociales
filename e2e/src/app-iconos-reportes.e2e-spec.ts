@@ -52,6 +52,12 @@ describe('Iconos de contactos en reportes',  () => {
     expect(element(by.css('ngb-tooltip-window div.tooltip-inner')).getText()).toEqual('2920412228');
   });
 
+  it('verifico si esta presente el boton de red social', () => {
+    let botonRedSocial = element(by.tagName('shared-vista-info-persona')).element(by.css('div.btn-group')).element(by.tagName('a'));
+
+    expect(botonRedSocial.isPresent()).toBeTruthy();
+  });
+
   it('cierro modal de vista', () => {
     element(by.css('modal-info-persona-prestacion-content button.close')).click();
 
