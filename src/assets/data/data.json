@@ -229,13 +229,7 @@
                       }
                   ]
               },
-              "lista_red_social": [
-                {
-                "tipo_red_socialid":1,
-                "tipo_red_social": "Facebook",
-                "perfil":"cep11p",
-                "icono_class": "fab fa-facebook-square"
-              }],
+              "lista_red_social": [],
               "estudios": [
                   {
                       "id": 3,
