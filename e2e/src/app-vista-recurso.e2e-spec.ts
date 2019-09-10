@@ -28,6 +28,8 @@ describe('Componente Vista de un recurso',  () => {
     expect(element(by.tagName('shared-vista-info-persona')).isPresent());
   });
 
+
+
   it('Componente info recurso', () => {
     expect(element(by.tagName('shared-vista-info-recurso')).isPresent());
   });
