@@ -2,6 +2,7 @@ import { by, browser, element } from "protractor";
 import { AppCabeceraPage } from "./page-object/app.cabecera-po";
 import { AppLoginPage } from "./page-object/app.login-po";
 import { AppReportePage } from "./page-object/app.busqueda-avanzada-po";
+import { elementEnd } from "@angular/core/src/render3/instructions";
 
 describe('Reportes beneficiarios',  () => {
   let login: AppLoginPage;
@@ -41,6 +42,34 @@ describe('Reportes beneficiarios',  () => {
     expect(element(by.tagName('shared-vista-info-persona')).isPresent()).toBeTruthy();
   });
 
+  it('Verifico la cantidad de prestaciones de subsidios', () => {
+    // elemento tab de prestaciones
+    let tabPrestaciones = element(by.css('shared-vista-info-prestaciones'));
+
+    tabPrestaciones.element(by.css('div.active')).all(by.css('div.card')).then(function(prestacion) {
+      // cuento la cantidad de prestaciones
+      expect(prestacion.length).toBe(2);
+    });
+  });
+
+  it('Verifico la cantidad de prestaciones de emprender', () => {
+    // elemento tab de prestaciones
+    let tabPrestaciones = element(by.css('shared-vista-info-prestaciones'));
+    // clickeo la pestaña emprender
+    tabPrestaciones.element(by.css('ul')).all(by.tagName('li')).then(function(enlaces) {
+      // clickeo enlace de emprender
+      enlaces[2].element(by.tagName('a')).click();
+    });
+    browser.waitForAngular();
+
+
+    tabPrestaciones.element(by.css('div.active')).all(by.css('div.card')).then(function(prestacion) {
+      // cuento la cantidad de prestaciones
+      expect(prestacion.length).toBe(1);
+    });
+  });
+
+  // Cierro modal
   it('cierro modal de vista', () => {
     element(by.css('modal-info-beneficiario-content button.close')).click();
 
