@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { UtilService } from 'src/app/core/utils';
 
 @Component({
-  selector: 'modal-info-beneficirio-content',
+  selector: 'modal-info-beneficiario-content',
   templateUrl: './modal-info-beneficiario.content.html'
 })
 export class ModalInfoBeneficiarioContent implements OnInit {
