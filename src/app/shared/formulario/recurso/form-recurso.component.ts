@@ -36,7 +36,7 @@ export class FormRecursoComponent implements OnInit {
 
   ) {
     // configuro la fecha minima
-    _configNgbDate.minDate = {year: 1950, month: 1, day: 1};
+    _configNgbDate.minDate = {year: 1900, month: 1, day: 1};
     // formulario de recurso
     this.formRecurso = _fb.group({
       programaid: ['', Validators.required],
@@ -62,10 +62,10 @@ export class FormRecursoComponent implements OnInit {
   get datosRecurso(){ return this.formRecurso.controls; }
 
 
-  public formatFechaAlta(objFecha) {
+  /* public formatFechaAlta(objFecha) {
     const fecha:string = this._utilService.formatearFecha(objFecha.day, objFecha.month, objFecha.year, 'yyyy-MM-dd');
     this.formRecurso.controls.fecha_alta.setValue(fecha);
-  }
+  } */
 
   public validadrNumero(datos){
     if (!this._utilService.validarNumero(datos.value)) {
@@ -73,11 +73,11 @@ export class FormRecursoComponent implements OnInit {
     }
   }
 
-  public validarMoneda(moneda) {
+  /* public validarMoneda(moneda) {
     if (!this._utilService.validarMoneda(moneda.value)) {
       moneda.value = moneda.value.substring(0, moneda.value.length -1);
     }
-  }
+  } */
 
   public listarTipoRecurso(programaid:any) {
     this.formRecurso.controls.tipo_recursoid.setValue('');

@@ -1,0 +1,47 @@
+<fieldset [formGroup]="prestacion">
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label for="proposito">Propósito (<span class="text-obligatorio">*</span>):</label>
+      <input type="text" id="proposito" placeholder="Propósito..." class="form-control" formControlName="proposito">
+      <div *ngIf="(prestacion.get('proposito').invalid && submitted)" class="text-danger">
+        <div *ngIf="prestacion.get('proposito').hasError('required')">Por favor ingrese un propósito. </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="fecha_alta" class="prioridad">Fecha Alta (<span class="text-obligatorio">*</span>):</label>
+      <div class="input-group">
+        <input class="form-control" #c1 placeholder="Ej.: dd/mm/yyyy" ngbDatepicker #frd="ngbDatepicker"
+        id="fecha_alta" formControlName="fechaAlta" (ngModelChange)="formatFechaAlta($event)">
+        <div class="input-group-append">
+            <button class="btn btn-outline-info" (click)="frd.toggle()" type="button"
+                [ngClass]="{'btn-outline-danger': (prestacion.get('fechaAlta').invalid && submitted), 'is-invalid': (prestacion.get('fechaAlta').invalid && submitted)}">
+                <span class="oi oi-calendar" title="Fecha alta" aria-hidden="true"></span>
+            </button>
+          </div>
+      </div>
+      <div *ngIf="(prestacion.get('fechaAlta').invalid && submitted)" class="text-danger">
+          <div *ngIf="prestacion.get('fechaAlta').hasError('required')">Por favor ingrese una fecha de alta. </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+          <div class="form-group col-md-12">
+            <label for="monto">Monto (<span class="text-obligatorio">*</span>):</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">$</div>
+              </div>
+              <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validarMoneda($event.target)">
+            </div>
+            <div *ngIf="(prestacion.get('monto').invalid && submitted)" class="text-danger">
+              <div *ngIf="prestacion.get('monto').hasError('required')">Por favor ingrese un monto. </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <label for="observacion">Observación:</label>
+      <textarea class="form-control" id="observacion" cols="30" rows="1" placeholder="Descripcion..." formControlName="observacion" ></textarea>
+    </div>
+  </div>
+</fieldset>

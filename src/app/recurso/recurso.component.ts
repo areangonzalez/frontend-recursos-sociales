@@ -47,7 +47,10 @@ export class RecursoComponent implements OnInit {
       this.programaLista = this._route.snapshot.data["programas"];
     }
   }
-
+  /**
+   * selecciono la persona del listado a traves de la busqueda
+   * @param datos objeto que contiene los datos de la persona seleccionada
+   */
   public seleccionarPersona(datos){
     if (datos.persona != undefined) {
       this.infoPersona = true;
@@ -58,13 +61,18 @@ export class RecursoComponent implements OnInit {
       this.personaEditada(datos.id);
     }
   }
-
+  /**
+   * limpia el formulario de persona y vuelve al listado de busqueda
+   */
   public cambiarPersona(){
     this.datosPersona = {};
     this.infoPersona = false;
     this.contactosForm.reset();
   }
-
+  /**
+   * guarda una prestacion al completar el formulario
+   * @param recurso datos de la prestacion
+   */
   public guardar(recurso:object) {
     //console.log(this.datosPersona.id);
     if (this.datosPersona.id !== undefined ) {
@@ -84,20 +92,29 @@ export class RecursoComponent implements OnInit {
       this._mensajeService.cancelado("Disculpe, aun NO se ha seleccionado una persona.", [{name:''}]);
     }
   }
-
+  /**
+   * cancela el formulario de prestacion
+   * @param cancela confirmacion de la cancelacion
+   */
   public cancelar(cancela:boolean) {
     if(cancela) {
       this._router.navigate(['inicio']);
     }
   }
-
+  /**
+   * Guarda la prestacion
+   * @param params datos de la prestacion
+   */
   public guardarRecurso(params:object){
     this._recursoService.guardar(params, 0).subscribe(
       resultado => {
         this._mensajeService.confirmar("Se ha guardado correctamente la prestación", [{name: 'inicio/vista/prestacion', param:resultado["data"]["id"], tipo:'vista'}]);
       }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
   }
-
+  /**
+   * Obtiene los datos para editar a una persona
+   * @param personaid identificador de la persona
+   */
   public personaEditada(personaid){
     this.infoPersona = true;
     this._personaService.personaPorId(personaid).subscribe(
