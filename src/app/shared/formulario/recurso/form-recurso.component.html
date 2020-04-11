@@ -28,7 +28,8 @@
           </div>
         </div>
       </div>
-      <prestacion-general [prestacion]="formRecurso" [submitted]="submitted"></prestacion-general>
+      <!-- <prestacion-general [prestacion]="formRecurso" [submitted]="submitted"></prestacion-general> -->
+      <modulo-alimentar [prestacionModuloAlimentar]="formRecurso" [submitted]="submitted"></modulo-alimentar>
     </fieldset>
     <hr class="pt1" *ngIf="(!emprender)">
     <fieldset *ngIf="(!emprender)">

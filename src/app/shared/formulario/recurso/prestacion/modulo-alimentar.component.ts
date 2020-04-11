@@ -11,13 +11,68 @@ import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
   /* styleUrls: ['./form-recurso.component.sass'] */
 })
 export class ModuloAlimentarComponent implements OnInit {
+  @Input("prestacionModuloAlimentar") public prestacionModuloAlimentar: FormGroup;
+  @Input("submitted") public submitted: boolean;
+  public listaTipoResponsable = [{
+    "id":1, "nombre": "Delegación", "lista_responsable_entrega": [
+    {"id":1, "nombre": "Alto Valle Centro - General Roca"},
+    {"id":2, "nombre": "Alto Valle Este - Villa Regina"},
+    {"id":3, "nombre": "Alto Valle Oeste - Cipolletti"},
+    {"id":4, "nombre": "Línea Sur - Sierra Colorada"},
+    {"id":5, "nombre": "Valle Inferior - Viedma"}
+  ]},
+  {"id":2, "nombre": "Municipio", "lista_responsable_entrega": [
+    {"id":6, "nombre": "Campo Grande"},
+    {"id":7, "nombre": "Cervantes"},
+    {"id":8, "nombre": "Chimpay"},
+    {"id":9, "nombre": "Maquinchao"},
+    {"id":10, "nombre": "Valcheta"}
+  ]}];
+  public listaResponsableEntrega = [
+    {"id":1, "nombre": "Alto Valle Centro - General Roca"},
+    {"id":2, "nombre": "Alto Valle Este - Villa Regina"},
+    {"id":3, "nombre": "Alto Valle Oeste - Cipolletti"},
+    {"id":4, "nombre": "Línea Sur - Sierra Colorada"},
+    {"id":5, "nombre": "Valle Inferior - Viedma"},
+    {"id":6, "nombre": "Campo Grande"},
+    {"id":7, "nombre": "Cervantes"},
+    {"id":8, "nombre": "Chimpay"},
+    {"id":9, "nombre": "Maquinchao"},
+    {"id":10, "nombre": "Valcheta"}
+  ];
+  public listaResponsableEntregaAux = [];
 
-
-  constructor(){
-
+  constructor( private _utilService: UtilService, private _configNgbDate: NgbDatepickerConfig){
+    // configuro la fecha minima
+    _configNgbDate.minDate = {year: 1900, month: 1, day: 1};
   }
 
   ngOnInit(){
+    this.listaResponsableEntregaAux = this.listaResponsableEntrega;
+  }
 
+  /**
+   * Formateo la fecha de objeto a string
+   * @param objFecha objeto fecha es ingresada como objeto
+   */
+  public formatFechaAlta(objFecha) {
+    const fecha:string = this._utilService.formatearFecha(objFecha.day, objFecha.month, objFecha.year, 'yyyy-MM-dd');
+    this.prestacionModuloAlimentar.controls.fecha_alta.setValue(fecha);
+  }
+  /**
+   * listo el tipo de responsables segun la seleccion
+   * @param tipo_responsableid identificador del tipo de responsable
+   */
+  public listarResponsableEntrega(tipo_responsableid:any) {
+    this.prestacionModuloAlimentar.controls.responsableid.setValue('');
+    if (tipo_responsableid != ''){
+      for (let i = 0; i < this.listaTipoResponsable.length; i++) {
+        if (parseInt(tipo_responsableid) == this.listaTipoResponsable[i].id) {
+          this.listaResponsableEntrega = this.listaTipoResponsable[i].lista_responsable_entrega;
+        }
+      }
+    }else{
+      this.listaResponsableEntrega = this.listaResponsableEntregaAux;
+    }
   }
 }

@@ -45,12 +45,16 @@ export class FormRecursoComponent implements OnInit {
       fechaAlta: ['', Validators.required],
       fecha_alta: '',
       monto: ['', Validators.required],
-      observacion: ''
+      observacion: '',
+      referente: '',
+      cant_modulo: ['', Validators.required],
+      tipo_responsableid: ['', Validators.required],
+      responsableid: ['', Validators.required]
     });
   }
 
   ngOnInit() {
-    this.listaTipoRecursoAux = this.listarTipoRecurso;
+    this.listaTipoRecursoAux = this.listaTipoRecurso;
     if (this.programaid) {
       let id: number = parseInt(this.programaid);
       // actualizo el listado de programas
@@ -60,25 +64,19 @@ export class FormRecursoComponent implements OnInit {
   }
 
   get datosRecurso(){ return this.formRecurso.controls; }
-
-
-  /* public formatFechaAlta(objFecha) {
-    const fecha:string = this._utilService.formatearFecha(objFecha.day, objFecha.month, objFecha.year, 'yyyy-MM-dd');
-    this.formRecurso.controls.fecha_alta.setValue(fecha);
-  } */
-
+  /**
+   * valido si es un numero
+   * @param datos valor a verificar si es un numero
+   */
   public validadrNumero(datos){
     if (!this._utilService.validarNumero(datos.value)) {
       datos.value = datos.value.substring(0,datos.value.length - 1);
     }
   }
-
-  /* public validarMoneda(moneda) {
-    if (!this._utilService.validarMoneda(moneda.value)) {
-      moneda.value = moneda.value.substring(0, moneda.value.length -1);
-    }
-  } */
-
+  /**
+   * listo los tipo de recursos a traves de la seleccion de un programa localmente
+   * @param programaid identificador de programa
+   */
   public listarTipoRecurso(programaid:any) {
     this.formRecurso.controls.tipo_recursoid.setValue('');
     if (programaid != ''){
@@ -91,7 +89,10 @@ export class FormRecursoComponent implements OnInit {
       this.listaTipoRecurso = this.listaTipoRecursoAux;
     }
   }
-
+  /**
+   * agreo alumnos al listado de emprender, evitando duplicaciones de las personas
+   * @param alumno datos del alumno a agregar
+   */
   public agregarAlumnos(alumno:any){
     if (this.personaid != undefined) {
       if ( alumno.id !== this.personaid ){
@@ -107,7 +108,12 @@ export class FormRecursoComponent implements OnInit {
       this._mensajeService.cancelado("Por favor ingrese a un beneficiario.", [{name:''}]);
     }
   }
-
+  /**
+   * Me permite verificar si existe la duplicacion del alumno
+   * @param id identificador del alumno
+   * @return {boolean} devuelve true si existe un duplicado
+   *
+   */
   private alumnoDuplicado(id:number) {
     let existe = true;
     if (this.listaAlumnos.length > 0){
@@ -118,9 +124,11 @@ export class FormRecursoComponent implements OnInit {
       }
     }
     return existe;
-
   }
-
+  /**
+   * borra un alumno del listado de emprender
+   * @param alumno datos del alumno a eliminar
+   */
   public borrarAlumno(alumno:any){
     for (let i = 0; i < this.listaAlumnos.length; i++) {
       if (this.listaAlumnos[i].id == alumno.id){
@@ -128,18 +136,26 @@ export class FormRecursoComponent implements OnInit {
       }
     }
   }
-
+  /**
+   * busca una persona por su numero de id
+   * @param id identificador de persona
+   */
   public buscarPersonaPorId(personaid:number){
     this._personaService.personaPorId(personaid).subscribe(
       persona => {
         this.listaAlumnos.push(persona);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
-
+  /**
+   * cancelar el formulario notificando la confirmacion
+   */
   public cancelarForm(){
     this.cancelar.emit(true);
   }
-
+  /**
+   * valida el formulario de prestación
+   * enviando los datos al componente padre
+   */
   public validarForm(){
     this.submitted = true;
 
@@ -165,7 +181,10 @@ export class FormRecursoComponent implements OnInit {
       }
     }
   }
-
+  /**
+   * verifica si la seleccion del programa es emprender
+   * @param event valor que obtiene del option de programa
+   */
   public esEmprender(event:any){
     // obtengo el nombre del programa
     let selectElementText = event.target['options'][event.target['options'].selectedIndex].text;

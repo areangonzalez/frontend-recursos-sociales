@@ -1,0 +1,59 @@
+<fieldset [formGroup]="prestacionModuloAlimentar">
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label for="referente">Referente:</label>
+      <input type="text" id="referente" placeholder="Nombre del referente: Ej.: Juan pablo Fernández" class="form-control" formControlName="referente">
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+          <div class="form-group col-md-12">
+            <label for="cant_modulo">Cantidad de módulos (<span class="text-obligatorio">*</span>):</label>
+            <input type="number" id="cant_modulo" placeholder="Ej.: 5" class="form-control" formControlName="cant_modulo">
+            <div *ngIf="(prestacionModuloAlimentar.get('cant_modulo').invalid && submitted)" class="text-danger">
+              <div *ngIf="prestacionModuloAlimentar.get('cant_modulo').hasError('required')">Por favor ingrese una cantidad. </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="fecha_alta" class="prioridad">Fecha de entrega (<span class="text-obligatorio">*</span>):</label>
+      <div class="input-group">
+        <input class="form-control" #c1 placeholder="Ej.: dd/mm/yyyy" ngbDatepicker #frd="ngbDatepicker"
+        id="fecha_alta" formControlName="fechaAlta" (ngModelChange)="formatFechaAlta($event)">
+        <div class="input-group-append">
+            <button class="btn btn-outline-info" (click)="frd.toggle()" type="button"
+                [ngClass]="{'btn-outline-danger': (prestacionModuloAlimentar.get('fechaAlta').invalid && submitted), 'is-invalid': (prestacionModuloAlimentar.get('fechaAlta').invalid && submitted)}">
+                <span class="oi oi-calendar" title="Fecha alta" aria-hidden="true"></span>
+            </button>
+          </div>
+      </div>
+      <div *ngIf="(prestacionModuloAlimentar.get('fechaAlta').invalid && submitted)" class="text-danger">
+          <div *ngIf="prestacionModuloAlimentar.get('fechaAlta').hasError('required')">Por favor ingrese una fecha de entrega. </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="tipo_responsable">Tipo de responsable de entrega (<span class="text-obligatorio">*</span>):</label>
+      <select class="form-control" id="tipo_responsable" formControlName="tipo_responsableid" [ngClass]="{'is-invalid': (prestacionModuloAlimentar.get('tipo_responsableid').invalid && submitted)}" (change)="listarResponsableEntrega($event.target.value)" >
+        <option value="">Seleccione tipo de responsable de entrega</option>
+        <option *ngFor="let tipo of listaTipoResponsable" value="{{tipo.id}}">{{tipo.nombre}}</option>
+      </select>
+      <div *ngIf="(prestacionModuloAlimentar.get('tipo_responsableid').invalid && submitted)" class="text-danger">
+        <div *ngIf="prestacionModuloAlimentar.get('tipo_responsableid').hasError('required')">Por favor Seleccione un programa. </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="responsable">Responsable de entrega (<span class="text-obligatorio">*</span>):</label>
+      <select class="form-control" id="responsable" formControlName="responsableid" [ngClass]="{'is-invalid': (prestacionModuloAlimentar.get('responsableid').invalid && submitted)}">
+        <option value="">Seleccione un responsable de entrega</option>
+        <option *ngFor="let responsable of listaResponsableEntrega" value="{{responsable.id}}">{{responsable.nombre}}</option>
+      </select>
+      <div *ngIf="(prestacionModuloAlimentar.get('responsableid').invalid && submitted)" class="text-danger">
+          <div *ngIf="prestacionModuloAlimentar.get('responsableid').hasError('required')">Por favor Seleccione responsable de entrega. </div>
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <label for="observacion">Observación:</label>
+      <textarea class="form-control" id="observacion" cols="30" rows="1" placeholder="Descripcion..." formControlName="observacion" ></textarea>
+    </div>
+  </div>
+</fieldset>

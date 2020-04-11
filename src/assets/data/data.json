@@ -25,6 +25,34 @@
     {"id": 3, "nombre": "Linkedin", "icono_class": "fab fa-twitter", "url_1": "https://www.linkedin.com/in/" },
     {"id": 4, "nombre": "Twitter", "icono_class": "fab fa-linkedin-in", "url_1": "https://twitter.com/" }
   ],
+  "tipoResponsables": [
+    {"id":1, "nombre": "Delegación", "lista_responsable_entrega": [
+      {"id":1, "nombre": "Alto Valle Centro - General Roca"},
+      {"id":2, "nombre": "Alto Valle Este - Villa Regina"},
+      {"id":3, "nombre": "Alto Valle Oeste - Cipolletti"},
+      {"id":4, "nombre": "Línea Sur - Sierra Colorada"},
+      {"id":5, "nombre": "Valle Inferior - Viedma"}
+    ]},
+    {"id":2, "nombre": "Municipio", "lista_responsable_entrega": [
+      {"id":6, "nombre": "Campo Grande"},
+      {"id":7, "nombre": "Cervantes"},
+      {"id":8, "nombre": "Chimpay"},
+      {"id":9, "nombre": "Maquinchao"},
+      {"id":10, "nombre": "Valcheta"}
+    ]}
+  ],
+  "responsables": [
+    {"id":1, "nombre": "Alto Valle Centro - General Roca"},
+    {"id":2, "nombre": "Alto Valle Este - Villa Regina"},
+    {"id":3, "nombre": "Alto Valle Oeste - Cipolletti"},
+    {"id":4, "nombre": "Línea Sur - Sierra Colorada"},
+    {"id":5, "nombre": "Valle Inferior - Viedma"},
+    {"id":6, "nombre": "Campo Grande"},
+    {"id":7, "nombre": "Cervantes"},
+    {"id":8, "nombre": "Chimpay"},
+    {"id":9, "nombre": "Maquinchao"},
+    {"id":10, "nombre": "Valcheta"}
+  ],
   "personas": [{
               "id": 1,
               "nombre": "Victoria Margarita",
