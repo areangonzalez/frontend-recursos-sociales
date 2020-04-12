@@ -8,7 +8,7 @@
       <div class="row">
           <div class="form-group col-md-12">
             <label for="cant_modulo">Cantidad de módulos (<span class="text-obligatorio">*</span>):</label>
-            <input type="number" id="cant_modulo" placeholder="Ej.: 5" class="form-control" formControlName="cant_modulo">
+            <input type="number" id="cant_modulo" placeholder="Ej.: 5" class="form-control" formControlName="cant_modulo" min="1">
             <div *ngIf="(prestacionModuloAlimentar.get('cant_modulo').invalid && submitted)" class="text-danger">
               <div *ngIf="prestacionModuloAlimentar.get('cant_modulo').hasError('required')">Por favor ingrese una cantidad. </div>
             </div>

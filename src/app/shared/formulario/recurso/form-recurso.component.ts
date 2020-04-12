@@ -24,6 +24,7 @@ export class FormRecursoComponent implements OnInit {
   public emprender: boolean = false;
   public listaAlumnos = [];
   public submitted = false;
+  public programaNombreSeleccionado: string = '';
 
   constructor(
     private _fb: FormBuilder,
@@ -189,5 +190,12 @@ export class FormRecursoComponent implements OnInit {
     // obtengo el nombre del programa
     let selectElementText = event.target['options'][event.target['options'].selectedIndex].text;
     this.emprender = (selectElementText.toLowerCase() === "emprender") ? true : false;
+    // verifico el programa que selecciono
+    this.programaSeleccionado(selectElementText);
   }
+
+  public programaSeleccionado(nombrePrograma: string) {
+    this.programaNombreSeleccionado = nombrePrograma.toLocaleLowerCase();
+  }
+
 }
