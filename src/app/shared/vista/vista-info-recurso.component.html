@@ -3,7 +3,7 @@
     <ng-template  ngbTabContent>
       <div class="card border-light p-2">
         <div class="card-header">
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between" *ngIf="(recurso.programa !== 'Módulo Alimentar')">
             <span class="d-flex align-items-center">Alta: {{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</span>
             <span class="d-flex align-items-center text-success" *ngIf="(recurso.acreditacion)">Acreditacion: {{recurso.fecha_acreditacion | date:'dd/MM/yyyy'}}</span>
             <span class="d-flex align-items-center text-danger" *ngIf="(recurso.baja)" >Baja: {{recurso.fecha_baja | date:'dd/MM/yyyy'}}</span>
@@ -12,8 +12,53 @@
                 <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" [recursoid]="recurso.id" (obtenerRecurso)="mostrarFB($event)" ></modal-baja-component>
             </span>
           </div>
+          <div class="d-flex justify-content-between" *ngIf="(recurso.programa == 'Módulo Alimentar')">
+            <span class="d-flex align-items-center">Entrega: {{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</span>
+          </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" *ngIf="(recurso.programa == 'Módulo Alimentar')">
+          <div class="row">
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Tipo prestación:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.tipo_recurso}}</dd>
+              </dl>
+            </div>
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Referente:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.referente}}</dd>
+              </dl>
+            </div>
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cantidad de Módulo/s:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.cant_modulo}}</dd>
+              </dl>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Localidad:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.localidad}}</dd>
+              </dl>
+            </div>
+            <div class="col-md-4">
+              <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Responsable Entrega:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.responsable_entrega}}</dd>
+              </dl>
+            </div>
+            <div class="col-md-12">
+              <dl class="row">
+                <dt class="col-2 col-sm-2 col-md-2 col-lg-2" style="margin-left: 0.8rem;">Observación:</dt>
+                <dd class="col-3 col-sm-9 col-md-9 col-lg-9">{{recurso.observacion}}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" *ngIf="(recurso.programa !== 'Módulo Alimentar')">
           <div class="row">
             <div class="col-md-4">
               <dl class="row">

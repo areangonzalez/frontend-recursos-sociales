@@ -176,13 +176,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 return of(new HttpResponse({ status: 200, body: id }));
               }else{
-                /*
-                code: 0
-                message: "{"fecha_baja":["La fecha de baja no puede ser mayor a la de hoy 2019-03-06"]}"
-                name: "Bad Request"
-                status: 400
-                type: "yii\web\HttpException"
-                 */
 
                 return throwError({ error: { message: 'Unauthorised' } });
               }
