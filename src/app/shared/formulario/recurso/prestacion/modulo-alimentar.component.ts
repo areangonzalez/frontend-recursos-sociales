@@ -12,34 +12,9 @@ import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModuloAlimentarComponent implements OnInit {
   @Input("prestacionModuloAlimentar") public prestacionModuloAlimentar: FormGroup;
+  @Input("listaTipoResponsable") listaTipoResponsable: any;
   @Input("submitted") public submitted: boolean;
-  public listaTipoResponsable = [{
-    "id":1, "nombre": "Delegación", "lista_responsable": [
-    {"id":1, "nombre": "Alto Valle Centro - General Roca"},
-    {"id":2, "nombre": "Alto Valle Este - Villa Regina"},
-    {"id":3, "nombre": "Alto Valle Oeste - Cipolletti"},
-    {"id":4, "nombre": "Línea Sur - Sierra Colorada"},
-    {"id":5, "nombre": "Valle Inferior - Viedma"}
-  ]},
-  {"id":2, "nombre": "Municipio", "lista_responsable": [
-    {"id":6, "nombre": "Campo Grande"},
-    {"id":7, "nombre": "Cervantes"},
-    {"id":8, "nombre": "Chimpay"},
-    {"id":9, "nombre": "Maquinchao"},
-    {"id":10, "nombre": "Valcheta"}
-  ]}];
-  public listaResponsableEntrega = [
-    {"id":1, "nombre": "Alto Valle Centro - General Roca"},
-    {"id":2, "nombre": "Alto Valle Este - Villa Regina"},
-    {"id":3, "nombre": "Alto Valle Oeste - Cipolletti"},
-    {"id":4, "nombre": "Línea Sur - Sierra Colorada"},
-    {"id":5, "nombre": "Valle Inferior - Viedma"},
-    {"id":6, "nombre": "Campo Grande"},
-    {"id":7, "nombre": "Cervantes"},
-    {"id":8, "nombre": "Chimpay"},
-    {"id":9, "nombre": "Maquinchao"},
-    {"id":10, "nombre": "Valcheta"}
-  ];
+  public listaResponsableEntrega = [];
   public listaResponsableEntregaAux = [];
 
   constructor( private _utilService: UtilService, private _configNgbDate: NgbDatepickerConfig){

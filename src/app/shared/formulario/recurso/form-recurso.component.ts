@@ -13,6 +13,7 @@ import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 export class FormRecursoComponent implements OnInit {
   @Input("listaPrograma") public listaPrograma: any;
   @Input("listaTipoRecurso") public listaTipoRecurso: any;
+  @Input('listaTipoResponsable') public listaTipoResponsable: any;
   @Input("programaid") public programaid: any;
   @Input("personaid") public personaid: any;
   @Output("cancelar") public cancelar = new EventEmitter();

@@ -80,7 +80,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let generos = (<any>data).generos;
         let estadoCivil = (<any>data).estadoCivils;
         let tipoRedSocial = (<any>data).tipoRedSocial;
-        let tipoResponsable = (<any>data).tipoResponsable;
+        let tipoResponsable = (<any>data).tipoResponsables;
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {

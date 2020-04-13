@@ -29,7 +29,7 @@
         </div>
       </div>
       <prestacion-general *ngIf="(programaNombreSeleccionado != '' && programaNombreSeleccionado != 'módulo alimentar')" [prestacion]="formRecurso.get('prestacion')" [submitted]="submittedPrestacion"></prestacion-general>
-      <modulo-alimentar *ngIf="(programaNombreSeleccionado != '' && programaNombreSeleccionado == 'módulo alimentar')" [prestacionModuloAlimentar]="formRecurso.get('modulo_alimentar')" [submitted]="submittedMA"></modulo-alimentar>
+      <modulo-alimentar *ngIf="(programaNombreSeleccionado != '' && programaNombreSeleccionado == 'módulo alimentar')" [listaTipoResponsable]="listaTipoResponsable" [prestacionModuloAlimentar]="formRecurso.get('modulo_alimentar')" [submitted]="submittedMA"></modulo-alimentar>
       <div class="row">
         <div class="form-group col-md-12">
           <label for="observacion">Observación:</label>

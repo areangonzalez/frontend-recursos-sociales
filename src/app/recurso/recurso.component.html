@@ -25,4 +25,4 @@
   <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.get('contacto')" [listaRedSocial]="listaRedSocial"></shared-form-contacto>
 
 </div>
-<shared-form-recurso [listaPrograma]="programaLista" [listaTipoRecurso]="tipoRecursoLista" [programaid]="programaid" [personaid]="datosPersona['id']" (obtenerDatos)="guardar($event)" (cancelar)="cancelar($event)" ></shared-form-recurso>
+<shared-form-recurso [listaPrograma]="programaLista" [listaTipoRecurso]="tipoRecursoLista" [programaid]="programaid" [listaTipoResponsable]="tipoResponsableLista" [personaid]="datosPersona['id']" (obtenerDatos)="guardar($event)" (cancelar)="cancelar($event)" ></shared-form-recurso>
