@@ -1,0 +1,23 @@
+<table class="table table-hover table-sm">
+  <thead>
+    <th scope="col">Nro Documento</th>
+    <th scope="col" colspan="2">Apellido, Nombre</th>
+    <th scope="col">Fecha Nacimiento</th>
+    <th scope="col" class="text-center">
+      acción
+    </th>
+  </thead>
+  <tbody *ngIf="(listadoGrupoFamiliar.length == 0)">
+    <tr>
+      <td rowspan="1" colspan="5" class="text-center"><h5>No se ha asignado ningun miembro del grupo familiar</h5></td>
+    </tr>
+  </tbody>
+  <tbody *ngIf="(listadoGrupoFamiliar.length > 0)">
+    <tr *ngFor="let grupo of listadoGrupoFamiliar; let i = index">
+      <td scope="col">{{grupo.nro_documento}}</td>
+      <td scope="col" colspan="2">{{grupo.apellido}}, {{grupo.nombre}}</td>
+      <td scope="col">{{grupo.fecha_nacimiento | date:'dd/MM/yyyy'}}</td>
+      <td scope="col" class="text-center"><button class="btn btn-danger btn-sm">borrar</button></td>
+    </tr>
+  </tbody>
+</table>

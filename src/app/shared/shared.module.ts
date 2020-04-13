@@ -11,7 +11,7 @@ import { FormLugarComponent } from "./formulario/lugar";
 import { FormContactoComponent, FormRedSocialComponent } from "./formulario/contacto";
 import { PrestacionGeneralComponent, ModuloAlimentarComponent, FormRecursoComponent } from "./formulario/recurso";
 import { FormGrupoFamiliarComponent } from "./formulario/grupo-familiar";
-import { ListaPersonaComponent, ListaRedSocialComponent } from './lista';
+import { ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent } from './lista';
 import { VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent } from "./vista";
 import {
   ModalFormPersonaComponent, ModalFormPersonaContent,
@@ -44,7 +44,7 @@ import { ProgramaComponent } from "./programa";
       FormContactoComponent, FormRedSocialComponent,
       FormPersonaComponent,
       PrestacionGeneralComponent, ModuloAlimentarComponent, FormRecursoComponent,
-      ListaPersonaComponent, ListaRedSocialComponent,
+      ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent,
       VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent,
       ModalFormPersonaComponent, ModalFormPersonaContent,
       ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
@@ -68,7 +68,7 @@ import { ProgramaComponent } from "./programa";
         FormContactoComponent, FormRedSocialComponent,
         FormPersonaComponent,
         PrestacionGeneralComponent, ModuloAlimentarComponent, FormRecursoComponent,
-        ListaPersonaComponent, ListaRedSocialComponent,
+        ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent,
         VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent,
         ModalFormPersonaComponent, ModalFormPersonaContent,
         ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
