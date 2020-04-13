@@ -17,3 +17,5 @@ export * from './tipo-red-social.service';
 export * from './descargas.service';
 export * from './detalle-programa.service'
 export * from './estadistica.service';
+export * from './tipo_responsable.service';
+export * from './responsable-entrega.service';

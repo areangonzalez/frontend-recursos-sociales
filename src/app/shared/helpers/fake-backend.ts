@@ -80,6 +80,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let generos = (<any>data).generos;
         let estadoCivil = (<any>data).estadoCivils;
         let tipoRedSocial = (<any>data).tipoRedSocial;
+        let tipoResponsable = (<any>data).tipoResponsable;
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -1007,6 +1008,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   // return 401 not authorised if token is null or invalid
               //     return throwError({ error: { message: 'Unauthorised' } });
               // }
+            }
+            // GET TIPO RESPONSABLES
+            if (request.url.endsWith('/apimock/tipo-responsables') && request.method === 'GET') {
+              return of(new HttpResponse({ status: 200, body: tipoResponsable }));
             }
 
             // get PROGRAMAS por id /\/users\/\d+$/
