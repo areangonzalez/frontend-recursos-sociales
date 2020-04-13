@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-between">
+  <div class="col-5 pt-1"><hr></div>
+  <div class="col-2 text-center"><h3><small class="text-muted">Grupo Familiar</small></h3></div>
+  <div class="col-5 pt-1"><hr></div>
+</div>
+<div class="row" [formGroup]="grupoFamiliar">
+  <div class="form-group col-md-4">
+    <label for="nro_documento" >Nro Documento (<span>*</span>):</label>
+    <input type="text" id="nro_documento" placeholder="Ej.: 33242854" class="form-control" formControlName="nro_documento" [ngClass]="{'is-invalid': (grupoFamiliar.get('nro_documento').invalid && submitted)}">
+    <div *ngIf="(grupoFamiliar.get('nro_documento').invalid && submitted)" class="text-danger">
+      <div *ngIf="grupoFamiliar.get('nro_documento').hasError('required')">Este campo es requerido. </div>
+    </div>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="apellido" >Apellido (<span>*</span>):</label>
+    <input type="text" id="apellido" placeholder="Ej.: Muñoz" class="form-control" formControlName="apellido" [ngClass]="{'is-invalid': (grupoFamiliar.get('apellido').invalid && submitted)}">
+    <div *ngIf="(grupoFamiliar.get('apellido').invalid && submitted)" class="text-danger">
+      <div *ngIf="grupoFamiliar.get('apellido').hasError('required')">Este campo es requerido. </div>
+    </div>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="nombre" >Nombre (<span>*</span>):</label>
+    <input type="text" id="nombre" placeholder="Ej.: Nahuel" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (grupoFamiliar.get('nombre').invalid && submitted)}">
+    <div *ngIf="(grupoFamiliar.get('nombre').invalid && submitted)" class="text-danger">
+      <div *ngIf="grupoFamiliar.get('nombre').hasError('required')">Este campo es requerido. </div>
+    </div>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="fecha_nacimiento" class="prioridad">Fecha nacimiento (<span>*</span>):</label>
+      <div class="input-group">
+        <input class="form-control" #c1 placeholder="Ej.: dd/mm/yyyy" ngbDatepicker #fpd="ngbDatepicker"
+        id="fecha_nacimiento" formControlName="fechaNacimiento" (ngModelChange)="formatFechaNacimiento($event)" [ngClass]="{'is-invalid': (grupoFamiliar.get('fechaNacimiento').invalid && submitted)}">
+        <div class="input-group-append">
+          <button class="btn btn-outline-info" (click)="fpd.toggle()" type="button"
+                [ngClass]="{'btn-outline-danger': (grupoFamiliar.get('fechaNacimiento').invalid && submitted), 'is-invalid': (grupoFamiliar.get('fechaNacimiento').invalid && submitted)}">
+              <span class="oi oi-calendar" title="Fecha nacimiento" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="(grupoFamiliar.get('fechaNacimiento').invalid && submitted)" class="text-danger">
+        <div *ngIf="grupoFamiliar.get('fechaNacimiento').hasError('required')">Este campo es requerido. </div>
+      </div>
+  </div>
+</div>
