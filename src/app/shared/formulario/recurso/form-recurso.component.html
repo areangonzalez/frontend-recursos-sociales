@@ -28,8 +28,14 @@
           </div>
         </div>
       </div>
-      <prestacion-general *ngIf="(programaNombreSeleccionado != '' && programaNombreSeleccionado != 'módulo alimentar')" [prestacion]="formRecurso" [submitted]="submitted"></prestacion-general>
-      <modulo-alimentar *ngIf="(programaNombreSeleccionado != '' && programaNombreSeleccionado == 'módulo alimentar')" [prestacionModuloAlimentar]="formRecurso" [submitted]="submitted"></modulo-alimentar>
+      <prestacion-general *ngIf="(programaNombreSeleccionado != '' && programaNombreSeleccionado != 'módulo alimentar')" [prestacion]="formRecurso.get('prestacion')" [submitted]="submittedPrestacion"></prestacion-general>
+      <modulo-alimentar *ngIf="(programaNombreSeleccionado != '' && programaNombreSeleccionado == 'módulo alimentar')" [prestacionModuloAlimentar]="formRecurso.get('modulo_alimentar')" [submitted]="submittedMA"></modulo-alimentar>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="observacion">Observación:</label>
+          <textarea class="form-control" id="observacion" cols="30" rows="1" placeholder="Descripcion..." formControlName="observacion" ></textarea>
+        </div>
+      </div>
     </fieldset>
     <hr class="pt1" *ngIf="(!emprender)">
     <fieldset *ngIf="(!emprender)">

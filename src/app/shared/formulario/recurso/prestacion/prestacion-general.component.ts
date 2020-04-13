@@ -25,8 +25,12 @@ export class PrestacionGeneralComponent implements OnInit {
    * @param objFecha objeto fecha es ingresada como objeto
    */
   public formatFechaAlta(objFecha) {
-    const fecha:string = this._utilService.formatearFecha(objFecha.day, objFecha.month, objFecha.year, 'yyyy-MM-dd');
-    this.prestacion.controls.fecha_alta.setValue(fecha);
+    if (objFecha != null){
+      const fecha:string = this._utilService.formatearFecha(objFecha.day, objFecha.month, objFecha.year, 'yyyy-MM-dd');
+      this.prestacion.controls.fecha_alta.setValue(fecha);
+    }else{
+      this.prestacion.controls.fecha_alta.setValue('');
+    }
   }
   /**
    * valido que la moneda sea numero

@@ -24,6 +24,8 @@ export class FormRecursoComponent implements OnInit {
   public emprender: boolean = false;
   public listaAlumnos = [];
   public submitted = false;
+  public submittedMA = false;
+  public submittedPrestacion = false;
   public programaNombreSeleccionado: string = '';
 
   constructor(
@@ -42,15 +44,21 @@ export class FormRecursoComponent implements OnInit {
     this.formRecurso = _fb.group({
       programaid: ['', Validators.required],
       tipo_recursoid: ['', Validators.required],
-      proposito: ['', Validators.required],
-      fechaAlta: ['', Validators.required],
-      fecha_alta: '',
-      monto: ['', Validators.required],
-      observacion: '',
-      referente: '',
-      cant_modulo: ['', Validators.required],
-      tipo_responsableid: ['', Validators.required],
-      responsableid: ['', Validators.required]
+      prestacion: _fb.group({
+        proposito: ['', Validators.required],
+        fechaAlta: ['', Validators.required],
+        fecha_alta: '',
+        monto: ['', Validators.required],
+      }),
+      modulo_alimentar: _fb.group({
+        fechaAlta: ['', Validators.required],
+        fecha_alta: '',
+        referente: '',
+        cant_modulo: ['', Validators.required],
+        tipo_responsableid: ['', Validators.required],
+        responsable_entregaid: ['', Validators.required],
+      }),
+      observacion: ''
     });
   }
 
@@ -80,6 +88,10 @@ export class FormRecursoComponent implements OnInit {
    */
   public listarTipoRecurso(programaid:any) {
     this.formRecurso.controls.tipo_recursoid.setValue('');
+    this.formRecurso.get('prestacion').reset();
+    this.formRecurso.get('modulo_alimentar').reset();
+    this.formRecurso.get('modulo_alimentar').get('tipo_responsableid').setValue('');
+    this.formRecurso.get('modulo_alimentar').get('responsable_entregaid').setValue('');
     if (programaid != ''){
       for (let i = 0; i < this.listaPrograma.length; i++) {
         if (parseInt(programaid) == this.listaPrograma[i].id) {
@@ -159,29 +171,59 @@ export class FormRecursoComponent implements OnInit {
    */
   public validarForm(){
     this.submitted = true;
+    let recurso: object = {};
 
-    if (this.formRecurso.invalid) {
-      this._mensajeService.cancelado("Campos sin completar!! Por favor verifique el formulario.", [{name:''}]);
-      return;
+    switch (this.programaNombreSeleccionado) {
+      case 'módulo alimentar':
+        this.submittedMA = true;
+        this.submittedPrestacion = false;
+        if (this.formRecurso.get('modulo_alimentar').invalid) {
+          this._mensajeService.cancelado("Campos sin completar!! Por favor verifique el formulario.", [{name:''}]);
+          return;
+        }else {
+          recurso = this.armarParametrosPrestacion(this.formRecurso.value, true);
+
+          this.obtenerDatos.emit(recurso);
+        }
+        break;
+      default:
+        this.submittedMA = false;
+        this.submittedPrestacion = true;
+        if (this.formRecurso.get('prestacion').invalid) {
+          this._mensajeService.cancelado("Campos sin completar!! Por favor verifique el formulario.", [{name:''}]);
+          return;
+        }else{
+          recurso = this.armarParametrosPrestacion(this.formRecurso.value, false);
+
+          this.obtenerDatos.emit(recurso);
+        }
+        break;
+    }
+  }
+
+  armarParametrosPrestacion(formulario: any, esModuloAlimentar: boolean) {
+    let recurso: object = {programaid: formulario.programaid, tipo_recursoid: formulario.tipo_recursoid};
+    let alumno: any[] = [];
+    if (esModuloAlimentar) {
+      Object.assign(recurso, formulario.modulo_alimentar);
     }else{
-      let recurso:object = this.formRecurso.value;
-      let alumno: any[] = [];
+      Object.assign(recurso, formulario.prestacion);
       if (this.emprender){ // si es programa emprender
         if (this.listaAlumnos.length > 0){
           for (let i = 0; i < this.listaAlumnos.length; i++) {
             alumno.push({ alumnoid: this.listaAlumnos[i].id });
           }
           recurso["alumno_lista"] = alumno;
-          this.obtenerDatos.emit(recurso);
         }else{
           this._mensajeService.cancelado('La lista de alumnos deberia de tener al menos una persona.', [{name:''}]);
           return;
         }
-      }else{ // si no es programa emprender
-        this.obtenerDatos.emit(this.formRecurso.value);
       }
     }
+
+    return recurso;
   }
+
   /**
    * verifica si la seleccion del programa es emprender
    * @param event valor que obtiene del option de programa

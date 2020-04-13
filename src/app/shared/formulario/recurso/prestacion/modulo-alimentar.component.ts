@@ -14,14 +14,14 @@ export class ModuloAlimentarComponent implements OnInit {
   @Input("prestacionModuloAlimentar") public prestacionModuloAlimentar: FormGroup;
   @Input("submitted") public submitted: boolean;
   public listaTipoResponsable = [{
-    "id":1, "nombre": "Delegación", "lista_responsable_entrega": [
+    "id":1, "nombre": "Delegación", "lista_responsable": [
     {"id":1, "nombre": "Alto Valle Centro - General Roca"},
     {"id":2, "nombre": "Alto Valle Este - Villa Regina"},
     {"id":3, "nombre": "Alto Valle Oeste - Cipolletti"},
     {"id":4, "nombre": "Línea Sur - Sierra Colorada"},
     {"id":5, "nombre": "Valle Inferior - Viedma"}
   ]},
-  {"id":2, "nombre": "Municipio", "lista_responsable_entrega": [
+  {"id":2, "nombre": "Municipio", "lista_responsable": [
     {"id":6, "nombre": "Campo Grande"},
     {"id":7, "nombre": "Cervantes"},
     {"id":8, "nombre": "Chimpay"},
@@ -56,19 +56,23 @@ export class ModuloAlimentarComponent implements OnInit {
    * @param objFecha objeto fecha es ingresada como objeto
    */
   public formatFechaAlta(objFecha) {
-    const fecha:string = this._utilService.formatearFecha(objFecha.day, objFecha.month, objFecha.year, 'yyyy-MM-dd');
-    this.prestacionModuloAlimentar.controls.fecha_alta.setValue(fecha);
+    if (objFecha != null){
+      const fecha:string = this._utilService.formatearFecha(objFecha.day, objFecha.month, objFecha.year, 'yyyy-MM-dd');
+      this.prestacionModuloAlimentar.controls.fecha_alta.setValue(fecha);
+    }else{
+      this.prestacionModuloAlimentar.controls.fecha_alta.setValue('');
+    }
   }
   /**
    * listo el tipo de responsables segun la seleccion
    * @param tipo_responsableid identificador del tipo de responsable
    */
   public listarResponsableEntrega(tipo_responsableid:any) {
-    this.prestacionModuloAlimentar.controls.responsableid.setValue('');
+    this.prestacionModuloAlimentar.controls.responsable_entregaid.setValue('');
     if (tipo_responsableid != ''){
       for (let i = 0; i < this.listaTipoResponsable.length; i++) {
         if (parseInt(tipo_responsableid) == this.listaTipoResponsable[i].id) {
-          this.listaResponsableEntrega = this.listaTipoResponsable[i].lista_responsable_entrega;
+          this.listaResponsableEntrega = this.listaTipoResponsable[i].lista_responsable;
         }
       }
     }else{
