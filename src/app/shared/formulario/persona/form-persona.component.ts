@@ -69,13 +69,13 @@ export class FormPersonaComponent implements OnInit {
         apellido: ['', [Validators.required, Validators.minLength(3)]],
         nombre: ['', [Validators.required, Validators.minLength(3)]],
         cuil: '',
-        cuil_prin: ['', [Validators.required, Validators.minLength(2)]],
-        cuil_fin: ['', [Validators.required, Validators.minLength(1)]],
+        cuil_prin: '',
+        cuil_fin: '',
         fecha_nacimiento: '',
         fechaNacimiento: ['', Validators.required],
-        sexoid: ['', Validators.required],
-        generoid: ['', Validators.required],
-        estado_civilid: ['', Validators.required],
+        sexoid: '',
+        generoid: '',
+        estado_civilid: '',
         contacto: _fb.group({
           telefono: '',
           celular: '',
@@ -196,6 +196,9 @@ export class FormPersonaComponent implements OnInit {
       }
       return;
     }else{ // si pasa la validación
+      if (this.formPersona.get('cuil').value.length < 10){
+        this.formPersona.get('cuil').setValue('');
+      }
       let id = this.formPersona.value.id;
       let persona = this.personaModel.deserealize(this.formPersona.value);
       this.guardarPersona(persona,id);

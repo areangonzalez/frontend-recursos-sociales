@@ -19,19 +19,13 @@
             </div>
         </div>
         <div class="form-group col-md-3">
-            <label for="form-agente-cuil" class="prioridad">Cuil (<span>*</span>):</label>
+            <label for="form-agente-cuil" class="prioridad">Cuil:</label>
             <div class="input-group">
                 <input id="cuil_prin" class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2"
-                (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (formPersona.get('cuil_prin').invalid && submitted)}">
+                (change)="armarCuil()" (keyup)="soloNumero($event.target)">
                 <div class="input-group-addon div-cuil-num-center">{{cuil_medio}}</div>
                 <input id="cuil_fin" class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_fin" maxlength="1"
-                (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (formPersona.get('cuil_fin').invalid && submitted)}">
-                <div *ngIf="(formPersona.get('cuil_prin').invalid && submitted)" class="text-danger">
-                    <div *ngIf="formPersona.get('cuil_prin').hasError('required')">Este campo es requerido. </div>
-                </div>
-                <div *ngIf="(!formPersona.get('cuil_prin').invalid && formPersona.get('cuil_fin').invalid && submitted)" class="text-danger">
-                    <div *ngIf="formPersona.get('cuil_fin').hasError('required')">Este campo es requerido. </div>
-                </div>
+                (change)="armarCuil()" (keyup)="soloNumero($event.target)">
             </div>
         </div>
         <div class="form-group col-md-3">
@@ -69,36 +63,25 @@
             </div>
         </div>
         <div class="form-group col-md-3">
-            <label for="estado_civil" class="prioridad">Estado civil (<span>*</span>):</label>
-            <select class="form-control" id="estado_civil" formControlName="estado_civilid" [ngClass]="{'is-invalid': (formPersona.get('estado_civilid').invalid && submitted)}">
+            <label for="estado_civil" class="prioridad">Estado civil:</label>
+            <select class="form-control" id="estado_civil" formControlName="estado_civilid">
                 <option value="">Seleccione Estado civil</option>
                 <option *ngFor="let estadoCivil of estadoCivilLista" value="{{estadoCivil.id}}">{{estadoCivil.nombre}}</option>
             </select>
-            <div *ngIf="(formPersona.get('estado_civilid').invalid && submitted)"
-                class="text-danger">
-                <div *ngIf="formPersona.get('estado_civilid').hasError('required')">Por favor Seleccione estado civil. </div>
-            </div>
         </div>
         <div class="form-group col-md-3">
-            <label for="sexo" class="prioridad">Sexo (<span>*</span>):</label>
-            <select class="form-control" id="sexo" formControlName="sexoid" [ngClass]="{'is-invalid': (formPersona.get('sexoid').invalid && submitted)}">
+            <label for="sexo" class="prioridad">Sexo:</label>
+            <select class="form-control" id="sexo" formControlName="sexoid">
                 <option value="">Seleccione Sexo</option>
                 <option *ngFor="let sexo of sexoLista" value="{{sexo.id}}">{{sexo.nombre}}</option>
             </select>
-            <div *ngIf="(formPersona.get('sexoid').invalid && submitted)" class="text-danger">
-                <div *ngIf="formPersona.get('sexoid').hasError('required')">Por favor Seleccione sexo. </div>
-            </div>
         </div>
         <div class="form-group col-md-3">
-            <label for="genero" class="prioridad">Género (<span>*</span>):</label>
-            <select class="form-control" id="genero" formControlName="generoid" [ngClass]="{'is-invalid': (formPersona.get('generoid').invalid && submitted)}">
+            <label for="genero" class="prioridad">Género:</label>
+            <select class="form-control" id="genero" formControlName="generoid">
                 <option value="">Seleccione Género</option>
                 <option *ngFor="let genero of generoLista" value="{{genero.id}}">{{genero.nombre}}</option>
             </select>
-            <div *ngIf="(formPersona.get('generoid').invalid && submitted)"
-                class="text-danger">
-                <div *ngIf="formPersona.get('generoid').hasError('required')">Por favor Seleccione género. </div>
-            </div>
         </div>
       </div>
     <shared-form-contacto [formContacto]="formPersona.get('contacto')" [listaRedSocial]="listaRedSocial" ></shared-form-contacto>

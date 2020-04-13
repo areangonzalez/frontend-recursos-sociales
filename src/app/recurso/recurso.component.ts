@@ -76,10 +76,8 @@ export class RecursoComponent implements OnInit {
    * @param recurso datos de la prestacion
    */
   public guardar(recurso:object) {
-    console.log(recurso);
-    //console.log(this.datosPersona.id);
     if (this.datosPersona.id !== undefined ) {
-      if (recurso['monot'] !== undefined){
+      if (recurso['monto'] !== undefined){
         recurso["monto"] = parseFloat(recurso["monto"]);
       }
       // agrego el id de persona
