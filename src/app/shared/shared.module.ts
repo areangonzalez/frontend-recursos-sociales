@@ -10,6 +10,7 @@ import { FormPersonaComponent, BuscarPersonaComponent } from "./formulario/perso
 import { FormLugarComponent } from "./formulario/lugar";
 import { FormContactoComponent, FormRedSocialComponent } from "./formulario/contacto";
 import { PrestacionGeneralComponent, ModuloAlimentarComponent, FormRecursoComponent } from "./formulario/recurso";
+import { FormGrupoFamiliarComponent } from "./formulario/grupo-familiar";
 import { ListaPersonaComponent, ListaRedSocialComponent } from './lista';
 import { VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent } from "./vista";
 import {
@@ -53,7 +54,8 @@ import { ProgramaComponent } from "./programa";
       ModalRedSocialComponent, ModalRedSocialContent,
       ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
       ModalConfirmacionDescargaComponent, ModalConfirmacionDescargaContent,
-      ProgramaComponent
+      ProgramaComponent,
+      FormGrupoFamiliarComponent
     ],
     exports: [
         CommonModule,
@@ -76,7 +78,8 @@ import { ProgramaComponent } from "./programa";
         ModalRedSocialComponent, ModalRedSocialContent,
         ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
         ModalConfirmacionDescargaComponent, ModalConfirmacionDescargaContent,
-        ProgramaComponent
+        ProgramaComponent,
+        FormGrupoFamiliarComponent
     ],
     entryComponents: [
       ModalFormPersonaComponent, ModalFormPersonaContent,
