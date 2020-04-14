@@ -21,6 +21,7 @@ export class RecursoComponent implements OnInit {
   public tipoRecursoLista: any;
   public listaRedSocial: any = [];
   public tipoResponsableLista: any;
+  public listaGrupoFamiliar: any = [];
 
   constructor(
     private _fb: FormBuilder,

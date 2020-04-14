@@ -16,9 +16,9 @@ export class ListaGrupoFamiliarComponent implements OnInit {
    * agrego un nuevo elemento al listado de red social
    * @param redSocial datos de una red social
    */
-  /* public agregarRedSocial(redSocial:any) {
-    this.listadoRedSocial.push(redSocial);
-  } */
+  public agregarMiembro(miembro:any) {
+    this.listadoGrupoFamiliar.push(miembro);
+  }
 
   /* borrar(id:number, confirmacion: boolean){
     if (confirmacion){

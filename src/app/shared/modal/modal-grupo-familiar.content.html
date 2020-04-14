@@ -1,0 +1,9 @@
+<div class="modal-header">
+  <h4 class="modal-title">Agregar Grupo Familiar</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('closed')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <shared-form-grupo-familiar (obtenerDatos)="datosLista($event)" ></shared-form-grupo-familiar>
+</div>

@@ -6,3 +6,4 @@ export * from './modal-info-beneficiario.component';
 export * from './modal-red-social.component';
 export * from './modal-borrar-red-social.component';
 export * from './modal-confirmar-descarga.component';
+export * from './modal-grupo-familiar.component';
