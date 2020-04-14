@@ -1,7 +1,7 @@
 <div class="row" [formGroup]="grupoFamiliarForm">
   <div class="form-group col-md-3">
     <label for="nro_documento" >Nro Documento (<span>*</span>):</label>
-    <input type="text" id="nro_documento" placeholder="Ej.: 33242854" class="form-control" formControlName="nro_documento" [ngClass]="{'is-invalid': (grupoFamiliarForm.get('nro_documento').invalid && submitted)}">
+    <input type="number" id="nro_documento" placeholder="Ej.: 33242854" class="form-control" formControlName="nro_documento" [ngClass]="{'is-invalid': (grupoFamiliarForm.get('nro_documento').invalid && submitted)}">
     <div *ngIf="(grupoFamiliarForm.get('nro_documento').invalid && submitted)" class="text-danger">
       <div *ngIf="grupoFamiliarForm.get('nro_documento').hasError('required')">Este campo es requerido. </div>
     </div>
@@ -36,4 +36,11 @@
         <div *ngIf="grupoFamiliarForm.get('fechaNacimiento').hasError('required')">Este campo es requerido. </div>
       </div>
   </div>
+</div>
+
+<hr class="pt1">
+
+<div class="float-right mb-3">
+  <button type="button" class="btn btn-danger mr-1" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>
+  <button type="button" class="btn btn-success" (click)="validar()"><i class="fa fa-plus" title="Agregar"></i> Agregar</button>
 </div>
