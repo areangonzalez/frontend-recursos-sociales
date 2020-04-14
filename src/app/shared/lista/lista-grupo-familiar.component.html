@@ -22,7 +22,9 @@
       <td scope="col">{{grupo.nro_documento}}</td>
       <td scope="col" colspan="2">{{grupo.apellido}}, {{grupo.nombre}}</td>
       <td scope="col">{{grupo.fecha_nacimiento | date:'dd/MM/yyyy'}}</td>
-      <td scope="col" class="text-center"><button class="btn btn-danger btn-sm">borrar</button></td>
+      <td scope="col" class="text-center">
+        <modal-borrar-miembro-grupo-familiar-component (borrarMiembroGrupoFamiliar)="borrar(i, $event)"></modal-borrar-miembro-grupo-familiar-component>
+      </td>
     </tr>
   </tbody>
 </table>

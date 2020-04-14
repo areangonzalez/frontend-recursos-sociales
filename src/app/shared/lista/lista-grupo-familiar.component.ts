@@ -13,16 +13,20 @@ export class ListaGrupoFamiliarComponent implements OnInit {
   ngOnInit() {
   }
   /**
-   * agrego un nuevo elemento al listado de red social
-   * @param redSocial datos de una red social
+   * agrego un nuevo persona al listado de grupo familiar
+   * @param redSocial datos de una persona
    */
   public agregarMiembro(miembro:any) {
     this.listadoGrupoFamiliar.push(miembro);
   }
-
-  /* borrar(id:number, confirmacion: boolean){
+  /**
+   * borro una persona del grupo familiar
+   * @param id identificador que se posiciona en la tabla
+   * @param confirmacion confirmacion del borrado
+   */
+  borrar(id:number, confirmacion: boolean){
     if (confirmacion){
-      this.listadoRedSocial.splice(id, 1);
+      this.listadoGrupoFamiliar.splice(id, 1);
     }
-  } */
+  }
 }
