@@ -7,7 +7,7 @@ import { ReporteRoutingModule } from "./reporte-routing.module";
 import { ReporteComponent } from "./reporte.component";
 import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent } from "./busqueda";
 import { ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent } from "./lista";
-import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent } from "./menu-list";
+import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent, ModuloAlimentarComponent } from "./menu-list";
 import { BeneficiarioProgramaLocalidadComponent, BeneficiarioTipoPrestacionLocalidadComponent } from './beneficiario';
 import {
   ChartProgramaMontoComponent, ChartProgramaPrestacionesComponent, ChartProgramaBeneficiariosComponent,
@@ -27,7 +27,7 @@ import {
         BeneficiarioProgramaLocalidadComponent, BeneficiarioTipoPrestacionLocalidadComponent,
         ChartProgramaMontoComponent, ChartProgramaPrestacionesComponent, ChartProgramaBeneficiariosComponent,
         ChartBeneficiarioProgramaLocalidadComponent, ChartBeneficiarioTipoPrestacionLocalidadComponent, ChartLocalidadMontoComponent,
-        MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent
+        MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent, ModuloAlimentarComponent
     ],
     entryComponents: [
       ChartBeneficiarioProgramaLocalidadComponent, ChartBeneficiarioTipoPrestacionLocalidadComponent
