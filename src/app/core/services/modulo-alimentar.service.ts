@@ -12,17 +12,18 @@ export class ModuloAlimentarService implements Resolve<any> {
     private _apiService: ApiService
   ){}
 
-  public beneficiarioModuloAlimentar(id:any) {
-    return this._apiService.get('/modulo-alimentar');
+  public buscar(params: object) {
+    let httpParams = new HttpParams();
+    httpParams = this._apiService.formatParams(httpParams, params);
+    return this._apiService.get('/modulo-alimentar', httpParams);
   }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
     ): Observable<any>|Promise<any>|any {
-      /* let httpParams = new HttpParams();
+      let httpParams = new HttpParams();
       httpParams = this._apiService.formatParams(httpParams, { pagesize: 20, pages: 0 });
-      return this._apiService.get('/modulo-alimentar', httpParams); */
-      return this._apiService.get('/modulo-alimentar');
+      return this._apiService.get('/modulo-alimentar', httpParams);
     }
   }

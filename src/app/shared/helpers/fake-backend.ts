@@ -836,7 +836,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         if(request.url.endsWith('/apimock/modulo-alimentar') && request.method === 'GET') {
-
+          //let pageSize: number = parseInt(request.params.get('pagesize'));
+          let pageSize: number = 2;
+          let page: number = parseInt(request.params.get("page"));
+          let global_search = request.params.get('global_param');
 
           let datos = {
             "pagesize": 2,
@@ -901,9 +904,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
               }]};
 
+              if (page > 0) {
+                page = page;
+                let pageStart = page * pageSize;
+                let pageEnd = pageStart + pageSize;
+                //filtroBeneficiario.resultado = beneficiariosEncontrados.slice(pageStart, pageEnd);
+                datos.resultado = datos.resultado.slice(pageStart, pageEnd);
+              }else{
+                //filtroBeneficiario.resultado = beneficiariosEncontrados.slice(0,pageSize);
+                datos.resultado = datos.resultado.slice(0,pageSize);
+              }
 
-
-          return of(new HttpResponse({ status: 200, body: datos }));
+              return of(new HttpResponse({ status: 200, body: datos }));
         }
 
             /* ----------------------  LISTAS GENERALES  --------------------------- */
