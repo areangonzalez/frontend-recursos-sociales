@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-between mt-2 border-top">
+  <div class="d-flex align-items-center p-2 font-weight-bold">
+    <span *ngIf="configPaginacion.totalRegistros > 0">Prestaciones: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
+    <span *ngIf="configPaginacion.totalRegistros == 0">Prestaciones: 0</span>
+  </div>
+  <!-- <div class="d-flex align-items-center p-2 font-weight-bold">
+    <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination" style="margin-bottom: -15px;" ></ngb-pagination>
+  </div> -->
+</div>
+<div class="row pl-3 pr-3">
+  <table class="table table-hover table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Nro Doc</th>
+        <th colspan="2" scope="col">Apellido y nombre</th>
+        <th class="text-center" scope="col">Localidad</th>
+        <th class="text-center" scope="col">Cantidad de Módulos</th>
+        <th class="text-center" scope="col">Responsable de Entrega</th>
+        <th class="text-center" scope="col">Cantidad de hijos</th>
+        <th class="text-center" scope="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="(beneficiariosLista.length == 0)">
+      <tr>
+        <td rowspan="1" colspan="8" class="text-center"> <h5>No se han encontrado resultados.</h5> </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(beneficiariosLista.length > 0)">
+      <tr *ngFor="let beneficiario of beneficiariosLista">
+        <td scope="row">{{beneficiario.persona.nro_documento}}</td>
+        <td>
+          {{beneficiario.persona.apellido}}, {{beneficiario.persona.nombre}}
+        </td>
+        <td>
+          <div class="btn-group responsive-btn-icon" *ngIf="(beneficiario.persona.lugar.localidad != '')">
+            <button ngbTooltip="{{direccion(beneficiario.persona.lugar)}}" container="body" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
+            <button *ngIf="(beneficiario.persona.telefono != '')" ngbTooltip="{{beneficiario.persona.telefono}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
+            <button *ngIf="(beneficiario.persona.celular != '')" ngbTooltip="{{beneficiario.persona.celular}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
+            <button *ngIf="(beneficiario.persona.email != '')" ngbTooltip="{{beneficiario.persona.email}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
+            <!-- <div *ngIf="((beneficiario.persona.lista_red_social) && beneficiario.persona.lista_red_social.length > 0 )">
+              <a *ngFor="let redSocial of beneficiario.persona.lista_red_social" href="{{redSocial.perfil}}" target="_blank" ngbTooltip="{{redSocial.tipo_red_social}}" class="btn btn-sm btn-light"><i class="{{redSocial.icono_class}}"></i></a>
+            </div> -->
+          </div>
+        </td>
+        <td class="text-center">{{beneficiario.localidad}}</td>
+        <td class="text-center">{{beneficiario.cant_modulo}}</td>
+        <td class="text-center">{{beneficiario.responsable_entrega}}</td>
+        <td class="text-center">{{beneficiario.cant_hijo}}</td>
+        <td>
+          <div class="btn-group">
+            <!-- <modal-info-beneficiario-component [beneficiarioid]="beneficiario.personaid" (cambioEstado)="actualizarLista($event)"></modal-info-beneficiario-component> -->
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- <div class=" d-flex justify-content-center">
+    <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination"></ngb-pagination>
+</div> -->

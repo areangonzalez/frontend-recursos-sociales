@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './modulo-alimentar.component.html'
 })
 export class ModuloAlimentarComponent implements OnInit {
+  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 };
+
   public listaLocalidades: any = [];
   public listaProgramas: any = [];
   public listaTipoPrestaciones: any = [];

@@ -6,7 +6,7 @@ import { SharedModule } from "../shared";
 import { ReporteRoutingModule } from "./reporte-routing.module";
 import { ReporteComponent } from "./reporte.component";
 import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent } from "./busqueda";
-import { ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent } from "./lista";
+import { ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent, ListaModuloAlimentarComponent } from "./lista";
 import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent, ModuloAlimentarComponent } from "./menu-list";
 import { BeneficiarioProgramaLocalidadComponent, BeneficiarioTipoPrestacionLocalidadComponent } from './beneficiario';
 import {
@@ -23,7 +23,7 @@ import {
     declarations: [
         ReporteComponent,
         BusquedaRecursoComponent, BusquedaBeneficiarioComponent,
-        ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent,
+        ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent, ListaModuloAlimentarComponent,
         BeneficiarioProgramaLocalidadComponent, BeneficiarioTipoPrestacionLocalidadComponent,
         ChartProgramaMontoComponent, ChartProgramaPrestacionesComponent, ChartProgramaBeneficiariosComponent,
         ChartBeneficiarioProgramaLocalidadComponent, ChartBeneficiarioTipoPrestacionLocalidadComponent, ChartLocalidadMontoComponent,
