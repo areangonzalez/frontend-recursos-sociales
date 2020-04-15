@@ -19,3 +19,4 @@ export * from './detalle-programa.service'
 export * from './estadistica.service';
 export * from './tipo_responsable.service';
 export * from './responsable-entrega.service';
+export * from './modulo-alimentar.service';

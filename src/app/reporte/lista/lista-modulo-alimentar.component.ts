@@ -7,11 +7,9 @@ import { DatePipe } from "@angular/common";
   styleUrls: ['./lista-beneficiario.component.sass']
 })
 export class ListaModuloAlimentarComponent implements OnInit {
-  // @Input("beneficiariosLista") public beneficiariosLista:any;
+  @Input("beneficiariosLista") public beneficiariosLista:any;
   @Input("configPaginacion") public configPaginacion:any;
   @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
-
-  public beneficiariosLista = [];
 
   constructor(){}
 

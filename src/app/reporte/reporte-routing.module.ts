@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ReporteComponent } from './reporte.component';
 import { PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent, ModuloAlimentarComponent } from "./menu-list";
-import { RecursoSocialService, LocalidadService, ProgramaService, TipoRecursoService, BeneficiarioService } from '../core/services';
+import { RecursoSocialService, LocalidadService, ProgramaService, TipoRecursoService, BeneficiarioService, ModuloAlimentarService } from '../core/services';
 import { AuthGuard } from '../core/guards/auth.guard';
 
 const routes: Routes = [
@@ -41,7 +41,8 @@ const routes: Routes = [
             resolve: {
             localidades: LocalidadService,
             programas: ProgramaService,
-            tipoPrestaciones: TipoRecursoService
+            tipoPrestaciones: TipoRecursoService,
+            moduloAlimentar: ModuloAlimentarService
             },
           },
 
@@ -53,6 +54,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: [RecursoSocialService, ProgramaService, LocalidadService, TipoRecursoService, BeneficiarioService]
+    providers: [RecursoSocialService, ProgramaService, LocalidadService, TipoRecursoService, BeneficiarioService, ModuloAlimentarService]
 })
 export class ReporteRoutingModule { }

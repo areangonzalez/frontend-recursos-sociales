@@ -835,6 +835,77 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return of(new HttpResponse({ status: 200, body: personaEncontrada }));
         }
 
+        if(request.url.endsWith('/apimock/modulo-alimentar') && request.method === 'GET') {
+
+
+          let datos = {
+            "pagesize": 2,
+            "pages": 2,
+            "total_filtrado": 3,
+            "monto_acreditado": 32247.37,
+            "monto_baja": 36457.06,
+            "monto_sin_acreditar": 1275179.09,
+            "recurso_acreditado_cantidad": 3,
+            "recurso_baja_cantidad": 2,
+            "resultado": [
+              {
+                "id": 1, "fecha_inicial": "2016-01-30", "fecha_alta": "2019-03-07", "monto": 0,
+                "observacion": "Observacion Fixture 1", "proposito": "",
+                "programaid": 6, "tipo_recursoid": 4, "personaid": 1, "programa": "Módulo Alimentar", "tipo_recurso": "Emergencia",
+                "localidadid": 1, "localidad": "Viedma", "responsable_entregaid": 1, "responsable_entrega": "Alto Valle Este", "cant_modulo": 3, "cant_hijo": 2,
+                "persona": {
+                    "id": 1, "nombre": "Victor garcia", "apellido": "González", "apodo": "", "nro_documento": "23851266",
+                    "fecha_nacimiento": "0000-00-00", "estado_civilid": null, "telefono": "", "celular": "2920412227",
+                    "sexoid": 1, "tipo_documentoid": null, "nucleoid": 1, "situacion_laboralid": null, "generoid": null,
+                    "email": "", "cuil": "20238512669", "red_social": "", "estudios": [], "sexo": "Hombre", "genero": "",
+                    "estado_civil": "",
+                    "lugar": {
+                        "id": 1, "nombre": "", "calle": "", "altura": "100", "localidadid": 1, "latitud": "-1234123", "longitud": "21314124",
+                        "barrio": "barrio1", "piso": "0º", "depto": "A", "escalera": "", "entre_calle_1": "", "entre_calle_2": "",
+                        "localidad": "Viedma"
+                    }
+                }
+              },{
+                "id": 1, "fecha_inicial": "2016-01-30", "fecha_alta": "2019-03-15", "monto": 0,
+                "observacion": "Observacion Fixture 2", "proposito": "",
+                "programaid": 6, "tipo_recursoid": 4, "personaid": 2, "programa": "Módulo Alimentar", "tipo_recurso": "Emergencia",
+                "localidadid": 1, "localidad": "Viedma", "responsable_entregaid": 1, "responsable_entrega": "Alto Valle Este", "cant_modulo": 8, "cant_hijo": 6,
+                "persona": {
+                    "id": 2, "nombre": "Andrea", "apellido": "Flores", "apodo": "", "nro_documento": "23851672",
+                    "fecha_nacimiento": "0000-00-00", "estado_civilid": null, "telefono": "", "celular": "2920412227",
+                    "sexoid": 2, "tipo_documentoid": null, "nucleoid": 1, "situacion_laboralid": null, "generoid": null,
+                    "email": "", "cuil": "20238512669", "red_social": "", "estudios": [], "sexo": "Mujer", "genero": "",
+                    "estado_civil": "",
+                    "lugar": {
+                        "id": 1, "nombre": "", "calle": "calle2", "altura": "100", "localidadid": 1, "latitud": "-1234123", "longitud": "21314124",
+                        "barrio": "barrio2", "piso": "0º", "depto": "A", "escalera": "", "entre_calle_1": "", "entre_calle_2": "",
+                        "localidad": "Viedma"
+                    }
+                }
+              },{
+                "id": 1, "fecha_inicial": "2016-01-30", "fecha_alta": "2019-04-07", "monto": 0,
+                "observacion": "Observacion Fixture 3", "proposito": "",
+                "programaid": 6, "tipo_recursoid": 4, "personaid": 1, "programa": "Módulo Alimentar", "tipo_recurso": "Emergencia",
+                "localidadid": 1, "localidad": "Viedma", "responsable_entregaid": 1, "responsable_entrega": "Alto Valle Este", "cant_modulo": 6, "cant_hijo": 5,
+                "persona": {
+                    "id": 1, "nombre": "Clara", "apellido": "Lopez", "apodo": "", "nro_documento": "23851293",
+                    "fecha_nacimiento": "0000-00-00", "estado_civilid": null, "telefono": "", "celular": "2920412227",
+                    "sexoid": 2, "tipo_documentoid": null, "nucleoid": 1, "situacion_laboralid": null, "generoid": null,
+                    "email": "", "cuil": "20238512669", "red_social": "", "estudios": [], "sexo": "Mujer", "genero": "",
+                    "estado_civil": "",
+                    "lugar": {
+                        "id": 1, "nombre": "", "calle": "calle3", "altura": "100", "localidadid": 1, "latitud": "-1234123", "longitud": "21314124",
+                        "barrio": "barrio3", "piso": "0º", "depto": "A", "escalera": "", "entre_calle_1": "", "entre_calle_2": "",
+                        "localidad": "Viedma"
+                    }
+                }
+              }]};
+
+
+
+          return of(new HttpResponse({ status: 200, body: datos }));
+        }
+
             /* ----------------------  LISTAS GENERALES  --------------------------- */
             // get TIPO RECURSO SOCIAL por programa id
             if(request.url.endsWith('/apimock/tipo-recursos') && request.method === 'GET') {
