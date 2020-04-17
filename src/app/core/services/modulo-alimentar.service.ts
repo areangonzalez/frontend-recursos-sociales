@@ -15,7 +15,7 @@ export class ModuloAlimentarService implements Resolve<any> {
   public buscar(params: object) {
     let httpParams = new HttpParams();
     httpParams = this._apiService.formatParams(httpParams, params);
-    return this._apiService.get('/modulo-alimentar', httpParams);
+    return this._apiService.get('/recursos', httpParams);
   }
 
   resolve(
@@ -23,7 +23,7 @@ export class ModuloAlimentarService implements Resolve<any> {
     state: RouterStateSnapshot,
     ): Observable<any>|Promise<any>|any {
       let httpParams = new HttpParams();
-      httpParams = this._apiService.formatParams(httpParams, { pagesize: 20, pages: 0 });
-      return this._apiService.get('/modulo-alimentar', httpParams);
+      httpParams = this._apiService.formatParams(httpParams, { pagesize: 20, pages: 0, programaid: 6 });
+      return this._apiService.get('/recursos', httpParams);
     }
   }

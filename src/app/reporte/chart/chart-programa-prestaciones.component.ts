@@ -9,7 +9,7 @@ import { MensajesService, DetalleProgramaService } from 'src/app/core/services';
 export class ChartProgramaPrestacionesComponent implements OnInit {
 
   public chart:any;
-  public colorsGrafico: any[] = ['red', 'orange', 'yellow', 'green', 'lightblue'];
+  public colorsGrafico: any[] = ['red', 'orange', 'yellow', 'green', 'lightblue', 'purple'];
   public datosPrograma: any[] = [];
 
   constructor(
