@@ -22,6 +22,7 @@ export class RecursoComponent implements OnInit {
   public listaRedSocial: any = [];
   public tipoResponsableLista: any;
   public listaGrupoFamiliar: any = [];
+  public listaLocalidades: any =[];
 
   constructor(
     private _fb: FormBuilder,
@@ -43,6 +44,7 @@ export class RecursoComponent implements OnInit {
   ngOnInit() {
     this.tipoRecursoLista = this._route.snapshot.data['tipoRecursos'];
     this.tipoResponsableLista = this._route.snapshot.data['tipoResponsables'];
+    this.listaLocalidades = this._route.snapshot.data['localidades'];
     this.programaid = this._route.snapshot.paramMap.get('programaid');
     if (this.programaid){
       this.programaLista = [this._route.snapshot.data["programas"]];

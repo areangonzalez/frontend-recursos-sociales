@@ -14,6 +14,7 @@ export class FormRecursoComponent implements OnInit {
   @Input("listaPrograma") public listaPrograma: any;
   @Input("listaTipoRecurso") public listaTipoRecurso: any;
   @Input('listaTipoResponsable') public listaTipoResponsable: any;
+  @Input('listaLocalidades') public listaLocalidades: any;
   @Input("programaid") public programaid: any;
   @Input("personaid") public personaid: any;
   @Output("cancelar") public cancelar = new EventEmitter();
@@ -27,7 +28,7 @@ export class FormRecursoComponent implements OnInit {
   public submitted = false;
   public submittedMA = false;
   public submittedPrestacion = false;
-  public programaNombreSeleccionado: string = '';
+  public programaSeleccionadoId: string = '';
 
   constructor(
     private _fb: FormBuilder,
@@ -45,6 +46,7 @@ export class FormRecursoComponent implements OnInit {
     this.formRecurso = _fb.group({
       programaid: ['', Validators.required],
       tipo_recursoid: ['', Validators.required],
+      localidadid: ['', Validators.required],
       prestacion: _fb.group({
         proposito: ['', Validators.required],
         fechaAlta: ['', Validators.required],
@@ -93,6 +95,8 @@ export class FormRecursoComponent implements OnInit {
     this.formRecurso.get('modulo_alimentar').reset();
     this.formRecurso.get('modulo_alimentar').get('tipo_responsableid').setValue('');
     this.formRecurso.get('modulo_alimentar').get('responsable_entregaid').setValue('');
+    this.formRecurso.get('localidadid').setValue('');
+    this.programaSeleccionadoId = programaid;
     if (programaid != ''){
       for (let i = 0; i < this.listaPrograma.length; i++) {
         if (parseInt(programaid) == this.listaPrograma[i].id) {
@@ -174,8 +178,8 @@ export class FormRecursoComponent implements OnInit {
     this.submitted = true;
     let recurso: object = {};
 
-    switch (this.programaNombreSeleccionado) {
-      case 'módulo alimentar':
+    switch (this.programaSeleccionadoId) {
+      case '6':
         this.submittedMA = true;
         this.submittedPrestacion = false;
         if (this.formRecurso.get('modulo_alimentar').invalid) {
@@ -233,12 +237,5 @@ export class FormRecursoComponent implements OnInit {
     // obtengo el nombre del programa
     let selectElementText = event.target['options'][event.target['options'].selectedIndex].text;
     this.emprender = (selectElementText.toLowerCase() === "emprender") ? true : false;
-    // verifico el programa que selecciono
-    this.programaSeleccionado(selectElementText);
   }
-
-  public programaSeleccionado(nombrePrograma: string) {
-    this.programaNombreSeleccionado = nombrePrograma.toLocaleLowerCase();
-  }
-
 }

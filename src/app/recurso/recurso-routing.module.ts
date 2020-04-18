@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RecursoComponent } from './recurso.component';
-import { ProgramaService, TipoRecursoService, TipoResponsableService } from "../core/services";
+import { ProgramaService, TipoRecursoService, TipoResponsableService, LocalidadService } from "../core/services";
 
 const routes: Routes = [
     {
@@ -10,7 +10,8 @@ const routes: Routes = [
       resolve: {
         programas: ProgramaService,
         tipoRecursos: TipoRecursoService,
-        tipoResponsables: TipoResponsableService
+        tipoResponsables: TipoResponsableService,
+        localidades: LocalidadService
       }
     },
     {
@@ -19,7 +20,8 @@ const routes: Routes = [
       resolve: {
         programas: ProgramaService,
         tipoRecursos: TipoRecursoService,
-        tipoResponsables: TipoResponsableService
+        tipoResponsables: TipoResponsableService,
+        localidades: LocalidadService
       }
     }
 ];
@@ -27,6 +29,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: [ProgramaService, TipoRecursoService, TipoResponsableService]
+    providers: [ProgramaService, TipoRecursoService, TipoResponsableService, LocalidadService]
 })
 export class RecursoRoutingModule { }
