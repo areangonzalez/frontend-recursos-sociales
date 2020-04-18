@@ -81,6 +81,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let estadoCivil = (<any>data).estadoCivils;
         let tipoRedSocial = (<any>data).tipoRedSocial;
         let tipoResponsable = (<any>data).tipoResponsables;
+        let responsables = (<any>data).responsables;
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -388,6 +389,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               nuevoRecurso["tipo_recurso"] = nombrePorId(nuevoRecurso.tipo_recursoid, tipoRecurso);
               nuevoRecurso["programa"] = nombrePorId(nuevoRecurso.programaid, programas);
               nuevoRecurso["localidad"] = nombrePorId(nuevoRecurso.localidadid, localidades);
+              nuevoRecurso["responsable_entrega"] = nombrePorId(nuevoRecurso.responsable_entregaid, responsables);
+              nuevoRecurso["programaid"] = parseInt(nuevoRecurso.programaid);
 
               delete nuevoRecurso["fechaAlta"];
 

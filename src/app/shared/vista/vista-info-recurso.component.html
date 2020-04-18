@@ -3,7 +3,7 @@
     <ng-template  ngbTabContent>
       <div class="card border-light p-2">
         <div class="card-header">
-          <div class="d-flex justify-content-between" *ngIf="(recurso.programa !== 'Módulo Alimentar')">
+          <div class="d-flex justify-content-between" *ngIf="(recurso.programaid !== 6)">
             <span class="d-flex align-items-center">Alta: {{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</span>
             <span class="d-flex align-items-center text-success" *ngIf="(recurso.acreditacion)">Acreditacion: {{recurso.fecha_acreditacion | date:'dd/MM/yyyy'}}</span>
             <span class="d-flex align-items-center text-danger" *ngIf="(recurso.baja)" >Baja: {{recurso.fecha_baja | date:'dd/MM/yyyy'}}</span>
@@ -12,11 +12,11 @@
                 <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" [recursoid]="recurso.id" (obtenerRecurso)="mostrarFB($event)" ></modal-baja-component>
             </span>
           </div>
-          <div class="d-flex justify-content-between" *ngIf="(recurso.programa == 'Módulo Alimentar')">
+          <div class="d-flex justify-content-between" *ngIf="(recurso.programaid == 6)">
             <span class="d-flex align-items-center">Entrega: {{ recurso.fecha_alta | date:'dd/MM/yyyy' }}</span>
           </div>
         </div>
-        <div class="card-body" *ngIf="(recurso.programa == 'Módulo Alimentar')">
+        <div class="card-body" *ngIf="(recurso.programaid == 6)">
           <div class="row">
             <div class="col-md-4">
               <dl class="row">
@@ -58,7 +58,7 @@
             </div>
           </div>
         </div>
-        <div class="card-body" *ngIf="(recurso.programa !== 'Módulo Alimentar')">
+        <div class="card-body" *ngIf="(recurso.programaid !== 6)">
           <div class="row">
             <div class="col-md-4">
               <dl class="row">

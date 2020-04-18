@@ -3,7 +3,7 @@
       <ng-template ngbTabTitle>{{recurso.programa}} <span class='badge badge-info'>{{recurso.recurso_cantidad}}</span></ng-template>
         <ng-template  ngbTabContent >
             <div class="card border-light p-2" *ngFor="let prestacion of recurso.recursos; let i = index;">
-                <div class="card-header" *ngIf="(recurso.programa !== 'Módulo Alimentar')">
+                <div class="card-header" *ngIf="(recurso.programaid !== 6)">
                   <div class="d-flex justify-content-between" >
                     <span class="d-flex align-items-center">Alta: {{ prestacion.fecha_alta | date:'dd/MM/yyyy' }}</span>
                     <span class="d-flex align-items-center text-success" *ngIf="(prestacion.acreditacion)">Acreditacion: {{prestacion.fecha_acreditacion | date:'dd/MM/yyyy'}}</span>
@@ -14,12 +14,12 @@
                     </span>
                   </div>
                 </div>
-                <div class="card-header" *ngIf="(recurso.programa == 'Módulo Alimentar')">
+                <div class="card-header" *ngIf="(recurso.programaid == 6)">
                   <div class="d-flex justify-content-between" >
                     <span class="d-flex align-items-center">Entrega: {{ prestacion.fecha_alta | date:'dd/MM/yyyy' }}</span>
                   </div>
                 </div>
-                <div class="card-body" *ngIf="(recurso.programa == 'Módulo Alimentar')">
+                <div class="card-body" *ngIf="(recurso.programaid == 6)">
                   <div class="row">
                     <div class="col-md-4">
                       <dl class="row">
@@ -75,7 +75,7 @@
                   </div>
                   <shared-lista-persona *ngIf="(prestacion.alumno_lista != undefined && prestacion.alumno_lista.length > 0)" [personas]="prestacion.alumno_lista" [mostrar]="false"></shared-lista-persona>
                 </div>
-                <div class="card-body" *ngIf="(recurso.programa !== 'Módulo Alimentar')">
+                <div class="card-body" *ngIf="(recurso.programa !== 6)">
                   <div class="row">
                     <div class="col-md-4">
                       <dl class="row">

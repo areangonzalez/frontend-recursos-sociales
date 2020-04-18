@@ -85,8 +85,6 @@ export class RecursoComponent implements OnInit {
       }
       // agrego el id de persona
       recurso["personaid"] = this.datosPersona.id;
-      // id de la localidad de la persona para la prestación
-      recurso["localidadid"] = this.datosPersona.lugar.localidadid;
       let contacto: any = this.contactosForm.value.contacto;
       Object.assign(contacto, {lista_red_social: this.listaRedSocial});
       this._personaService.guardarContacto(contacto, this.datosPersona.id).subscribe(
