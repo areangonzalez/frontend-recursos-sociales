@@ -1,26 +1,25 @@
 import { Injectable } from "@angular/core";
-import { HttpParams } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 
 import { ApiService } from './api.service';
 
 @Injectable()
-export class ResponsableEntregaService implements Resolve <any> {
+export class MunicipioService implements Resolve<any> {
 
   constructor(
     private _apiService: ApiService
   ){}
 
-  get() {
-    return this._apiService.get('/responsables');
+  listar() {
+    return this._apiService.get('/municipios');
   }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
     ): Observable<any>|Promise<any>|any {
-
-      return this._apiService.get('/responsables');
+        return this._apiService.get('/municipios');
     }
+
 }
