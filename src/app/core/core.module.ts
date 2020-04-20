@@ -29,7 +29,8 @@ import {
   ResponsableEntregaService,
   ModuloAlimentarService,
   ComisionFomentoService,
-  MunicipioService
+  MunicipioService,
+  DelegacionService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -65,7 +66,8 @@ import { UtilService } from "./utils";
     ResponsableEntregaService,
     ModuloAlimentarService,
     ComisionFomentoService,
-    MunicipioService
+    MunicipioService,
+    DelegacionService
   ],
   declarations: []
 })

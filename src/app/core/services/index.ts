@@ -22,3 +22,4 @@ export * from './responsable-entrega.service';
 export * from './modulo-alimentar.service';
 export * from './comision-fomento.service';
 export * from './municipio.service';
+export * from './delegacion.service';
