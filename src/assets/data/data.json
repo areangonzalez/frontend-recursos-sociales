@@ -39,6 +39,9 @@
       {"id":8, "nombre": "Chimpay"},
       {"id":9, "nombre": "Maquinchao"},
       {"id":10, "nombre": "Valcheta"}
+    ]},
+    {"id":3, "nombre": "Municipio", "lista_responsable": [
+
     ]}
   ],
   "responsables": [
@@ -52,6 +55,25 @@
     {"id":8, "nombre": "Chimpay (Municipio)"},
     {"id":9, "nombre": "Maquinchao (Municipio)"},
     {"id":10, "nombre": "Valcheta (Municipio)"}
+  ],
+  "delegaciones": [
+    {"id":1, "nombre": "Alto Valle Centro"},
+    {"id":2, "nombre": "Alto Valle Este"},
+    {"id":3, "nombre": "Alto Valle Oeste"},
+    {"id":4, "nombre": "Línea Sur"},
+    {"id":5, "nombre": "Valle Inferior"}
+  ],
+  "municipios": [
+    {"id":6, "nombre": "Campo Grande"},
+    {"id":7, "nombre": "Cervantes"},
+    {"id":8, "nombre": "Chimpay"},
+    {"id":9, "nombre": "Maquinchao"},
+    {"id":10, "nombre": "Valcheta"}
+  ],
+  "comisionesDeFomento": [
+    {"id":11, "nombre": "Aguda Cecilio"},
+    {"id":12, "nombre": "Agudada de guerra"},
+    {"id":13, "nombre": "Aguada Guzmán"}
   ],
   "personas": [{
               "id": 1,

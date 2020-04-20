@@ -82,6 +82,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let tipoRedSocial = (<any>data).tipoRedSocial;
         let tipoResponsable = (<any>data).tipoResponsables;
         let responsables = (<any>data).responsables;
+        let municipios = (<any>data).municipios;
+        let comisionesDeFomento = (<any>data).comisionesDeFomento;
+        let delegaciones = (<any>data).delegaciones;
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -1073,6 +1076,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   // return 401 not authorised if token is null or invalid
                   return throwError({ status: 401, message: 'Unauthorised' });
               }
+            }
+            // LISTADELEGACIONES
+            if (request.url.endsWith('/apimock/delegacions') && request.method === 'GET') {
+                return of(new HttpResponse({ status: 200, body: delegaciones }));
+            }
+            // LISTAMUNICIPIOS
+            if (request.url.endsWith('/apimock/municipios') && request.method === 'GET') {
+              return of(new HttpResponse({ status: 200, body: municipios }));
+            }
+            // LISTACOMISIONDEFOMENTOS
+            if (request.url.endsWith('/apimock/comision-fomentos') && request.method === 'GET') {
+              return of(new HttpResponse({ status: 200, body: comisionesDeFomento }));
             }
             // get PROGRAMAS
             if (request.url.endsWith('/apimock/programas') && request.method === 'GET') {
