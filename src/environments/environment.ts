@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: '/apimock'
+  baseUrl: '/apimock',
+  mapboxKey: 'pk.eyJ1IjoiYXJlYW5nb256YWxleiIsImEiOiJjazk1eDFtamkwZjUzM21sYzBxY3Z3d3g1In0.d1xSOvYCNlNSxbaKxCqKTg'
 };
 
 /*

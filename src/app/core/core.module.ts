@@ -27,7 +27,8 @@ import {
   EstadisticaService,
   TipoResponsableService,
   ResponsableEntregaService,
-  ModuloAlimentarService
+  ModuloAlimentarService,
+  ComisionFomentoService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -61,7 +62,8 @@ import { UtilService } from "./utils";
     EstadisticaService,
     TipoResponsableService,
     ResponsableEntregaService,
-    ModuloAlimentarService
+    ModuloAlimentarService,
+    ComisionFomentoService
   ],
   declarations: []
 })
