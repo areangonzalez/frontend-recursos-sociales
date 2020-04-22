@@ -33,9 +33,7 @@ export class FormRecursoComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _utilService: UtilService,
-    private _tipoRecursoService: TipoRecursoService,
     private _mensajeService: MensajesService,
-    private _programaService: ProgramaService,
     private _personaService: PersonaService,
     private _configNgbDate: NgbDatepickerConfig,
 

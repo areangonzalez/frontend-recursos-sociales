@@ -7,9 +7,14 @@ import { ModuloAlimentarService, MensajesService } from 'src/app/core/services';
   templateUrl: './modulo-alimentar.component.html'
 })
 export class ModuloAlimentarComponent implements OnInit {
+  public orden: string = "-fecha_alta"; // ordenamiento del listado predefinido
+  public busqueda: any = {page: 0, pagesize: 20, sort: this.orden}; // parametros de la busqueda
   public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 };
-  public busqueda: any = {page: 0, pagesize: 20};
   public listaLocalidades: any = [];
+  public listaTipoResponsables: any = [];
+  public listaDelegaciones: any = [];
+  public listaMunicipios: any = [];
+  public listaComisionesDeFomentos: any = [];
   public beneficiariosLista: any = [];
 
   constructor(
@@ -19,14 +24,18 @@ export class ModuloAlimentarComponent implements OnInit {
 
   ngOnInit() {
     this.listaLocalidades = this._route.snapshot.data["localidades"];
-    this.configBeneficiario(this._route.snapshot.data["moduloAlimentar"]);
+    this.listaTipoResponsables = this._route.snapshot.data["tipoResponsables"];
+    this.listaMunicipios = this._route.snapshot.data["municipios"];
+    this.listaComisionesDeFomentos = this._route.snapshot.data["comisionesDeFomento"];
+    this.listaDelegaciones = this._route.snapshot.data["delegaciones"];
+    this.configModuloAlimentario(this._route.snapshot.data["moduloAlimentar"]);
   }
 
   /**
    * Se configura el listado y paginado de la prestacion de modulo alimenticio
    * @param beneficiarios
    */
-  public configBeneficiario(beneficiarios:any) {
+  public configModuloAlimentario(beneficiarios:any) {
     this.configPaginacion.colleccionSize = beneficiarios.total_filtrado;
       this.configPaginacion.pageSize = beneficiarios.pagesize;
       this.configPaginacion.monto_acreditado = 0;
@@ -74,14 +83,29 @@ export class ModuloAlimentarComponent implements OnInit {
       Object.assign(this.busqueda,{"page": newPage});
       this.listarPrestacionesModuloAlimentar(this.busqueda);
     }
-
+    /**
+     * @function listarPrestacionesModuloAlimentar obtiene el listado de prestaciones de modulo alimentario segun sus parametros
+     * @param params parametros de busquedas para las prestaciones de modulo alimentario
+     */
     public listarPrestacionesModuloAlimentar(params:object) {
       this._moduloAlimentarService.buscar(params).subscribe(
         beneficiarios => {
-          this.configBeneficiario(beneficiarios);
+          this.configModuloAlimentario(beneficiarios);
         }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
     }
 
-
-
+    public buscar(apiBusqueda:any) {
+      this.busqueda = {};
+      if (Object.entries(apiBusqueda).length == 0) {
+        this.orden = "-fecha_alta";
+      }
+      // Agrego la paginacion a la busqueda avanzada
+      Object.assign(apiBusqueda, {"page": 0, "pagesize": 20, "sort": this.orden});
+      // agrego la busqueda en la nueva variable
+      Object.assign(this.busqueda, apiBusqueda);
+      // configuro para que se dirija a la primera pagina
+      this.configPaginacion.page = 1;
+      // realizo la busqueda
+      this.listarPrestacionesModuloAlimentar(apiBusqueda);
+    }
 }

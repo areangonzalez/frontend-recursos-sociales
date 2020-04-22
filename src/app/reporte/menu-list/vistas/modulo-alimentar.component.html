@@ -1,4 +1,5 @@
 <div class="mt-2 bg-white p-3 rounded">
+  <busqueda-modulo-alimentar [localidades]="listaLocalidades" [tipoResponsables]="listaTipoResponsables" [delegaciones]="listaDelegaciones" [municipios]="listaMunicipios" [comisionesDeFomentos]="listaComisionesDeFomentos" (obtenerBusqueda)="buscar($event)"></busqueda-modulo-alimentar>
   <lista-modulo-alimentar [beneficiariosLista]="beneficiariosLista" [configPaginacion]="configPaginacion" (cambioDePagina)="cambioPagina($event)" ></lista-modulo-alimentar>
 </div>
 

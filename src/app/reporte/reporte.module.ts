@@ -5,7 +5,7 @@ import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared";
 import { ReporteRoutingModule } from "./reporte-routing.module";
 import { ReporteComponent } from "./reporte.component";
-import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent } from "./busqueda";
+import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent, BusquedaModuloAlimentarComponent } from "./busqueda";
 import { ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent, ListaModuloAlimentarComponent } from "./lista";
 import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent, ModuloAlimentarComponent } from "./menu-list";
 import { BeneficiarioProgramaLocalidadComponent, BeneficiarioTipoPrestacionLocalidadComponent } from './beneficiario';
@@ -22,7 +22,7 @@ import {
     ],
     declarations: [
         ReporteComponent,
-        BusquedaRecursoComponent, BusquedaBeneficiarioComponent,
+        BusquedaRecursoComponent, BusquedaBeneficiarioComponent, BusquedaModuloAlimentarComponent,
         ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent, ListaModuloAlimentarComponent,
         BeneficiarioProgramaLocalidadComponent, BeneficiarioTipoPrestacionLocalidadComponent,
         ChartProgramaMontoComponent, ChartProgramaPrestacionesComponent, ChartProgramaBeneficiariosComponent,
