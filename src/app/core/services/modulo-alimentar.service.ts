@@ -13,7 +13,7 @@ export class ModuloAlimentarService implements Resolve<any> {
   ){}
 
   public buscar(params: object) {
-    return this._apiService.post('/recursos/filtrar', params);
+    return this._apiService.post('/recursos/filtrar-prestacion', params);
   }
 
   resolve(
@@ -21,6 +21,6 @@ export class ModuloAlimentarService implements Resolve<any> {
     state: RouterStateSnapshot,
     ): Observable<any>|Promise<any>|any {
       let params = { pagesize: 20, pages: 0, programaid: 6 };
-      return this._apiService.post('/recursos/filtrar', params);
+      return this._apiService.post('/recursos/filtrar-prestacion', params);
     }
   }
