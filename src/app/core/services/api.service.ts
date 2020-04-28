@@ -21,8 +21,8 @@ export class ApiService {
     public formatParams(httpParams: HttpParams = new HttpParams(),params:Object){
       for (const key in params) {
         httpParams = httpParams.append(key.toString(), params[key].toString());
+        return httpParams;
       }
-      return httpParams;
     }
 
     get(path: string, params: HttpParams = new HttpParams()): Observable<any> {

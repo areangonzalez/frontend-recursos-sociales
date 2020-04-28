@@ -14,8 +14,8 @@
         <th scope="col">Nro Doc</th>
         <th colspan="2" scope="col">Apellido y nombre</th>
         <th class="text-center" scope="col">Localidad</th>
-        <th class="text-center" scope="col">Cantidad de Módulos</th>
         <th class="text-center" scope="col">Responsable de Entrega</th>
+        <th class="text-center" scope="col">Cantidad de Módulos</th>
         <th class="text-center" scope="col">Cantidad de hijos</th>
         <th class="text-center" scope="col"></th>
       </tr>
@@ -43,12 +43,12 @@
           </div>
         </td>
         <td class="text-center">{{beneficiario.localidad}}</td>
-        <td class="text-center">{{beneficiario.cant_modulo}}</td>
         <td class="text-center">{{beneficiario.responsable_entrega}}</td>
+        <td class="text-center">{{beneficiario.cant_modulo}}</td>
         <td class="text-center">{{beneficiario.cant_hijo}}</td>
-        <td>
+        <td class="text-center">
           <div class="btn-group">
-            <!-- <modal-info-beneficiario-component [beneficiarioid]="beneficiario.personaid" (cambioEstado)="actualizarLista($event)"></modal-info-beneficiario-component> -->
+            <modal-info-beneficiario-component [beneficiarioid]="beneficiario.personaid" (cambioEstado)="actualizarLista($event)"></modal-info-beneficiario-component>
           </div>
         </td>
       </tr>

@@ -13,17 +13,14 @@ export class ModuloAlimentarService implements Resolve<any> {
   ){}
 
   public buscar(params: object) {
-    let httpParams = new HttpParams();
-    httpParams = this._apiService.formatParams(httpParams, params);
-    return this._apiService.get('/recursos', httpParams);
+    return this._apiService.post('/recursos/filtrar', params);
   }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
     ): Observable<any>|Promise<any>|any {
-      let httpParams = new HttpParams();
-      httpParams = this._apiService.formatParams(httpParams, { pagesize: 20, pages: 0, programaid: 6 });
-      return this._apiService.get('/recursos', httpParams);
+      let params = { pagesize: 20, pages: 0, programaid: 6 };
+      return this._apiService.post('/recursos/filtrar', params);
     }
   }
