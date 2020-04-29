@@ -9,7 +9,7 @@ import { MensajesService, DetalleProgramaService } from 'src/app/core/services';
 export class ChartProgramaPrestacionesComponent implements OnInit {
 
   public chart:any;
-  public colorsGrafico: any[] = ['red', 'orange', 'yellow', 'green', 'lightblue', 'purple'];
+  public colorsGrafico: any[] = [];
   public datosPrograma: any[] = [];
 
   constructor(
@@ -28,7 +28,9 @@ export class ChartProgramaPrestacionesComponent implements OnInit {
     this._detalleProgramaService.info()
     .subscribe(programa => {
       programa.forEach((val, i) => {
-        this.datosPrograma.push({ nombre: programa[i].nombre, color: this.colorsGrafico[i], recurso_cantidad: programa[i].recurso_cantidad });
+        this.datosPrograma.push({ nombre: programa[i].nombre, color: programa[i].color, recurso_cantidad: programa[i].recurso_cantidad });
+        // hago el listado de colores para mostrar en el grafico
+        this.colorsGrafico.push(programa[i].color);
         // nombre de programas
         this.chart.data.labels.push(programa[i].nombre);
         // cantidad recursos

@@ -841,7 +841,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return of(new HttpResponse({ status: 200, body: personaEncontrada }));
         }
 
-        if(request.url.endsWith('/apimock/modulo-alimentar') && request.method === 'GET') {
+        if(request.url.endsWith('/apimock/recursos/filtrar-prestacion') && request.method === 'POST') {
           //let pageSize: number = parseInt(request.params.get('pagesize'));
           let pageSize: number = 2;
           let page: number = parseInt(request.params.get("page"));

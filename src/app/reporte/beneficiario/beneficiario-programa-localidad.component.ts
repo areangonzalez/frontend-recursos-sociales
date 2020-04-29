@@ -64,7 +64,6 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
    * @param index identificador del componente
    */
   remove(index: number) {
-
     if (this.VCR.length < 1)
       return;
 
@@ -72,17 +71,19 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
     let component: ChartBeneficiarioProgramaLocalidadComponent = <ChartBeneficiarioProgramaLocalidadComponent>componentRef.instance;
 
     let vcrIndex: number = this.VCR.indexOf(componentRef)
-
+    console.log("vcr index: ",vcrIndex);
     // removing component from container
     this.VCR.remove(vcrIndex);
 
     this.componentsReferences = this.componentsReferences.filter(x => x.instance.index !== index);
+    // borro localidad seleccionada
+    this.localidadSeleccionadas.splice(vcrIndex, 1);
   }
 
   private buscarLocalidadPorId(id:number) {
     let encontrada = false;
     for (let i = 0; i < this.localidadSeleccionadas.length; i++) {
-      if (this.localidadSeleccionadas[i] == id){
+      if (parseInt(this.localidadSeleccionadas[i]) == id){
         encontrada = true;
       }
     }
@@ -92,10 +93,8 @@ export class BeneficiarioProgramaLocalidadComponent implements OnInit {
    *  genero un listado de colores para cada programa
    */
   public etiquetasProgramas() {
-    let colorsGrafico: any[] = ['red', 'orange', 'yellow', 'green', 'lightblue'];
-
     for (let i = 0; i < this.programas.length; i++) {
-      this.programaColor.push({'nombre': this.programas[i].nombre, 'color': colorsGrafico[i]});
+      this.programaColor.push({'nombre': this.programas[i].nombre, 'color': this.programas[i].nombre});
     }
   }
 
