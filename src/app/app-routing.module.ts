@@ -17,6 +17,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: './inicio/inicio.module#InicioModule', // prod
       },
+      { path: 'reporte-modulo-alimentar',
+        loadChildren: './modulo-alimentar/modulo-alimentar.module#ModuloAlimentarModule',
+        canActivate: [AuthGuard],
+        data: { loading: true, preload: true, breadcrumb: 'Reportes Modulo Alimentar' }
+      },
       { path: 'crear-prestacion',
         loadChildren: './recurso/recurso.module#RecursoModule', // prod
         canActivate: [AuthGuard],

@@ -5,27 +5,27 @@
  */
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { AuthGuard } from '../core/guards/auth.guard';
 
+
 const routes: Routes = [
-    /* {
+    {
         path: '',
         //component: ReporteComponent,
         canActivateChild: [AuthGuard],
         children: [
-          { path: '', redirectTo: 'prestaciones', pathMatch: 'full' },
-          { path: 'prestaciones', component: PrestacionesComponent, data: { breadcrumb: 'Prestaciones', title: 'Reportes de prestaciones' },
+          { path: '', redirectTo: 'beneficiarios', pathMatch: 'full' },
+          /* { path: 'prestaciones', component: ModuloAlimentarReporteComponent, data: { breadcrumb: 'beneficiarios', title: 'Reportes de prestaciones' },
             resolve: {
               prestaciones: RecursoSocialService,
               programas: ProgramaService,
               localidades: LocalidadService,
               tipoPrestacion: TipoRecursoService
             }
-          },
-          { path: '', redirectTo: 'prestaciones', pathMatch: 'full' }
+          }, */
+          { path: '', redirectTo: 'beneficiarios', pathMatch: 'full' }
         ]
-    } */
+    }
 ];
 
 @NgModule({

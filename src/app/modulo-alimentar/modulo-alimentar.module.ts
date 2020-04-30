@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared";
 import { ModuloAlimentarRoutingModule } from "./modulo-alimentar-routing.module";
 import { ModuloAlimentarReporteComponent } from "./modulo-alimentar-reporte.component";
+import { MenuComponent } from './menu';
 
 @NgModule({
     imports: [
@@ -13,8 +14,8 @@ import { ModuloAlimentarReporteComponent } from "./modulo-alimentar-reporte.comp
         ModuloAlimentarRoutingModule
     ],
     declarations: [
-      ModuloAlimentarReporteComponent
-
+      ModuloAlimentarReporteComponent,
+      MenuComponent
     ],
     entryComponents: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
