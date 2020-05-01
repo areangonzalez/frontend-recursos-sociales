@@ -6,8 +6,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ReporteComponent } from './reporte.component';
-import { PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent, ModuloAlimentarComponent } from "./menu-list";
-import { RecursoSocialService, LocalidadService, ProgramaService, TipoRecursoService, BeneficiarioService, ModuloAlimentarService, ComisionFomentoService, MunicipioService, DelegacionService, TipoResponsableService } from '../core/services';
+import { PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent } from "./menu-list";
+import { RecursoSocialService, LocalidadService, ProgramaService, TipoRecursoService, BeneficiarioService } from '../core/services';
 import { AuthGuard } from '../core/guards/auth.guard';
 
 const routes: Routes = [
@@ -37,15 +37,6 @@ const routes: Routes = [
              programas: ProgramaService,
              tipoPrestaciones: TipoRecursoService
             },
-          },{ path: 'modulo-alimentar', component: ModuloAlimentarComponent, data: { breadcrumb: 'Módulo Alimentar', title: 'Reportes con Módulo Alimentar' },
-            resolve: {
-            localidades: LocalidadService,
-            tipoResponsables: TipoResponsableService,
-            moduloAlimentar: ModuloAlimentarService, // listado de prestaciones de modulo alimentar
-            comisionesDeFomento: ComisionFomentoService,
-            municipios: MunicipioService,
-            delegaciones: DelegacionService
-            },
           },
 
           { path: '', redirectTo: 'prestaciones', pathMatch: 'full' }
@@ -56,6 +47,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: [RecursoSocialService, ProgramaService, LocalidadService, TipoRecursoService, BeneficiarioService, ModuloAlimentarService]
+    providers: [RecursoSocialService, ProgramaService, LocalidadService, TipoRecursoService, BeneficiarioService]
 })
 export class ReporteRoutingModule { }

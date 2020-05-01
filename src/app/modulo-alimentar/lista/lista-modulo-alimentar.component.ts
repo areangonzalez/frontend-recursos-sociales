@@ -4,7 +4,7 @@ import { DatePipe } from "@angular/common";
 @Component({
   selector: 'lista-modulo-alimentar',
   templateUrl: './lista-modulo-alimentar.component.html',
-  styleUrls: ['./lista-beneficiario.component.sass']
+  styleUrls: ['./lista-modulo-alimentar.component.sass']
 })
 export class ListaModuloAlimentarComponent implements OnInit {
   @Input("beneficiariosLista") public beneficiariosLista:any;

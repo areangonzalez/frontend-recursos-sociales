@@ -6,23 +6,30 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
+/* Componentes */
+import { ModuloAlimentarReporteComponent } from "./modulo-alimentar-reporte.component";
+import { BeneficiariosComponent } from "./menu";
+/* Servicios */
+import { LocalidadService, TipoResponsableService, ModuloAlimentarService, ComisionFomentoService, MunicipioService, DelegacionService } from '../core/services';
 
 
 const routes: Routes = [
     {
         path: '',
-        //component: ReporteComponent,
+        component: ModuloAlimentarReporteComponent,
         canActivateChild: [AuthGuard],
         children: [
           { path: '', redirectTo: 'beneficiarios', pathMatch: 'full' },
-          /* { path: 'prestaciones', component: ModuloAlimentarReporteComponent, data: { breadcrumb: 'beneficiarios', title: 'Reportes de prestaciones' },
+          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'beneficiarios', title: 'Reportes de prestaciones' },
             resolve: {
-              prestaciones: RecursoSocialService,
-              programas: ProgramaService,
               localidades: LocalidadService,
-              tipoPrestacion: TipoRecursoService
-            }
-          }, */
+              tipoResponsables: TipoResponsableService,
+              moduloAlimentar: ModuloAlimentarService, // listado de prestaciones de modulo alimentar
+              comisionesDeFomento: ComisionFomentoService,
+              municipios: MunicipioService,
+              delegaciones: DelegacionService
+            },
+          },
           { path: '', redirectTo: 'beneficiarios', pathMatch: 'full' }
         ]
     }
@@ -31,6 +38,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: []
+    providers: [LocalidadService, TipoResponsableService, ModuloAlimentarService, ComisionFomentoService, MunicipioService, DelegacionService]
 })
 export class ModuloAlimentarRoutingModule { }

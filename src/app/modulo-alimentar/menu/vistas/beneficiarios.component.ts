@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ModuloAlimentarService, MensajesService } from 'src/app/core/services';
 
 @Component({
-  selector: 'reporte-estadisticas',
-  templateUrl: './modulo-alimentar.component.html'
+  selector: 'ma-reporte-beneficiario-vista',
+  templateUrl: './beneficiarios.component.html'
 })
-export class ModuloAlimentarComponent implements OnInit {
+export class BeneficiariosComponent implements OnInit {
   public orden: string = "-fecha_alta"; // ordenamiento del listado predefinido
   public busqueda: any = {page: 0, pagesize: 20, sort: this.orden}; // parametros de la busqueda
   public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 };
@@ -100,7 +100,7 @@ export class ModuloAlimentarComponent implements OnInit {
         this.orden = "-fecha_alta";
       }
       // Agrego la paginacion a la busqueda avanzada
-      Object.assign(apiBusqueda, {"page": 0, "pagesize": 20, "sort": this.orden});
+      Object.assign(apiBusqueda, {"page": 0, "pagesize": 20, "programaid": 6, "sort": this.orden});
       // agrego la busqueda en la nueva variable
       Object.assign(this.busqueda, apiBusqueda);
       // configuro para que se dirija a la primera pagina

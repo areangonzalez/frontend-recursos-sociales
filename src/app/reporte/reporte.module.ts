@@ -5,9 +5,9 @@ import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared";
 import { ReporteRoutingModule } from "./reporte-routing.module";
 import { ReporteComponent } from "./reporte.component";
-import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent, BusquedaModuloAlimentarComponent } from "./busqueda";
-import { ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent, ListaModuloAlimentarComponent } from "./lista";
-import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent, ModuloAlimentarComponent } from "./menu-list";
+import { BusquedaRecursoComponent, BusquedaBeneficiarioComponent } from "./busqueda";
+import { ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent } from "./lista";
+import { MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent } from "./menu-list";
 import { BeneficiarioProgramaLocalidadComponent, BeneficiarioTipoPrestacionLocalidadComponent } from './beneficiario';
 import {
   ChartProgramaMontoComponent, ChartProgramaPrestacionesComponent, ChartProgramaBeneficiariosComponent,
@@ -22,12 +22,12 @@ import {
     ],
     declarations: [
         ReporteComponent,
-        BusquedaRecursoComponent, BusquedaBeneficiarioComponent, BusquedaModuloAlimentarComponent,
-        ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent, ListaModuloAlimentarComponent,
+        BusquedaRecursoComponent, BusquedaBeneficiarioComponent,
+        ListaRecursoComponent, ListaBeneficiarioComponent, ListaProgramasComponent,
         BeneficiarioProgramaLocalidadComponent, BeneficiarioTipoPrestacionLocalidadComponent,
         ChartProgramaMontoComponent, ChartProgramaPrestacionesComponent, ChartProgramaBeneficiariosComponent,
         ChartBeneficiarioProgramaLocalidadComponent, ChartBeneficiarioTipoPrestacionLocalidadComponent, ChartLocalidadMontoComponent,
-        MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent, ModuloAlimentarComponent
+        MenuListaComponent, PrestacionesComponent, BeneficiariosComponent, EstadisticasComponent
     ],
     entryComponents: [
       ChartBeneficiarioProgramaLocalidadComponent, ChartBeneficiarioTipoPrestacionLocalidadComponent
