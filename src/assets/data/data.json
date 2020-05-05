@@ -19,6 +19,44 @@
       {"id":3, "nombre": "Mejoramiento habitacional"},
       {"id":4, "nombre": "Emergencia"}
   ],
+  "estadistica-modulo-alimentar": [
+    {
+      "localidadid": "2576",
+      "modulo_cantidad": "33",
+      "beneficiario_cantidad": "32",
+      "localidad": "General Roca"
+    },
+    {
+      "localidadid": "2586",
+      "modulo_cantidad": "297",
+      "beneficiario_cantidad": "297",
+      "localidad": "Cipolletti"
+    },
+    {
+      "localidadid": "2587",
+      "modulo_cantidad": "28",
+      "beneficiario_cantidad": "28",
+      "localidad": "Cinco Saltos"
+    },
+    {
+      "localidadid": "2589",
+      "modulo_cantidad": "10",
+      "beneficiario_cantidad": "10",
+      "localidad": "Allen"
+    },
+    {
+      "localidadid": "2629",
+      "modulo_cantidad": "22",
+      "beneficiario_cantidad": "22",
+      "localidad": "San Antonio Oeste"
+    },
+    {
+      "localidadid": "2640",
+      "modulo_cantidad": "17",
+      "beneficiario_cantidad": "17",
+      "localidad": "Viedma"
+    }
+  ],
   "tipoRedSocial": [
     {"id": 1, "nombre": "Facebook", "icono_class": "fab fa-facebook-square", "url_1": "https://www.facebook.com/" },
     {"id": 2, "nombre": "Instagram", "icono_class": "fab fa-instagram", "url_1": "https://www.instagram.com/" },

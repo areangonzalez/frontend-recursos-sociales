@@ -8,7 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
 /* Componentes */
 import { ModuloAlimentarReporteComponent } from "./modulo-alimentar-reporte.component";
-import { BeneficiariosComponent } from "./menu";
+import { BeneficiariosComponent, EstadisticasComponent } from "./menu";
 /* Servicios */
 import { LocalidadService, TipoResponsableService, ModuloAlimentarService, ComisionFomentoService, MunicipioService, DelegacionService } from '../core/services';
 
@@ -20,7 +20,7 @@ const routes: Routes = [
         canActivateChild: [AuthGuard],
         children: [
           { path: '', redirectTo: 'beneficiarios', pathMatch: 'full' },
-          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'beneficiarios', title: 'Reportes de prestaciones' },
+          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'Beneficiarios', title: 'Reportes de Modulo Alimentar' },
             resolve: {
               localidades: LocalidadService,
               tipoResponsables: TipoResponsableService,
@@ -29,6 +29,9 @@ const routes: Routes = [
               municipios: MunicipioService,
               delegaciones: DelegacionService
             },
+          },
+          { path: 'estadisticas', component: EstadisticasComponent,
+            data: { breadcrumb: 'Estadísticas', title: 'Reportes de Estadísticas Modulo Alimentar' }
           },
           { path: '', redirectTo: 'beneficiarios', pathMatch: 'full' }
         ]
