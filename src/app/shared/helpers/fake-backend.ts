@@ -85,6 +85,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let municipios = (<any>data).municipios;
         let comisionesDeFomento = (<any>data).comisionesDeFomento;
         let delegaciones = (<any>data).delegaciones;
+        let estadistcasModuloAlimentar = (<any>data).estadisticaModuloAlimentar;
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -1077,6 +1078,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   return throwError({ status: 401, message: 'Unauthorised' });
               }
             }
+            // Estadistica modulo alimentar
+            if (request.url.endsWith('/apimock/estadisticas/modulo-alimentario-por-localidad') && request.method === 'GET') {
+              return of(new HttpResponse({ status: 200, body: estadistcasModuloAlimentar }));
+          }
+
             // LISTADELEGACIONES
             if (request.url.endsWith('/apimock/delegacions') && request.method === 'GET') {
                 return of(new HttpResponse({ status: 200, body: delegaciones }));

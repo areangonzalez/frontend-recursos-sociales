@@ -10,7 +10,7 @@ import { AuthGuard } from '../core/guards/auth.guard';
 import { ModuloAlimentarReporteComponent } from "./modulo-alimentar-reporte.component";
 import { BeneficiariosComponent, EstadisticasComponent } from "./menu";
 /* Servicios */
-import { LocalidadService, TipoResponsableService, ModuloAlimentarService, ComisionFomentoService, MunicipioService, DelegacionService } from '../core/services';
+import { LocalidadService, TipoResponsableService, ModuloAlimentarService, ComisionFomentoService, MunicipioService, DelegacionService, EstadisticaService } from '../core/services';
 
 
 const routes: Routes = [
@@ -31,7 +31,10 @@ const routes: Routes = [
             },
           },
           { path: 'estadisticas', component: EstadisticasComponent,
-            data: { breadcrumb: 'Estadísticas', title: 'Reportes de Estadísticas Modulo Alimentar' }
+            data: { breadcrumb: 'Estadísticas', title: 'Reportes de Estadísticas Modulo Alimentar' },
+            resolve: {
+              estadisticas: EstadisticaService
+            }
           },
           { path: '', redirectTo: 'beneficiarios', pathMatch: 'full' }
         ]

@@ -19,7 +19,7 @@
       {"id":3, "nombre": "Mejoramiento habitacional"},
       {"id":4, "nombre": "Emergencia"}
   ],
-  "estadistica-modulo-alimentar": [
+  "estadisticaModuloAlimentar": [
     {
       "localidadid": "2576",
       "modulo_cantidad": "33",

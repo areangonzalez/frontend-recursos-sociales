@@ -23,4 +23,4 @@ export class ModuloAlimentarService implements Resolve<any> {
       let params = { pagesize: 20, pages: 0, programaid: 6 };
       return this._apiService.post('/recursos/filtrar-prestacion', params);
     }
-  }
+}

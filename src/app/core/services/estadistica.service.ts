@@ -3,6 +3,7 @@ import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiService } from './api.service';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 
 @Injectable()
 export class EstadisticaService {
@@ -32,5 +33,13 @@ export class EstadisticaService {
   montosLocalidades(rango:number) {
     return this._apiService.get('/estadisticas/montos-por-localidades/' + rango);
   }
+
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+    ): Observable<any>|Promise<any>|any {
+      return this._apiService.get('/estadisticas/modulo-alimentario-por-localidad');
+    }
+
 
 }
