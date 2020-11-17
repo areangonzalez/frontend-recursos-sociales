@@ -38,7 +38,7 @@ export class BusquedaModuloAlimentarComponent implements OnInit {
     private _util: UtilService
   ){
     // configuracion de fecha minima
-    _configNgbDate.minDate = {year: 1950, month: 1, day: 1};
+    _configNgbDate.minDate = {year: 1900, month: 1, day: 1};
     // formulario de busqueda avanzada
     this.busquedaAvanzada = _fb.group({
         persona: _fb.group({
