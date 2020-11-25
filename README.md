@@ -1,27 +1,61 @@
 # FrontendRecursosSociales
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
+Este proyecto esta generado con imagen de docker  [Angular CLI](https://github.com/angular/angular-cli) version 7.2.4.
+ - [Angular CLI](https://github.com/angular/angular-cli) version 7.3.10.
+ - [Ng Bootstrap](https://github.com/ng-bootstrap/ng-bootstrap) v4.0.1
 
-## Development server
+## Instalacion del proyecto via docker
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Descargamos la imagen de docker:
+  
+  `docker pull trion/ng-cli:7.2.4`
 
-## Code scaffolding
+Nos dirigimos al directorio donde tenemos el proyecto y seguimos los siguientes pasos:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ - Utilizamos el siguiente comando a instalar, que nos proporcionara la instalación de las dependencias del proyecto:
+    
+    `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:7.2.4 npm install`
 
-## Build
+ - Compilamos el codigo con el siguiente comando:
+    
+    `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:7.2.4 ng build`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Una vez completado los pasos anteriores iniciamos el docker que contiene nuestro sistema:
 
-## Running unit tests
+Iniciamos el proyecto con la imagen de docker `trion/ng-cli:7.2.4`:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   `docker run -u $(id -u) --rm -p 4200:4200 -v "$PWD":/app trion/ng-cli:7.2.4 ng serve --host 0.0.0.0`
 
-## Running end-to-end tests
+Mediante docker-compose:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+ - Levantamos los contenedores
 
-## Further help
+    `docker-compose -p app up -d`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ - Borramos los contenedores
+
+    `docker-compose -p app down`
+
+## Test E2E (end-to-end)
+
+Imagen utilizada para test [Trion/ng-cli-e2e:9.1.5](https://hub.docker.com/r/trion/ng-cli-e2e/).
+
+Creamos una red para los contenedores de docker:
+
+  `docker network create front`
+
+Iniciamos el docker para testing:
+
+  `docker run -u $(id -u) --rm --network=front --name=miangular2 -v "$PWD":/app trion/ng-cli-e2e:7.2.4 ng serve --port 4200 --host miangular2`
+
+Ingresar al servicio que ejecuta angular-cli y ejecutar el siguiente comando:
+
+ - Ejemplo mi servicio es: "miangular2":
+
+   `ng e2e --host miangular2 --port 4300`
+
+Esto ejecutara end-to-end el testeo via [Protractor](http://www.protractortest.org/).
+
+## Ayuda
+
+Para mas ayuda dobre Angular CLI utilice `ng help` o ingresa a [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
