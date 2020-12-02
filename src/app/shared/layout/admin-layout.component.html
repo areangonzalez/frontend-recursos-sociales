@@ -1,0 +1,25 @@
+<nav class="col-md-2 d-none d-md-block background-menu sidebar">
+  <div class="logorn-nombre">
+    <img src="../../../assets/img/logoRN.svg" alt="rio_negro" >
+    <p class="nombre-ds">Ministerio de Desarrollo Humano y Articulación Solidaria</p>
+  </div>
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['gestor-usuarios']">Gesti&oacute;n de Usuarios</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['gestor-usuarios']">Alta de Permisos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" >Cerrar Sesión</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<app-menu-admin></app-menu-admin>
+<main class="col-md-9 ml-sm-auto col-lg-10">
+  <mensajes-alert></mensajes-alert>
+  <router-outlet></router-outlet>
+</main>

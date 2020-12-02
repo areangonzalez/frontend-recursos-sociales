@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomPreloadingStrategy } from "./custom-preloading-strategy";
-import { AppLayoutComponent } from "./shared/layout";
+import { AdminLayoutComponent, AppLayoutComponent } from "./shared/layout";
 import { AuthGuard } from "./core/guards/auth.guard";
 
 
@@ -36,6 +36,7 @@ const routes: Routes = [
         data: { loading: true, preload: true, breadcrumb: 'Vista', title: 'Visualizar prestación' } }
     ]
   },
+  { path: 'admin', component: AdminLayoutComponent, data: { title: "Administración" }, loadChildren: './admin/admin.module#AdminModule' },
   { path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
   { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
