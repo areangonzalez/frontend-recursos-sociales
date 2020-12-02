@@ -95,9 +95,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   // if login details are valid return 200 OK with a fake jwt token
                   let body = {
                       username: 'admin',
-                      access_token: 'fake-jwt-token'
+                      access_token: 'fake-jwt-token1',
+                      role: 1
                   };
                   return of(new HttpResponse({ status: 200, body }));
+              } else if (request.body.username === 'soporte' && request.body.password_hash === 'soportes') {
+                // if login details are valid return 200 OK with a fake jwt token
+                let body = {
+                    username: 'admin',
+                    access_token: 'fake-jwt-token2',
+                    role: 2
+                };
+                return of(new HttpResponse({ status: 200, body }));
+              } else if (request.body.username === 'usuario' && request.body.password_hash === 'usuarios') {
+                // if login details are valid return 200 OK with a fake jwt token
+                let body = {
+                    username: 'admin',
+                    access_token: 'fake-jwt-token3',
+                    role: 3
+                };
+                return of(new HttpResponse({ status: 200, body }));
               } else {
                   // else return 400 bad request
                   return throwError( { code:0,status: 500, message: 'Username or password is incorrect' } );
