@@ -1,25 +1,36 @@
-<nav class="col-md-2 d-none d-md-block background-menu sidebar">
-  <div class="logorn-nombre">
-    <img src="../../../assets/img/logoRN.svg" alt="rio_negro" >
-    <p class="nombre-ds">Ministerio de Desarrollo Humano y Articulación Solidaria</p>
-  </div>
-  <div class="sidebar-sticky">
-    <ul class="nav flex-column">
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['gestor-usuarios']">Gesti&oacute;n de Usuarios</a>
-      </li>
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['gestor-usuarios']">Alta de Permisos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" >Cerrar Sesión</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div class="container-fluid">
+  <div class="row wrapper min-vh-100 flex-column flex-sm-row">
+    <aside class="col-12 col-sm-2 p-0 background-menu flex-shrink-1">
+      <nav class="navbar navbar-expand-sm align-items-start flex-sm-column flex-row">
+        <div class="logorn-nombre" >
+          <img src="../../../assets/img/logoRN.svg" alt="rio_negro" >
+          <p class="nombre-ds">Ministerio de Desarrollo Humano y Articulación Solidaria</p>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse"
+        aria-expanded="false" aria-label="Toggle navigation">
+          <i style="color:white;" class="fas fa-bars"></i>
+        </button>
+        <div class="collapse nabvar-collapse sidebar" id="navbarCollapse" [ngbCollapse]="!isCollapsed">
+          <ul class="flex-column navbar-nav w-100 justify-content-between">
+            <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
+              <a class="nav-link" [routerLink]="['gestor-usuarios']">Gesti&oacute;n de Usuarios</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
+              <a class="nav-link" [routerLink]="['gestor-usuarios']">Alta de Permisos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" >Cerrar Sesión</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
 
-<app-menu-admin></app-menu-admin>
-<main class="col-md-9 ml-sm-auto col-lg-10">
-  <mensajes-alert></mensajes-alert>
-  <router-outlet></router-outlet>
-</main>
+    <main class="col py-3 flex-grow-1">
+      <mensajes-alert></mensajes-alert>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+
+</div>
