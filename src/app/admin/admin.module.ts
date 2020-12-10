@@ -5,16 +5,17 @@ import { SharedModule } from "../shared";
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { GestorUsuarioComponent } from './gestor-usuario';
-import { UsuarioComponent, UsuarioModalComponent, UsuarioFormComponent } from './componentes';
+import { UsuarioComponent, UsuarioModalContent, UsuarioModalComponent, UsuarioFormComponent } from './componentes';
 
 @NgModule({
-  declarations: [AdminComponent, GestorUsuarioComponent, UsuarioComponent, UsuarioFormComponent, UsuarioModalComponent],
   imports: [
     NgbModule,
     SharedModule,
     AdminRoutingModule
   ],
+  declarations: [AdminComponent, GestorUsuarioComponent, UsuarioComponent, UsuarioFormComponent, UsuarioModalContent, UsuarioModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [UsuarioModalContent, UsuarioModalComponent]
 
 })
 export class AdminModule { }
