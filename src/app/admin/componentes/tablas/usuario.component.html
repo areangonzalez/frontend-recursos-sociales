@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-between">
+  <div class="d-flex align-items-center p-2 font-weight-bold">
+    <!-- <span *ngIf="configPaginacion.totalRegistros > 0">Prestaciones: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
+    <span *ngIf="configPaginacion.totalRegistros == 0">Prestaciones: 0</span> -->
+    <span>Usuarios: 10</span>
+  </div>
+  <!-- <div class="d-flex align-items-center p-2 font-weight-bold">
+    <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination" style="margin-bottom: -15px;" ></ngb-pagination>
+  </div> -->
+  <div class="d-flex align-items-center p-2 font-weight-normal">
+    <ngb-pagination [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+  </div>
+</div>
+<div class="row pl-3 pr-3">
+  <table class="table table-sm">
+    <thead class="background-menu" >
+      <tr>
+        <th scope="col">Apellido y Nombre</th>
+        <th class="text-center" scope="col">Usuario</th>
+        <th class="text-center" scope="col">Fecha Inicial</th>
+        <th class="text-center" scope="col">Ultimo Ingreso</th>
+        <th class="text-center" scope="col">Dirección IP</th>
+        <th class="text-center columna-160" scope="col"><button class="btn btn-sm btn-success"><i class="fas fa-user-plus"></i> Agregar Usuario</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Garcia Pedro</td>
+        <td class="text-center">pgarcia</td>
+        <td class="text-center">12/06/2020</td>
+        <td class="text-center">25/11/2020</td>
+        <td class="text-center">192.168.1.19</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-outline-dark rounded-circle"><i class="fas fa-user-cog"></i></button>
+          <button class="btn btn-sm btn-outline-secondary rounded-circle"><i class="fas fa-user-edit"></i></button>
+          <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="fas fa-user-minus"></i></button>
+        </td>
+      </tr>
+      <tr>
+        <td>Garcia Pedro</td>
+        <td class="text-center">pgarcia</td>
+        <td class="text-center">12/06/2020</td>
+        <td class="text-center">25/11/2020</td>
+        <td class="text-center">192.168.1.19</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-outline-dark rounded-circle"><i class="fas fa-user-cog"></i></button>
+          <button class="btn btn-sm btn-outline-secondary rounded-circle"><i class="fas fa-user-edit"></i></button>
+          <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="fas fa-user-minus"></i></button>
+        </td>
+      </tr>
+      <tr>
+        <td>Garcia Pedro</td>
+        <td class="text-center">pgarcia</td>
+        <td class="text-center">12/06/2020</td>
+        <td class="text-center">25/11/2020</td>
+        <td class="text-center">192.168.1.19</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-outline-dark rounded-circle"><i class="fas fa-user-cog"></i></button>
+          <button class="btn btn-sm btn-outline-secondary rounded-circle"><i class="fas fa-user-edit"></i></button>
+          <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="fas fa-user-minus"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex justify-content-between border-top">
+  <div class="d-flex align-items-center p-2 font-weight-bold">
+    <!-- <span *ngIf="configPaginacion.totalRegistros > 0">Prestaciones: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
+    <span *ngIf="configPaginacion.totalRegistros == 0">Prestaciones: 0</span> -->
+    <span>Usuarios: 10</span>
+  </div>
+  <!-- <div class="d-flex align-items-center p-2 font-weight-bold">
+    <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination" style="margin-bottom: -15px;" ></ngb-pagination>
+  </div> -->
+  <div class="d-flex align-items-center p-2 font-weight-normal">
+    <ngb-pagination [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+  </div>
+</div>
