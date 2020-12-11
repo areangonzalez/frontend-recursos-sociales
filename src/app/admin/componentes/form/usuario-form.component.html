@@ -1,3 +1,89 @@
-<p>
-  usuario-form works!
-</p>
+<form [formGroup]="persona">
+  <fieldset >
+    <div class="row">
+      <div class="form-group col-md-6">
+          <label for="nro_documento" class="prioridad">Nro. documento (<span>*</span>):</label>
+          <div class="input-group">
+              <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" placeholder="Ej.: 23123987"
+                (keyup)="soloNumero($event.target)" (change)="validarCuil($event.target.value)" [ngClass]="{'is-invalid': (persona.get('nro_documento').invalid && submitted)}">
+          </div>
+          <div *ngIf="(persona.get('nro_documento').invalid && submitted)" class="text-danger">
+              <div *ngIf="persona.get('nro_documento').hasError('required')">Este campo es requerido. </div>
+              <div *ngIf="persona.get('nro_documento').hasError('minlength')">El número de documento debe tener al menos 7 digitos.</div>
+              <div *ngIf="persona.get('nro_documento').hasError('maxlength')">El número de documento no puede tener mas de 8 digitos.</div>
+          </div>
+      </div>
+      <div class="form-group col-md-6">
+          <label for="form-agente-cuil" class="prioridad">Cuil (<span>*</span>):</label>
+          <div class="input-group">
+              <input id="cuil_prin" class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2"
+              (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (persona.get('cuil_prin').invalid && submitted)}">
+              <div class="input-group-addon div-cuil-num-center">{{cuil_medio}}</div>
+              <input id="cuil_fin" class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_fin" maxlength="1"
+              (change)="armarCuil()" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (persona.get('cuil_fin').invalid && submitted)}">
+          </div>
+          <div *ngIf="((persona.get('cuil_prin').invalid || persona.get('cuil_fin').invalid) && submitted)"
+              class="text-danger">
+              <div *ngIf="(persona.get('cuil_prin').hasError('required') || persona.get('cuil_fin').hasError('required'))">Complete los campos de Cuil.</div>
+          </div>
+      </div>
+      <div class="form-group col-md-6">
+          <label for="apellido" class="prioridad">Apellido (<span>*</span>):</label>
+          <input type="text" id="apellido" placeholder="Apellido" class="form-control" formControlName="apellido" [ngClass]="{'is-invalid': (persona.get('apellido').invalid && submitted)}">
+          <div *ngIf="(persona.get('apellido').invalid && submitted)"
+              class="text-danger">
+              <div *ngIf="persona.get('apellido').hasError('required')">Este campo es requerido. </div>
+              <div *ngIf="persona.get('apellido').hasError('minlength')">El apellido es muy corto.</div>
+          </div>
+      </div>
+      <div class="form-group col-md-6">
+          <label for="nombre" class="prioridad">Nombre (<span>*</span>):</label>
+          <input type="text" id="nombre" placeholder="Nombre" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (persona.get('nombre').invalid && submitted)}">
+          <div *ngIf="(persona.get('nombre').invalid && submitted)"
+              class="text-danger">
+              <div *ngIf="persona.get('nombre').hasError('required')">Este campo es requerido. </div>
+              <div *ngIf="persona.get('nombre').hasError('minlength')">El nombre es muy corto.</div>
+          </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="usuario" class="prioridad">Usuario (<span>*</span>):</label>
+        <input type="text" id="usuario" placeholder="Nombre de usuario" class="form-control" formControlName="usuario" [ngClass]="{'is-invalid': (persona.get('usuario').invalid && submitted)}">
+        <div *ngIf="(persona.get('usuario').invalid && submitted)"
+            class="text-danger">
+            <div *ngIf="persona.get('usuario').hasError('required')">Este campo es requerido. </div>
+            <div *ngIf="persona.get('usuario').hasError('minlength')">El nombre es muy corto.</div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="email" class="prioridad">Email:</label>
+        <input type="email" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email" (keyup)="aMinuscula($event.target)" [ngClass]="{'is-invalid': (persona.get('email').invalid && submitted)}">
+        <div *ngIf="(persona.get('email').invalid && submitted)" class="text-danger">
+          <div *ngIf="persona.get('email').hasError('pattern')">El email es invalido.</div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="password" class="prioridad">Contraseña:</label>
+        <input type="password" id="password" placeholder="********" class="form-control" formControlName="password" [ngClass]="{'is-invalid': (persona.get('password').invalid && submitted)}">
+        <div *ngIf="(persona.get('password').invalid && submitted)"
+            class="text-danger">
+            <div *ngIf="persona.get('password').hasError('required')">Este campo es requerido. </div>
+            <div *ngIf="persona.get('password').hasError('minlength')">La contraseña es demasiado corta, al menos debe de tener 8 caracteres.</div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="confirmPass" class="prioridad">Confirmar Contraseña:</label>
+        <input type="password" id="confirmPass" placeholder="********" class="form-control" formControlName="confirmPass" [ngClass]="{'is-invalid': (persona.get('password').value != persona.get('confirmPass').value && persona.get('confirmPass').value != null)}">
+        <div *ngIf="(persona.get('password').value != persona.get('confirmPass').value && persona.get('confirmPass').value != null)" class="text-danger">
+          <div>Las contraseñas no coinciden.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="pt1">
+    <div class="float-right">
+        <button type="button" class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>&nbsp;
+        <button type="button" class="btn btn-success" (click)="validarPersona()" ><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
+    </div>
+
+  </fieldset>
+</form>

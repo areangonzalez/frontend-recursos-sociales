@@ -12,16 +12,17 @@ import { BotonDisenio, ModalConfig } from 'src/app/core/models';
       </button>
     </div>
     <div class="modal-body">
-      <p>Hello WORLD!</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+      <admin-usuario-form (cancelarForm)="cancelarModal($event)"></admin-usuario-form>
     </div>
   `
 })
 export class UsuarioModalContent {
   @Input("configModal") public configModal:ModalConfig;
   constructor(public activeModal: NgbActiveModal) {}
+
+  cancelarModal(cancelar: boolean) {
+    this.activeModal.close('closed');
+  }
 }
 
 @Component({
@@ -41,7 +42,7 @@ export class UsuarioModalComponent  {
   constructor(private modalService: NgbModal) {}
 
     open() {
-      const modalRef = this.modalService.open(UsuarioModalContent, { size: 'lg' });
+      const modalRef = this.modalService.open(UsuarioModalContent);
       modalRef.componentInstance.configModal = this.configModal;
     }
 

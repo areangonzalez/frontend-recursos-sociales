@@ -202,7 +202,6 @@ export class FormPersonaComponent implements OnInit {
       let id = this.formPersona.value.id;
       let persona = this.personaModel.deserealize(this.formPersona.value);
       this.guardarPersona(persona,id);
-
     }
   }
   /**
