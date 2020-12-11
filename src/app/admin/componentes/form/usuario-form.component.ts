@@ -9,10 +9,12 @@ import { UtilService } from 'src/app/core/utils';
   styleUrls: ['./usuario-form.component.sass']
 })
 export class UsuarioFormComponent implements OnInit {
+  @Input("datosUsuario") public datosUsuario: any;
   @Output("cancelarForm") public cancelarForm = new EventEmitter();
   public persona: FormGroup;
   public cuil_medio: string;
   public submitted: boolean = false;
+  public editarUsuario: boolean = true;
 
   constructor(private _fb: FormBuilder, private _util: UtilService, private _mensajeService: MensajesService) {
     this.persona = _fb.group({
@@ -23,14 +25,28 @@ export class UsuarioFormComponent implements OnInit {
       cuil: '',
       cuil_prin: ['', [Validators.required, Validators.minLength(2)]],
       cuil_fin: ['', [Validators.required, Validators.minLength(1)]],
-      usuario: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPass: ['', [Validators.required]]
-    }, { validators:  this.checkPasswords });
+      usuario: _fb.group({
+        user_name: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPass: ['', [Validators.required]]
+      }, { validators:  this.checkPasswords })
+    });
   }
 
   ngOnInit() {
+    if (this.datosUsuario !== null) {
+      this.completarForm(this.datosUsuario);
+      this.persona.removeControl("usuario");
+      this.editarUsuario = true;
+    } else {
+      this.editarUsuario = false;
+    }
+  }
+
+  completarForm(datos: any) {
+    this.validarCuil(datos["nro_documento"]);
+    this.persona.patchValue(datos);
   }
 
   cancelar() {
@@ -41,11 +57,11 @@ export class UsuarioFormComponent implements OnInit {
     this.submitted = true;
     if (this.persona.invalid) { // verifico la validación en los campos del formulario
       console.log("no se valida");
-      if (this.persona.get('email').value !== this.persona.get('email').value.toLowerCase()){
+      /* if (this.persona.get('email').value !== this.persona.get('email').value.toLowerCase()){
         this._mensajeService.cancelado("El email no puede estar en mayusculas!!", [{name:''}]);
-      }else{
+      }else{ */
         this._mensajeService.cancelado("Campos sin completar!!", [{name:''}]);
-      }
+      // }
       return;
     }else{ // si pasa la validación
       console.log("paso la validación");
@@ -57,6 +73,7 @@ export class UsuarioFormComponent implements OnInit {
       this.guardarUsuario(usuario,id); */
     }
   }
+
   /**
    * Checkea la comparacion de las contraseñas para validar
    * @param group formulario que contiene los valores a comparar

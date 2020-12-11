@@ -1,0 +1,36 @@
+<fieldset [formGroup]="usuario">
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="nombre_usuario" class="prioridad">Usuario (<span>*</span>):</label>
+      <input type="text" id="nombre_usuario" placeholder="Nombre de usuario" class="form-control" formControlName="user_name" [ngClass]="{'is-invalid': (usuario.get('user_name').invalid && submitted)}">
+      <div *ngIf="(usuario.get('user_name').invalid && submitted)"
+          class="text-danger">
+          <div *ngIf="usuario.get('user_name').hasError('required')">Este campo es requerido. </div>
+          <div *ngIf="usuario.get('user_name').hasError('minlength')">El nombre es muy corto.</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="email" class="prioridad">Email:</label>
+      <input type="email" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email" (keyup)="aMinuscula($event.target)" [ngClass]="{'is-invalid': (usuario.get('email').invalid && submitted)}">
+      <div *ngIf="(usuario.get('email').invalid && submitted)" class="text-danger">
+        <div *ngIf="usuario.get('email').hasError('pattern')">El email es invalido.</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="password" class="prioridad">Contraseña:</label>
+      <input type="password" id="password" placeholder="********" class="form-control" formControlName="password" [ngClass]="{'is-invalid': (usuario.get('password').invalid && submitted)}">
+      <div *ngIf="(usuario.get('password').invalid && submitted)"
+          class="text-danger">
+          <div *ngIf="usuario.get('password').hasError('required')">Este campo es requerido. </div>
+          <div *ngIf="usuario.get('password').hasError('minlength')">La contraseña es demasiado corta, al menos debe de tener 8 caracteres.</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="confirmPass" class="prioridad">Confirmar Contraseña:</label>
+      <input type="password" id="confirmPass" placeholder="********" class="form-control" formControlName="confirmPass" [ngClass]="{'is-invalid': (usuario.get('password').value != usuario.get('confirmPass').value && usuario.get('confirmPass').value != null)}">
+      <div *ngIf="(usuario.get('password').value != usuario.get('confirmPass').value && usuario.get('confirmPass').value != null)" class="text-danger">
+        <div>Las contraseñas no coinciden.</div>
+      </div>
+    </div>
+  </div>
+</fieldset>
