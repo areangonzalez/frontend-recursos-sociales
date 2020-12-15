@@ -13,6 +13,11 @@ export class UsuarioPassFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {}
-
-
+  /**
+   * convierte el email a minuscula, si el usuario esta escribiendo en mayuscula
+   * @param palabra {string} texto que esta siendo tipeado
+   */
+  public aMinuscula(palabra:any){
+    palabra.value = palabra.value.toLowerCase();
+  }
 }
