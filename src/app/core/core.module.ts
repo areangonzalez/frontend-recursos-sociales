@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 
 import { AuthGuard } from "./guards/auth.guard";
 
@@ -30,7 +28,8 @@ import {
   ModuloAlimentarService,
   ComisionFomentoService,
   MunicipioService,
-  DelegacionService
+  DelegacionService,
+  ConfiguracionParaPaginarService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -67,7 +66,8 @@ import { UtilService } from "./utils";
     ModuloAlimentarService,
     ComisionFomentoService,
     MunicipioService,
-    DelegacionService
+    DelegacionService,
+    ConfiguracionParaPaginarService
   ],
   declarations: []
 })
