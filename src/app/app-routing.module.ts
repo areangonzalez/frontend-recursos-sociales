@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   { path: 'admin', component: AdminLayoutComponent, data: { title: "Administración" }, loadChildren: './admin/admin.module#AdminModule' },
   { path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
-  { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 @NgModule({
     imports: [

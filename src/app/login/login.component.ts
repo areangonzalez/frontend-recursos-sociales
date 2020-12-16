@@ -26,12 +26,13 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    // verifico si esta logueado
+    this.isLogin();
   }
 
 
   ngOnInit() {
-    this.isLogin();
-
+    // guardo la ultima ruta a la que se a querido acceder
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/inicio';
   }
 
