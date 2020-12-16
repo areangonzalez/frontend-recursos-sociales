@@ -8,6 +8,14 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router, private _jwtService: JwtService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+      if (localStorage.getItem('token-rrss')) {
+        // logged in so return true
+        return true;
+      }
+      // not logged in so redirect to login page with the return url
+      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+      return false;
+
       /* let currentUser = this._jwtService.getToken();
       const isLoggedIn = currentUser && currentUser.datosToken && currentUser.datosToken.token;
       // verifico si el usuario esta logueado
@@ -25,13 +33,7 @@ export class AuthGuard implements CanActivate {
         return false;
       } */
 
-        if (localStorage.getItem('token-rrss')) {
-            // logged in so return true
-            return true;
-        }
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-        return false;
+
     }
 
     canActivateChild(

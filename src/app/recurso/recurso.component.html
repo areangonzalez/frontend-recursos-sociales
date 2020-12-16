@@ -21,8 +21,6 @@
     </div>
   <shared-buscar-persona *ngIf="!(infoPersona)" (personaElegida)="seleccionarPersona($event)"></shared-buscar-persona>
 
-  <shared-lista-grupo-familiar *ngIf="infoPersona" [listadoGrupoFamiliar]="listaGrupoFamiliar"></shared-lista-grupo-familiar>
-
   <shared-form-contacto *ngIf="infoPersona" [formContacto]="contactosForm.get('contacto')" [listaRedSocial]="listaRedSocial"></shared-form-contacto>
 
 </div>
