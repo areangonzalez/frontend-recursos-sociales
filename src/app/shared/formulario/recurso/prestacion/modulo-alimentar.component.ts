@@ -54,4 +54,13 @@ export class ModuloAlimentarComponent implements OnInit {
       this.listaResponsableEntrega = this.listaResponsableEntregaAux;
     }
   }
+  /**
+   * valido que la moneda sea numero
+   * @param moneda valor a verificar
+   */
+  public validarMoneda(moneda) {
+    if (!this._utilService.validarMoneda(moneda.value)) {
+      moneda.value = moneda.value.substring(0, moneda.value.length -1);
+    }
+  }
 }

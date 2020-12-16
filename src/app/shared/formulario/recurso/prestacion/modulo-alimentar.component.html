@@ -51,5 +51,21 @@
           <div *ngIf="prestacionModuloAlimentar.get('responsable_entregaid').hasError('required')">Por favor Seleccione responsable de entrega. </div>
       </div>
     </div>
+    <div class="col-md-4">
+      <div class="row">
+          <div class="form-group col-md-12">
+            <label for="monto">Monto (<span class="text-obligatorio">*</span>):</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">$</div>
+              </div>
+              <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validarMoneda($event.target)">
+            </div>
+            <div *ngIf="(prestacionModuloAlimentar.get('monto').invalid && submitted)" class="text-danger">
+              <div *ngIf="prestacionModuloAlimentar.get('monto').hasError('required')">Por favor ingrese un monto. </div>
+            </div>
+          </div>
+      </div>
+    </div>
   </div>
 </fieldset>

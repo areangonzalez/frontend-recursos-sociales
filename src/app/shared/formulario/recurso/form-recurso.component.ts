@@ -49,7 +49,7 @@ export class FormRecursoComponent implements OnInit {
         proposito: ['', Validators.required],
         fechaAlta: ['', Validators.required],
         fecha_alta: '',
-        monto: ['', Validators.required],
+        monto: ['', Validators.required]
       }),
       modulo_alimentar: _fb.group({
         fechaAlta: ['', Validators.required],
@@ -58,6 +58,7 @@ export class FormRecursoComponent implements OnInit {
         cant_modulo: ['', Validators.required],
         tipo_responsableid: ['', Validators.required],
         responsable_entregaid: ['', Validators.required],
+        monto: ['', Validators.required]
       }),
       observacion: ''
     });
@@ -185,7 +186,6 @@ export class FormRecursoComponent implements OnInit {
           return;
         }else {
           recurso = this.armarParametrosPrestacion(this.formRecurso.value, true);
-
           this.obtenerDatos.emit(recurso);
         }
         break;
@@ -205,7 +205,9 @@ export class FormRecursoComponent implements OnInit {
   }
 
   armarParametrosPrestacion(formulario: any, esModuloAlimentar: boolean) {
-    let recurso: object = {programaid: formulario.programaid, tipo_recursoid: formulario.tipo_recursoid};
+    let recurso: object = {
+      programaid: formulario.programaid, tipo_recursoid: formulario.tipo_recursoid,
+      localidadid: formulario.localidadid, observacion: formulario.observacion};
     let alumno: any[] = [];
     if (esModuloAlimentar) {
       Object.assign(recurso, formulario.modulo_alimentar);
