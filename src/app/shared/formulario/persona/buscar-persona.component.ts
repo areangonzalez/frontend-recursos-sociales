@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { PersonaService, MensajesService } from 'src/app/core/services';
-import { ModalConfig, BotonDisenio } from 'src/app/core/models';
+import { PersonaService, MensajesService, ConfiguracionParaPaginarService } from 'src/app/core/services';
+import { ModalConfig, BotonDisenio, ConfigurarPagina } from 'src/app/core/models';
 
 
 
@@ -19,24 +19,38 @@ export class BuscarPersonaComponent implements OnInit {
   public page:number = 1;
   public pageSize:number = 0;
   public colleccionSize:number = 0;
+  public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
+  public filtradoBusqueda: any = {};
 
   constructor(
     private _cd: ChangeDetectorRef,
     private _personaService: PersonaService,
-    private _mensajeService: MensajesService
+    private _mensajeService: MensajesService, private _configuracionPaginacion: ConfiguracionParaPaginarService
   ){}
 
   ngOnInit(){}
 
-  public buscar(busqueda:string, pagina:number){
-    let pag = pagina - 1;
-    const params: object = {global_param:busqueda, pagesize: 8, page: pag};
+  public buscar(params:any, pagina:number){
+    Object.assign(params, { page: pagina-1, pagesize: 8 });
+    console.log(params);
+
     this._personaService.buscar(params).subscribe(
       datos => {
-        this.colleccionSize = datos.total_filtrado;
-        this.pageSize = datos.pagesize;
-        this.listaPersonas = datos.resultado;
+        this.prepararListadoPersona(datos, 1);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+  }
+
+  public actualizarBusqueda(palabra: string) {
+    this.busqueda = palabra;
+    this.buscar({ global_param: palabra }, 1);
+
+  }
+
+  public prepararListadoPersona(listado:any, pagina: number) {
+    // preparo la variable con la configuracion para el paginado
+    this.configPaginacion = this._configuracionPaginacion.config(listado, pagina);
+
+    this.listaPersonas = listado.resultado;
   }
 
 
@@ -69,12 +83,13 @@ export class BuscarPersonaComponent implements OnInit {
   limpiarBusqueda() {
     this.busqueda = "";
     this.listaPersonas = [];
-    this.colleccionSize = 0;
-    this.page = 1;
+    this.configPaginacion.colleccionSize = 0;
+    this.configPaginacion.page = 1;
   }
 
   public isEnter(e:any) {
     if (e.keyCode == 13){
+      this.actualizarBusqueda
       this.buscar(this.busqueda, this.page);
     }
   }
