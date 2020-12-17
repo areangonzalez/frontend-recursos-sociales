@@ -431,8 +431,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // get Buscador de personas
             if(request.url.endsWith('/apimock/personas') && request.method === 'GET') {
-              console.log(request.params.get('page'));
-
               let globalSearch = request.params.get('global_param');
               // let pageSize:number = (request.params.get('pagesize')) ? parseInt(request.params.get('pagesize')) : 8;
               // let page = (request.params.get('page') != undefined) ? parseInt(request.params.get('page')) : 0;
