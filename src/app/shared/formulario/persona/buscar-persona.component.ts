@@ -16,9 +16,6 @@ export class BuscarPersonaComponent implements OnInit {
   public listaPersonas: any = [];
   public configModal: ModalConfig = {title:"Crear beneficiario"};
   public botonAgregar: BotonDisenio = {class: "btn btn-success", iconoClass: "fas fa-user-plus",  text: ""};
-  public page:number = 1;
-  public pageSize:number = 0;
-  public colleccionSize:number = 0;
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public filtradoBusqueda: any = {};
 
@@ -29,7 +26,11 @@ export class BuscarPersonaComponent implements OnInit {
   ){}
 
   ngOnInit(){}
-
+  /**
+   * Realiza la busqueda de una persona con o sin parametros establecidos
+   * @param params un objeto que contiene los parametros
+   * @param pagina numero de pagina
+   */
   public buscar(params:any, pagina:number){
     Object.assign(params, { page: pagina-1, pagesize: 8 });
     console.log(params);
@@ -45,20 +46,30 @@ export class BuscarPersonaComponent implements OnInit {
     this.buscar({ global_param: palabra }, 1);
 
   }
-
+  /**
+   * prepara la configuracion de paginado para el listado de persona
+   * @param listado datos obtenidos del api
+   * @param pagina numero de pagina
+   */
   public prepararListadoPersona(listado:any, pagina: number) {
     // preparo la variable con la configuracion para el paginado
     this.configPaginacion = this._configuracionPaginacion.config(listado, pagina);
 
     this.listaPersonas = listado.resultado;
   }
-
-
+  /**
+   * selecciona una persona y se envian los datos al componente padre
+   * @param id identificador de la persona
+   * @param persona datos de la persona
+   */
   public seleccionarPersona(id, persona){
     const datos: object = {id:id, persona: persona};
     this.personaElegida.emit(datos);
   }
-
+  /**
+   * Crea un texto plano de la informacion de un lugar
+   * @param lugar direccion de una persona
+   */
   public direccion(lugar){
     let dir = "";
     dir += lugar['localidad'];
@@ -70,27 +81,28 @@ export class BuscarPersonaComponent implements OnInit {
 
     return dir;
   }
-
+  /**
+   * Cambia la pagina del listado
+   * @param page numero de pagina
+   */
   public cambioPagina(page){
     this.buscar(this.busqueda, page);
   }
-
+  /**
+   * Crea la persona enviando los datos al componente padre
+   * @param personaid identificador de la persona
+   */
   public personaCreada(personaid) {
     const datos: object = {id: personaid};
     this.personaElegida.emit(datos);
   }
-
+  /**
+   * limpia el listado de busqueda
+   */
   limpiarBusqueda() {
     this.busqueda = "";
     this.listaPersonas = [];
     this.configPaginacion.colleccionSize = 0;
     this.configPaginacion.page = 1;
-  }
-
-  public isEnter(e:any) {
-    if (e.keyCode == 13){
-      this.actualizarBusqueda
-      this.buscar(this.busqueda, this.page);
-    }
   }
 }
