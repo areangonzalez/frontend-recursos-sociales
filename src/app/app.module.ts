@@ -39,14 +39,14 @@ import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     NgbModule.forRoot(),
     NgbTooltipModule.forRoot(),
     PixelSpinnerModule,
     HttpClientModule,
     ChartsModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -56,7 +56,7 @@ import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
     BreadcrumbsService,
 
     // facke-backend providers
-    fakeBackendProvider
+    //fakeBackendProvider
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

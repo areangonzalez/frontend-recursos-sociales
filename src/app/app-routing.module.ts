@@ -6,9 +6,7 @@ import { AuthGuard } from "./core/guards/auth.guard";
 
 
 const routes: Routes = [
-//  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-
-  //{ path: 'inicio', data: {  preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'inicio', data: {  preload: true, breadcrumb: 'Inicio', tile: 'Inicio' },
     component: AppLayoutComponent,
@@ -38,11 +36,12 @@ const routes: Routes = [
   },
   { path: 'admin', component: AdminLayoutComponent, data: { title: "Administración" }, loadChildren: './admin/admin.module#AdminModule' },
   { path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, {
+          useHash: true,
           // preload all modules; optionally we could
           // implement a custom preloading strategy for just some
           // of the modules (PRs welcome 😉)
