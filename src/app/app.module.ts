@@ -56,7 +56,7 @@ import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
     BreadcrumbsService,
 
     // facke-backend providers
-    //fakeBackendProvider
+    fakeBackendProvider
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
