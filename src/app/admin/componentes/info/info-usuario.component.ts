@@ -7,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoUsuarioComponent implements OnInit {
 
-  constructor() { }
+  public datosPersona: any;
+
+  constructor() {
+    this.datosPersona = {
+      nro_documento: "33476725", cuil: "20334767257", nombre: "Arean", apellido: "Gonzalez",
+      user_name: "agonzalez", email: "agonzalez@desarrollohumano.rionegro.gov.ar", password: ""
+    }
+  }
 
   ngOnInit() {
   }
