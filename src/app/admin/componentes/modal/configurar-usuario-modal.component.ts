@@ -51,15 +51,15 @@ export class ConfigurarUsuarioModalComponent {
       }};
 
     let listas: any = {
-      roles: [{ id: 1, nombre: 'admin' }, { id: 2, nombre: 'soporte' }, { id: 3, nombre: 'usuario_general' }, { id: 4, nombre: 'usuario_emprender' },
-      { id: 5, nombre: 'usuario_habirat' }, { id: 6, nombre: 'usuario_micro_emprendimiento' }, { id: 7, nombre: 'usuario_modulo_alimenticio' },
-      { id: 8, nombre: 'usuario_rio_negro_presente' }, { id: 9, nombre: 'usuario_subsidio' }],
-      permisos: [{id: 1, nombre: "prestacion_crear" },{id: 2, nombre: "prestacion_modificar" },{id: 3, nombre: "prestacion_baja" },{id: 4, nombre: "prestacion_acreditar" },
-      {id: 5, nombre: "prestacion_ver" },{id: 6, nombre: "persona_crear" },{id: 7, nombre: "persona_baja" },{id: 8, nombre: "persona_modificar" },
-      {id: 9, nombre: "persona_ver" }]
-    }
-
-
+      permisos: [
+        { nombre: "3_crear" },{ nombre: "3_ver" },{ nombre: "3_baja" },{ nombre: "3_acreditar" },
+        { nombre: "5_crear" },{ nombre: "5_ver" },{ nombre: "5_baja" },{ nombre: "5_acreditar" },
+        { nombre: "4_crear "},{ nombre: "4_ver "},{ nombre: "4_baja "},{ nombre: "4_acreditar "},
+        { nombre: "2_crear "},{ nombre: "2_ver "},{ nombre: "2_baja "},{ nombre: "2_acreditar "},
+        { nombre: "1_crear "},{ nombre: "1_ver "},{ nombre: "1_baja "},{ nombre: "1_acreditar "},
+        { nombre: "6_crear "},{ nombre: "6_ver "},{ nombre: "6_baja "},{ nombre: "6_acreditar "}
+      ]
+    };
     this.abrirModal(usuario, listas);
   }
 

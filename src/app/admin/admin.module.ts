@@ -8,7 +8,9 @@ import { GestorUsuarioComponent } from './gestor-usuario';
 import {
   UsuarioComponent, UsuarioModalContent, UsuarioModalComponent, UsuarioFormComponent,
   UsuarioPassFormComponent, InfoUsuarioComponent, ConfigUsuarioComponent,
-  ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent
+  ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
+  AdministrarRolPermisoComponent,
+  AutoCompletarComponent, TagComponent
 } from './componentes';
 
 @NgModule({
@@ -17,7 +19,7 @@ import {
     SharedModule,
     AdminRoutingModule
   ],
-  declarations: [AdminComponent, GestorUsuarioComponent, UsuarioComponent, UsuarioFormComponent, UsuarioModalContent, UsuarioModalComponent, InfoUsuarioComponent, UsuarioPassFormComponent, ConfigUsuarioComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent],
+  declarations: [AdminComponent, GestorUsuarioComponent, UsuarioComponent, UsuarioFormComponent, UsuarioModalContent, UsuarioModalComponent, InfoUsuarioComponent, UsuarioPassFormComponent, ConfigUsuarioComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent, AdministrarRolPermisoComponent, AutoCompletarComponent, TagComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [UsuarioModalContent, UsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent]
 
