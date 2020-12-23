@@ -90,11 +90,6 @@ export class ConfigurarUsuarioModalComponent {
       "1_crear", "1_ver", "1_baja", "1_acreditar",
       "6_crear", "6_ver", "6_baja", "6_acreditar"
    ];
-    /* this._programaService.listar().subscribe(
-      programas => {
-        this.listaProgramas = programas;
-      }
-    ) */
   }
 
 
