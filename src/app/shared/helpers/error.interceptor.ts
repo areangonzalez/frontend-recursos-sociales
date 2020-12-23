@@ -15,8 +15,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         this._loadService.show();
         return next.handle(request).pipe(
           tap(res => {
-            console.log("envios: ", this.envios);
-            console.log("recibidos: ", this.recibidos);
             // res.type is prod and zero is dev
             let tipoRespuesta = (environment.production) ? res.type : 0 ;
             if (tipoRespuesta === HttpEventType.Sent) {
