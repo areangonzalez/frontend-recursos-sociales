@@ -1,8 +1,0 @@
-<label for="auto-completar" class="prioridad">Seleccionar Permisos:</label>
-<input id="typeahead-config" type="text" class="form-control"
-[(ngModel)]="model" [ngbTypeahead]="search"
-(focus)="focus$.next($event.target.value)"
-  (click)="click$.next($event.target.value)"
-  #instance="ngbTypeahead"
-  placeholder="Seleccione un permiso"
-  />

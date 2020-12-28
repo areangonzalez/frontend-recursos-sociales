@@ -60,10 +60,10 @@ export class ConfigurarUsuarioModalComponent {
         email: 'pgarcia@desarrollohumano.rionegro.gov.ar',
         password: '',
       }};
-      console.log(this.listaProgramas);
 
     let listas: any = {
-      permisos: this.listaPermisos
+      permisos: this.listaPermisos,
+      programas: this.listaProgramas
     };
     this.abrirModal(usuario, listas);
 
