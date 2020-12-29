@@ -3,7 +3,10 @@
     <th scope="col">Programa</th>
     <th scope="col">Permisos</th>
   </thead>
-  <tbody>
+  <tbody *ngIf="(listaProgramaPermisos.length == 0)">
+    <td scope="row" class="text-center bg-warning" rowspan="1" colspan="2"><strong>El usuario no tiene programa/s y permiso/s</strong></td>
+  </tbody>
+  <tbody *ngIf="(listaProgramaPermisos.length > 0)">
     <td scope="row"></td>
     <td scope="row"></td>
   </tbody>
