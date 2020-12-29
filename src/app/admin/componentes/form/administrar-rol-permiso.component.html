@@ -1,21 +1,37 @@
-<div class="row m-3">
-  <div class="form-group col-md-6">
-    <label for="permisos">Programa/s:</label>
-    <ng-select [items]="listaProgramas"
-             bindLabel="nombre"
-             placeholder="Seleccione uno o varios Programa/s."
-             appendTo="body"
-             multiple="true"
-             [(ngModel)]="programsSeleccionados">
-    </ng-select>
+<div class="row m-1">
+  <div class="col-md-12" [formGroup]="rolPermisosForm">
+    <div class="row" >
+      <div class="form-group col-md-6">
+        <label for="rol" class="prioridad">Rol:</label>
+        <select class="form-control" id="rol" formControlName="rol">
+          <option value="">Seleccione un Rol</option>
+          <!-- <option *ngFor="let estadoCivil of estadoCivilLista" value="{{estadoCivil.id}}">{{estadoCivil.nombre}}</option> -->
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="rol" class="prioridad">Programa/s:</label>
+        <select class="form-control" id="rol" formControlName="programaid">
+          <option value="">Seleccione un Programa</option>
+          <option *ngFor="let programa of listaProgramas" value="{{programa.id}}">{{programa.nombre}}</option>
+        </select>
+      </div>
+    </div>
   </div>
-  <div class="form-group col-md-6">
-    <label for="permisos">Permiso/s:</label>
-    <ng-select [items]="listaPermisos"
-              placeholder="Seleccione uno o varios permiso/s."
-              appendTo="body"
-              multiple="true"
-              [(ngModel)]="permisosSeleccionados">
-    </ng-select>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="permisos">Permiso/s:</label>
+      <ng-select [items]="listaPermisos"
+        placeholder="Seleccione uno o varios permiso/s."
+        appendTo="body"
+        multiple="true"
+        [(ngModel)]="permisosSeleccionados">
+      </ng-select>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <button type="button" class="btn btn-success btn-block"><i class="far fa-save"></i> Guardar</button>
+  </div>
+  <div class="col-md-12 mt-1">
+    <admin-programa-permiso-tabla [listaProgramaPermisos]="listaProgramaPermisos"></admin-programa-permiso-tabla>
   </div>
 </div>

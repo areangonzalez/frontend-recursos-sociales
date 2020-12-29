@@ -10,16 +10,21 @@ export class AdministrarRolPermisoComponent implements OnInit {
   @Input("listaProgramas") public listaProgramas: any;
   @Input("listaPermisos") public listaPermisos: any;
   public rolPermisosForm: FormGroup;
-  public programsSeleccionados: any = [];
+  public listaProgramaPermisos: any = [];
   public permisosSeleccionados: any = [];
 
   constructor(private _fb: FormBuilder) {
     this.rolPermisosForm = _fb.group({
-      rol: ["", [Validators.required]]
+      rol: ["", [Validators.required]],
+      programaid: ["", [Validators.required]]
     })
   }
 
   ngOnInit() {
+  }
+
+  obtenerListaProgramaPermisos(idUsuario: number) {
+    // Se genera el servicio para obtener el listado de permisos por programa del usuario
   }
 
 }

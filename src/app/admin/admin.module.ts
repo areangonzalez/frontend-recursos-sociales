@@ -12,6 +12,7 @@ import {
   ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
   AdministrarRolPermisoComponent
 } from './componentes';
+import { ProgramaPermisoComponent } from './componentes/tablas/programa-permiso.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import {
     SharedModule,
     AdminRoutingModule
   ],
-  declarations: [AdminComponent, GestorUsuarioComponent, UsuarioComponent, UsuarioFormComponent, UsuarioModalContent, UsuarioModalComponent, InfoUsuarioComponent, UsuarioPassFormComponent, ConfigUsuarioComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent, AdministrarRolPermisoComponent],
+  declarations: [AdminComponent, GestorUsuarioComponent, UsuarioComponent, UsuarioFormComponent, UsuarioModalContent, UsuarioModalComponent, InfoUsuarioComponent, UsuarioPassFormComponent, ConfigUsuarioComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent, AdministrarRolPermisoComponent, ProgramaPermisoComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [UsuarioModalContent, UsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent]
 
