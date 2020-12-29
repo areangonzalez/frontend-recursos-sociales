@@ -15,6 +15,7 @@ export class ConfigUsuarioComponent implements OnInit {
     this.usuario = _fb.group({
         user_name: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+        localidadid: '',
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPass: ['', [Validators.required]]
       }, { validators:  this.checkPasswords })

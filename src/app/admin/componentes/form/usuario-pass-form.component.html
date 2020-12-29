@@ -16,8 +16,18 @@
         <div *ngIf="usuario.get('email').hasError('pattern')">El email es invalido.</div>
       </div>
     </div>
+    <div class="form-group col-md-12">
+      <label for="email" class="prioridad">Localidad:</label>
+      <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'is-invalid': (usuario.get('localidadid').invalid && submitted)}">
+        <option value="">Seleccione Localidad</option>
+        <!-- <option *ngFor="let localidad of localidadLista" value="{{localidad.id}}">{{localidad.nombre}}</option> -->
+      </select>
+      <div *ngIf="(usuario.get('localidadid').invalid && submitted)" class="text-danger">
+          <div *ngIf="usuario.get('localidadid').hasError('required')">Por favor Seleccione localidad. </div>
+      </div>
+    </div>
     <div class="form-group col-md-6">
-      <label for="password" class="prioridad">Contraseña:</label>
+      <label for="password" class="prioridad">Contraseña (<span>*</span>):</label>
       <input type="password" id="password" placeholder="********" class="form-control" formControlName="password" [ngClass]="{'is-invalid': (usuario.get('password').invalid && submitted)}">
       <div *ngIf="(usuario.get('password').invalid && submitted)"
           class="text-danger">
@@ -26,7 +36,7 @@
       </div>
     </div>
     <div class="form-group col-md-6">
-      <label for="confirmPass" class="prioridad">Confirmar Contraseña:</label>
+      <label for="confirmPass" class="prioridad">Confirmar Contraseña (<span>*</span>):</label>
       <input type="password" id="confirmPass" placeholder="********" class="form-control" formControlName="confirmPass" [ngClass]="{'is-invalid': (usuario.get('password').value != usuario.get('confirmPass').value && usuario.get('confirmPass').value != null)}">
       <div *ngIf="(usuario.get('password').value != usuario.get('confirmPass').value && usuario.get('confirmPass').value != null)" class="text-danger">
         <div>Las contraseñas no coinciden.</div>
