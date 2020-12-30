@@ -120,8 +120,49 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   return throwError( { code:0,status: 500, message: 'Username or password is incorrect' } );
               }
             }
+            // Agregar Usuario
+            if(request.url.endsWith('/apimock/usuarios') && request.method === 'POST') {
+              let newUsuario = request.body;
 
+              if (newUsuario["password"] === newUsuario["confirmPass"]) {
+                return of(new HttpResponse({ status: 200 }));
+              } else {
+                return throwError( { code:0,status: 500, message: 'No se puede registrar este usuario' } );
+              }
+            }
+            // Agregar Usuario
+            if(request.url.endsWith('/apimock/usuarios') && request.method === 'GET') {
+              let listaUsuarios = [
+                {id: 1, nombre: "Carlos", apellido: "Garcia", user_name: "cgarcia", fecha_inicial: "2019-03-25", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
+                {id: 2, nombre: "Maria", apellido: "Gonzalez", user_name: "mgonzalez", fecha_inicial: "2019-04-02", fecha_ultimo_ingreso: "2020-12-20", direccion_ip: "192.10.10.8" },
+                {id: 3, nombre: "Graciela", apellido: "Perez", user_name: "gperez", fecha_inicial: "2019-05-03", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
+                {id: 4, nombre: "Paola", apellido: "Rodriguez", user_name: "prodriguez", fecha_inicial: "2019-08-06", fecha_ultimo_ingreso: "2020-12-23", direccion_ip: "192.10.10.8" },
+                {id: 5, nombre: "Gustavo", apellido: "Acosta", user_name: "gacosta", fecha_inicial: "2019-11-21", fecha_ultimo_ingreso: "2020-12-29", direccion_ip: "192.10.10.8" },
+              ]
 
+                return of(new HttpResponse({ status: 200, body: listaUsuarios }));
+              /* } else {
+                return throwError( { code:0,status: 500, message: 'No se puede registrar este usuario' } );
+              } */
+            }
+            // obtener usuario por ID
+            if(request.url.match(/\/apimock\/usuarios\/\d+$/) && request.method === 'GET') {
+              let urlParts = request.url.split('/');
+              let id = parseInt(urlParts[urlParts.length - 1]);
+              let listaUsuarios = [
+                {id: 1, nombre: "Carlos", apellido: "Garcia", user_name: "cgarcia", fecha_inicial: "2019-03-25", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
+                {id: 2, nombre: "Maria", apellido: "Gonzalez", user_name: "mgonzalez", fecha_inicial: "2019-04-02", fecha_ultimo_ingreso: "2020-12-20", direccion_ip: "192.10.10.8" },
+                {id: 3, nombre: "Graciela", apellido: "Perez", user_name: "gperez", fecha_inicial: "2019-05-03", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
+                {id: 4, nombre: "Paola", apellido: "Rodriguez", user_name: "prodriguez", fecha_inicial: "2019-08-06", fecha_ultimo_ingreso: "2020-12-23", direccion_ip: "192.10.10.8" },
+                {id: 5, nombre: "Gustavo", apellido: "Acosta", user_name: "gacosta", fecha_inicial: "2019-11-21", fecha_ultimo_ingreso: "2020-12-29", direccion_ip: "192.10.10.8" },
+              ]
+
+              let usuario = listaUsuarios.filter(usu => { return usu.id === id; });
+              let usuarioEncontrado = usuario.length ? usuario[0] : null;
+
+              return of(new HttpResponse({ status: 200, body: usuarioEncontrado }));
+
+            }
             // obtener reurso por ID
             if(request.url.match(/\/apimock\/recursos\/\d+$/) && request.method === 'GET') {
               let urlParts = request.url.split('/');

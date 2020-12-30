@@ -23,37 +23,22 @@
         <th class="text-center columna-160" scope="col"><admin-usuario-modal [configModal]="configModalAgregar" [disenioBoton]="configBotonModalAgregar"></admin-usuario-modal></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="(listado.length == 0)">
       <tr>
-        <td>Garcia Pedro</td>
-        <td class="text-center">pgarcia</td>
-        <td class="text-center">12/06/2020</td>
-        <td class="text-center">25/11/2020</td>
-        <td class="text-center">192.168.1.19</td>
-        <td class="text-center">
-          <admin-configurar-usuario-modal [usuarioid]="1" ></admin-configurar-usuario-modal>
-          <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="fas fa-user-minus"></i></button>
+        <td class="text-center bg-warning" rowspan="1" colspan="6">
+          <strong>No se han encontrado resultado</strong>
         </td>
       </tr>
-      <tr>
-        <td>Garcia Pedro</td>
-        <td class="text-center">pgarcia</td>
-        <td class="text-center">12/06/2020</td>
-        <td class="text-center">25/11/2020</td>
-        <td class="text-center">192.168.1.19</td>
+    </tbody>
+    <tbody *ngIf="(listado.length > 0)" >
+      <tr *ngFor="let user of listado">
+        <td>{{user.apellido}}, {{user.nombre}}</td>
+        <td class="text-center">{{user.user_name}}</td>
+        <td class="text-center">{{user.fecha_inicial | date:'dd/MM/yyyy'}}</td>
+        <td class="text-center">{{user.fecha_ultimo_ingreso | date:'dd/MM/yyyy'}}</td>
+        <td class="text-center">{{user.direccion_ip}}</td>
         <td class="text-center">
-          <button class="btn btn-sm btn-outline-dark rounded-circle"><i class="fas fa-user-cog"></i></button>
-          <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="fas fa-user-minus"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td>Garcia Pedro</td>
-        <td class="text-center">pgarcia</td>
-        <td class="text-center">12/06/2020</td>
-        <td class="text-center">25/11/2020</td>
-        <td class="text-center">192.168.1.19</td>
-        <td class="text-center">
-          <button class="btn btn-sm btn-outline-dark rounded-circle"><i class="fas fa-user-cog"></i></button>
+          <admin-configurar-usuario-modal [usuarioid]="user.id" ></admin-configurar-usuario-modal>
           <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="fas fa-user-minus"></i></button>
         </td>
       </tr>

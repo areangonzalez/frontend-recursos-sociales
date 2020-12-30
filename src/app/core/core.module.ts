@@ -29,7 +29,8 @@ import {
   ComisionFomentoService,
   MunicipioService,
   DelegacionService,
-  ConfiguracionParaPaginarService
+  ConfiguracionParaPaginarService,
+  UsuarioService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -67,7 +68,8 @@ import { UtilService } from "./utils";
     ComisionFomentoService,
     MunicipioService,
     DelegacionService,
-    ConfiguracionParaPaginarService
+    ConfiguracionParaPaginarService,
+    UsuarioService
   ],
   declarations: []
 })

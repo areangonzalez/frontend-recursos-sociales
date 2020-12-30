@@ -24,3 +24,4 @@ export * from './comision-fomento.service';
 export * from './municipio.service';
 export * from './delegacion.service';
 export * from './configuracion-para-paginar.service';
+export * from './usuario.service';
