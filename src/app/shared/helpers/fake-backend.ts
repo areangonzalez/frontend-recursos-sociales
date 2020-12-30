@@ -150,17 +150,27 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let urlParts = request.url.split('/');
               let id = parseInt(urlParts[urlParts.length - 1]);
               let listaUsuarios = [
-                {id: 1, nombre: "Carlos", apellido: "Garcia", user_name: "cgarcia", fecha_inicial: "2019-03-25", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
-                {id: 2, nombre: "Maria", apellido: "Gonzalez", user_name: "mgonzalez", fecha_inicial: "2019-04-02", fecha_ultimo_ingreso: "2020-12-20", direccion_ip: "192.10.10.8" },
-                {id: 3, nombre: "Graciela", apellido: "Perez", user_name: "gperez", fecha_inicial: "2019-05-03", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
-                {id: 4, nombre: "Paola", apellido: "Rodriguez", user_name: "prodriguez", fecha_inicial: "2019-08-06", fecha_ultimo_ingreso: "2020-12-23", direccion_ip: "192.10.10.8" },
-                {id: 5, nombre: "Gustavo", apellido: "Acosta", user_name: "gacosta", fecha_inicial: "2019-11-21", fecha_ultimo_ingreso: "2020-12-29", direccion_ip: "192.10.10.8" },
-              ]
+                {id: 1, nombre: "Carlos", apellido: "Garcia", nro_documento: "23159753", cuil: "20231597538", email:"cgarcia@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", user_name: "cgarcia", fecha_inicial: "2019-03-25", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
+                {id: 2, nombre: "Maria", apellido: "Gonzalez", nro_documento: "14156783", cuil: "20141567835", email:"mgonzalez@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", user_name: "mgonzalez", fecha_inicial: "2019-04-02", fecha_ultimo_ingreso: "2020-12-20", direccion_ip: "192.10.10.8" },
+                {id: 3, nombre: "Graciela", apellido: "Perez", nro_documento: "16358248", cuil: "20163582485", email:"gperez@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", user_name: "gperez", fecha_inicial: "2019-05-03", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
+                {id: 4, nombre: "Paola", apellido: "Rodriguez", nro_documento: "16322448", cuil: "20163224485", email:"prodriguez@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", user_name: "prodriguez", fecha_inicial: "2019-08-06", fecha_ultimo_ingreso: "2020-12-23", direccion_ip: "192.10.10.8" },
+                {id: 5, nombre: "Gustavo", apellido: "Acosta", nro_documento: "18334826", cuil: "20183348265", email:"gacosta@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", user_name: "gacosta", fecha_inicial: "2019-11-21", fecha_ultimo_ingreso: "2020-12-29", direccion_ip: "192.10.10.8" },
+              ];
 
               let usuario = listaUsuarios.filter(usu => { return usu.id === id; });
               let usuarioEncontrado = usuario.length ? usuario[0] : null;
 
               return of(new HttpResponse({ status: 200, body: usuarioEncontrado }));
+
+            }
+            // Listado de pdermisos
+            if(request.url.endsWith('/apimock/permisos') && request.method === 'GET') {
+              let listaPermisos = [
+                "persona_ver", "persona_crear", "prestacion_ver", "prestacion_crear",
+                "prestacion_acreditar", "prestacion_baja"
+              ];
+
+              return of(new HttpResponse({ status: 200, body: listaPermisos }));
 
             }
             // obtener reurso por ID

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProgramaService } from 'src/app/core/services';
+import { ProgramaService, LocalidadService, MensajesService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-configurar-usuario-modal',
@@ -36,11 +36,13 @@ export class ConfigurarUsuarioModalComponent {
   @Input("usuarioid") public usuarioid: number;
   public listaProgramas: any = [];
   public listaPermisos: any = [];
+  public listaLocalidades: any = [];
 
-  constructor(private _modalService: NgbModal, private _programaService: ProgramaService)
+  constructor(private _modalService: NgbModal, private _programaService: ProgramaService, private _localidadService: LocalidadService, private _msj: MensajesService)
   {
     this.listarProgramas();
     this.listarPermisos();
+    this.listarLocalidades();
   }
 
 
@@ -63,7 +65,8 @@ export class ConfigurarUsuarioModalComponent {
 
     let listas: any = {
       permisos: this.listaPermisos,
-      programas: this.listaProgramas
+      programas: this.listaProgramas,
+      localidades: this.listaLocalidades
     };
     this.abrirModal(usuario, listas);
 
@@ -73,23 +76,22 @@ export class ConfigurarUsuarioModalComponent {
    */
   listarProgramas() {
     this._programaService.listar().subscribe(
-      programas => {
-        this.listaProgramas = programas;
-      }
+      programas => { this.listaProgramas = programas; },
+      error => { this._msj.cancelado(error, [{name: ""}]); }
     )
   }
   /**
    * Obtengo el listado de permisos
    */
   listarPermisos() {
-    this.listaPermisos = [
-      "3_crear", "3_ver", "3_baja", "3_acreditar",
-      "5_crear", "5_ver", "5_baja", "5_acreditar",
-      "4_crear", "4_ver", "4_baja", "4_acreditar",
-      "2_crear", "2_ver", "2_baja", "2_acreditar",
-      "1_crear", "1_ver", "1_baja", "1_acreditar",
-      "6_crear", "6_ver", "6_baja", "6_acreditar"
-   ];
+    this.listaPermisos = [];
+  }
+
+  listarLocalidades() {
+    this._localidadService.listar().subscribe(
+      localidad => { this.listaLocalidades = localidad; },
+      error => { this._msj.cancelado(error, [{name: ''}]); }
+    );
   }
 
 
