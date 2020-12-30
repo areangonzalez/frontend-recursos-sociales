@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProgramaService, LocalidadService, MensajesService } from 'src/app/core/services';
+import { ProgramaService, LocalidadService, MensajesService, PermisosService, UsuarioService } from 'src/app/core/services';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-configurar-usuario-modal',
@@ -12,13 +13,14 @@ import { ProgramaService, LocalidadService, MensajesService } from 'src/app/core
       </button>
     </div>
     <div class="modal-body">
-      <admin-config-usuario-tabs [configListas]="listas"></admin-config-usuario-tabs>
+      <admin-config-usuario-tabs [configListas]="listas" [datosUsuario]="datosUsuario"></admin-config-usuario-tabs>
     </div>
   `,
   styleUrls: ['./configurar-usuario-modal.component.sass']
 })
 export class ConfigurarUsuarioModalContent {
   @Input("listas") public listas: any;
+  @Input("datosUsuario") public datosUsuario: any;
 
   constructor(public _activeModal: NgbActiveModal) { }
 
@@ -38,7 +40,11 @@ export class ConfigurarUsuarioModalComponent {
   public listaPermisos: any = [];
   public listaLocalidades: any = [];
 
-  constructor(private _modalService: NgbModal, private _programaService: ProgramaService, private _localidadService: LocalidadService, private _msj: MensajesService)
+  constructor(
+    private _modalService: NgbModal, private _programaService: ProgramaService,
+    private _localidadService: LocalidadService, private _msj: MensajesService,
+    private _permisosService: PermisosService, private _usuarioService: UsuarioService
+    )
   {
     this.listarProgramas();
     this.listarPermisos();
@@ -53,22 +59,33 @@ export class ConfigurarUsuarioModalComponent {
   }
 
   configurarModal() {
-    // pido usuario por api
-    let usuario = {
-      id: this.usuarioid, nro_documento: '25262728', apellido: 'Garcia', nombre: 'Pedro',
-      cuil: '25262728', cuil_prin: '20', cuil_fin: '3',
-      usuario: {
-        user_name: 'pgarcia',
-        email: 'pgarcia@desarrollohumano.rionegro.gov.ar',
-        password: '',
-      }};
-
     let listas: any = {
       permisos: this.listaPermisos,
       programas: this.listaProgramas,
       localidades: this.listaLocalidades
     };
-    this.abrirModal(usuario, listas);
+    // pido usuario por api
+    this._usuarioService.buscarPorId(this.usuarioid)
+    .pipe(map(vDatos => {
+      let vUsuario: any = {
+        id: vDatos['id'],
+        nombre: vDatos['nombre'],
+        apellido: vDatos['apellido'],
+        cuil: vDatos['cuil'],
+        nro_documento: vDatos['nro_documento'],
+        usuario: {
+          user_name: vDatos['user_name'],
+          email: vDatos['email'],
+          localidad: vDatos['localidad'],
+          localidadid: vDatos['localidadid'],
+          fecha_inicial: vDatos['fecha_inicial']
+        }
+      };
+      return vUsuario;
+    })).subscribe(
+      datos => { this.abrirModal(datos, listas); },
+      error => { this._msj.cancelado(error, [{name: ''}]); }
+    );
 
   }
   /**
@@ -84,7 +101,11 @@ export class ConfigurarUsuarioModalComponent {
    * Obtengo el listado de permisos
    */
   listarPermisos() {
-    this.listaPermisos = [];
+    this._permisosService.listar().subscribe(
+      permisos => { this.listaPermisos = permisos; },
+      error => { this._msj.cancelado(error, [{name: ''}]); }
+    );
+
   }
 
   listarLocalidades() {

@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 })
 export class ConfigUsuarioComponent implements OnInit {
   @Input("configListas") configListas: any;
+  @Input("datosUsuario") datosUsuario: any;
   public usuario: FormGroup;
   public submitted: boolean = false;
 
@@ -22,6 +23,7 @@ export class ConfigUsuarioComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.prepararFormulario(this.datosUsuario);
   }
 
   /**
@@ -32,6 +34,9 @@ export class ConfigUsuarioComponent implements OnInit {
     if ( group.get('password').value !== group.get('confirmPass').value ) {
       return { invalid: true };
     }
+  }
+  public prepararFormulario(datos: object){
+    this.usuario.patchValue(datos['usuario']);
   }
 
 }
