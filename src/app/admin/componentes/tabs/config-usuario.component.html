@@ -16,7 +16,7 @@
           <admin-usuario-pass-form [localidades]="configListas.localidades" [usuario]="usuario" [submitted]="submitted" ></admin-usuario-pass-form>
         </div>
         <div class="col-md-12 mt-1 mb-3">
-          <button type="button" class="btn btn-success btn-block"><i class="far fa-save"></i> Guardar</button>
+          <button type="button" class="btn btn-success btn-block" (click)="cambiarPass()"><i class="far fa-save"></i> Guardar</button>
         </div>
       </ng-template>
     </ngb-tab>

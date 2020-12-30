@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { UsuarioService, MensajesService } from '../../../core/services';
 
 @Component({
   selector: 'admin-config-usuario-tabs',
@@ -11,8 +12,9 @@ export class ConfigUsuarioComponent implements OnInit {
   @Input("datosUsuario") datosUsuario: any;
   public usuario: FormGroup;
   public submitted: boolean = false;
+  private idUsuario: number;
 
-  constructor(private _fb: FormBuilder) {
+  constructor(private _fb: FormBuilder, private _usuarioService: UsuarioService, private _msj: MensajesService) {
     this.usuario = _fb.group({
         user_name: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
@@ -35,8 +37,37 @@ export class ConfigUsuarioComponent implements OnInit {
       return { invalid: true };
     }
   }
+  /**
+   * Completa el formulario del usuario
+   * @param datos datos del usuario
+   */
   public prepararFormulario(datos: object){
     this.usuario.patchValue(datos['usuario']);
+    this.idUsuario = datos['usuario']['id'];
+  }
+  /**
+   * funcion que valida el formulario y el cambio de contraseña
+   */
+  public cambiarPass() {
+    this.submitted = true;
+    if (this.usuario.invalid) {
+      this._msj.cancelado("¡Campos sin completar!", [{name: ''}]);
+      return;
+    } else {
+      let datos = this.usuario.value;
+
+      this.cambiarDatosUsuario(datos, this.idUsuario);
+    }
+  }
+
+  private cambiarDatosUsuario(datos: object, id: number) {
+    this._usuarioService.actualizarUsuario(datos, id).subscribe(
+      respuesta => {
+        this._msj.exitoso("Los datos del usuario han sido actualizados correctamente.", [{name: ''}]);
+        this.usuario.patchValue({"password": ""});
+        this.usuario.patchValue({"confirmPass": ""});
+      }, error => { this._msj.cancelado(error, [{name:''}]); }
+    );
   }
 
 }

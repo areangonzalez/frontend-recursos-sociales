@@ -68,12 +68,13 @@ export class ConfigurarUsuarioModalComponent {
     this._usuarioService.buscarPorId(this.usuarioid)
     .pipe(map(vDatos => {
       let vUsuario: any = {
-        id: vDatos['id'],
+        id: vDatos['personaid'],
         nombre: vDatos['nombre'],
         apellido: vDatos['apellido'],
         cuil: vDatos['cuil'],
         nro_documento: vDatos['nro_documento'],
         usuario: {
+          id: vDatos['id'],
           user_name: vDatos['user_name'],
           email: vDatos['email'],
           localidad: vDatos['localidad'],

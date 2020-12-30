@@ -31,6 +31,10 @@ export class UsuarioService implements Resolve<any> {
     return this._api.get('/usuarios/' + id);
   }
 
+  public actualizarUsuario(params:object, id: number) {
+    return this._api.put('/usuario/' + id, params);
+  }
+
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
