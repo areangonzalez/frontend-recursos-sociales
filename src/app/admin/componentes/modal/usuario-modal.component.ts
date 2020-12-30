@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BotonDisenio, ModalConfig } from 'src/app/core/models';
-import { PersonaService } from 'src/app/core/services';
+import { PersonaService, LocalidadService, MensajesService } from 'src/app/core/services';
 
 @Component({
   selector: 'admin-usuario-modal-content',
@@ -13,13 +13,13 @@ import { PersonaService } from 'src/app/core/services';
       </button>
     </div>
     <div class="modal-body">
-      <admin-usuario-form [datosUsuario]="datosUsuario" (cancelarForm)="cancelarModal($event)"></admin-usuario-form>
+      <admin-usuario-form [localidades]="localidades" (cancelarForm)="cancelarModal($event)"></admin-usuario-form>
     </div>
   `
 })
 export class UsuarioModalContent {
   @Input("configModal") public configModal:ModalConfig;
-  @Input("datosUsuario") public datosUsuario:any;
+  @Input("localidades") public localidades:any;
   constructor(public activeModal: NgbActiveModal) {}
 
   cancelarModal(cancelar: boolean) {
@@ -41,30 +41,25 @@ export class UsuarioModalComponent  {
   @Input("disenioBoton") public disenioBoton: BotonDisenio;
   @Input("configModal") public configModal: ModalConfig;
   @Input("usuarioid") public usuarioid: number;
+  public listaLocalidades: any = [];
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private _localidadService: LocalidadService, private _msj: MensajesService) {
+    this.listarLocalidades();
+  }
 
-    abrirModal(datosUsuario: any) {
+    abrirModal() {
       const modalRef = this.modalService.open(UsuarioModalContent);
       modalRef.componentInstance.configModal = this.configModal;
-      modalRef.componentInstance.datosUsuario = datosUsuario;
+      modalRef.componentInstance.localidades = this.listaLocalidades;
     }
 
-    buscarUsuario() {
-      if (this.usuarioid !== undefined) {
-        let usuario = {
-          id: this.usuarioid, nro_documento: '25262728', apellido: 'Garcia', nombre: 'Pedro',
-          cuil: '25262728', cuil_prin: '20', cuil_fin: '3',
-          usuario: {
-            user_name: 'pgarcia',
-            email: 'pgarcia@desarrollohumano.rionegro.gov.ar',
-            password: '',
-          }};
-        this.abrirModal(usuario);
-      } else {
-        this.abrirModal(null);
-      }
-    }
 
+    listarLocalidades() {
+      this._localidadService.listar().subscribe(
+        lista => {
+          this.listaLocalidades = lista;
+        }, error => { this._msj.cancelado(error, [{name:''}]); }
+      );
+    }
 
 }

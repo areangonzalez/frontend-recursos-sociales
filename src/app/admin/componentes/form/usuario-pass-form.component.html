@@ -20,7 +20,7 @@
       <label for="email" class="prioridad">Localidad:</label>
       <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'is-invalid': (usuario.get('localidadid').invalid && submitted)}">
         <option value="">Seleccione Localidad</option>
-        <!-- <option *ngFor="let localidad of localidadLista" value="{{localidad.id}}">{{localidad.nombre}}</option> -->
+        <option *ngFor="let localidad of localidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
       </select>
       <div *ngIf="(usuario.get('localidadid').invalid && submitted)" class="text-danger">
           <div *ngIf="usuario.get('localidadid').hasError('required')">Por favor Seleccione localidad. </div>

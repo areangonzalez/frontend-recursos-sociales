@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { MensajesService } from 'src/app/core/services';
+import { MensajesService, UsuarioService } from 'src/app/core/services';
 import { UtilService } from 'src/app/core/utils';
 
 @Component({
@@ -9,14 +9,13 @@ import { UtilService } from 'src/app/core/utils';
   styleUrls: ['./usuario-form.component.sass']
 })
 export class UsuarioFormComponent implements OnInit {
-  @Input("datosUsuario") public datosUsuario: any;
+  @Input("localidades") public localidades: any;
   @Output("cancelarForm") public cancelarForm = new EventEmitter();
   public persona: FormGroup;
   public cuil_medio: string;
   public submitted: boolean = false;
-  public editarUsuario: boolean = true;
 
-  constructor(private _fb: FormBuilder, private _util: UtilService, private _mensajeService: MensajesService) {
+  constructor(private _fb: FormBuilder, private _util: UtilService, private _mensajeService: MensajesService, private _usuarioService: UsuarioService) {
     this.persona = _fb.group({
       id: '',
       nro_documento: ['', [Validators.required, Validators.minLength(7)]],
@@ -35,44 +34,41 @@ export class UsuarioFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    if (this.datosUsuario !== null) {
-      this.completarForm(this.datosUsuario);
-      this.persona.removeControl("usuario");
-      this.editarUsuario = true;
-    } else {
-      this.editarUsuario = false;
-    }
-  }
-
-  completarForm(datos: any) {
-    this.validarCuil(datos["nro_documento"]);
-    this.persona.patchValue(datos);
-  }
-
+  ngOnInit() {}
+  /**
+   * cancela el formulario
+   */
   cancelar() {
     this.cancelarForm.emit(true);
   }
-
-  validarPersona() {
+  /**
+   * valida los datos del formulario
+   * si los campos no han sido compoletados muestra un mensaje de error y los campos resaltados.
+   * si se han completado los campos correctamente se aplica el guardado de datos, y se notifica si se ha guardado correctamete
+   */
+  validarForm() {
     this.submitted = true;
     if (this.persona.invalid) { // verifico la validación en los campos del formulario
-      console.log("no se valida");
-      /* if (this.persona.get('email').value !== this.persona.get('email').value.toLowerCase()){
-        this._mensajeService.cancelado("El email no puede estar en mayusculas!!", [{name:''}]);
-      }else{ */
-        this._mensajeService.cancelado("Campos sin completar!!", [{name:''}]);
-      // }
+      this._mensajeService.cancelado("Campos sin completar!!", [{name:''}]);
       return;
     }else{ // si pasa la validación
       console.log("paso la validación");
-      this._mensajeService.exitoso("Se guardo el usuario con exito. Se necesita seguir desarrollando esta respueta.", [{name:''}]);
-      this.cancelarForm.emit(true);
-      /*
-      let id = this.persona.value.id;
-      let usuario = this.persona.value);
-      this.guardarUsuario(usuario,id); */
+
+      let usuario = this.persona.value;
+
+      console.log(usuario);
+
+      this.guardarUsuario(usuario);
     }
+  }
+
+  public guardarUsuario(params: object) {
+    this._usuarioService.guardar(params).subscribe(
+      respuesta => {
+        this._mensajeService.exitoso("Se ha guardado el usuario con exito.", [{name:''}]);
+        this.cancelarForm.emit(true);
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); }
+    )
   }
 
   /**

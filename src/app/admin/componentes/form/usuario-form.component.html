@@ -46,13 +46,13 @@
           </div>
       </div>
     </div>
-    <hr *ngIf="(!editarUsuario)">
-    <admin-usuario-pass-form *ngIf="(!editarUsuario)" [usuario]="persona.get('usuario')" [submitted]="submitted" ></admin-usuario-pass-form>
+    <hr>
+    <admin-usuario-pass-form [localidades]="localidades" [usuario]="persona.get('usuario')" [submitted]="submitted" ></admin-usuario-pass-form>
 
     <hr class="pt1">
     <div class="float-right">
         <button type="button" class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>&nbsp;
-        <button type="button" class="btn btn-success" (click)="validarPersona()" ><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
+        <button type="button" class="btn btn-success" (click)="validarForm()" ><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
     </div>
 
   </fieldset>

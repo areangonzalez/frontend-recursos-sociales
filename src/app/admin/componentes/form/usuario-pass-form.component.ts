@@ -7,6 +7,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./usuario-pass-form.component.sass']
 })
 export class UsuarioPassFormComponent implements OnInit {
+  @Input("localidades") public localidades: any;
   @Input("usuario") public usuario: FormGroup;
   @Input("submitted") public submitted: boolean;
 
