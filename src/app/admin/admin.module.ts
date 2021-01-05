@@ -10,9 +10,9 @@ import {
   UsuarioComponent, UsuarioModalContent, UsuarioModalComponent, UsuarioFormComponent,
   UsuarioPassFormComponent, InfoUsuarioComponent, ConfigUsuarioComponent,
   ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
-  AdministrarRolPermisoComponent
+  AdministrarRolPermisoComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent
 } from './componentes';
-import { ProgramaPermisoComponent } from './componentes/tablas/programa-permiso.component';
+import { ProgramaPermisoComponent } from './componentes/tablas';
 
 @NgModule({
   imports: [
@@ -21,9 +21,9 @@ import { ProgramaPermisoComponent } from './componentes/tablas/programa-permiso.
     SharedModule,
     AdminRoutingModule
   ],
-  declarations: [AdminComponent, GestorUsuarioComponent, UsuarioComponent, UsuarioFormComponent, UsuarioModalContent, UsuarioModalComponent, InfoUsuarioComponent, UsuarioPassFormComponent, ConfigUsuarioComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent, AdministrarRolPermisoComponent, ProgramaPermisoComponent],
+  declarations: [AdminComponent, GestorUsuarioComponent, UsuarioComponent, UsuarioFormComponent, UsuarioModalContent, UsuarioModalComponent, InfoUsuarioComponent, UsuarioPassFormComponent, ConfigUsuarioComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent, AdministrarRolPermisoComponent, ProgramaPermisoComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [UsuarioModalContent, UsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent]
+  entryComponents: [UsuarioModalContent, UsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent]
 
 })
 export class AdminModule { }

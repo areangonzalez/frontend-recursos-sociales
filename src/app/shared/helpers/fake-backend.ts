@@ -213,7 +213,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               if (localStorage.getItem("asignacion")) {
                 listaAsignacion = JSON.parse(localStorage.getItem("asignacion"));
               }
-              console.log(listaAsignacion);
 
               if (listaAsignacion.length > 0) {
                 let asignacion = listaAsignacion.filter(asig => { return asig.usuarioid === id; });
@@ -223,6 +222,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               } else {
                 return of(new HttpResponse({ status: 200, body: [] }));
               }
+            }
+            // borrar asignaciones
+            if(request.url.endsWith("/apimock/soportes/borrar-asignacion") && request.method === 'POST') {
+              let programaUsuario = request.body;
+              let listaAsignacion = [];
+              if (localStorage.getItem("asignacion")) {
+                listaAsignacion = JSON.parse(localStorage.getItem("asignacion"));
+              }
+
+              if (listaAsignacion.length > 0) {
+                for (let i = 0; i < listaAsignacion.length; i++) {
+                  if (listaAsignacion[i].usuarioid === programaUsuario.usuarioid && listaAsignacion[i].programaid === programaUsuario.programaid) {
+                    listaAsignacion.splice(i, 1);
+                  }
+                }
+                localStorage.setItem("asignacion",JSON.stringify(listaAsignacion));
+              }
+              return of(new HttpResponse({ status: 200 }));
             }
             // obtener reurso por ID
             if(request.url.match(/\/apimock\/recursos\/\d+$/) && request.method === 'GET') {

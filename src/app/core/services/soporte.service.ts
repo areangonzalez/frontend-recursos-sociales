@@ -15,8 +15,15 @@ export class SoporteService {
   public asignarPermisos(params: object) {
     return this._api.post("/soportes/crear-asignacion", params);
   }
-
+  /**
+   * obtiene el listado de los programas con us permisos del usuario
+   * @param idusuario identificador que define el usuario
+   */
   public listarAsignacion(idusuario:number) {
     return this._api.get("/soportes/listar-asignacion/" + idusuario);
+  }
+  public borrarAsignacion(usuarioid: number, programaid: number) {
+    let params: object = { usuarioid: usuarioid, programaid: programaid } ;
+    return this._api.post("/soportes/borrar-asignacion", params);
   }
 }
