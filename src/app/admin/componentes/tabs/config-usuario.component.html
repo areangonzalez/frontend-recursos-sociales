@@ -7,7 +7,7 @@
     </ngb-tab>
     <ngb-tab title="Rol y Permisos">
       <ng-template ngbTabContent>
-        <admin-administrar-rol-permiso-form [listaPermisos]="configListas.permisos" [listaProgramas]="configListas.programas"></admin-administrar-rol-permiso-form>
+        <admin-administrar-rol-permiso-form [idUsuario]="datosUsuario.usuario.id" [listaPermisos]="configListas.permisos" [listaRoles]="configListas.roles" [listaProgramas]="configListas.programas"></admin-administrar-rol-permiso-form>
       </ng-template>
     </ngb-tab>
     <ngb-tab title="Administrar contraseña">

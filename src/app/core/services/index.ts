@@ -26,3 +26,5 @@ export * from './delegacion.service';
 export * from './configuracion-para-paginar.service';
 export * from './usuario.service';
 export * from './permisos.service';
+export * from './rol.service';
+export * from './soporte.service';

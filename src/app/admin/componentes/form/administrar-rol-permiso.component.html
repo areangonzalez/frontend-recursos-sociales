@@ -3,14 +3,14 @@
     <div class="row" >
       <div class="form-group col-md-6">
         <label for="rol" class="prioridad">Rol:</label>
-        <select class="form-control" id="rol" formControlName="rol">
+        <select class="form-control" id="rol" formControlName="rolid">
           <option value="">Seleccione un Rol</option>
-          <!-- <option *ngFor="let estadoCivil of estadoCivilLista" value="{{estadoCivil.id}}">{{estadoCivil.nombre}}</option> -->
+          <option *ngFor="let rol of listaRoles" value="{{rol.id}}">{{rol.nombre}}</option>
         </select>
       </div>
       <div class="form-group col-md-6">
         <label for="rol" class="prioridad">Programa/s:</label>
-        <select class="form-control" id="rol" formControlName="programaid">
+        <select class="form-control" id="rol" formControlName="programaid" (change)="setPermisosDefault($event.target.value)">
           <option value="">Seleccione un Programa</option>
           <option *ngFor="let programa of listaProgramas" value="{{programa.id}}">{{programa.nombre}}</option>
         </select>
@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="col-md-12">
-    <button type="button" class="btn btn-success btn-block"><i class="far fa-save"></i> Guardar</button>
+    <button type="button" class="btn btn-success btn-block" (click)="validarDatos()"><i class="far fa-save"></i> Guardar</button>
   </div>
   <div class="col-md-12 mt-1 mb-2">
     <admin-programa-permiso-tabla [listaProgramaPermisos]="listaProgramaPermisos"></admin-programa-permiso-tabla>

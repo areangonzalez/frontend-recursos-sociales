@@ -25,5 +25,4 @@ export class ProgramaPermisoComponent implements OnInit {
   actualizarListado(idUsuario: number) {
     // pedir listado a backend
   }
-
 }

@@ -30,7 +30,8 @@ import {
   MunicipioService,
   DelegacionService,
   ConfiguracionParaPaginarService,
-  UsuarioService, PermisosService
+  UsuarioService, PermisosService, RolService,
+  SoporteService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -69,7 +70,8 @@ import { UtilService } from "./utils";
     MunicipioService,
     DelegacionService,
     ConfiguracionParaPaginarService,
-    UsuarioService, PermisosService
+    UsuarioService, PermisosService, RolService,
+    SoporteService
   ],
   declarations: []
 })

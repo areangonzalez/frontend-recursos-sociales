@@ -32,7 +32,7 @@ export class UsuarioService implements Resolve<any> {
   }
 
   public actualizarUsuario(params:object, id: number) {
-    return this._api.put('/usuario/' + id, params);
+    return this._api.put('/usuarios/' + id, params);
   }
 
   resolve(

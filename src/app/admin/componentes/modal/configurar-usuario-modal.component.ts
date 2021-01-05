@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProgramaService, LocalidadService, MensajesService, PermisosService, UsuarioService } from 'src/app/core/services';
+import { ProgramaService, LocalidadService, MensajesService, PermisosService, UsuarioService, RolService } from 'src/app/core/services';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -39,15 +39,18 @@ export class ConfigurarUsuarioModalComponent {
   public listaProgramas: any = [];
   public listaPermisos: any = [];
   public listaLocalidades: any = [];
+  public listaRoles: any = [];
 
   constructor(
     private _modalService: NgbModal, private _programaService: ProgramaService,
     private _localidadService: LocalidadService, private _msj: MensajesService,
-    private _permisosService: PermisosService, private _usuarioService: UsuarioService
+    private _permisosService: PermisosService, private _usuarioService: UsuarioService,
+    private _rolService: RolService
     )
   {
     this.listarProgramas();
     this.listarPermisos();
+    this.listarRoles();
     this.listarLocalidades();
   }
 
@@ -62,7 +65,8 @@ export class ConfigurarUsuarioModalComponent {
     let listas: any = {
       permisos: this.listaPermisos,
       programas: this.listaProgramas,
-      localidades: this.listaLocalidades
+      localidades: this.listaLocalidades,
+      roles: this.listaRoles
     };
     // pido usuario por api
     this._usuarioService.buscarPorId(this.usuarioid)
@@ -106,9 +110,19 @@ export class ConfigurarUsuarioModalComponent {
       permisos => { this.listaPermisos = permisos; },
       error => { this._msj.cancelado(error, [{name: ''}]); }
     );
-
   }
-
+  /**
+   * Obtengo el listado de roles
+   */
+  listarRoles() {
+    this._rolService.listar().subscribe(
+      roles => { this.listaRoles = roles; },
+      error => { this._msj.cancelado(error, [{name: ''}]); }
+    );
+  }
+  /**
+   * Obtengo el listado de localidades
+   */
   listarLocalidades() {
     this._localidadService.listar().subscribe(
       localidad => { this.listaLocalidades = localidad; },

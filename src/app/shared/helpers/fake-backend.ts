@@ -161,7 +161,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let usuarioEncontrado = usuario.length ? usuario[0] : null;
 
               return of(new HttpResponse({ status: 200, body: usuarioEncontrado }));
-
             }
             // Listado de pdermisos
             if(request.url.endsWith('/apimock/permisos') && request.method === 'GET') {
@@ -174,13 +173,55 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             }
             // editar datos usuario
-            if(request.url.match(/\/apimock\/usuario\/\d+$/) && request.method === 'PUT') {
+            if(request.url.match(/\/apimock\/usuarios\/\d+$/) && request.method === 'PUT') {
               let urlParts = request.url.split('/');
               let id = parseInt(urlParts[urlParts.length - 1]);
               if (id !== 0) {
                 return of(new HttpResponse({ status: 200 }));
               }else {
                 return throwError( { code:0,status: 400, message: 'No se puedo actualizar este usuario' } );
+              }
+            }
+            // lista de roles
+            if(request.url.endsWith('/apimock/rols') && request.method === 'GET') {
+              let listaRoles = [{id: 3, nombre: "usuario" }];
+              return of(new HttpResponse({ status: 200, body: listaRoles }));
+            }
+            // Agregar La asignacion de permisos a un usuario por programa
+            if(request.url.endsWith('/apimock/soportes/crear-asignacion') && request.method === 'POST') {
+              let newPermisos = request.body;
+              let listaAsignacion: any = [];
+              if (localStorage.getItem("asignacion")) {
+                listaAsignacion = JSON.parse(localStorage.getItem("asignacion"));
+              }
+
+              listaAsignacion.push({
+                usuarioid: newPermisos.usuarioid, programaid: newPermisos.programaid, rolid: newPermisos.rolid,
+                lista_permiso: newPermisos.lista_permiso,
+                programa: nombrePorId(parseInt(newPermisos.programaid), programas)
+              });
+
+              localStorage.setItem("asignacion", JSON.stringify(listaAsignacion));
+
+              return of(new HttpResponse({ status: 200 }));
+            }
+            // listar asignaciones
+            if(request.url.match(/\/apimock\/soportes\/listar-asignacion\/\d+$/) && request.method === 'GET') {
+              let urlParts = request.url.split('/');
+              let id = parseInt(urlParts[urlParts.length - 1]);
+              let listaAsignacion = [];
+              if (localStorage.getItem("asignacion")) {
+                listaAsignacion = JSON.parse(localStorage.getItem("asignacion"));
+              }
+              console.log(listaAsignacion);
+
+              if (listaAsignacion.length > 0) {
+                let asignacion = listaAsignacion.filter(asig => { return asig.usuarioid === id; });
+                /* let asignacionEncontrado = asignacion.length ? asignacion[0] : null; */
+
+                return of(new HttpResponse({ status: 200, body: asignacion }));
+              } else {
+                return of(new HttpResponse({ status: 200, body: [] }));
               }
             }
             // obtener reurso por ID
