@@ -10,6 +10,7 @@ import { ConfiguracionParaPaginarService, UsuarioService, MensajesService } from
 })
 export class GestorUsuarioComponent implements OnInit {
   public listaUsuarios: any = [];
+  public listaLocalidades: any = [];
   public busqueda: any = {};
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina();
 
@@ -17,6 +18,7 @@ export class GestorUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.prepararListadoUsuario(this._route.snapshot.data["usuarios"], 1);
+    this.listaLocalidades = this._route.snapshot.data["localidades"];
   }
   /**
    * @function buscar busca en listado

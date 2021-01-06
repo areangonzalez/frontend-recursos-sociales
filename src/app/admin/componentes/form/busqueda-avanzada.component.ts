@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MensajesService } from 'src/app/core/services';
@@ -10,6 +10,7 @@ import { UtilService } from 'src/app/core/utils';
   styleUrls: ['./busqueda-avanzada.component.sass']
 })
 export class BusquedaAvanzadaComponent implements OnInit {
+  @Input("listaLocalidades") public listaLocalidades: any;
   @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
   public btnSeleccion: boolean = false;
   public mostrar: boolean = false;

@@ -49,7 +49,7 @@
               <label for="localidad" class="prioridad">Localidad:</label>
               <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.localidadid.value)}" >
                 <option value="">Seleccione Localidad</option>
-                <option *ngFor="let localidad of localidadesLista" value="{{localidad.id}}">{{localidad.nombre}}</option>
+                <option *ngFor="let localidad of listaLocalidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
               </select>
             </div>
           </div>
