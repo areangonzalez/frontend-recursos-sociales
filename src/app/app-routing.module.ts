@@ -14,27 +14,28 @@ const routes: Routes = [
       { path: '',
         canActivate: [AuthGuard],
         loadChildren: './inicio/inicio.module#InicioModule', // prod
+        data: { rol: ['usuario', 'admin'] }
       },
       { path: 'reporte-modulo-alimentar',
         loadChildren: './modulo-alimentar/modulo-alimentar.module#ModuloAlimentarModule',
         canActivate: [AuthGuard],
-        data: { loading: true, preload: true, breadcrumb: 'Reportes Modulo Alimentar' }
+        data: { loading: true, preload: true, breadcrumb: 'Reportes Modulo Alimentar', rol: ['usuario', 'admin'] }
       },
       { path: 'crear-prestacion',
         loadChildren: './recurso/recurso.module#RecursoModule', // prod
         canActivate: [AuthGuard],
-        data: { loading: true, preload: true, breadcrumb: 'Prestación' } },
+        data: { loading: true, preload: true, breadcrumb: 'Prestación', rol: ['usuario', 'admin'] } },
       { path: 'reporte',
         canActivate: [AuthGuard],
         loadChildren: './reporte/reporte.module#ReporteModule', // prod
-        data: { loading: true, preload: true, breadcrumb: 'Reportes', title: 'Reportes' } },
+        data: { loading: true, preload: true, breadcrumb: 'Reportes', title: 'Reportes', rol: ['usuario', 'admin'] } },
       { path: 'vista',
         canActivate: [AuthGuard],
         loadChildren: './vista/vista.module#VistaModule', // prod
-        data: { loading: true, preload: true, breadcrumb: 'Vista', title: 'Visualizar prestación' } }
+        data: { loading: true, preload: true, breadcrumb: 'Vista', title: 'Visualizar prestación', rol: ['usuario', 'admin'] } }
     ]
   },
-  { path: 'admin', component: AdminLayoutComponent, data: { title: "Administración" }, loadChildren: './admin/admin.module#AdminModule' },
+  { path: 'admin', component: AdminLayoutComponent, canActivate: [AuthGuard], data: { title: "Administración", rol: ['admin'] }, loadChildren: './admin/admin.module#AdminModule' },
   { path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];

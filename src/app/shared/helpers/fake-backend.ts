@@ -96,25 +96,25 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   let body = {
                       username: 'admin',
                       access_token: 'fake-jwt-token',
-                      role: 1
+                      rol: 'admin'
                   };
                   return of(new HttpResponse({ status: 200, body }));
-              /* } else if (request.body.username === 'soporte' && request.body.password_hash === 'soportes') {
+              } else if (request.body.username === 'soporte' && request.body.password_hash === 'soportes') {
                 // if login details are valid return 200 OK with a fake jwt token
                 let body = {
-                    username: 'admin',
+                    username: 'soporte',
                     access_token: 'fake-jwt-token2',
-                    role: 2
+                    role: 'soporte'
                 };
                 return of(new HttpResponse({ status: 200, body }));
               } else if (request.body.username === 'usuario' && request.body.password_hash === 'usuarios') {
                 // if login details are valid return 200 OK with a fake jwt token
                 let body = {
-                    username: 'admin',
+                    username: 'usuario',
                     access_token: 'fake-jwt-token3',
-                    role: 3
+                    role: 'usuario'
                 };
-                return of(new HttpResponse({ status: 200, body })); */
+                return of(new HttpResponse({ status: 200, body }));
               } else {
                   // else return 400 bad request
                   return throwError( { code:0,status: 500, message: 'Username or password is incorrect' } );
@@ -133,8 +133,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // Agregar Usuario
             if(request.url.endsWith('/apimock/usuarios') && request.method === 'GET') {
               let busqueda = request.params;
-              console.log(busqueda);
-
               let listaUsuarios = {
                 pagesize: 20,
                 pages: 2,
