@@ -3,9 +3,9 @@
     <div class="row" >
       <div class="form-group col-md-6">
         <label for="rol" class="prioridad">Rol:</label>
-        <select class="form-control" id="rol" formControlName="rolid">
+        <select class="form-control" id="rol" formControlName="rol">
           <option value="">Seleccione un Rol</option>
-          <option *ngFor="let rol of listaRoles" value="{{rol.id}}"[selected]="(listaRoles.length == 1)">{{rol.nombre}}</option>
+          <option *ngFor="let rol of listaRoles" value="{{rol.name}}"[selected]="(listaRoles.length == 1)">{{rol.name}}</option>
         </select>
       </div>
       <div class="form-group col-md-6">

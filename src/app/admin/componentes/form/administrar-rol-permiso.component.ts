@@ -19,7 +19,7 @@ export class AdministrarRolPermisoComponent implements OnInit {
 
   constructor(private _fb: FormBuilder, private _msj: MensajesService, private _soporteService: SoporteService) {
     this.rolPermisosForm = _fb.group({
-      rolid: ["", [Validators.required]],
+      rol: ["", [Validators.required]],
       programaid: ["", [Validators.required]]
     });
 
