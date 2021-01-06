@@ -17,10 +17,12 @@
       </div>
     </div>
   </div>
+  {{ listaPermisos | json }}
   <div class="col-md-12">
     <div class="form-group">
       <label for="permisos">Permiso/s:</label>
       <ng-select [items]="listaPermisos"
+        bindLabel="name"
         placeholder="Seleccione uno o varios permiso/s."
         appendTo="body"
         multiple="true"

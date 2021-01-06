@@ -172,9 +172,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // Listado de pdermisos
             if(request.url.endsWith('/apimock/permisos') && request.method === 'GET') {
               let listaPermisos = [
-                "persona_ver", "persona_crear", "prestacion_ver", "prestacion_crear",
-                "prestacion_acreditar", "prestacion_baja"
-              ];
+                { "name": "persona_crear" },{ "name": "persona_modificar" },{ "name": "prestacion_acreditar" },
+                { "name": "prestacion_baja" },{ "name": "prestacion_crear" },{ "name": "prestacion_ver" }
+            ];
 
               return of(new HttpResponse({ status: 200, body: listaPermisos }));
 
@@ -191,7 +191,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // lista de roles
             if(request.url.endsWith('/apimock/rols') && request.method === 'GET') {
-              let listaRoles = [{id: 3, nombre: "usuario" }];
+              let listaRoles = [{id: 3, name: "usuario" }];
               return of(new HttpResponse({ status: 200, body: listaRoles }));
             }
             // Agregar La asignacion de permisos a un usuario por programa

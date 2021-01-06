@@ -38,7 +38,7 @@ export class AdministrarRolPermisoComponent implements OnInit {
   }
 
   setPermisosDefault(programaid: any) {
-    this.permisosSeleccionados = (programaid != "") ? ["persona_ver", "prestacion_ver"] : [];
+    this.permisosSeleccionados = (programaid != "") ? [{ name: "prestacion_ver" }] : [];
   }
 
   validarDatos() {
