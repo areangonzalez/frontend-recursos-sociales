@@ -3,6 +3,6 @@
   <admin-busqueda-avanzada-form (obtenerBusqueda)="realizarBusqueda($event,configPaginacion.page)"></admin-busqueda-avanzada-form>
 </div>
 <div class="shadow-sm mb-3 bg-white  p-3 rounded">
-  <admin-usuario-tabla [listado]="listaUsuarios"></admin-usuario-tabla>
+  <admin-usuario-tabla [listado]="listaUsuarios" [configPaginacion]="configPaginacion" (cambioDePagina)="cambiarPagina($event)"></admin-usuario-tabla>
 </div>
 

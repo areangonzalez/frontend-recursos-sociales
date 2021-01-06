@@ -37,12 +37,17 @@ export class GestorUsuarioComponent implements OnInit {
       }, error => { this._msj.cancelado(error, [{name:''}]); }
     )
   }
-
   prepararListadoUsuario(listado:any, pagina: number) {
     // preparo la variable con la configuracion para el paginado
     this.configPaginacion = this._configPagina.config(listado, pagina);
 
     this.listaUsuarios = listado.resultado;
   }
-
+  /**
+   * Solicito el cambio de pagina
+   * @param pagina numero de pagina
+   */
+  cambiarPagina(pagina:any) {
+    this.realizarBusqueda(this.busqueda, pagina);
+  }
 }
