@@ -132,13 +132,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // Agregar Usuario
             if(request.url.endsWith('/apimock/usuarios') && request.method === 'GET') {
-              let listaUsuarios = [
+              let busqueda = request.params;
+              console.log(busqueda);
+
+              let listaUsuarios = {
+                pagesize: 20,
+                pages: 2,
+                total_filtrado: 40,
+                resultado: [
                 {id: 1, nombre: "Carlos", apellido: "Garcia", user_name: "cgarcia", fecha_inicial: "2019-03-25", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
                 {id: 2, nombre: "Maria", apellido: "Gonzalez", user_name: "mgonzalez", fecha_inicial: "2019-04-02", fecha_ultimo_ingreso: "2020-12-20", direccion_ip: "192.10.10.8" },
                 {id: 3, nombre: "Graciela", apellido: "Perez", user_name: "gperez", fecha_inicial: "2019-05-03", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
                 {id: 4, nombre: "Paola", apellido: "Rodriguez", user_name: "prodriguez", fecha_inicial: "2019-08-06", fecha_ultimo_ingreso: "2020-12-23", direccion_ip: "192.10.10.8" },
                 {id: 5, nombre: "Gustavo", apellido: "Acosta", user_name: "gacosta", fecha_inicial: "2019-11-21", fecha_ultimo_ingreso: "2020-12-29", direccion_ip: "192.10.10.8" },
-              ]
+              ]}
 
                 return of(new HttpResponse({ status: 200, body: listaUsuarios }));
               /* } else {
