@@ -9,7 +9,7 @@ export class JwtService {
     }
 
     saveToken(datosToken: any) {
-        localStorage.setItem('token-rrss', JSON.stringify({ datosToken }));
+        localStorage.setItem('token-rrss', JSON.stringify(datosToken));
     }
 
     destroyToken() {

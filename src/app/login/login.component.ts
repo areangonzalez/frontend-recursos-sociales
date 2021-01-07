@@ -41,13 +41,10 @@ export class LoginComponent implements OnInit {
     this._auth.login(this.loginForm.value)
             .pipe(first())
             .subscribe(
-            data => {
-              console.log(data);
-                this.router.navigate([this.returnUrl]);
+            user => {
+                this.redirigirUsuario(user.rol);
             },
             error => {
-              console.log(error);
-
               this.huboError = true;
               this.mensaje = "Por favor verifique sus datos.";
             });
@@ -55,8 +52,15 @@ export class LoginComponent implements OnInit {
 
   private isLogin(){
     if (this._auth.loggedIn) {
-       this.router.navigate(['/inicio']);
+       this.redirigirUsuario(this._auth.loggedIn.rol);
     }
   }
 
+  redirigirUsuario(userRol: string) {
+    if (userRol === 'usuario' || userRol === 'admin') {
+      this.router.navigate(['/inicio']);
+    } else if (userRol === 'soporte') {
+      this.router.navigate(['/admin']);
+    }
+  }
 }

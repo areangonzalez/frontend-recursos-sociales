@@ -105,16 +105,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // if login details are valid return 200 OK with a fake jwt token
                 let body = {
                     username: 'soporte',
-                    access_token: 'fake-jwt-token2',
-                    role: 'soporte'
+                    access_token: 'fake-jwt-token',
+                    rol: 'soporte'
                 };
                 return of(new HttpResponse({ status: 200, body }));
               } else if (request.body.username === 'usuario' && request.body.password_hash === 'usuarios') {
                 // if login details are valid return 200 OK with a fake jwt token
                 let body = {
                     username: 'usuario',
-                    access_token: 'fake-jwt-token3',
-                    role: 'usuario'
+                    access_token: 'fake-jwt-token',
+                    rol: 'usuario'
                 };
                 return of(new HttpResponse({ status: 200, body }));
               } else {
@@ -1174,8 +1174,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // get DETALLES DE PROGRAMAS
             if (request.url.endsWith('/apimock/programas/detalle') && request.method === 'GET') {
-              console.log("headers: ", request.headers);
-
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 for (let i = 0; i < programas.length; i++) {

@@ -35,7 +35,7 @@ const routes: Routes = [
         data: { loading: true, preload: true, breadcrumb: 'Vista', title: 'Visualizar prestación', rol: ['usuario', 'admin'] } }
     ]
   },
-  { path: 'admin', component: AdminLayoutComponent, canActivate: [AuthGuard], data: { title: "Administración", rol: ['admin'] }, loadChildren: './admin/admin.module#AdminModule' },
+  { path: 'admin', component: AdminLayoutComponent, canActivate: [AuthGuard], data: { title: "Administración", rol: ['admin', 'soporte'] }, loadChildren: './admin/admin.module#AdminModule' },
   { path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
