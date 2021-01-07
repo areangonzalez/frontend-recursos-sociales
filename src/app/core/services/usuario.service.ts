@@ -35,6 +35,10 @@ export class UsuarioService implements Resolve<any> {
     return this._api.put('/usuarios/' + id, params);
   }
 
+  public baja(params: object) {
+    return this._api.post('/usuarios/baja', params);
+  }
+
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,

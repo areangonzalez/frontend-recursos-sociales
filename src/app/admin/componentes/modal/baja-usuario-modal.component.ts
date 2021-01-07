@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'admin-baja-usuario-modal-content',
@@ -12,18 +13,35 @@ import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-boots
     </div>
     <div class="modal-body">
       <p>¿Está seguro que desea dar de BAJA al usuario <strong>{{nombreUsuario}}</strong>?</p>
+      <div class="row" [formGroup]="bajaForm">
+        <div class="form-group col-md-12">
+          <label for="observacion">¿Por qué?:</label>
+          <textarea class="form-control" id="observacion" cols="30" rows="1" placeholder="Porque..." formControlName="baja_detalle" ></textarea>
+          <div *ngIf="(bajaForm.get('baja_detalle').invalid && submitted)"
+              class="text-danger">
+              <div *ngIf="bajaForm.get('baja_detalle').hasError('required')">Este campo es requerido. </div>
+              <div *ngIf="bajaForm.get('baja_detalle').hasError('minlength')">Explique brevemente...</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class=modal-footer>
-    <button type="button" class="btn btn-danger" (click)="confirmar(false)"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> No</button>
-    <button type="button" class="btn btn-success" (click)="confirmar(true)"><i class="fa fa-arrow-down"></i> Si</button>
+    <button type="button" class="btn btn-danger" (click)="cerrarModal()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> No</button>
+    <button type="button" class="btn btn-success" (click)="confirmar()"><i class="fa fa-arrow-down"></i> Si</button>
     </div>
   `,
   styleUrls: ['./baja-usuario-modal.component.sass']
 })
 export class BajaUsuarioModalContent {
   @Input("nombreUsuario") public nombreUsuario: string;
+  public bajaForm: FormGroup;
+  public submitted: boolean = false;
 
-  constructor(public _activeModal: NgbActiveModal) {}
+  constructor(public _activeModal: NgbActiveModal, private _fb: FormBuilder) {
+    this.bajaForm = _fb.group({
+      baja_detalle: ['', [Validators.required, Validators.minLength(15)]]
+    })
+  }
   /**
    * cierro el modal sin confirmación
    */
@@ -31,7 +49,15 @@ export class BajaUsuarioModalContent {
   /**
    * Confirmacion de borrado de usuario
    */
-  confirmar(confirmacion: boolean) { this._activeModal.close(confirmacion); }
+  confirmar() {
+    this.submitted = true;
+    if (this.bajaForm.invalid){ return; }
+    else {
+      let baja: any = this.bajaForm.value;
+      baja['confirmacion'] = true;
+      this._activeModal.close(baja);
+    }
+  }
 }
 
 
