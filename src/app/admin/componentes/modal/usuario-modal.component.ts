@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Input } from '@angular/core';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BotonDisenio, ModalConfig } from 'src/app/core/models';
-import { PersonaService, LocalidadService, MensajesService } from 'src/app/core/services';
+import { RolService, LocalidadService, MensajesService } from 'src/app/core/services';
 
 @Component({
   selector: 'admin-usuario-modal-content',
@@ -13,13 +13,14 @@ import { PersonaService, LocalidadService, MensajesService } from 'src/app/core/
       </button>
     </div>
     <div class="modal-body">
-      <admin-usuario-form [localidades]="localidades" (cancelarForm)="cancelarModal($event)"></admin-usuario-form>
+      <admin-usuario-form [localidades]="localidades" [roles]="roles" (cancelarForm)="cancelarModal($event)"></admin-usuario-form>
     </div>
   `
 })
 export class UsuarioModalContent {
   @Input("configModal") public configModal:ModalConfig;
   @Input("localidades") public localidades:any;
+  @Input("roles") public roles:any;
   constructor(public activeModal: NgbActiveModal) {}
 
   cancelarModal(cancelar: boolean) {
@@ -42,24 +43,37 @@ export class UsuarioModalComponent  {
   @Input("configModal") public configModal: ModalConfig;
   @Input("usuarioid") public usuarioid: number;
   public listaLocalidades: any = [];
+  public listaRoles: any = [];
 
-  constructor(private modalService: NgbModal, private _localidadService: LocalidadService, private _msj: MensajesService) {
+  constructor(private modalService: NgbModal, private _localidadService: LocalidadService, private _msj: MensajesService, private _rolService: RolService) {
     this.listarLocalidades();
+    this.listarRoles();
   }
 
     abrirModal() {
       const modalRef = this.modalService.open(UsuarioModalContent);
       modalRef.componentInstance.configModal = this.configModal;
       modalRef.componentInstance.localidades = this.listaLocalidades;
+      modalRef.componentInstance.roles = this.listaRoles;
     }
-
-
+    /**
+     * listo las localidades
+     */
     listarLocalidades() {
       this._localidadService.listar().subscribe(
-        lista => {
-          this.listaLocalidades = lista;
-        }, error => { this._msj.cancelado(error, [{name:''}]); }
+        lista => { this.listaLocalidades = lista; },
+        error => { this._msj.cancelado(error, [{name:''}]); }
       );
     }
+    /**
+     * listo los roles
+     */
+    listarRoles() {
+      this._rolService.listar().subscribe(
+        lista => { this.listaRoles = lista; },
+        error => { this._msj.cancelado(error, [{name:''}]); }
+      );
+    }
+
 
 }

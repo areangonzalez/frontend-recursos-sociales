@@ -35,7 +35,7 @@
         <td class="text-center">{{user.direccion_ip}}</td>
         <td class="text-center">
           <admin-configurar-usuario-modal [usuarioid]="user.id" ></admin-configurar-usuario-modal>
-          <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="fas fa-user-minus"></i></button>
+          <admin-baja-usuario-modal [nombreUsuario]="user.user_name" (confirmarBaja)="darBajaUsuario($event)" ></admin-baja-usuario-modal>
         </td>
       </tr>
     </tbody>

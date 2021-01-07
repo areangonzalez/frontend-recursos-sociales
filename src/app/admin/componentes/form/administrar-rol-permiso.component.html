@@ -1,14 +1,7 @@
 <div class="row m-1">
-  <div class="col-md-12" [formGroup]="rolPermisosForm">
+  <div class="col-md-12" [formGroup]="permisosForm">
     <div class="row" >
-      <div class="form-group col-md-6">
-        <label for="rol" class="prioridad">Rol:</label>
-        <select class="form-control" id="rol" formControlName="rol">
-          <option value="">Seleccione un Rol</option>
-          <option *ngFor="let rol of listaRoles" value="{{rol.name}}"[selected]="(listaRoles.length == 1)">{{rol.name}}</option>
-        </select>
-      </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-12">
         <label for="rol" class="prioridad">Programa/s:</label>
         <select class="form-control" id="rol" formControlName="programaid" (change)="setPermisosDefault($event.target.value)">
           <option value="">Seleccione un Programa</option>

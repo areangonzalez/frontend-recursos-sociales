@@ -11,15 +11,13 @@ export class AdministrarRolPermisoComponent implements OnInit {
   @Input("idUsuario") private idUsuario: number;
   @Input("listaProgramas") public listaProgramas: any;
   @Input("listaPermisos") public listaPermisos: any;
-  @Input("listaRoles") public listaRoles: any;
   public submitted: boolean = false;
-  public rolPermisosForm: FormGroup;
+  public permisosForm: FormGroup;
   public listaProgramaPermisos: any = [];
   public permisosSeleccionados: any = [];
 
   constructor(private _fb: FormBuilder, private _msj: MensajesService, private _soporteService: SoporteService) {
-    this.rolPermisosForm = _fb.group({
-      rol: ["", [Validators.required]],
+    this.permisosForm = _fb.group({
       programaid: ["", [Validators.required]]
     });
 
@@ -43,10 +41,10 @@ export class AdministrarRolPermisoComponent implements OnInit {
 
   validarDatos() {
     this.submitted = true;
-    if (this.rolPermisosForm.invalid && (this.permisosSeleccionados.length !== 0)) {
+    if (this.permisosForm.invalid && (this.permisosSeleccionados.length !== 0)) {
       return;
     }else{
-      let params: any = this.rolPermisosForm.value;
+      let params: any = this.permisosForm.value;
       params["usuarioid"] = this.idUsuario;
       params["lista_permiso"] = this.permisosSeleccionados;
 

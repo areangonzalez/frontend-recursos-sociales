@@ -8,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class UsuarioPassFormComponent implements OnInit {
   @Input("localidades") public localidades: any;
+  @Input("listaRoles") public listaRoles: any;
   @Input("usuario") public usuario: FormGroup;
   @Input("submitted") public submitted: boolean;
 

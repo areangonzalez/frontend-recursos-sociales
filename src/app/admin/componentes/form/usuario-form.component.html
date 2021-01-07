@@ -47,8 +47,7 @@
       </div>
     </div>
     <hr>
-    <admin-usuario-pass-form [localidades]="localidades" [usuario]="persona.get('usuario')" [submitted]="submitted" ></admin-usuario-pass-form>
-
+    <admin-usuario-pass-form [localidades]="localidades" [listaRoles]="roles" [usuario]="persona.get('usuario')" [submitted]="submitted" ></admin-usuario-pass-form>
     <hr class="pt1">
     <div class="float-right">
         <button type="button" class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>&nbsp;

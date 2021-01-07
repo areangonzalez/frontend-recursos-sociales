@@ -28,4 +28,8 @@ export class UsuarioComponent implements OnInit {
     this.cambioDePagina.emit(pagina);
   }
 
+
+  darBajaUsuario(confirmar:boolean) {
+    console.log(confirmar);
+  }
 }

@@ -5,15 +5,15 @@
         <admin-info-usuario [datosUsuario]="datosUsuario"></admin-info-usuario>
       </ng-template>
     </ngb-tab>
-    <ngb-tab title="Rol y Permisos">
+    <ngb-tab title="Permisos">
       <ng-template ngbTabContent>
-        <admin-administrar-rol-permiso-form [idUsuario]="datosUsuario.usuario.id" [listaPermisos]="configListas.permisos" [listaRoles]="configListas.roles" [listaProgramas]="configListas.programas"></admin-administrar-rol-permiso-form>
+        <admin-administrar-rol-permiso-form [idUsuario]="datosUsuario.usuario.id" [listaPermisos]="configListas.permisos" [listaProgramas]="configListas.programas"></admin-administrar-rol-permiso-form>
       </ng-template>
     </ngb-tab>
     <ngb-tab title="Administrar contraseña">
       <ng-template ngbTabContent>
         <div class="col-md-12 m-1">
-          <admin-usuario-pass-form [localidades]="configListas.localidades" [usuario]="usuario" [submitted]="submitted" ></admin-usuario-pass-form>
+          <admin-usuario-pass-form [localidades]="configListas.localidades" [usuario]="usuario" [listaRoles]="configListas.roles" [submitted]="submitted" ></admin-usuario-pass-form>
         </div>
         <div class="col-md-12 mt-1 mb-3">
           <button type="button" class="btn btn-success btn-block" (click)="cambiarPass()"><i class="far fa-save"></i> Guardar</button>

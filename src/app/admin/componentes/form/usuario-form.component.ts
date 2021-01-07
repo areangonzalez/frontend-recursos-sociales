@@ -10,6 +10,7 @@ import { UtilService } from 'src/app/core/utils';
 })
 export class UsuarioFormComponent implements OnInit {
   @Input("localidades") public localidades: any;
+  @Input("roles") public roles: any;
   @Output("cancelarForm") public cancelarForm = new EventEmitter();
   public persona: FormGroup;
   public cuil_medio: string;
@@ -27,6 +28,7 @@ export class UsuarioFormComponent implements OnInit {
       usuario: _fb.group({
         user_name: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+        rol: ['', [Validators.required]],
         localidadid: '',
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPass: ['', [Validators.required]]
