@@ -11,8 +11,9 @@ import {
   UsuarioPassFormComponent, InfoUsuarioComponent, ConfigUsuarioComponent,
   ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
   AdministrarRolPermisoComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent,
-  ProgramaPermisoComponent, BusquedaAvanzadaComponent
+  ProgramaPermisoComponent, BusquedaAvanzadaComponent, BajaUsuarioModalContent, BajaUsuarioModalComponent
 } from './componentes';
+import {  } from './componentes/modal/baja-usuario-modal.component';
 
 @NgModule({
   imports: [
@@ -21,9 +22,9 @@ import {
     SharedModule,
     AdminRoutingModule
   ],
-  declarations: [AdminComponent, GestorUsuarioComponent, UsuarioComponent, UsuarioFormComponent, UsuarioModalContent, UsuarioModalComponent, InfoUsuarioComponent, UsuarioPassFormComponent, ConfigUsuarioComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent, AdministrarRolPermisoComponent, ProgramaPermisoComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent, BusquedaAvanzadaComponent],
+  declarations: [AdminComponent, GestorUsuarioComponent, UsuarioComponent, UsuarioFormComponent, UsuarioModalContent, UsuarioModalComponent, InfoUsuarioComponent, UsuarioPassFormComponent, ConfigUsuarioComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent, AdministrarRolPermisoComponent, ProgramaPermisoComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent, BusquedaAvanzadaComponent, BajaUsuarioModalContent, BajaUsuarioModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [UsuarioModalContent, UsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent]
+  entryComponents: [UsuarioModalContent, UsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent, BajaUsuarioModalContent, BajaUsuarioModalComponent]
 
 })
 export class AdminModule { }
