@@ -6,7 +6,7 @@ import { ProgramaService, TipoRecursoService, TipoResponsableService, LocalidadS
 const routes: Routes = [
     {
       path: '', component: RecursoComponent,
-      data: { loading: true, preload: true, breadcrumb: 'Crear', title: 'Crear prestación' },
+      data: { loading: true, preload: true, breadcrumb: 'Crear', title: 'Crear prestación', rol: ['usuario', 'admin'] },
       resolve: {
         programas: ProgramaService,
         tipoRecursos: TipoRecursoService,
@@ -16,7 +16,7 @@ const routes: Routes = [
     },
     {
       path: ':programaid', component: RecursoComponent,
-      data: { loading: true, preload: true, breadcrumb: 'Crear', title: 'Crear prestación' },
+      data: { loading: true, preload: true, breadcrumb: 'Crear', title: 'Crear prestación', rol: ['usuario', 'admin'] },
       resolve: {
         programas: ProgramaService,
         tipoRecursos: TipoRecursoService,

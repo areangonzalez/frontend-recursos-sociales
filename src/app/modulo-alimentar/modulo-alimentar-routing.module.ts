@@ -20,7 +20,7 @@ const routes: Routes = [
         canActivateChild: [AuthGuard],
         children: [
           { path: '', redirectTo: 'beneficiarios', pathMatch: 'full' },
-          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'Beneficiarios', title: 'Reportes de Modulo Alimentar' },
+          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'Beneficiarios', title: 'Reportes de Modulo Alimentar', rol: ['usuario', 'admin'] },
             resolve: {
               localidades: LocalidadService,
               tipoResponsables: TipoResponsableService,
@@ -31,7 +31,7 @@ const routes: Routes = [
             },
           },
           { path: 'estadisticas', component: EstadisticasComponent,
-            data: { breadcrumb: 'Estadísticas', title: 'Reportes de Estadísticas Modulo Alimentar' },
+            data: { breadcrumb: 'Estadísticas', title: 'Reportes de Estadísticas Modulo Alimentar', rol: ['usuario', 'admin'] },
             resolve: {
               estadisticas: EstadisticaService
             }

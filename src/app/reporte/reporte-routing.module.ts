@@ -17,7 +17,7 @@ const routes: Routes = [
         canActivateChild: [AuthGuard],
         children: [
           { path: '', redirectTo: 'prestaciones', pathMatch: 'full' },
-          { path: 'prestaciones', component: PrestacionesComponent, data: { breadcrumb: 'Prestaciones', title: 'Reportes de prestaciones' },
+          { path: 'prestaciones', component: PrestacionesComponent, data: { breadcrumb: 'Prestaciones', title: 'Reportes de prestaciones', rol: ['usuario', 'admin'] },
             resolve: {
               prestaciones: RecursoSocialService,
               programas: ProgramaService,
@@ -25,13 +25,13 @@ const routes: Routes = [
               tipoPrestacion: TipoRecursoService
             }
           },
-          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'Beneficiarios', title: 'Reportes de beneficiarios' },
+          { path: 'beneficiarios', component: BeneficiariosComponent, data: { breadcrumb: 'Beneficiarios', title: 'Reportes de beneficiarios', rol: ['usuario', 'admin'] },
             resolve: {
               beneficiarios: BeneficiarioService,
               localidades: LocalidadService
             }
           },
-          { path: 'estadisticas', component: EstadisticasComponent, data: { breadcrumb: 'Estadísticas', title: 'Reportes con estadísticas' },
+          { path: 'estadisticas', component: EstadisticasComponent, data: { breadcrumb: 'Estadísticas', title: 'Reportes con estadísticas', rol: ['usuario', 'admin'] },
             resolve: {
              localidades: LocalidadService,
              programas: ProgramaService,

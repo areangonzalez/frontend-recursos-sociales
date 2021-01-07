@@ -7,7 +7,7 @@ const routes: Routes = [
     {
         path: '',
         component: InicioComponent,
-        data: { title: 'Inicio' },
+        data: { title: 'Inicio', rol: ['usuario', 'admin'] },
         resolve: {
           programas: DetalleProgramaService
         }
