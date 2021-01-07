@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { JwtService } from '../services';
+import { AuthenticationService, JwtService } from '../services';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
 
-    constructor(private router: Router, private _jwtService: JwtService) { }
+    constructor(private router: Router, private _auth: AuthenticationService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      if (localStorage.getItem('token-rrss')) {
+      if (this._auth.loggedIn) {
         // logged in so return true
         return true;
       }

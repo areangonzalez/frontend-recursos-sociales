@@ -8,7 +8,7 @@ export class JwtService {
         return JSON.parse(localStorage.getItem('token-rrss'));
     }
 
-    saveToken(datosToken: object) {
+    saveToken(datosToken: any) {
         localStorage.setItem('token-rrss', JSON.stringify({ datosToken }));
     }
 

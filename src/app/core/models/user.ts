@@ -1,7 +1,17 @@
+import { HalfCircleSpinnerModule } from "angular-epic-spinners";
+
 export class User {
   username: string;
-  nombre: string;
-  apellido: string;
   role: string;
-  token: string;
+  access_token: string;
+  nombre?: string;
+  apellido?: string;
+  email?: string;
+/*
+  constructor() {}
+
+  hasRole(key: string) {
+    if (this.role) { return false; }
+    return this.role === key;
+  } */
 }

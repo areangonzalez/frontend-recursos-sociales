@@ -22,7 +22,7 @@ export class AdminLayoutComponent implements OnInit {
   ngOnInit() {
     this._titleService.init();
     // this.nombreUsuario = this._auth.getUserName();
-    this.nombreUsuario = "Un administrador";
+    this.nombreUsuario = this._auth.loggedIn.username;
   }
 
   estoyLogueado(){

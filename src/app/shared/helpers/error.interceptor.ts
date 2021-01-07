@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpEventType } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
@@ -9,12 +9,13 @@ import { LoaderService, AuthenticationService, JwtService } from 'src/app/core/s
 export class ErrorInterceptor implements HttpInterceptor {
     private envios = 0;
     private recibidos = 0;
-    constructor(private authenticationService: AuthenticationService, private _loadService: LoaderService, private _jwtService: JwtService) { }
+    constructor(private authenticationService: AuthenticationService, private _loadService: LoaderService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this._loadService.show();
         return next.handle(request).pipe(
           tap(res => {
+            console.log(res);
             // res.type is prod and zero is dev
             let tipoRespuesta = (environment.production) ? res.type : 0 ;
             if (tipoRespuesta === HttpEventType.Sent) {
@@ -32,37 +33,37 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
           }),
           catchError(err => {
-            // verifico si existe el acceso del usuario
-            let accessUser = this._jwtService.getToken();
-            if (accessUser && accessUser.datosToken){
-              this.recibidos++;
-            }
-            // error de inahutorizado
-            if (err.status === 401) {
-              this.recibidos++;
-              // auto logout if 401 response returned from api
-              this.authenticationService.logout();
-              location.reload(true);
-              this._loadService.hide();
-            }
-            if (err.status === 403) {
-              // auto logout if 401 response returned from api
-              this._loadService.hide();
-              let mensaje = "No tiene permitido ejecutar esta accion";
-              return throwError(mensaje);
-            }
-            // error.message viene como objeto
-            if (err.status === 400){
-              this.recibidos++;
-              let mensaje = this.recorrerErrorObjeto(JSON.parse(err.error.message));
-              // envio el mensaje como texto.
-              this._loadService.hide();
-              return throwError(mensaje);
-            }else{ // cualquier otro error
-              const error = err.message || err.error.message || err.statusText;
-              this._loadService.hide();
-              return throwError(error);
-            }
+              // verifico si existe el acceso del usuario
+              let accessUser = this.authenticationService.loggedIn;
+              if (accessUser){
+                this.recibidos++;
+              }
+              // error de inahutorizado
+              if (err.status === 401) {
+                this.recibidos++;
+                // auto logout if 401 response returned from api
+                this.authenticationService.logout();
+                //location.reload(true);
+                this._loadService.hide();
+              }
+              if (err.status === 403) {
+                // auto logout if 401 response returned from api
+                this._loadService.hide();
+                let mensaje = "No tiene permitido ejecutar esta accion";
+                return throwError(mensaje);
+              }
+              // error.message viene como objeto
+              if (err.status === 400){
+                this.recibidos++;
+                let mensaje = this.recorrerErrorObjeto(JSON.parse(err.error.message));
+                // envio el mensaje como texto.
+                this._loadService.hide();
+                return throwError(mensaje);
+              }else{ // cualquier otro error
+                const error = err.message || err.error.message || err.statusText;
+                this._loadService.hide();
+                return throwError(error);
+              }
           })
         )
     }

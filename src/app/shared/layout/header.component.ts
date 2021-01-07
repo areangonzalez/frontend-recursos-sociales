@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-      this.nombreUsuario = this._authentication.getUserName();
+      this.nombreUsuario = this._authentication.loggedIn.username;
     }
 
     estoyLogueado(){

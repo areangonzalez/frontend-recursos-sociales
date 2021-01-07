@@ -91,6 +91,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(null).pipe(mergeMap(() => {
             // authenticate
             if (request.url.endsWith('/apimock/usuarios/login') && request.method === 'POST') {
+              console.log(request.body);
+
               if (request.body.username === 'admin' && request.body.password_hash === 'admins') {
                   // if login details are valid return 200 OK with a fake jwt token
                   let body = {
@@ -1172,6 +1174,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // get DETALLES DE PROGRAMAS
             if (request.url.endsWith('/apimock/programas/detalle') && request.method === 'GET') {
+              console.log("headers: ", request.headers);
+
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 for (let i = 0; i < programas.length; i++) {

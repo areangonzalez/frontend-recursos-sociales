@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-    // verifico si esta logueado
+    // redirijo a la pagina principal si esta logueado
     this.isLogin();
   }
 
@@ -42,16 +42,19 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
             data => {
+              console.log(data);
                 this.router.navigate([this.returnUrl]);
             },
             error => {
+              console.log(error);
+
               this.huboError = true;
               this.mensaje = "Por favor verifique sus datos.";
             });
   }
 
   private isLogin(){
-    if (this._auth.loggedIn()) {
+    if (this._auth.loggedIn) {
        this.router.navigate(['/inicio']);
     }
   }
