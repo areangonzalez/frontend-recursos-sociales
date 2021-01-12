@@ -169,6 +169,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               return of(new HttpResponse({ status: 200, body: usuarioEncontrado }));
             }
+            // obtener usuario por ID
+            if(request.url.match(/\/apimock\/usuarios\/buscar-persona\/\d+$/) && request.method === 'GET') {
+              let urlParts = request.url.split('/');
+              let cuil = urlParts[urlParts.length - 1];
+              let listaUsuarios = [
+                {personaid: 1, id: 1, nombre: "Carlos", apellido: "Garcia", nro_documento: "23159753", cuil: "20231597538", usuario: { id: 1, email:"cgarcia@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "cgarcia", rol: 'usuario', fecha_inicial: "2019-03-25", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" }},
+                {personaid: 2, id: 2, nombre: "Pedro", apellido: "Gonzalez", nro_documento: "15156783", cuil: "20151567835" },
+              ];
+
+              let usuario = listaUsuarios.filter(usu => { return usu.cuil === cuil; });
+              let usuarioEncontrado = usuario.length ? usuario[0] : null;
+
+              if (usuarioEncontrado) {
+                return of(new HttpResponse({ status: 200, body: {success: true, resultado: usuarioEncontrado} }));
+              }else{
+                return of(new HttpResponse({ status: 200, body: {success: false, resultado: []} }));
+              }
+            }
             // Listado de pdermisos
             if(request.url.endsWith('/apimock/permisos') && request.method === 'GET') {
               let listaPermisos = [

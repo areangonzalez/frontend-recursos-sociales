@@ -39,6 +39,10 @@ export class UsuarioService implements Resolve<any> {
     return this._api.put('/usuarios/baja/' + id, params);
   }
 
+  public buscarPorCuil(cuil: string) {
+    return this._api.get('/usuarios/buscar-persona/' + cuil );
+  }
+
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,

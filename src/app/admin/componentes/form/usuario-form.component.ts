@@ -15,10 +15,11 @@ export class UsuarioFormComponent implements OnInit {
   public persona: FormGroup;
   public cuil_medio: string;
   public submitted: boolean = false;
+  private usuarioid: number = 0;
 
   constructor(private _fb: FormBuilder, private _util: UtilService, private _mensajeService: MensajesService, private _usuarioService: UsuarioService) {
     this.persona = _fb.group({
-      id: '',
+      personaid: '',
       nro_documento: ['', [Validators.required, Validators.minLength(7)]],
       apellido: ['', [Validators.required, Validators.minLength(3)]],
       nombre: ['', [Validators.required, Validators.minLength(3)]],
@@ -36,7 +37,11 @@ export class UsuarioFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.roles.length === 1) {
+      this.persona.get('usuario').patchValue('rol','usuario');
+    }
+  }
   /**
    * cancela el formulario
    */
@@ -55,7 +60,11 @@ export class UsuarioFormComponent implements OnInit {
       return;
     }else{ // si pasa la validación
       let usuario = this.persona.value;
-      this.guardarUsuario(usuario);
+      if (this.usuarioid === 0) {
+        this.guardarUsuario(usuario);
+      } else {
+        this._mensajeService.cancelado("Este usuario ya esta registrado en el sistema.", [{name: ''}]);
+      }
     }
   }
 
@@ -108,10 +117,29 @@ export class UsuarioFormComponent implements OnInit {
     // verifico si las variables son distintas a vacio
     // si la validacion es correcta seteo el valor del formulario con el cuil armado
     if (cuil_primero != '' && cuil_ult != '') {
-        return this.persona.controls.cuil.setValue(cuil_primero + this.cuil_medio + cuil_ult);
+      let cuil = cuil_primero + this.cuil_medio + cuil_ult;
+
+      this.validarPersonaPorCuil(cuil);
+
+      return this.persona.controls.cuil.setValue(cuil);
     }else{ // si esta vacio seteo el valor del formulario en vacion
-        return this.persona.controls.cuil.setValue('');
+      return this.persona.controls.cuil.setValue('');
     }
+  }
+
+  public validarPersonaPorCuil(cuil: string) {
+    this.usuarioid = 0;
+    this._usuarioService.buscarPorCuil(cuil).subscribe(
+      datos => {
+        if (datos.success){
+          let datosPersona = datos.resultado;
+          this.persona.patchValue(datosPersona);
+          if (datosPersona.usuario !== undefined) {
+            this.usuarioid = datosPersona.usuario.id;
+            this.persona.get("usuario").patchValue(datosPersona.usuario);
+          }
+        }
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
 }
