@@ -30,9 +30,8 @@ export class UsuarioComponent implements OnInit {
 
 
   darBajaUsuario(baja:any, usuarioid: number) {
-    baja['usuarioid'] = usuarioid;
     if (baja.confirmacion) {
-      this._usuarioService.baja(baja).subscribe(
+      this._usuarioService.baja(baja, usuarioid).subscribe(
         resultado => {
           this._msj.exitoso("El usuario a sido dado de baja correctamente.", [{name:""}]);
           this.cambioPagina(this.configPaginacion.page);
