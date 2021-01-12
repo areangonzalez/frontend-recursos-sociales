@@ -13,11 +13,11 @@
     </div>
     <div class="form-group col-md-6">
       <label for="nombre_usuario" class="prioridad">Usuario (<span>*</span>):</label>
-      <input type="text" id="nombre_usuario" placeholder="Nombre de usuario" class="form-control" formControlName="user_name" [ngClass]="{'is-invalid': (usuario.get('user_name').invalid && submitted)}">
-      <div *ngIf="(usuario.get('user_name').invalid && submitted)"
+      <input type="text" id="nombre_usuario" placeholder="Nombre de usuario" class="form-control" formControlName="username" [ngClass]="{'is-invalid': (usuario.get('username').invalid && submitted)}">
+      <div *ngIf="(usuario.get('username').invalid && submitted)"
           class="text-danger">
-          <div *ngIf="usuario.get('user_name').hasError('required')">Este campo es requerido. </div>
-          <div *ngIf="usuario.get('user_name').hasError('minlength')">El nombre es muy corto.</div>
+          <div *ngIf="usuario.get('username').hasError('required')">Este campo es requerido. </div>
+          <div *ngIf="usuario.get('username').hasError('minlength')">El nombre es muy corto.</div>
       </div>
     </div>
     <div class="form-group col-md-6">

@@ -26,7 +26,7 @@ export class UsuarioFormComponent implements OnInit {
       cuil_prin: ['', [Validators.required, Validators.minLength(2)]],
       cuil_fin: ['', [Validators.required, Validators.minLength(1)]],
       usuario: _fb.group({
-        user_name: ['', [Validators.required, Validators.minLength(3)]],
+        username: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
         rol: ['', [Validators.required]],
         localidadid: '',
@@ -54,12 +54,7 @@ export class UsuarioFormComponent implements OnInit {
       this._mensajeService.cancelado("Campos sin completar!!", [{name:''}]);
       return;
     }else{ // si pasa la validación
-      console.log("paso la validación");
-
       let usuario = this.persona.value;
-
-      console.log(usuario);
-
       this.guardarUsuario(usuario);
     }
   }

@@ -29,13 +29,13 @@
     <tbody *ngIf="(listado.length > 0)" >
       <tr *ngFor="let user of listado">
         <td>{{user.apellido}}, {{user.nombre}}</td>
-        <td class="text-center">{{user.user_name}}</td>
+        <td class="text-center">{{user.username}}</td>
         <td class="text-center">{{user.fecha_inicial | date:'dd/MM/yyyy'}}</td>
         <td class="text-center">{{user.fecha_ultimo_ingreso | date:'dd/MM/yyyy'}}</td>
         <td class="text-center">{{user.direccion_ip}}</td>
         <td class="text-center">
           <admin-configurar-usuario-modal [usuarioid]="user.id" ></admin-configurar-usuario-modal>
-          <admin-baja-usuario-modal [nombreUsuario]="user.user_name" (confirmarBaja)="darBajaUsuario($event, user.id)" ></admin-baja-usuario-modal>
+          <admin-baja-usuario-modal [nombreUsuario]="user.username" (confirmarBaja)="darBajaUsuario($event, user.id)" ></admin-baja-usuario-modal>
         </td>
       </tr>
     </tbody>
