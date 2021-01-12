@@ -4,7 +4,7 @@
       <label for="rol" class="prioridad">Rol:</label>
       <select class="form-control" id="rol" formControlName="rol">
         <option value="">Seleccione un Rol</option>
-        <option *ngFor="let rol of listaRoles" value="{{rol.name}}"[selected]="(listaRoles.length == 1)">{{rol.name}}</option>
+        <option *ngFor="let rol of listaRoles" value="{{rol.name}}">{{rol.name}}</option>
       </select>
       <div *ngIf="(usuario.get('rol').invalid && submitted)"
           class="text-danger">

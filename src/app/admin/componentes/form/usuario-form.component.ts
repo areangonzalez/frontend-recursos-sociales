@@ -38,9 +38,7 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.roles.length === 1) {
-      this.persona.get('usuario').patchValue('rol','usuario');
-    }
+    this.setRol(this.roles);
   }
   /**
    * cancela el formulario
@@ -67,7 +65,10 @@ export class UsuarioFormComponent implements OnInit {
       }
     }
   }
-
+  /**
+   * guardado de usuario al completar y ser validado del formulario
+   * @param params valores utilizados para el guardado de un usuario
+   */
   public guardarUsuario(params: object) {
     this._usuarioService.guardar(params).subscribe(
       respuesta => {
@@ -106,6 +107,12 @@ export class UsuarioFormComponent implements OnInit {
     }else{
       this.cuil_medio = nroDocumento;
     }
+    /**
+     * si el usuario cambia el numero de documento se valida nuevamente el cuil de la persona
+     */
+    if (this.persona.value.cuil_prin !== '' && this.persona.value.cuil_fin !== ''){
+      this.armarCuil();
+    }
     //return this.cuil_medio;
   }
   /**
@@ -126,20 +133,67 @@ export class UsuarioFormComponent implements OnInit {
       return this.persona.controls.cuil.setValue('');
     }
   }
-
+  /**
+   * valido una persona por numero de cuil
+   * @param cuil numero de cuil de la persona
+   */
   public validarPersonaPorCuil(cuil: string) {
+    /* Guardo los datos de cuil que son completados obligatoriamente para la busqueda */
+    const nro_documento = this.persona.get('nro_documento').value;
+    const cuil_pri = this.persona.get('cuil_prin').value;
+    const cuil_fin = this.persona.get('cuil_fin').value;
     this.usuarioid = 0;
+
+    /* reseteo el formulario */
+    this.resetForm(this.persona);
+
     this._usuarioService.buscarPorCuil(cuil).subscribe(
       datos => {
         if (datos.success){
-          let datosPersona = datos.resultado;
+          const datosPersona = datos.resultado;
           this.persona.patchValue(datosPersona);
+          this.persona.patchValue({'cuil_prin': cuil_pri});
+          this.persona.patchValue({'cuil_fin': cuil_fin});
+
           if (datosPersona.usuario !== undefined) {
             this.usuarioid = datosPersona.usuario.id;
             this.persona.get("usuario").patchValue(datosPersona.usuario);
+          }else{ // si el usuario no existe seteo el combo de roles si el listado tiene un unico valor
+            this.setRol(this.roles);
           }
+        }else{
+          this.persona.patchValue({'nro_documento': nro_documento});
+          this.persona.patchValue({'cuil_prin': cuil_pri});
+          this.persona.patchValue({'cuil_fin': cuil_fin});
+          this.setRol(this.roles);
         }
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
+
+  // reseteo el formulario y pongo las variables en vacio
+  public resetForm(formGroup: FormGroup) {
+    let control: AbstractControl = null;
+    // formulario reset
+    formGroup.reset();
+    formGroup.markAsUntouched();
+    Object.keys(formGroup.controls).forEach((name) => {
+        control = formGroup.controls[name];
+        if(control instanceof FormGroup){
+            this.resetForm(control)
+        }else{
+            control.setValue('');
+            control.setErrors(null);
+        }
+    });
+  }
+  /**
+   * seteo el combo de rol si solo tiene un valor para seleccionar
+   * @param listaRoles listado de roles que obtengo por api
+   */
+  setRol(listaRoles: any) {
+    if (listaRoles.length === 1) {
+      this.persona.get('usuario').patchValue({'rol':listaRoles[0].name});
+    }
+  }
 }
