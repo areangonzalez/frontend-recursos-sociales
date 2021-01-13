@@ -53,16 +53,13 @@ export class UsuarioFormComponent implements OnInit {
    */
   validarForm() {
     this.submitted = true;
-    if (this.persona.invalid) { // verifico la validación en los campos del formulario
+    console.log(this.persona.get('usuario').invalid)
+    if (this.persona.invalid && this.persona.get('usuario').invalid) { // verifico la validación en los campos del formulario
       this._mensajeService.cancelado("Campos sin completar!!", [{name:''}]);
       return;
     }else{ // si pasa la validación
       let usuario = this.persona.value;
-      if (this.usuarioid === 0) {
-        this.guardarUsuario(usuario);
-      } else {
-        this._mensajeService.cancelado("Este usuario ya esta registrado en el sistema.", [{name: ''}]);
-      }
+      this.guardarUsuario(usuario);
     }
   }
   /**
@@ -107,12 +104,6 @@ export class UsuarioFormComponent implements OnInit {
     }else{
       this.cuil_medio = nroDocumento;
     }
-    /**
-     * si el usuario cambia el numero de documento se valida nuevamente el cuil de la persona
-     */
-    if (this.persona.value.cuil_prin !== '' && this.persona.value.cuil_fin !== ''){
-      this.armarCuil();
-    }
     //return this.cuil_medio;
   }
   /**
@@ -123,7 +114,7 @@ export class UsuarioFormComponent implements OnInit {
     const cuil_ult = this.persona.value.cuil_fin;
     // verifico si las variables son distintas a vacio
     // si la validacion es correcta seteo el valor del formulario con el cuil armado
-    if (cuil_primero != '' && cuil_ult != '') {
+    if ((cuil_primero != '' && cuil_primero != null) && (cuil_ult != '' && cuil_ult != null)) {
       let cuil = cuil_primero + this.cuil_medio + cuil_ult;
 
       this.validarPersonaPorCuil(cuil);
@@ -142,23 +133,20 @@ export class UsuarioFormComponent implements OnInit {
     const nro_documento = this.persona.get('nro_documento').value;
     const cuil_pri = this.persona.get('cuil_prin').value;
     const cuil_fin = this.persona.get('cuil_fin').value;
-    this.usuarioid = 0;
-
-    /* reseteo el formulario */
-    this.resetForm(this.persona);
-
+    /* se busca al usuario por cuil */
     this._usuarioService.buscarPorCuil(cuil).subscribe(
       datos => {
         if (datos.success){
           const datosPersona = datos.resultado;
-          this.persona.patchValue(datosPersona);
-          this.persona.patchValue({'cuil_prin': cuil_pri});
-          this.persona.patchValue({'cuil_fin': cuil_fin});
-
+          // verifico si la persona tiene usuario
           if (datosPersona.usuario !== undefined) {
-            this.usuarioid = datosPersona.usuario.id;
-            this.persona.get("usuario").patchValue(datosPersona.usuario);
-          }else{ // si el usuario no existe seteo el combo de roles si el listado tiene un unico valor
+            this.persona.reset();
+            this.cuil_medio = '';
+            this._mensajeService.cancelado("Este usuario ya esta registrado en el sistema.", [{name: ''}]);
+          }else{ // si la persona viene sin usuario completo el formulario de persona
+            this.persona.patchValue(datosPersona);
+            this.persona.patchValue({'cuil_prin': cuil_pri});
+            this.persona.patchValue({'cuil_fin': cuil_fin});
             this.setRol(this.roles);
           }
         }else{
@@ -177,10 +165,11 @@ export class UsuarioFormComponent implements OnInit {
     // formulario reset
     formGroup.reset();
     formGroup.markAsUntouched();
+    this.usuarioid = 0;
     Object.keys(formGroup.controls).forEach((name) => {
         control = formGroup.controls[name];
         if(control instanceof FormGroup){
-            this.resetForm(control)
+          this.resetForm(control)
         }else{
             control.setValue('');
             control.setErrors(null);
