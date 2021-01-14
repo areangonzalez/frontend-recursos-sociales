@@ -140,11 +140,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 pages: 2,
                 total_filtrado: 40,
                 resultado: [
-                {id: 1, nombre: "Carlos", apellido: "Garcia", username: "cgarcia", fecha_inicial: "2019-03-25", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
-                {id: 2, nombre: "Maria", apellido: "Gonzalez", username: "mgonzalez", fecha_inicial: "2019-04-02", fecha_ultimo_ingreso: "2020-12-20", direccion_ip: "192.10.10.8" },
-                {id: 3, nombre: "Graciela", apellido: "Perez", username: "gperez", fecha_inicial: "2019-05-03", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
-                {id: 4, nombre: "Paola", apellido: "Rodriguez", username: "prodriguez", fecha_inicial: "2019-08-06", fecha_ultimo_ingreso: "2020-12-23", direccion_ip: "192.10.10.8" },
-                {id: 5, nombre: "Gustavo", apellido: "Acosta", username: "gacosta", fecha_inicial: "2019-11-21", fecha_ultimo_ingreso: "2020-12-29", direccion_ip: "192.10.10.8" },
+                {id: 1, nombre: "Carlos", apellido: "Garcia", username: "cgarcia", created_at: "2019-03-25", fecha_baja: "", baja: false, last_login_at: "2020-12-30",  direccion_ip: "192.10.10.8" },
+                {id: 2, nombre: "Maria", apellido: "Gonzalez", username: "mgonzalez", created_at: "2019-04-02", fecha_baja: "", baja: false, last_login_at: "2020-12-20", direccion_ip: "192.10.10.8" },
+                {id: 3, nombre: "Graciela", apellido: "Perez", username: "gperez", created_at: "2019-05-03", fecha_baja: "2020-12-05", baja: true, last_login_at: "2020-12-30", direccion_ip: "192.10.10.8" },
+                {id: 4, nombre: "Paola", apellido: "Rodriguez", username: "prodriguez", created_at: "2019-08-06", fecha_baja: "", baja: false, last_login_at: "2020-12-23", direccion_ip: "192.10.10.8" },
+                {id: 5, nombre: "Gustavo", apellido: "Acosta", username: "gacosta", created_at: "2019-11-21", fecha_baja: "", baja: false, last_login_at: "2020-12-29", direccion_ip: "192.10.10.8" },
               ]}
 
                 return of(new HttpResponse({ status: 200, body: listaUsuarios }));
@@ -157,11 +157,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let urlParts = request.url.split('/');
               let id = parseInt(urlParts[urlParts.length - 1]);
               let listaUsuarios = [
-                {personaid: 1, id: 1, nombre: "Carlos", apellido: "Garcia", nro_documento: "23159753", cuil: "20231597538", email:"cgarcia@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "cgarcia", fecha_inicial: "2019-03-25", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
-                {personaid: 2, id: 2, nombre: "Maria", apellido: "Gonzalez", nro_documento: "14156783", cuil: "20141567835", email:"mgonzalez@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "mgonzalez", fecha_inicial: "2019-04-02", fecha_ultimo_ingreso: "2020-12-20", direccion_ip: "192.10.10.8" },
-                {personaid: 3, id: 3, nombre: "Graciela", apellido: "Perez", nro_documento: "16358248", cuil: "20163582485", email:"gperez@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "gperez", fecha_inicial: "2019-05-03", fecha_ultimo_ingreso: "2020-12-30", direccion_ip: "192.10.10.8" },
-                {personaid: 4, id: 4, nombre: "Paola", apellido: "Rodriguez", nro_documento: "16322448", cuil: "20163224485", email:"prodriguez@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "prodriguez", fecha_inicial: "2019-08-06", fecha_ultimo_ingreso: "2020-12-23", direccion_ip: "192.10.10.8" },
-                {personaid: 5, id: 5, nombre: "Gustavo", apellido: "Acosta", nro_documento: "18334826", cuil: "20183348265", email:"gacosta@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "gacosta", fecha_inicial: "2019-11-21", fecha_ultimo_ingreso: "2020-12-29", direccion_ip: "192.10.10.8" },
+                {personaid: 1, id: 1, nombre: "Carlos", apellido: "Garcia", nro_documento: "23159753", cuil: "20231597538", email:"cgarcia@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "cgarcia", created_at: "2019-03-25", fecha_baja: "", baja: false, direccion_ip: "192.10.10.8" },
+                {personaid: 2, id: 2, nombre: "Maria", apellido: "Gonzalez", nro_documento: "14156783", cuil: "20141567835", email:"mgonzalez@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "mgonzalez", created_at: "2019-04-02", fecha_baja: "", baja: false, direccion_ip: "192.10.10.8" },
+                {personaid: 3, id: 3, nombre: "Graciela", apellido: "Perez", nro_documento: "16358248", cuil: "20163582485", email:"gperez@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "gperez", created_at: "2019-05-03", fecha_baja: "2020-12-05", baja: true, direccion_ip: "192.10.10.8" },
+                {personaid: 4, id: 4, nombre: "Paola", apellido: "Rodriguez", nro_documento: "16322448", cuil: "20163224485", email:"prodriguez@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "prodriguez", created_at: "2019-08-06", fecha_baja: "", baja: false, direccion_ip: "192.10.10.8" },
+                {personaid: 5, id: 5, nombre: "Gustavo", apellido: "Acosta", nro_documento: "18334826", cuil: "20183348265", email:"gacosta@desarrollohumano.rionegro.gov.ar", localidadid: "9", localidad: "Viedma", username: "gacosta", created_at: "2019-11-21", fecha_baja: "", baja: false, direccion_ip: "192.10.10.8" },
               ];
 
               let usuario = listaUsuarios.filter(usu => { return usu.id === id; });

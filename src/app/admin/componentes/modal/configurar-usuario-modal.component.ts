@@ -79,11 +79,13 @@ export class ConfigurarUsuarioModalComponent {
         nro_documento: vDatos['nro_documento'],
         usuario: {
           id: vDatos['id'],
-          user_name: vDatos['user_name'],
+          username: vDatos['username'],
           email: vDatos['email'],
           localidad: vDatos['localidad'],
           localidadid: vDatos['localidadid'],
-          fecha_inicial: vDatos['fecha_inicial']
+          created_at: vDatos['created_at'],
+          fecha_baja: vDatos['fecha_baja'],
+          baja: (vDatos['fecha_baja']) ? true : false
         }
       };
       return vUsuario;

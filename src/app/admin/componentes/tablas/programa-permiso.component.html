@@ -11,7 +11,7 @@
     <tr *ngFor="let item of listaProgramaPermisos">
       <td scope="row">{{item.programa}}</td>
       <td scope="row">
-        <span *ngFor="let permiso of item.lista_permiso" class="badge badge-pill badge-info m-1">{{permiso}}</span>
+        <span *ngFor="let permiso of item.lista_permiso" class="badge badge-pill badge-info m-1">{{permiso.name}}</span>
       </td>
       <td>
         <admin-confirmar-borrar-permiso-usuario-modal (confirmarBorrado)="borrarDato(item.usuarioid, item.programaid, $event)"></admin-confirmar-borrar-permiso-usuario-modal>

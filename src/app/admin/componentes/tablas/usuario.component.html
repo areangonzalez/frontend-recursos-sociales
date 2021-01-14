@@ -13,7 +13,7 @@
       <tr>
         <th scope="col">Apellido y Nombre</th>
         <th class="text-center" scope="col">Usuario</th>
-        <th class="text-center" scope="col">Fecha Inicial</th>
+        <th class="text-center" scope="col">Fecha de Alta</th>
         <th class="text-center" scope="col">Ultimo Ingreso</th>
         <th class="text-center" scope="col">Dirección IP</th>
         <th class="text-center columna-160" scope="col"><admin-usuario-modal [configModal]="configModalAgregar" [disenioBoton]="configBotonModalAgregar"></admin-usuario-modal></th>
@@ -27,11 +27,11 @@
       </tr>
     </tbody>
     <tbody *ngIf="(listado.length > 0)" >
-      <tr *ngFor="let user of listado">
+      <tr *ngFor="let user of listado; ">
         <td>{{user.apellido}}, {{user.nombre}}</td>
         <td class="text-center">{{user.username}}</td>
-        <td class="text-center">{{user.fecha_inicial | date:'dd/MM/yyyy'}}</td>
-        <td class="text-center">{{user.fecha_ultimo_ingreso | date:'dd/MM/yyyy'}}</td>
+        <td class="text-center">{{user.created_at | date:'dd/MM/yyyy'}}</td>
+        <td class="text-center">{{user.last_login_at | date:'dd/MM/yyyy'}}</td>
         <td class="text-center">{{user.direccion_ip}}</td>
         <td class="text-center">
           <admin-configurar-usuario-modal [usuarioid]="user.id" ></admin-configurar-usuario-modal>
