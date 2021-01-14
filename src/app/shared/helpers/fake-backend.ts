@@ -140,7 +140,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 pages: 2,
                 total_filtrado: 40,
                 resultado: [
-                {id: 1, nombre: "Carlos", apellido: "Garcia", username: "cgarcia", created_at: "2019-03-25", fecha_baja: "", baja: false, last_login_at: "2020-12-30",  direccion_ip: "192.10.10.8" },
+                {id: 1, nombre: "Carlos", apellido: "Garcia", username: "cgarcia", created_at: "1560617468681", fecha_baja: "", baja: false, last_login_at: "2020-12-30",  direccion_ip: "192.10.10.8" },
                 {id: 2, nombre: "Maria", apellido: "Gonzalez", username: "mgonzalez", created_at: "2019-04-02", fecha_baja: "", baja: false, last_login_at: "2020-12-20", direccion_ip: "192.10.10.8" },
                 {id: 3, nombre: "Graciela", apellido: "Perez", username: "gperez", created_at: "2019-05-03", fecha_baja: "2020-12-05", baja: true, last_login_at: "2020-12-30", direccion_ip: "192.10.10.8" },
                 {id: 4, nombre: "Paola", apellido: "Rodriguez", username: "prodriguez", created_at: "2019-08-06", fecha_baja: "", baja: false, last_login_at: "2020-12-23", direccion_ip: "192.10.10.8" },
