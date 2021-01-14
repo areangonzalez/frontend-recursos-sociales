@@ -12,6 +12,7 @@ export class ConfigUsuarioComponent implements OnInit {
   @Input("datosUsuario") datosUsuario: any;
   public usuario: FormGroup;
   public submitted: boolean = false;
+  public usuarioBaja: boolean = false;
   private idUsuario: number;
 
   constructor(private _fb: FormBuilder, private _usuarioService: UsuarioService, private _msj: MensajesService) {
@@ -45,6 +46,7 @@ export class ConfigUsuarioComponent implements OnInit {
   public prepararFormulario(datos: object){
     this.usuario.patchValue(datos['usuario']);
     this.idUsuario = datos['usuario']['id'];
+    this.usuarioBaja = datos['usuario']['baja'];
   }
   /**
    * funcion que valida el formulario y el cambio de contraseña

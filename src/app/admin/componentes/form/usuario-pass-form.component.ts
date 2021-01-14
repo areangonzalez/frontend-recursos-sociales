@@ -11,6 +11,7 @@ export class UsuarioPassFormComponent implements OnInit {
   @Input("listaRoles") public listaRoles: any;
   @Input("usuario") public usuario: FormGroup;
   @Input("submitted") public submitted: boolean;
+  @Input("baja") public baja: boolean;
 
   constructor() { }
 

@@ -7,7 +7,7 @@
     </ngb-tab>
     <ngb-tab title="Permisos">
       <ng-template ngbTabContent>
-        <admin-administrar-rol-permiso-form [idUsuario]="datosUsuario.usuario.id" [listaPermisos]="configListas.permisos" [listaProgramas]="configListas.programas"></admin-administrar-rol-permiso-form>
+        <admin-administrar-rol-permiso-form [idUsuario]="datosUsuario.usuario.id" [baja]="usuarioBaja" [listaPermisos]="configListas.permisos" [listaProgramas]="configListas.programas"></admin-administrar-rol-permiso-form>
       </ng-template>
     </ngb-tab>
     <ngb-tab title="Administrar contraseña">
@@ -15,8 +15,13 @@
         <div class="col-md-12 m-1">
           <admin-usuario-pass-form [localidades]="configListas.localidades" [usuario]="usuario" [listaRoles]="configListas.roles" [submitted]="submitted" ></admin-usuario-pass-form>
         </div>
-        <div class="col-md-12 mt-1 mb-3">
+        <div class="col-md-12 mt-1 mb-3" *ngIf="!usuarioBaja">
           <button type="button" class="btn btn-success btn-block" (click)="cambiarPass()"><i class="far fa-save"></i> Guardar</button>
+        </div>
+        <div class="col-md-12 mt-1 mb-3" *ngIf="usuarioBaja">
+          <div class="alert alert-danger text-center" role="alert">
+            El usuario ha sido dado de baja. En estos momentos no se pueden modificar sus datos.
+          </div>
         </div>
       </ng-template>
     </ngb-tab>

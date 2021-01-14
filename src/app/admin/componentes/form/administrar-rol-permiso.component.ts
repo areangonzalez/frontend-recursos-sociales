@@ -11,6 +11,7 @@ export class AdministrarRolPermisoComponent implements OnInit {
   @Input("idUsuario") private idUsuario: number;
   @Input("listaProgramas") public listaProgramas: any;
   @Input("listaPermisos") public listaPermisos: any;
+  @Input("baja") public baja: boolean;
   public submitted: boolean = false;
   public permisosForm: FormGroup;
   public listaProgramaPermisos: any = [];
