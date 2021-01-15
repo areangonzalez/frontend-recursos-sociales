@@ -6,15 +6,15 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
   selector: 'admin-alta-usuario-modal-content',
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">Alta de Usuario</h4>
+      <h4 class="modal-title">Habilitación de Usuario</h4>
       <button type="button" class="close" aria-label="Close" (click)="cerrarModal()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <p>¿Está seguro que desea dar de BAJA al usuario <strong>{{nombreUsuario}}</strong>?</p>
+      <p >Por favor complete los campos para habilitar al usuario <strong>{{nombreUsuario}}</strong>.</p>
       <div class="row" [formGroup]="altaForm">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
           <label for="password" class="prioridad">Contraseña (<span>*</span>):</label>
           <input type="password" id="password" placeholder="********" class="form-control" formControlName="password" [ngClass]="{'is-invalid': (altaForm.get('password').invalid && submitted)}">
           <div *ngIf="(altaForm.get('password').invalid && submitted)"
@@ -23,7 +23,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
               <div *ngIf="altaForm.get('password').hasError('minlength')">La contraseña es demasiado corta, al menos debe de tener 8 caracteres.</div>
           </div>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
           <label for="confirmPass" class="prioridad">Confirmar Contraseña (<span>*</span>):</label>
           <input type="password" id="confirmPass" placeholder="********" class="form-control" formControlName="confirmPass" [ngClass]="{'is-invalid': (altaForm.get('password').value != altaForm.get('confirmPass').value && altaForm.get('confirmPass').value != null)}">
           <div *ngIf="(altaForm.get('password').value != altaForm.get('confirmPass').value && altaForm.get('confirmPass').value != null)" class="text-danger">
@@ -33,8 +33,8 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
       </div>
     </div>
     <div class=modal-footer>
-    <button type="button" class="btn btn-danger" (click)="cerrarModal()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> No</button>
-    <button type="button" class="btn btn-success" (click)="confirmar()"><i class="fa fa-arrow-down"></i> Si</button>
+    <button type="button" class="btn btn-danger" (click)="cerrarModal()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="confirmar()"><i class="fas fa-user-check"></i> Habilitar</button>
     </div>
   `,
   styleUrls: ['./alta-usuario-modal.component.sass']
@@ -62,23 +62,23 @@ export class AltaUsuarioModalContent {
   /**
    * cierro el modal sin confirmación
    */
-  cerrarModal() { this._activeModal.dismiss('closed'); }
+  cerrarModal() { this._activeModal.close('closed'); }
   /**
    * Confirmacion de borrado de usuario
    */
   confirmar() {
-    /* this.submitted = true;
-    if (this.bajaForm.invalid){ return; }
+    this.submitted = true;
+    if (this.altaForm.invalid){ return; }
     else {
-      let baja: any = this.bajaForm.value;
-      baja['confirmacion'] = true;
-    } */
-    this._activeModal.close(true);
+      let alta: any = this.altaForm.value;
+      alta['confirmacion'] = true;
+      this._activeModal.close(alta);
+    }
   }
 }
 
 @Component({
-  selector: 'app-alta-usuario-modal',
+  selector: 'admin-alta-usuario-modal',
   templateUrl: './alta-usuario-modal.component.html',
   styleUrls: ['./alta-usuario-modal.component.sass']
 })

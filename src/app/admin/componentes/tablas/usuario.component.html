@@ -27,16 +27,16 @@
       </tr>
     </tbody>
     <tbody *ngIf="(listado.length > 0)" >
-      <tr *ngFor="let user of listado;" [ngClass]="{'table-danger': (user.baja)}" triggers="click" [autoClose]="'outside'" ngbTooltip="Fecha de Baja: {{user.fecha_baja | date:'dd/MM/yyyy'}}">
-        <td>{{user.apellido}}, {{user.nombre}}</td>
+      <tr *ngFor="let user of listado;" [ngClass]="{'table-danger': (user.baja)}" ngbTooltip="{{infoAdicional(user.fecha_baja | date:'dd/MM/yyyy')}}">
+        <td>{{user.apellido}}, {{user.nombre}} - {{user.baja}}</td>
         <td class="text-center">{{user.username}}</td>
         <td class="text-center">{{user.created_at | date:'dd/MM/yyyy'}}</td>
         <td class="text-center">{{user.last_login_at | date:'dd/MM/yyyy'}}</td>
         <td class="text-center">{{user.direccion_ip}}</td>
         <td class="text-center">
-          <admin-configurar-usuario-modal [usuarioid]="user.id" ></admin-configurar-usuario-modal>
-          <admin-baja-usuario-modal *ngIf="(!user.baja)" [nombreUsuario]="user.username" (confirmarBaja)="darBajaUsuario($event, user.id)" ></admin-baja-usuario-modal>
-          <button *ngIf="(user.baja)" type="button" class="btn btn-outline-success btn-sm rounded-circle"><i class="fas fa-user-check"></i></button>
+          <admin-configurar-usuario-modal [usuarioid]="user.id"></admin-configurar-usuario-modal>
+          <admin-baja-usuario-modal *ngIf="(!user.baja)" [nombreUsuario]="user.username" (confirmarBaja)="darBajaUsuario($event, user.id)"></admin-baja-usuario-modal>
+          <admin-alta-usuario-modal *ngIf="(user.baja)" [nombreUsuario]="user.username" (confirmarAlta)="darAltaUsuario($event, user.id)"></admin-alta-usuario-modal>
         </td>
       </tr>
     </tbody>

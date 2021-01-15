@@ -31,12 +31,30 @@ export class UsuarioComponent implements OnInit {
 
   darBajaUsuario(baja:any, usuarioid: number) {
     if (baja.confirmacion) {
+      baja['baja'] = true;
       this._usuarioService.baja(baja, usuarioid).subscribe(
         resultado => {
           this._msj.exitoso("El usuario a sido dado de baja correctamente.", [{name:""}]);
           this.cambioPagina(this.configPaginacion.page);
         }, error => { this._msj.cancelado(error, [{name:''}]); })
     }
+  }
 
+  darAltaUsuario(alta:any, usuarioid: number) {
+    if (alta.confirmacion) {
+      alta["baja"] = false;
+      console.log(alta);
+
+      this._usuarioService.baja(alta, usuarioid).subscribe(
+        resultado => {
+          this._msj.exitoso("El usuario a sido habilitado correctamente.", [{name:""}]);
+          this.cambioPagina(this.configPaginacion.page);
+        }, error => { this._msj.cancelado(error, [{name:''}]); })
+    }
+  }
+  public infoAdicional(fecha_baja) {
+    if (fecha_baja) {
+      return "Fecha de Baja: " + fecha_baja;
+    }
   }
 }
