@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-      this.nombreUsuario = this._authentication.loggedIn.username;
+      this.setNombreUsuario();
     }
 
     estoyLogueado(){
@@ -42,6 +42,14 @@ export class HeaderComponent implements OnInit {
 
     ocultarMenu(){
       this.mostrar = false;
+    }
+
+    setNombreUsuario() {
+      if (this._authentication.loggedIn.apellido && this._authentication.loggedIn.nombre && this._authentication.loggedIn.rol !== 'admin') {
+        this.nombreUsuario = this._authentication.loggedIn.apellido + ", " + this._authentication.loggedIn.nombre;
+      }else{
+        this.nombreUsuario = "Admin";
+      }
     }
 
 }

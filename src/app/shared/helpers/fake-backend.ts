@@ -98,7 +98,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   let body = {
                       username: 'admin',
                       access_token: 'fake-jwt-token',
-                      rol: 'admin'
+                      rol: 'admin',
                   };
                   return of(new HttpResponse({ status: 200, body }));
               } else if (request.body.username === 'soporte' && request.body.password_hash === 'soportes') {
@@ -114,7 +114,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let body = {
                     username: 'usuario',
                     access_token: 'fake-jwt-token',
-                    rol: 'usuario'
+                    rol: 'usuario',
+                    nombre: "Carla",
+                    apellido: "Benitez"
                 };
                 return of(new HttpResponse({ status: 200, body }));
               } else {

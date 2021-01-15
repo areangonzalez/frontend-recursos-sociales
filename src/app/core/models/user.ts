@@ -7,11 +7,4 @@ export class User {
   nombre?: string;
   apellido?: string;
   email?: string;
-/*
-  constructor() {}
-
-  hasRole(key: string) {
-    if (this.role) { return false; }
-    return this.role === key;
-  } */
 }
