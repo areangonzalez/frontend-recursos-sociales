@@ -5,6 +5,7 @@ import { GestorUsuarioComponent } from './gestor-usuario';
 import { UsuarioService, LocalidadService } from '../core/services';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'gestor-usuarios', pathMatch: 'full' },
   {
     path: '', component: AdminComponent,
     data: { loading: true, preload: true, breadcrumb: 'Administración', title: 'Administración', rol: ['soporte', 'admin'] },

@@ -15,11 +15,8 @@
             <li class="nav-item" [routerLinkActive]="['active']">
               <a class="nav-link" [routerLink]="['gestor-usuarios']">Gesti&oacute;n de Usuarios</a>
             </li>
-            <li class="nav-item" [routerLinkActive]="['active']">
-              <a class="nav-link" [routerLink]="['permisos']">Alta de Permisos</a>
-            </li>
             <li class="nav-item">
-              <a class="nav-link" >Cerrar Sesión</a>
+              <a class="nav-link" (click)="cerrarSesion()" >Cerrar Sesión</a>
             </li>
           </ul>
         </div>
