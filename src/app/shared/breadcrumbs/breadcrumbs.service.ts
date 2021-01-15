@@ -23,7 +23,7 @@ export class BreadcrumbsService {
     //Store the breadcrumbs of the current route
     public store(breadcrumbs: IBreadcrumb[]) {
         this.breadcrumbs = breadcrumbs;
-
+        console.log(breadcrumbs)
         let allBreadcrumbs = this.prefixedBreadcrumbs.concat(this.breadcrumbs);
         this.breadcrumbsSource.next(allBreadcrumbs);
 

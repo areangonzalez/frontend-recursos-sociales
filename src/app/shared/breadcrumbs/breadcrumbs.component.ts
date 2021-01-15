@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET } from "@angular/router";
 import { filter } from 'rxjs/operators';
+import { AuthenticationService } from "src/app/core/services";
 import { IBreadcrumb } from "./breadcrumbs.model";
 import { BreadcrumbsService } from "./breadcrumbs.service";
 
@@ -26,7 +27,7 @@ export class BreadcrumbComponent implements OnInit {
   public addClass: string;
 
 
-  public constructor(private breadcrumbService: BreadcrumbsService, private activatedRoute: ActivatedRoute, private router: Router) {
+  public constructor(private breadcrumbService: BreadcrumbsService, private activatedRoute: ActivatedRoute, private router: Router, private _auth: AuthenticationService) {
     breadcrumbService.get().subscribe((breadcrumbs: IBreadcrumb[]) => {
       this.breadcrumbs = breadcrumbs as IBreadcrumb[];
     });
@@ -74,6 +75,7 @@ export class BreadcrumbComponent implements OnInit {
           const hasDynamicBreadcrumb: boolean = route.snapshot.params.hasOwnProperty(ROUTE_PARAM_BREADCRUMB);
           // console.log("hasDynamicBreadcrumb: ", hasDynamicBreadcrumb);
           if (hasData || hasDynamicBreadcrumb) {
+            console.log(ROUTE_DATA_BREADCRUMB);
 
 
             /*
@@ -98,6 +100,12 @@ export class BreadcrumbComponent implements OnInit {
               route.snapshot.params = {};
             }
 
+            for (let i = 0; i < this.currentBreadcrumbs.length; i++) {
+              if (this.currentBreadcrumbs[i]['label'] !== 'Inicio') {
+
+              }
+
+            }
 
             // Add breadcrumb
             let breadcrumb: IBreadcrumb = {
@@ -109,15 +117,14 @@ export class BreadcrumbComponent implements OnInit {
             // Add the breadcrumb as 'prefixed'. It will appear before all breadcrumbs
             if (route.snapshot.data.hasOwnProperty(PREFIX_BREADCRUMB)) {
               this.breadcrumbService.storePrefixed(breadcrumb);
-            }
-            else {
+            } else {
               this.currentBreadcrumbs.push(breadcrumb);
             }
 
           }
 
         });
-        this.breadcrumbService.store(this.currentBreadcrumbs);
+        this.breadcrumbService.store(this.removeDuplicates(this.currentBreadcrumbs, "label"));
       }
     });
 
@@ -126,6 +133,24 @@ export class BreadcrumbComponent implements OnInit {
   }// fin ngOnInit
 
   estoyLogueado(){
-    return (localStorage.getItem('token-pril')) ? true : false;
+    return (this._auth.loggedIn) ? true : false;
   }
+  /**
+   * remueve objetos duplicados de un array
+   * @param originalArray array original que contiene un listado de objetos
+   * @param prop propiedad que se quiere verificar
+   */
+  removeDuplicates(originalArray, prop) {
+    var newArray = [];
+    var lookupObject  = {};
+
+    for(var i in originalArray) {
+       lookupObject[originalArray[i][prop]] = originalArray[i];
+    }
+
+    for(i in lookupObject) {
+        newArray.push(lookupObject[i]);
+    }
+     return newArray;
+}
 }
