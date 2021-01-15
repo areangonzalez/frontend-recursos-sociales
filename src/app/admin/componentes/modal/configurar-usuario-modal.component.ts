@@ -85,7 +85,8 @@ export class ConfigurarUsuarioModalComponent {
           localidadid: vDatos['localidadid'],
           created_at: vDatos['created_at'],
           fecha_baja: vDatos['fecha_baja'],
-          baja: (vDatos['fecha_baja']) ? true : false
+          baja: (vDatos['fecha_baja']) ? true : false,
+          descripcion_baja: vDatos['descripcion_baja']
         }
       };
       return vUsuario;
