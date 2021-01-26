@@ -40,7 +40,7 @@ export class UsuarioService implements Resolve<any> {
   }
 
   public buscarPorCuil(cuil: string) {
-    return this._api.get('/usuarios/buscar-persona/' + cuil );
+    return this._api.get('/usuarios/buscar-persona-por-cuil/' + cuil );
   }
 
   resolve(
