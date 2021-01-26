@@ -17,6 +17,7 @@ export class ConfigUsuarioComponent implements OnInit {
 
   constructor(private _fb: FormBuilder, private _usuarioService: UsuarioService, private _msj: MensajesService) {
     this.usuario = _fb.group({
+        personaid: '',
         rol: ['', [Validators.required]],
         username: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],

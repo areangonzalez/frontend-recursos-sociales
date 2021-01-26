@@ -79,6 +79,7 @@ export class ConfigurarUsuarioModalComponent {
         nro_documento: vDatos['nro_documento'],
         usuario: {
           id: vDatos['id'],
+          personaid: vDatos['personaid'],
           username: vDatos['username'],
           email: vDatos['email'],
           localidad: vDatos['localidad'],

@@ -19,7 +19,6 @@ export class UsuarioFormComponent implements OnInit {
 
   constructor(private _fb: FormBuilder, private _util: UtilService, private _mensajeService: MensajesService, private _usuarioService: UsuarioService) {
     this.persona = _fb.group({
-      personaid: '',
       nro_documento: ['', [Validators.required, Validators.minLength(7)]],
       apellido: ['', [Validators.required, Validators.minLength(3)]],
       nombre: ['', [Validators.required, Validators.minLength(3)]],
@@ -27,6 +26,7 @@ export class UsuarioFormComponent implements OnInit {
       cuil_prin: ['', [Validators.required, Validators.minLength(2)]],
       cuil_fin: ['', [Validators.required, Validators.minLength(1)]],
       usuario: _fb.group({
+        personaid: '',
         username: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
         rol: ['', [Validators.required]],
@@ -53,7 +53,6 @@ export class UsuarioFormComponent implements OnInit {
    */
   validarForm() {
     this.submitted = true;
-    console.log(this.persona.get('usuario').invalid)
     if (this.persona.invalid && this.persona.get('usuario').invalid) { // verifico la validación en los campos del formulario
       this._mensajeService.cancelado("Campos sin completar!!", [{name:''}]);
       return;
@@ -145,6 +144,7 @@ export class UsuarioFormComponent implements OnInit {
             this._mensajeService.cancelado("Este usuario ya esta registrado en el sistema.", [{name: ''}]);
           }else{ // si la persona viene sin usuario completo el formulario de persona
             this.persona.patchValue(datosPersona);
+            this.persona.get('usuario').patchValue({'personaid': datosPersona.id});
             this.persona.patchValue({'cuil_prin': cuil_pri});
             this.persona.patchValue({'cuil_fin': cuil_fin});
             this.setRol(this.roles);
@@ -153,6 +153,7 @@ export class UsuarioFormComponent implements OnInit {
           this.persona.patchValue({'nro_documento': nro_documento});
           this.persona.patchValue({'cuil_prin': cuil_pri});
           this.persona.patchValue({'cuil_fin': cuil_fin});
+          this.persona.get('usuario').patchValue({'personaid': ''});
           this.setRol(this.roles);
         }
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
