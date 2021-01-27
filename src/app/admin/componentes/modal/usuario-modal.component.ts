@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BotonDisenio, ModalConfig } from 'src/app/core/models';
 import { RolService, LocalidadService, MensajesService } from 'src/app/core/services';
@@ -24,7 +24,7 @@ export class UsuarioModalContent {
   constructor(public activeModal: NgbActiveModal) {}
 
   cancelarModal(cancelar: boolean) {
-    this.activeModal.close('closed');
+    this.activeModal.close((cancelar) ? 'closed' : 1);
   }
 }
 
@@ -42,6 +42,7 @@ export class UsuarioModalComponent  {
   @Input("disenioBoton") public disenioBoton: BotonDisenio;
   @Input("configModal") public configModal: ModalConfig;
   @Input("usuarioid") public usuarioid: number;
+  @Output("confirmarGuardado") public confirmarGuardado = new EventEmitter
   public listaLocalidades: any = [];
   public listaRoles: any = [];
 
@@ -55,6 +56,15 @@ export class UsuarioModalComponent  {
       modalRef.componentInstance.configModal = this.configModal;
       modalRef.componentInstance.localidades = this.listaLocalidades;
       modalRef.componentInstance.roles = this.listaRoles;
+      modalRef.result.then(
+        (result) => {
+            if (result == 'closed'){
+            }else{
+              // obtengo el resultado de la operacion y reseteo el listado a la pagina 1.
+              return this.confirmarGuardado.emit(result);
+            }
+        }
+      )
     }
     /**
      * listo las localidades

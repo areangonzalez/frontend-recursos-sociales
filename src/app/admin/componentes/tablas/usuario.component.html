@@ -16,7 +16,7 @@
         <th class="text-center" scope="col">Fecha de Alta</th>
         <th class="text-center" scope="col">Ultimo Ingreso</th>
         <th class="text-center" scope="col">Dirección IP</th>
-        <th class="text-center columna-160" scope="col"><admin-usuario-modal [configModal]="configModalAgregar" [disenioBoton]="configBotonModalAgregar"></admin-usuario-modal></th>
+        <th class="text-center columna-160" scope="col"><admin-usuario-modal [configModal]="configModalAgregar" (confirmarGuardado)="cambioPagina($event)" [disenioBoton]="configBotonModalAgregar"></admin-usuario-modal></th>
       </tr>
     </thead>
     <tbody *ngIf="(listado.length == 0)">

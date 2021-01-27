@@ -69,7 +69,7 @@ export class UsuarioFormComponent implements OnInit {
     this._usuarioService.guardar(params).subscribe(
       respuesta => {
         this._mensajeService.exitoso("Se ha guardado el usuario con exito.", [{name:''}]);
-        this.cancelarForm.emit(true);
+        this.cancelarForm.emit(false);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); }
     )
   }
