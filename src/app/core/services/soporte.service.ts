@@ -33,8 +33,7 @@ export class SoporteService {
    * @param usuarioid
    * @param programaid
    */
-  public borrarAsignacion(usuarioid: number, programaid: number) {
-    let params: object = { usuarioid: usuarioid, programaid: programaid } ;
+  public borrarAsignacion(params: object) {
     return this._api.post("/usuarios/borrar-asignacion", params);
   }
 }

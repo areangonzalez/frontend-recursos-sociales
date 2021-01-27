@@ -13,6 +13,7 @@
       <tr>
         <th scope="col">Apellido y Nombre</th>
         <th class="text-center" scope="col">Usuario</th>
+        <th class="text-center" scope="col">Localidad</th>
         <th class="text-center" scope="col">Fecha de Alta</th>
         <th class="text-center" scope="col">Ultimo Ingreso</th>
         <th class="text-center" scope="col">Dirección IP</th>
@@ -28,11 +29,12 @@
     </tbody>
     <tbody *ngIf="(listado.length > 0)" >
       <tr *ngFor="let user of listado;" [ngClass]="{'table-danger': (user.baja)}" ngbTooltip="{{infoAdicional(user.fecha_baja | date:'dd/MM/yyyy')}}">
-        <td>{{user.apellido}}, {{user.nombre}} - {{user.baja}}</td>
+        <td>{{user.apellido}}, {{user.nombre}}</td>
         <td class="text-center">{{user.username}}</td>
+        <td class="text-center">{{user.localidad}}</td>
         <td class="text-center">{{user.created_at | date:'dd/MM/yyyy'}}</td>
         <td class="text-center">{{user.last_login_at | date:'dd/MM/yyyy'}}</td>
-        <td class="text-center">{{user.direccion_ip}}</td>
+        <td class="text-center">{{user.registration_ip}}</td>
         <td class="text-center">
           <admin-configurar-usuario-modal [usuarioid]="user.id"></admin-configurar-usuario-modal>
           <admin-baja-usuario-modal *ngIf="(!user.baja)" [nombreUsuario]="user.username" (confirmarBaja)="darBajaUsuario($event, user.id)"></admin-baja-usuario-modal>

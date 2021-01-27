@@ -13,10 +13,15 @@ export class ProgramaPermisoComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  borrarDato(idUsuario: number, programaid: number, confirmacion: boolean) {
+  /**
+   * borra los permisos del programa que le pertenecen al usuario
+   * @param datos objeto que contiene los datos del programa con sus permisos
+   * @param confirmacion confirmacion de parte del usuario para dar o no acceso al borrado
+   */
+  borrarDato(datos: any, confirmacion: boolean) {
     if (confirmacion) {
-      this._soporteService.borrarAsignacion(idUsuario, programaid).subscribe(
+      let idUsuario = datos.usuarioid;
+      this._soporteService.borrarAsignacion(datos).subscribe(
         repsuesta => {
           this._msj.exitoso("Se ha borrado el programa con sus permisos.", [{name: ''}]);
           this.actualizarListado(idUsuario);
