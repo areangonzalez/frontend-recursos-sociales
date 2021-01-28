@@ -33,8 +33,8 @@
         <td class="text-center">{{user.username}}</td>
         <td class="text-center">{{user.localidad}}</td>
         <td class="text-center">{{user.created_at | date:'dd/MM/yyyy'}}</td>
-        <td class="text-center">{{user.last_login_at | date:'dd/MM/yyyy'}}</td>
-        <td class="text-center">{{user.registration_ip}}</td>
+        <td class="text-center">{{user.last_login_at | date:'dd/MM/yyyy HH:mm'}}</td>
+        <td class="text-center">{{user.last_login_ip}}</td>
         <td class="text-center">
           <admin-configurar-usuario-modal [usuarioid]="user.id"></admin-configurar-usuario-modal>
           <admin-baja-usuario-modal *ngIf="(!user.baja)" [nombreUsuario]="user.username" (confirmarBaja)="darBajaUsuario($event, user.id)"></admin-baja-usuario-modal>
