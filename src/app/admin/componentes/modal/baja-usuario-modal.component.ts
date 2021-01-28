@@ -20,7 +20,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
           <div *ngIf="(bajaForm.get('baja_detalle').invalid && submitted)"
               class="text-danger">
               <div *ngIf="bajaForm.get('baja_detalle').hasError('required')">Este campo es requerido. </div>
-              <div *ngIf="bajaForm.get('baja_detalle').hasError('minlength')">Explique brevemente...</div>
+              <div *ngIf="bajaForm.get('baja_detalle').hasError('minlength')">La explicación es muy corta...</div>
           </div>
         </div>
       </div>
