@@ -16,11 +16,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
       <div class="row" [formGroup]="bajaForm">
         <div class="form-group col-md-12">
           <label for="observacion">¿Por qué?:</label>
-          <textarea class="form-control" id="observacion" cols="30" rows="1" placeholder="Porque..." formControlName="baja_detalle" ></textarea>
-          <div *ngIf="(bajaForm.get('baja_detalle').invalid && submitted)"
+          <textarea class="form-control" id="observacion" cols="30" rows="1" placeholder="Porque..." formControlName="descripcion_baja" ></textarea>
+          <div *ngIf="(bajaForm.get('descripcion_baja').invalid && submitted)"
               class="text-danger">
-              <div *ngIf="bajaForm.get('baja_detalle').hasError('required')">Este campo es requerido. </div>
-              <div *ngIf="bajaForm.get('baja_detalle').hasError('minlength')">La explicación es muy corta...</div>
+              <div *ngIf="bajaForm.get('descripcion_baja').hasError('required')">Este campo es requerido. </div>
+              <div *ngIf="bajaForm.get('descripcion_baja').hasError('minlength')">La explicación es muy corta...</div>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@ export class BajaUsuarioModalContent {
 
   constructor(public _activeModal: NgbActiveModal, private _fb: FormBuilder) {
     this.bajaForm = _fb.group({
-      baja_detalle: ['', [Validators.required, Validators.minLength(15)]]
+      descripcion_baja: ['', [Validators.required, Validators.minLength(15)]]
     })
   }
   /**
