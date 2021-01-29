@@ -4,4 +4,5 @@ export interface configurarListas {
   permisos?: any;
   roles?: any;
   usuarios?: any;
+  tamanioPagina?: any;
 }

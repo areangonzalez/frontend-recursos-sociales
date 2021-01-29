@@ -11,7 +11,9 @@ export class UsuarioComponent implements OnInit {
   @Input("listados") public listados: any;
   @Input("configPaginacion") public configPaginacion: any;
   @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
+  @Output("cambioDeTamanioPagina") public cambioDeTamanioPagina = new EventEmitter();
 
+  public tamanioPagina: number = 20;
   /* Configuraciones para el modal de agregar y editar usuario */
   public configModalAgregar: ModalConfig = { title: "Agregar usuario" };
   public configBotonModalAgregar: BotonDisenio = { class: 'btn btn-sm btn-success btn-block', iconoClass: 'fas fa-user-plus', text:'Agregar Usuario' };
@@ -26,6 +28,11 @@ export class UsuarioComponent implements OnInit {
    */
   cambioPagina(pagina:number){
     this.cambioDePagina.emit(pagina);
+  }
+
+  cambioTamanioPagina(size: number) {
+    this.tamanioPagina = size;
+    this.cambioDeTamanioPagina.emit(size);
   }
 
 

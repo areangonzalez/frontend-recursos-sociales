@@ -3,5 +3,5 @@
   <admin-busqueda-avanzada-form (obtenerBusqueda)="realizarBusqueda($event,configPaginacion.page)" [listaLocalidades]="listas.localidades"></admin-busqueda-avanzada-form>
 </div>
 <div class="shadow-sm mb-3 bg-white  p-3 rounded">
-  <admin-usuario-tabla [listados]="listas" [configPaginacion]="configPaginacion" (cambioDePagina)="cambiarPagina($event)" ></admin-usuario-tabla>
+  <admin-usuario-tabla [listados]="listas" [configPaginacion]="configPaginacion" (cambioDeTamanioPagina)="cambiarTamanioPagina($event)" (cambioDePagina)="cambiarPagina($event)" ></admin-usuario-tabla>
 </div>
