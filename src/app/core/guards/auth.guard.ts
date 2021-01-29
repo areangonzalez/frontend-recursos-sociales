@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
       let autorizacion = this._auth.loggedIn;
       const roles = route.data['rol'];
       let cont = 0;
-      if (roles) {
+      if (roles && autorizacion) {
         for (let rol of roles) {
           if (rol === autorizacion.rol) {
             cont++;

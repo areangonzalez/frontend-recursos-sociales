@@ -75,9 +75,6 @@ export class BreadcrumbComponent implements OnInit {
           const hasDynamicBreadcrumb: boolean = route.snapshot.params.hasOwnProperty(ROUTE_PARAM_BREADCRUMB);
           // console.log("hasDynamicBreadcrumb: ", hasDynamicBreadcrumb);
           if (hasData || hasDynamicBreadcrumb) {
-            console.log(ROUTE_DATA_BREADCRUMB);
-
-
             /*
              Verify the custom data property "breadcrumb"
              is specified on the route or in its parameters.
@@ -98,13 +95,6 @@ export class BreadcrumbComponent implements OnInit {
             // Cannot have parameters on a root route
             if (routeURL.length === 0) {
               route.snapshot.params = {};
-            }
-
-            for (let i = 0; i < this.currentBreadcrumbs.length; i++) {
-              if (this.currentBreadcrumbs[i]['label'] !== 'Inicio') {
-
-              }
-
             }
 
             // Add breadcrumb
