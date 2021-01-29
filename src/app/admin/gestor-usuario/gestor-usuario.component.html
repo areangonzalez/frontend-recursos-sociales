@@ -1,8 +1,7 @@
 <h2>Gestión de Usuarios</h2>
 <div class="shadow-sm mb-3 bg-white  p-3 rounded">
-  <admin-busqueda-avanzada-form (obtenerBusqueda)="realizarBusqueda($event,configPaginacion.page)" [listaLocalidades]="listaLocalidades"></admin-busqueda-avanzada-form>
+  <admin-busqueda-avanzada-form (obtenerBusqueda)="realizarBusqueda($event,configPaginacion.page)" [listaLocalidades]="listas.localidades"></admin-busqueda-avanzada-form>
 </div>
 <div class="shadow-sm mb-3 bg-white  p-3 rounded">
-  <admin-usuario-tabla [listado]="listaUsuarios" [configPaginacion]="configPaginacion" (cambioDePagina)="cambiarPagina($event)"></admin-usuario-tabla>
+  <admin-usuario-tabla [listados]="listas" [configPaginacion]="configPaginacion" (cambioDePagina)="cambiarPagina($event)" ></admin-usuario-tabla>
 </div>
-

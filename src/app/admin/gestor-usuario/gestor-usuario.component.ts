@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ConfigurarPagina } from 'src/app/core/models';
+import { ConfigurarPagina, configurarListas } from 'src/app/core/models';
 import { ConfiguracionParaPaginarService, UsuarioService, MensajesService } from 'src/app/core/services';
 
 @Component({
@@ -10,7 +10,7 @@ import { ConfiguracionParaPaginarService, UsuarioService, MensajesService } from
 })
 export class GestorUsuarioComponent implements OnInit {
   public listaUsuarios: any = [];
-  public listaLocalidades: any = [];
+  public listas = {} as configurarListas;
   public busqueda: any = {};
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina();
 
@@ -18,7 +18,10 @@ export class GestorUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.prepararListadoUsuario(this._route.snapshot.data["usuarios"], 1);
-    this.listaLocalidades = this._route.snapshot.data["localidades"];
+    this.listas.localidades = this._route.snapshot.data["localidades"];
+    this.listas.programas = this._route.snapshot.data["programas"];
+    this.listas.permisos = this._route.snapshot.data["permisos"];
+    this.listas.roles = this._route.snapshot.data["roles"];
   }
   /**
    * @function buscar busca en listado
@@ -43,7 +46,7 @@ export class GestorUsuarioComponent implements OnInit {
     // preparo la variable con la configuracion para el paginado
     this.configPaginacion = this._configPagina.config(listado, pagina);
 
-    this.listaUsuarios = listado.resultado;
+    this.listas.usuarios = listado.resultado;
   }
   /**
    * Solicito el cambio de pagina

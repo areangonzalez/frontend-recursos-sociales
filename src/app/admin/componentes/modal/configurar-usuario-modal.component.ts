@@ -36,38 +36,20 @@ export class ConfigurarUsuarioModalContent {
 })
 export class ConfigurarUsuarioModalComponent {
   @Input("usuarioid") public usuarioid: number;
-  public listaProgramas: any = [];
-  public listaPermisos: any = [];
-  public listaLocalidades: any = [];
-  public listaRoles: any = [];
+  @Input("listados") public listados: number;
 
   constructor(
-    private _modalService: NgbModal, private _programaService: ProgramaService,
-    private _localidadService: LocalidadService, private _msj: MensajesService,
-    private _permisosService: PermisosService, private _usuarioService: UsuarioService,
-    private _rolService: RolService
-    )
-  {
-    this.listarProgramas();
-    this.listarPermisos();
-    this.listarRoles();
-    this.listarLocalidades();
-  }
+    private _modalService: NgbModal, private _msj: MensajesService, private _usuarioService: UsuarioService
+    ) {}
 
 
-  abrirModal(datosUsuario: any, listas: any) {
+  abrirModal(datosUsuario: any) {
     const modalRef = this._modalService.open(ConfigurarUsuarioModalContent, { size: "lg" });
-    modalRef.componentInstance.listas = listas;
+    modalRef.componentInstance.listas = this.listados;
     modalRef.componentInstance.datosUsuario = datosUsuario;
   }
 
   configurarModal() {
-    let listas: any = {
-      permisos: this.listaPermisos,
-      programas: this.listaProgramas,
-      localidades: this.listaLocalidades,
-      roles: this.listaRoles
-    };
     // pido usuario por api
     this._usuarioService.buscarPorId(this.usuarioid)
     .pipe(map(vDatos => {
@@ -81,6 +63,7 @@ export class ConfigurarUsuarioModalComponent {
           id: vDatos['id'],
           personaid: vDatos['personaid'],
           username: vDatos['username'],
+          rol: vDatos['rol'],
           email: vDatos['email'],
           localidad: vDatos['localidad'],
           localidadid: vDatos['localidadid'],
@@ -92,48 +75,8 @@ export class ConfigurarUsuarioModalComponent {
       };
       return vUsuario;
     })).subscribe(
-      datos => { this.abrirModal(datos, listas); },
-      error => { this._msj.cancelado(error, [{name: ''}]); }
-    );
-
-  }
-  /**
-   * Obtengo el listado de programas
-   */
-  listarProgramas() {
-    this._programaService.listar().subscribe(
-      programas => { this.listaProgramas = programas; },
-      error => { this._msj.cancelado(error, [{name: ""}]); }
-    )
-  }
-  /**
-   * Obtengo el listado de permisos
-   */
-  listarPermisos() {
-    this._permisosService.listar().subscribe(
-      permisos => { this.listaPermisos = permisos; },
+      datos => { this.abrirModal(datos); },
       error => { this._msj.cancelado(error, [{name: ''}]); }
     );
   }
-  /**
-   * Obtengo el listado de roles
-   */
-  listarRoles() {
-    this._rolService.listar().subscribe(
-      roles => { this.listaRoles = roles; },
-      error => { this._msj.cancelado(error, [{name: ''}]); }
-    );
-  }
-  /**
-   * Obtengo el listado de localidades
-   */
-  listarLocalidades() {
-    this._localidadService.listar().subscribe(
-      localidad => { this.listaLocalidades = localidad; },
-      error => { this._msj.cancelado(error, [{name: ''}]); }
-    );
-  }
-
-
-
 }

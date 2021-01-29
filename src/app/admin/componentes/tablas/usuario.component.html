@@ -20,15 +20,15 @@
         <th class="text-center columna-160" scope="col"><admin-usuario-modal [configModal]="configModalAgregar" (confirmarGuardado)="cambioPagina($event)" [disenioBoton]="configBotonModalAgregar"></admin-usuario-modal></th>
       </tr>
     </thead>
-    <tbody *ngIf="(listado.length == 0)">
+    <tbody *ngIf="(listados.usuarios.length == 0)">
       <tr>
         <td class="text-center bg-warning" rowspan="1" colspan="6">
           <strong>No se han encontrado resultado</strong>
         </td>
       </tr>
     </tbody>
-    <tbody *ngIf="(listado.length > 0)" >
-      <tr *ngFor="let user of listado;" [ngClass]="{'table-danger': (user.baja)}" ngbTooltip="{{infoAdicional(user.fecha_baja | date:'dd/MM/yyyy')}}">
+    <tbody *ngIf="(listados.usuarios.length > 0)" >
+      <tr *ngFor="let user of listados.usuarios;" [ngClass]="{'table-danger': (user.baja)}" ngbTooltip="{{infoAdicional(user.fecha_baja | date:'dd/MM/yyyy')}}">
         <td>{{user.apellido}}, {{user.nombre}}</td>
         <td class="text-center">{{user.username}}</td>
         <td class="text-center">{{user.localidad}}</td>
@@ -36,7 +36,7 @@
         <td class="text-center">{{user.last_login_at | date:'dd/MM/yyyy HH:mm'}}</td>
         <td class="text-center">{{user.last_login_ip}}</td>
         <td class="text-center">
-          <admin-configurar-usuario-modal [usuarioid]="user.id"></admin-configurar-usuario-modal>
+          <admin-configurar-usuario-modal [listados]="listados" [usuarioid]="user.id"></admin-configurar-usuario-modal>
           <admin-baja-usuario-modal *ngIf="(!user.baja)" [nombreUsuario]="user.username" (confirmarBaja)="darBajaUsuario($event, user.id)"></admin-baja-usuario-modal>
           <admin-alta-usuario-modal *ngIf="(user.baja)" [nombreUsuario]="user.username" (confirmarAlta)="darAltaUsuario($event, user.id)"></admin-alta-usuario-modal>
         </td>

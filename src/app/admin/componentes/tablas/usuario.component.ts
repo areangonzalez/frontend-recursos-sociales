@@ -8,7 +8,7 @@ import { UsuarioService, MensajesService } from './../../../core/services';
   styleUrls: ['./usuario.component.sass']
 })
 export class UsuarioComponent implements OnInit {
-  @Input("listado") public listado: any;
+  @Input("listados") public listados: any;
   @Input("configPaginacion") public configPaginacion: any;
   @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
 
