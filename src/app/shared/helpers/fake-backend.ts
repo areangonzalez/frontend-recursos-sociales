@@ -106,7 +106,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let body = {
                     username: 'soporte',
                     access_token: 'fake-jwt-token',
-                    rol: 'soporte'
+                    rol: 'soporte',
+                    nombre: "Pedro",
+                    apellido: "Alvarez"
                 };
                 return of(new HttpResponse({ status: 200, body }));
               } else if (request.body.username === 'usuario' && request.body.password_hash === 'usuarios') {

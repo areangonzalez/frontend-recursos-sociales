@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigurarPagina, configurarListas } from 'src/app/core/models';
-import { ConfiguracionParaPaginarService, UsuarioService, MensajesService } from 'src/app/core/services';
+import { ConfiguracionParaPaginarService, UsuarioService, MensajesService, AuthenticationService } from 'src/app/core/services';
 
 @Component({
   selector: 'admind-gestor-usuario',
@@ -13,6 +13,7 @@ export class GestorUsuarioComponent implements OnInit {
   public busqueda: any = {};
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina();
   public tamanioPagina: number = 20;
+  public nombreUsuario: string = '';
 
   constructor(private _route: ActivatedRoute, private _usuarioService: UsuarioService, private _configPagina: ConfiguracionParaPaginarService, private _msj: MensajesService) { }
 

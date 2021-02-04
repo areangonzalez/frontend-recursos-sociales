@@ -14,36 +14,17 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this._loadService.show();
         return next.handle(request).pipe(
-          /* tap(res => {
-            // res.type is prod and zero is dev
-            let tipoRespuesta = (environment.production) ? res.type : 0 ;
-            if (tipoRespuesta === HttpEventType.Sent) {
-              // cuento los envios
-              this.envios++;
-            }
-
-            if (res.type === HttpEventType.Response) {
-              // cuento los recibidos
-              this.recibidos++;
-              // comparo y si son iguales oculto el spinner
-              if (this.envios == this.recibidos){
-                this._loadService.hide()
-              }
-            }
-          }), */
           catchError(err => {
               // verifico si existe el acceso del usuario
               let accessUser = this.authenticationService.loggedIn;
               if (accessUser){
-                // this.recibidos++;
                 this._loadService.hide();
               }
               // error de inahutorizado
               if (err.status === 401) {
-                //this.recibidos++;
                 // auto logout if 401 response returned from api
                 this.authenticationService.logout();
-                //location.reload(true);
+                location.reload(true);
                 this._loadService.hide();
               }
               if (err.status === 403) {
@@ -54,7 +35,6 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
               // error.message viene como objeto
               if (err.status === 400){
-                //this.recibidos++;
                 let mensaje = this.recorrerErrorObjeto(JSON.parse(err.error.message));
                 // envio el mensaje como texto.
                 this._loadService.hide();

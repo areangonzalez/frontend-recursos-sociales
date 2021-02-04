@@ -21,8 +21,7 @@ export class AdminLayoutComponent implements OnInit {
 
   ngOnInit() {
     this._titleService.init();
-    // this.nombreUsuario = this._auth.getUserName();
-    this.nombreUsuario = this._auth.loggedIn.username;
+    this.setNombreUsuario();
   }
 
   estoyLogueado(){
@@ -44,6 +43,14 @@ export class AdminLayoutComponent implements OnInit {
 
   ocultarMenu(){
     this.mostrar = false;
+  }
+
+  setNombreUsuario() {
+    if (this._auth.loggedIn.apellido && this._auth.loggedIn.nombre && this._auth.loggedIn.rol !== 'admin') {
+      this.nombreUsuario = this._auth.loggedIn.apellido + ", " + this._auth.loggedIn.nombre;
+    }else{
+      this.nombreUsuario = "Admin";
+    }
   }
 
 }
