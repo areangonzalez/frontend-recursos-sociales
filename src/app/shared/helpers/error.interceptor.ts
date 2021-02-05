@@ -14,11 +14,25 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this._loadService.show();
         return next.handle(request).pipe(
+          tap(res => {
+            // res.type is prod and zero is dev
+            // Envios
+            let tipoRespuesta = (environment.production) ? res.type : 0 ;
+            if (tipoRespuesta === HttpEventType.Sent) {
+              // cuento los envios
+              this.envios++;
+            }
+            if (res.type === HttpEventType.Response) {
+              // cuento los recibidos
+              this.recibidos++;
+            }
+          }),
           catchError(err => {
+              this.recibidos++;
               // verifico si existe el acceso del usuario
               let accessUser = this.authenticationService.loggedIn;
               if (accessUser){
-                this._loadService.hide();
+                //this._loadService.hide();
               }
               // error de inahutorizado
               if (err.status === 401) {
@@ -44,7 +58,16 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this._loadService.hide();
                 return throwError(error);
               }
-          }), finalize(() => this._loadService.hide())
+          }), finalize(() => {
+            // comparo y si son iguales oculto el spinner
+            if (this.envios == this.recibidos){
+              this._loadService.hide();
+            } else {
+              setTimeout(() => {
+                this._loadService.hide()
+              }, 3000);
+            }
+          })
         )
     }
 
