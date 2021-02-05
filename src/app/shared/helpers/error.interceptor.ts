@@ -1,49 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpEventType, HttpErrorResponse } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, finalize, tap } from 'rxjs/operators';
-import { environment } from "../../../environments/environment";
+import { catchError, finalize } from 'rxjs/operators';
 import { LoaderService, AuthenticationService, JwtService } from 'src/app/core/services';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    private envios = 0;
-    private recibidos = 0;
+    private service_count = 0;
     constructor(private authenticationService: AuthenticationService, private _loadService: LoaderService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this._loadService.show();
+        this.service_count++;
         return next.handle(request).pipe(
-          tap(res => {
-            // res.type is prod and zero is dev
-            // Envios
-            let tipoRespuesta = (environment.production) ? res.type : 0 ;
-            if (tipoRespuesta === HttpEventType.Sent) {
-              // cuento los envios
-              this.envios++;
-            }
-            if (res.type === HttpEventType.Response) {
-              // cuento los recibidos
-              this.recibidos++;
-            }
-          }),
           catchError(err => {
-              this.recibidos++;
-              // verifico si existe el acceso del usuario
-              let accessUser = this.authenticationService.loggedIn;
-              if (accessUser){
-                //this._loadService.hide();
-              }
               // error de inahutorizado
               if (err.status === 401) {
                 // auto logout if 401 response returned from api
                 this.authenticationService.logout();
                 location.reload(true);
-                this._loadService.hide();
               }
               if (err.status === 403) {
                 // auto logout if 401 response returned from api
-                this._loadService.hide();
                 let mensaje = "No tiene permitido ejecutar esta accion";
                 return throwError(mensaje);
               }
@@ -51,21 +29,15 @@ export class ErrorInterceptor implements HttpInterceptor {
               if (err.status === 400){
                 let mensaje = this.recorrerErrorObjeto(JSON.parse(err.error.message));
                 // envio el mensaje como texto.
-                this._loadService.hide();
                 return throwError(mensaje);
               }else{ // cualquier otro error
                 const error = err.message || err.error.message || err.statusText;
-                this._loadService.hide();
                 return throwError(error);
               }
           }), finalize(() => {
-            // comparo y si son iguales oculto el spinner
-            if (this.envios == this.recibidos){
+            this.service_count--;
+            if (this.service_count === 0) {
               this._loadService.hide();
-            } else {
-              setTimeout(() => {
-                this._loadService.hide()
-              }, 3000);
             }
           })
         )
