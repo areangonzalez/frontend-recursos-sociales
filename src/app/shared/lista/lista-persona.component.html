@@ -18,8 +18,8 @@
           <td scope="row">{{persona.nro_documento}}</td>
           <td >{{persona.apellido}}, {{persona.nombre}}</td>
           <td class="text-center">
-            <div class="btn-group" *ngIf="(persona.lugar.localidad != '')">
-              <button ngbTooltip="{{direccion(persona.lugar)}}" container="body" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
+            <div class="btn-group">
+              <button *ngIf="(persona.lugar != undefined)" ngbTooltip="{{direccion(persona.lugar)}}" container="body" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
               <button *ngIf="(persona.telefono != '')" ngbTooltip="{{persona.telefono}}" container="body" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
               <button *ngIf="(persona.celular != '')" ngbTooltip="{{persona.celular}}" container="body" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
               <button *ngIf="(persona.email != '')" ngbTooltip="{{persona.email}}" container="body" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>

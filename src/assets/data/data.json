@@ -3,7 +3,15 @@
   "generos": [{ "id": 1, "nombre": "Femenino" }, { "id": 2, "nombre": "Masculino" }],
   "estadoCivils": [{ "id": 1, "nombre": "Casado/a" }, { "id": 2, "nombre": "Soltero/a" }, { "id": 2, "nombre": "Viudo/a" }],
   "localidads": [
-    { "id": 1, "nombre": "Aguada de Guerra" }, { "id": 2, "nombre": "Bariloche" }, { "id": 3, "nombre": "Choele Choel" }, { "id": 4, "nombre": "Cinco Saltos" }, { "id": 5, "nombre": "Cipolletti" }, { "id": 6, "nombre": "Coronel Belisle" }, { "id": 7, "nombre": "General Roca" }, { "id": 8, "nombre": "Río colorado" }, { "id": 9, "nombre": "Viedma" }, { "id": 10, "nombre": "Villa Regina" }
+    { "id": 1, "nombre": "Aguada de Guerra", "localidad": "Aguada de Guerra" },
+    { "id": 2, "nombre": "Bariloche", "localidad": "Bariloche" },
+    { "id": 3, "nombre": "Choele Choel", "localidad": "Choele Choel" },
+    { "id": 4, "nombre": "Cinco Saltos", "localidad": "Cinco Saltos" },
+    { "id": 5, "nombre": "Cipolletti", "localidad": "Cipolletti" },
+    { "id": 6, "nombre": "Coronel Belisle", "localidad": "Coronel Belisle" },
+    { "id": 7, "nombre": "General Roca", "localidad": "General Roca" },
+    { "id": 8, "nombre": "Río colorado", "localidad": "Río colorado" },
+    { "id": 9, "nombre": "Viedma", "localidad": "Viedma" }, { "id": 10, "nombre": "Villa Regina", "localidad": "Villa Regina" }
   ],
   "programas": [
     { "id": 3, "nombre": "Emprender", "color": "#FFC837", "lista_tipo_recurso": [{"id":2, "nombre": "Empleo / Formación laboral"}] },
@@ -130,30 +138,6 @@
               "generoid": "",
               "email": "Margarita@gmail.com",
               "cuil": "20238512669",
-              "hogar": {
-                  "id": 1,
-                  "tiene_gas": 1,
-                  "tiene_luz": 1,
-                  "tiene_agua": 1,
-                  "condicion_ocupacionid": 1,
-                  "obtencion_aguaid": 1,
-                  "tipo_desagueid": 1,
-                  "cocina_combustibleid": 1,
-                  "tipo_viviendaid": 1,
-                  "jefeid": "",
-                  "habitacion_dormir": 2,
-                  "banioid": 1,
-                  "lugarid": 1,
-                  "observacion": "",
-                  "nucleos": [
-                      {
-                          "id": 1,
-                          "hogarid": 1,
-                          "jefeid": "",
-                          "nombre": "Familia Rodriguez"
-                      }
-                  ]
-              },
               "estudios": [],
               "lista_red_social": [
                 {
@@ -171,23 +155,7 @@
               ],
               "sexo": "Mujer",
               "genero": "",
-              "estado_civil": "",
-              "lugar": {
-                  "id": 1,
-                  "nombre": "",
-                  "calle": "calle1",
-                  "altura": "100",
-                  "localidadid": 4,
-                  "latitud": "-1234123",
-                  "longitud": "21314124",
-                  "barrio": "barrio1",
-                  "piso": "0º",
-                  "depto": "A",
-                  "escalera": "",
-                  "entre_calle_1": "",
-                  "entre_calle_2": "",
-                  "localidad": "Viedma"
-              }
+              "estado_civil": ""
           },
           {
               "id": 2,

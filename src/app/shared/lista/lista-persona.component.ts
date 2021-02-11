@@ -20,12 +20,14 @@ export class ListaPersonaComponent implements OnInit {
     this.borrarPersona.emit({id:id});
   }
 
-  public direccion(lugar){
+  public direccion(lugar: object){
     let dir = "";
-    dir += lugar['localidad'] + " - " + lugar['barrio'] + ' - ' + lugar['calle'] + ' ' + lugar['altura'];
-    dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
-    dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
-    dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
+      dir += lugar['localidad'];
+      dir += (lugar['barrio'] != '') ? ' - ' + lugar['barrio'] : ''
+      dir += (lugar['calle'] != '') ? ' - ' + lugar['calle'] + ' ' + lugar['altura'] : '';
+      dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
+      dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
+      dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
 
     return dir;
   }

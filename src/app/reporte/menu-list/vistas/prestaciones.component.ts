@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MensajesService, RecursoSocialService, DescargasService } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router';
-import {saveAs as importedSaveAs} from "file-saver";
+import { saveAs } from "file-saver";
 
 @Component({
   selector: 'reporte-prestaciones',
@@ -137,8 +137,8 @@ export class PrestacionesComponent implements OnInit {
       if (exportar){
         this._descargasService.descargarExcel(this.exportBusqueda).subscribe(
           blob => {
-            let filename = 'prestaciones.xls';
-            importedSaveAs(blob, filename);
+            let file = new File([blob], 'prestaciones.xls', {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+            saveAs(file);
         }, error => { this._mensajeService.cancelado(error, [{name: ''}]); });
       }
     }

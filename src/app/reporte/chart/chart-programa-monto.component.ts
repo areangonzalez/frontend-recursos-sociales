@@ -68,6 +68,24 @@ export class ChartProgramaMontoComponent implements OnInit {
         ]
       },
       options: {
+        tooltips: {
+          enabled: true,
+          mode: 'single',
+          callbacks: {
+            label: function (tooltipItems, data) {
+              for (let i = 0; i < data.datasets.length; i++) {
+                for (let j = 0; j < data.datasets[i].data.length; j++) {
+                  if (data.datasets[i].data[j] === tooltipItems.yLabel){
+                    let formatoPeso = new Intl.NumberFormat('es-CO', {
+                      style: 'currency', currency: 'COP'
+                    });
+                    return data.datasets[i].label + ": " + formatoPeso.format(parseFloat(tooltipItems.yLabel));
+                  }
+                }
+              }
+            }
+          }
+        },
         responsive: true,
         maintainAspectRatio: false,
         legend: {
