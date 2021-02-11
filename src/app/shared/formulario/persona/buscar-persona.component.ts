@@ -33,8 +33,6 @@ export class BuscarPersonaComponent implements OnInit {
    */
   public buscar(params:any, pagina:number){
     Object.assign(params, { page: pagina-1, pagesize: 8 });
-    console.log(params);
-
     this._personaService.buscar(params).subscribe(
       datos => {
         this.prepararListadoPersona(datos, 1);

@@ -48,8 +48,8 @@
           {{beneficiario.persona.apellido}}, {{beneficiario.persona.nombre}}
         </td>
         <td>
-          <div class="btn-group responsive-btn-icon" *ngIf="(beneficiario.persona.lugar.localidad != '')">
-            <button ngbTooltip="{{direccion(beneficiario.persona.lugar)}}" container="body" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
+          <div class="btn-group responsive-btn-icon">
+            <button *ngIf="(beneficiario.persona.lugar != undefined)" ngbTooltip="{{direccion(beneficiario.persona.lugar)}}" container="body" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-home"></i></button>
             <button *ngIf="(beneficiario.persona.telefono != '')" ngbTooltip="{{beneficiario.persona.telefono}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
             <button *ngIf="(beneficiario.persona.celular != '')" ngbTooltip="{{beneficiario.persona.celular}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
             <button *ngIf="(beneficiario.persona.email != '')" ngbTooltip="{{beneficiario.persona.email}}" triggers="click" [autoClose]="'outside'" type="button" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
@@ -58,7 +58,7 @@
             </div>
           </div>
         </td>
-        <td class="text-center">{{beneficiario.persona.lugar.localidad}}</td>
+        <td class="text-center">{{ (beneficiario.persona.lugar != undefined) ? beneficiario.persona.lugar.localidad : " - "}}</td>
         <td class="text-center">{{beneficiario.monto_acreditado | currency:'USD':'symbol-narrow':'2.2'}} ({{beneficiario.recurso_acreditado_cantidad}})</td>
         <td class="text-center">{{beneficiario.monto_baja | currency:'USD':'symbol-narrow':'2.2'}} ({{beneficiario.recurso_baja_cantidad}})</td>
         <td class="text-center">{{beneficiario.monto_sin_acreditar | currency:'USD':'symbol-narrow':'2.2'}} ({{beneficiario.recurso_sin_acreditar_cantidad}})</td>

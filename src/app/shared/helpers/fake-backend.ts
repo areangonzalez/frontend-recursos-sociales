@@ -435,7 +435,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   // preguntar si los id's coinciden
                   if (recursos[i]["personaid"] == personas[j]["id"]){
                     // actualizo las localidades
-                    personas[j]["lugar"]["localidad"] = nombrePorId(personas[j]["lugar"]["localidadid"], localidades);
+                    if (personas[j]["lugar"] != undefined) {
+                      personas[j]["lugar"]["localidad"] = nombrePorId(personas[j]["lugar"]["localidadid"], localidades);
+                    }
                     // creo a la persona dentro del recurso
                     recursos[i]["persona"] = personas[j];
                   }
@@ -1238,8 +1240,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   // monto sin acreditar = monto_total - monto_acreditar - monto_baja
                   programas[i]["monto_sin_acreditar"] = programas[i]["monto"] - programas[i]["monto_acreditado"] - programas[i]["monto_baja"];
                 }
-
-
 
                   return of(new HttpResponse({ status: 200, body: programas }));
               } else {
