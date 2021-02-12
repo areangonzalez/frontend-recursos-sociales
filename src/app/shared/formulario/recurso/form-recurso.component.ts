@@ -71,6 +71,7 @@ export class FormRecursoComponent implements OnInit {
       // actualizo el listado de programas
       this.formRecurso.controls.programaid.patchValue(id);
       this.listarTipoRecurso(id);
+      this.emprender = (this.programaid == 3) ? true : false;
     }
   }
 
