@@ -8,7 +8,7 @@ import { RolService, LocalidadService, MensajesService } from 'src/app/core/serv
   template: `
     <div class="modal-header">
       <h4 class="modal-title">{{configModal.title}}</h4>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <button type="button" class="close" aria-label="Close" (click)="cancelarModal(false)">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>

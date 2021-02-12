@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   template: `
     <div class="modal-header">
       <h4 class="modal-title">Configurar Datos del Usuario</h4>
-      <button type="button" class="close" aria-label="Close" (click)="_activeModal.dismiss('Cross click')">
+      <button type="button" class="close" aria-label="Close" (click)="_activeModal.close('closed')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
