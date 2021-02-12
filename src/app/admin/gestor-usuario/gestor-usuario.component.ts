@@ -36,7 +36,6 @@ export class GestorUsuarioComponent implements OnInit {
     // configuro para que se dirija a la primera pagina
     this.configPaginacion.page = 1;
     // realizo la busqueda
-    console.log(apiBusqueda);
     this._usuarioService.buscar(apiBusqueda).subscribe(
       respuesta => {
         this.prepararListadoUsuario(respuesta, page);

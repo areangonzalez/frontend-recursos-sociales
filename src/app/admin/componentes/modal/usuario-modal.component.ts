@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { BotonDisenio, ModalConfig } from 'src/app/core/models';
 import { RolService, LocalidadService, MensajesService } from 'src/app/core/services';
 
@@ -8,7 +8,7 @@ import { RolService, LocalidadService, MensajesService } from 'src/app/core/serv
   template: `
     <div class="modal-header">
       <h4 class="modal-title">{{configModal.title}}</h4>
-      <button type="button" class="close" aria-label="Close" (click)="cancelarModal(false)">
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.close('closed')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -46,7 +46,12 @@ export class UsuarioModalComponent  {
   public listaLocalidades: any = [];
   public listaRoles: any = [];
 
-  constructor(private modalService: NgbModal, private _localidadService: LocalidadService, private _msj: MensajesService, private _rolService: RolService) {
+  constructor(
+    private modalService: NgbModal, private _localidadService: LocalidadService,
+    private _msj: MensajesService, private _rolService: RolService, private config: NgbModalConfig
+  ) {
+    config.backdrop = 'static';
+    config.keyboard = false;
     this.listarLocalidades();
     this.listarRoles();
   }
