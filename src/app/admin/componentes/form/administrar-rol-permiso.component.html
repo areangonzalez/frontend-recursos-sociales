@@ -3,10 +3,14 @@
     <div class="row" >
       <div class="form-group col-md-12">
         <label for="rol" class="prioridad">Programa/s:</label>
-        <select class="form-control" id="rol" formControlName="programaid" (change)="setPermisosDefault($event.target.value)">
+        <select class="form-control" id="programaid" formControlName="programaid" (change)="setPermisosDefault($event.target.value)">
           <option value="">Seleccione un Programa</option>
           <option *ngFor="let programa of listaProgramas" value="{{programa.id}}">{{programa.nombre}}</option>
         </select>
+        <div *ngIf="(permisosForm.get('programaid').invalid && submitted)"
+          class="text-danger">
+          <div *ngIf="permisosForm.get('programaid').hasError('required')">Seleccione un Programa. </div>
+      </div>
       </div>
     </div>
   </div>
