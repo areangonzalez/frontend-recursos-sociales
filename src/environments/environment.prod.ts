@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://api-prestaciones-sociales.local/api'
+  // baseUrl: 'https://prestaciones-sociales-api.rionegro.gov.ar/api'
+  baseUrl: 'http://prestaciones-sociales.local/api'
 };

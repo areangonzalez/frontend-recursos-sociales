@@ -28,10 +28,10 @@ export class BuscarPersonaComponent implements OnInit {
   ngOnInit(){}
   /**
    * Realiza la busqueda de una persona con o sin parametros establecidos
-   * @param params un objeto que contiene los parametros
+   * @param params objeto que contiene los parametros a buscar
    * @param pagina numero de pagina
    */
-  public buscar(params:any, pagina:number){
+  public buscar(params:object, pagina:number){
     Object.assign(params, { page: pagina-1, pagesize: 8 });
     this._personaService.buscar(params).subscribe(
       datos => {
@@ -83,8 +83,8 @@ export class BuscarPersonaComponent implements OnInit {
    * Cambia la pagina del listado
    * @param page numero de pagina
    */
-  public cambioPagina(page){
-    this.buscar(this.busqueda, page);
+  public cambioPagina(page: number){
+    this.buscar({ global_param: this.busqueda }, page);
   }
   /**
    * Crea la persona enviando los datos al componente padre

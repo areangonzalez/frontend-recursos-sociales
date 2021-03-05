@@ -17,7 +17,6 @@ export class ListaModuloAlimentarComponent implements OnInit {
   }
 
   cambioPagina(page){
-    console.log(page);
     this.cambioDePagina.emit(page);
   }
 

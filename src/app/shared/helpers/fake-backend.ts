@@ -586,7 +586,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // let page = (request.params.get('page') != undefined) ? parseInt(request.params.get('page')) : 0;
               let pageSize:number = parseInt(request.params.get('pagesize'));
               let page = parseInt(request.params.get('page'));
-              let search = globalSearch.split(" ");
+              let search = (globalSearch != null) ? globalSearch.split(" ") : "";
               let resultado = [];
               let listaPersonas = {
                 total_filtrado: 0,
@@ -598,7 +598,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               resultado = personas.filter(
                 persona => {
                   for (let i = 0; i < search.length; i++) {
-                    let nombre = persona.nombre.split(" ");
+                    let nombre =  (persona.nombre) ? persona.nombre.split(" ") : "";
                     for (let j = 0; j < nombre.length; j++) {
                         if ( nombre[j].toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
                           return persona;
