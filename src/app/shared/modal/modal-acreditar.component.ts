@@ -120,7 +120,12 @@ export class ModalAcreditarComponent {
   `
 })
 export class ModalConfirmarCanceladoAcreditarContent {
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal,
+    private config: NgbModalConfig
+    ) {
+      config.backdrop = 'static';
+      config.keyboard = false;
+    }
 
   public confirmacion(confirma: boolean) {
     this.activeModal.close(confirma);

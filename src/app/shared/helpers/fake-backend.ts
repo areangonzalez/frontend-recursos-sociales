@@ -99,6 +99,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       username: 'admin',
                       access_token: 'fake-jwt-token',
                       rol: 'admin',
+                      programaids: [1,4,3,2,5,6]
                   };
                   return of(new HttpResponse({ status: 200, body }));
               } else if (request.body.username === 'soporte' && request.body.password_hash === 'soportes') {
@@ -111,14 +112,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     apellido: "Alvarez"
                 };
                 return of(new HttpResponse({ status: 200, body }));
-              } else if (request.body.username === 'usuario' && request.body.password_hash === 'usuarios') {
+              } else if (request.body.username === 'usuario1' && request.body.password_hash === 'usuario1') {
                 // if login details are valid return 200 OK with a fake jwt token
                 let body = {
                     username: 'usuario',
                     access_token: 'fake-jwt-token',
                     rol: 'usuario',
                     nombre: "Carla",
-                    apellido: "Benitez"
+                    apellido: "Benitez",
+                    programaids: [3,2,5]
+                };
+                return of(new HttpResponse({ status: 200, body }));
+              } else if (request.body.username === 'usuario2' && request.body.password_hash === 'usuario2') {
+                // if login details are valid return 200 OK with a fake jwt token
+                let body = {
+                    username: 'usuario',
+                    access_token: 'fake-jwt-token',
+                    rol: 'usuario',
+                    nombre: "Pedro",
+                    apellido: "Riquelme",
+                    programaids: [4,6]
                 };
                 return of(new HttpResponse({ status: 200, body }));
               } else {

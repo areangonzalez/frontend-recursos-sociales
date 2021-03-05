@@ -44,6 +44,19 @@ export class HeaderComponent implements OnInit {
       this.mostrar = false;
     }
 
+    mostrarModuloAlimentar() {
+      let mostrar = false;
+      if (this._authentication.loggedIn.programaids !== undefined) {
+        let programaids = this._authentication.loggedIn.programaids;
+        for (let i = 0; i < programaids.length; i++) {
+          if (programaids[i] === 6) {
+            mostrar = true;
+          }
+        }
+      }
+      return mostrar;
+    }
+
     setNombreUsuario() {
       if (this._authentication.loggedIn.apellido && this._authentication.loggedIn.nombre && this._authentication.loggedIn.rol !== 'admin') {
         this.nombreUsuario = this._authentication.loggedIn.apellido + ", " + this._authentication.loggedIn.nombre;

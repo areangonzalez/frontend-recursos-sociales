@@ -35,7 +35,7 @@ export class BuscarPersonaComponent implements OnInit {
     Object.assign(params, { page: pagina-1, pagesize: 8 });
     this._personaService.buscar(params).subscribe(
       datos => {
-        this.prepararListadoPersona(datos, 1);
+        this.prepararListadoPersona(datos, pagina);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 
@@ -52,7 +52,7 @@ export class BuscarPersonaComponent implements OnInit {
   public prepararListadoPersona(listado:any, pagina: number) {
     // preparo la variable con la configuracion para el paginado
     this.configPaginacion = this._configuracionPaginacion.config(listado, pagina);
-
+console.log(this.configPaginacion.page);
     this.listaPersonas = listado.resultado;
   }
   /**

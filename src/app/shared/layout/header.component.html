@@ -11,7 +11,7 @@
           <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
             <a class="nav-link" [routerLink]="['crear-prestacion']" ><i class="fas fa-hands-helping"></i> Crear prestación</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
+          <li *ngIf="mostrarModuloAlimentar()" class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
             <a class="nav-link" [routerLink]="['reporte-modulo-alimentar']" ><i class="fas fa-boxes"></i> Modulo Alimentar</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
