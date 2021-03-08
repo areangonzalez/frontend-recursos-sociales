@@ -1,3 +1,4 @@
+import { ComponentRef } from '@angular/core';
 import { Component, ChangeDetectorRef, AfterViewInit, AfterViewChecked} from '@angular/core';
 import { Chart } from 'chart.js';
 import { MensajesService, EstadisticaService } from 'src/app/core/services';
@@ -46,23 +47,28 @@ export class ChartBeneficiarioProgramaLocalidadComponent implements AfterViewIni
 
       this._estadisticaService.programasPorLocalidad(this.localidadId)
       .pipe(
-        finalize(() => this.isComplete = true)
+        finalize(() => this.isComplete = true )
       )
       .subscribe(datos => {
-        datos.forEach((val, i) => {
-          // nombre de programas
-          this.chart.data.labels.push(datos[i].nombre);
-          // cantidad de beneficiarios
-          this.chart.data.datasets[0].data.push(datos[i].beneficiario_cantidad);
-          // agrego colores al grafico
-          this.chart.data.datasets[0].backgroundColor.push(datos[i].color);
-          // creo lista de colores
-          this.colorsGrafico.push({color: datos[i].color, nombre: datos[i].nombre});
-          // agrego las opciones al grafico
-          this.chart.options = this.pieOptions;
-          // actualizo el grafico
-          this.chart.update();
-        });
+        if (datos.length > 0) {
+          datos.forEach((val, i) => {
+            // nombre de programas
+            this.chart.data.labels.push(datos[i].nombre);
+            // cantidad de beneficiarios
+            this.chart.data.datasets[0].data.push(datos[i].beneficiario_cantidad);
+            // agrego colores al grafico
+            this.chart.data.datasets[0].backgroundColor.push(datos[i].color);
+            // creo lista de colores
+            this.colorsGrafico.push({color: datos[i].color, nombre: datos[i].nombre});
+            // agrego las opciones al grafico
+            this.chart.options = this.pieOptions;
+            // actualizo el grafico
+            this.chart.update();
+          });
+        }else{
+          this.compInteraction.remove(this.index);
+          this._mensajeService.cancelado("No se han encontrado resultados.", [{name:''}]);
+        }
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
     }else{
       this._mensajeService.cancelado("Error, no se ha seleccionado ninguna localidad", [{name:''}]);

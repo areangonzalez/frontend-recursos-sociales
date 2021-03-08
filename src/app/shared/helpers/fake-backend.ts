@@ -1139,12 +1139,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let id = parseInt(urlParts[urlParts.length - 1]);
                 let localidadElegida = localidades.filter(localidad => { return localidad.id === id });
 
-                for (let i = 0; i < programas.length; i++) {
-                  programas[i]['beneficiario_cantidad'] = (100+Math.floor(Math.random()*450));
+                if (id !== 9) {
+                  for (let i = 0; i < programas.length; i++) {
+                    programas[i]['beneficiario_cantidad'] = (100+Math.floor(Math.random()*450));
+                  }
+
+                  localidadElegida[0]["programas"] = programas;
+                  return of(new HttpResponse({ status: 200, body: programas }));
+                }else {
+                  return of(new HttpResponse({ status: 200, body: [] }));
                 }
 
-                localidadElegida[0]["programas"] = programas;
-                return of(new HttpResponse({ status: 200, body: localidadElegida[0].programas }));
               } else {
                 //return 401 not authorised if token is null or invalid
                    return throwError({ error: { message: 'Unauthorised' } });
