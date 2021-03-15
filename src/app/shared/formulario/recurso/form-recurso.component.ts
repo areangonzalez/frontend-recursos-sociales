@@ -69,7 +69,7 @@ export class FormRecursoComponent implements OnInit {
     if (this.programaid) {
       let id: number = parseInt(this.programaid);
       // actualizo el listado de programas
-      this.formRecurso.controls.programaid.patchValue(id);
+      this.formRecurso.get("programaid").patchValue(this.programaid);
       this.listarTipoRecurso(id);
       this.emprender = (this.programaid == 3) ? true : false;
     }
@@ -177,8 +177,9 @@ export class FormRecursoComponent implements OnInit {
   public validarForm(){
     this.submitted = true;
     let recurso: object = {};
+    console.log(this.programaSeleccionadoId);
 
-    switch (this.programaSeleccionadoId) {
+    switch (this.programaSeleccionadoId.toString()) {
       case '6':
         this.submittedMA = true;
         this.submittedPrestacion = false;

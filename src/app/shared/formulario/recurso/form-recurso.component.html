@@ -39,6 +39,7 @@
           </div>
         </div>
       </div>
+      {{ submittedMA }}
       <prestacion-general *ngIf="(programaSeleccionadoId != '' && programaSeleccionadoId != '6')" [prestacion]="formRecurso.get('prestacion')" [submitted]="submittedPrestacion"></prestacion-general>
       <modulo-alimentar *ngIf="(programaSeleccionadoId != '' && programaSeleccionadoId == '6')" [listaTipoResponsable]="listaTipoResponsable" [prestacionModuloAlimentar]="formRecurso.get('modulo_alimentar')" [submitted]="submittedMA"></modulo-alimentar>
       <div class="row">
