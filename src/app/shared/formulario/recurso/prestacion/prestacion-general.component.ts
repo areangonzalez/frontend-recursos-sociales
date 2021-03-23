@@ -24,12 +24,12 @@ export class PrestacionGeneralComponent implements OnInit {
    * Formateo la fecha de objeto a string
    * @param objFecha objeto fecha es ingresada como objeto
    */
-  public formatFechaAlta(objFecha) {
+  public formatFecha(objFecha, clave: string) {
     if (objFecha != null){
       const fecha:string = this._utilService.formatearFecha(objFecha.day, objFecha.month, objFecha.year, 'yyyy-MM-dd');
-      this.prestacion.controls.fecha_alta.setValue(fecha);
+      this.prestacion.controls[clave].setValue(fecha);
     }else{
-      this.prestacion.controls.fecha_alta.setValue('');
+      this.prestacion.controls[clave].setValue('');
     }
   }
   /**

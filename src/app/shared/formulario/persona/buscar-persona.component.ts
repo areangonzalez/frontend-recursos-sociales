@@ -52,7 +52,6 @@ export class BuscarPersonaComponent implements OnInit {
   public prepararListadoPersona(listado:any, pagina: number) {
     // preparo la variable con la configuracion para el paginado
     this.configPaginacion = this._configuracionPaginacion.config(listado, pagina);
-console.log(this.configPaginacion.page);
     this.listaPersonas = listado.resultado;
   }
   /**

@@ -49,7 +49,11 @@ export class FormRecursoComponent implements OnInit {
         proposito: ['', Validators.required],
         fechaAlta: ['', Validators.required],
         fecha_alta: '',
-        monto: ['', Validators.required]
+        fechaFinal: ['', Validators.required],
+        fecha_final: '',
+        monto: ['', Validators.required],
+        monto_mensual: '',
+        cuota: false
       }),
       modulo_alimentar: _fb.group({
         fechaAlta: ['', Validators.required],
@@ -60,6 +64,7 @@ export class FormRecursoComponent implements OnInit {
         responsable_entregaid: ['', Validators.required],
         monto: ['', Validators.required]
       }),
+      lugar_capacitacion: '',
       observacion: ''
     });
   }
@@ -71,7 +76,7 @@ export class FormRecursoComponent implements OnInit {
       // actualizo el listado de programas
       this.formRecurso.get("programaid").patchValue(this.programaid);
       this.listarTipoRecurso(id);
-      this.emprender = (this.programaid == 3) ? true : false;
+      this.emprenderOrecrear = (this.programaid == 3 || this.programaid == 7) ? true : false;
     }
   }
 
@@ -177,7 +182,6 @@ export class FormRecursoComponent implements OnInit {
   public validarForm(){
     this.submitted = true;
     let recurso: object = {};
-    console.log(this.programaSeleccionadoId);
 
     switch (this.programaSeleccionadoId.toString()) {
       case '6':

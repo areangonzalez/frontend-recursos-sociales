@@ -39,25 +39,28 @@
           </div>
         </div>
       </div>
-      {{ submittedMA }}
       <prestacion-general *ngIf="(programaSeleccionadoId != '' && programaSeleccionadoId != '6')" [prestacion]="formRecurso.get('prestacion')" [submitted]="submittedPrestacion"></prestacion-general>
       <modulo-alimentar *ngIf="(programaSeleccionadoId != '' && programaSeleccionadoId == '6')" [listaTipoResponsable]="listaTipoResponsable" [prestacionModuloAlimentar]="formRecurso.get('modulo_alimentar')" [submitted]="submittedMA"></modulo-alimentar>
       <div class="row">
+        <div class="form-group col-md-12" *ngIf="(emprenderOrecrear)">
+          <label for="observacion">Lugar de capacitación:</label>
+          <input type="text" class="form-control" formControlName="lugar_capacitacion" placeholder="lugar de capacitacion...">
+        </div>
         <div class="form-group col-md-12">
           <label for="observacion">Observación:</label>
           <textarea class="form-control" id="observacion" cols="30" rows="1" placeholder="Descripcion..." formControlName="observacion" ></textarea>
         </div>
       </div>
     </fieldset>
-    <hr class="pt1" *ngIf="(!emprender)">
-    <fieldset *ngIf="(!emprender)">
+    <hr class="pt1" *ngIf="(!emprenderOrecrear)">
+    <fieldset *ngIf="(!emprenderOrecrear)">
         <div class="float-right">
           <button type="button" class="btn btn-danger" (click)="cancelarForm()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>&nbsp;
           <button type="button" class="btn btn-success" (click)="validarForm()" ><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
         </div>
     </fieldset>
   </div>
-  <div class="shadow-sm mb-3 bg-white p-3 rounded" *ngIf="(emprender)">
+  <div class="shadow-sm mb-3 bg-white p-3 rounded" *ngIf="(emprenderOrecrear)">
     <fieldset >
       <div class="d-flex justify-content-between">
         <div class="col-4 pt-1"><hr></div>
