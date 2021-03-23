@@ -10,7 +10,7 @@
       <div class="row">
           <div class="form-group col-md-4">
             <label for="programa">Programa (<span class="text-obligatorio">*</span>):</label>
-            <select class="form-control" id="programa" formControlName="programaid" [ngClass]="{'is-invalid': (formRecurso.get('programaid').invalid && submitted)}" (change)="listarTipoRecurso($event.target.value);esEmprender($event)" >
+            <select class="form-control" id="programa" formControlName="programaid" [ngClass]="{'is-invalid': (formRecurso.get('programaid').invalid && submitted)}" (change)="listarTipoRecurso($event.target.value);esEmprenderOrecrear($event)" >
               <option value="">Seleccione Programa</option>
               <option *ngFor="let programa of listaPrograma" value="{{programa.id}}">{{programa.nombre}}</option>
             </select>

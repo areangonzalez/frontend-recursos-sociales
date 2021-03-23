@@ -19,13 +19,19 @@
     { "id": 4, "nombre": "Micro Emprendimientos", "color": "#FFF637", "lista_tipo_recurso": [{"id":2, "nombre": "Empleo / Formación laboral"}] },
     { "id": 2, "nombre": "Río Negro Presente", "color": "#ABDF7D", "lista_tipo_recurso": [{"id":1, "nombre": "Alimentación"}, {"id":3, "nombre": "Mejoramiento habitacional"}] },
     { "id": 1, "nombre": "Subsidio", "color": "#FF6B37", "lista_tipo_recurso": [{"id":1, "nombre": "Alimentación"}, {"id":3, "nombre": "Mejoramiento habitacional"}] },
-    { "id": 6, "nombre": "Módulo Alimentar", "color": "#7DDEFF", "lista_tipo_recurso": [{"id":4, "nombre": "Emergencia"}] }
+    { "id": 6, "nombre": "Módulo Alimentar", "color": "#7DDEFF", "lista_tipo_recurso": [{"id":4, "nombre": "Emergencia"}] },
+    { "id": 6, "nombre": "Recrear", "color": "#A2AFFF", "lista_tipo_recurso": [{"id":5, "nombre": "Cultura"},{"id":6, "nombre": "Deporte"},{"id":7, "nombre": "Apoyo Escolar"},{"id":8, "nombre": "Ciencia y tecnología"},{"id":9, "nombre": "Otro"}] }
   ],
   "tipoRecursoSocials": [
       {"id":1, "nombre": "Alimentación"},
       {"id":2, "nombre": "Empleo / Formación laboral"},
       {"id":3, "nombre": "Mejoramiento habitacional"},
-      {"id":4, "nombre": "Emergencia"}
+      {"id":4, "nombre": "Emergencia"},
+      {"id":5, "nombre": "Cultura"},
+      {"id":6, "nombre": "Deporte"},
+      {"id":7, "nombre": "Apoyo Escolar"},
+      {"id":8, "nombre": "Ciencia y tecnología"},
+      {"id":9, "nombre": "Otro"}
   ],
   "estadisticaModuloAlimentar": [
     {

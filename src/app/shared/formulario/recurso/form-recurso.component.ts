@@ -23,7 +23,7 @@ export class FormRecursoComponent implements OnInit {
   public formRecurso: FormGroup;
   public programaLista: any = [];
   public listaTipoRecursoAux: any = [];
-  public emprender: boolean = false;
+  public emprenderOrecrear: boolean = false;
   public listaAlumnos = [];
   public submitted = false;
   public submittedMA = false;
@@ -239,9 +239,9 @@ export class FormRecursoComponent implements OnInit {
    * verifica si la seleccion del programa es emprender
    * @param event valor que obtiene del option de programa
    */
-  public esEmprender(event:any){
+  public esEmprenderOrecrear(event:any){
     // obtengo el nombre del programa
     let selectElementText = event.target['options'][event.target['options'].selectedIndex].text;
-    this.emprender = (selectElementText.toLowerCase() === "emprender") ? true : false;
+    this.emprenderOrecrear = (selectElementText.toLowerCase() === "emprender" || selectElementText.toLowerCase() === "recrear") ? true : false;
   }
 }
