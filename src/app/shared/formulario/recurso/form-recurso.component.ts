@@ -219,7 +219,7 @@ export class FormRecursoComponent implements OnInit {
       Object.assign(recurso, formulario.modulo_alimentar);
     }else{
       Object.assign(recurso, formulario.prestacion);
-      if (this.emprender){ // si es programa emprender
+      if (this.emprenderOrecrear){ // si es programa emprender
         if (this.listaAlumnos.length > 0){
           for (let i = 0; i < this.listaAlumnos.length; i++) {
             alumno.push({ alumnoid: this.listaAlumnos[i].id });
