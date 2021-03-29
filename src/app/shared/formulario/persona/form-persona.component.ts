@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from '@angular/router';
 import { UtilService } from 'src/app/core/utils';
 import { SexoService, GeneroService, EstadoCivilService, MensajesService, PersonaService } from 'src/app/core/services';
 import { PersonaModel } from 'src/app/core/models';

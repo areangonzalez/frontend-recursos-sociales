@@ -53,7 +53,7 @@ export class FormRecursoComponent implements OnInit {
         fecha_final: '',
         monto: ['', Validators.required],
         monto_mensual: '',
-        cuota: false
+        cuota: ['', Validators.required]
       }),
       modulo_alimentar: _fb.group({
         fechaAlta: ['', Validators.required],
@@ -97,6 +97,7 @@ export class FormRecursoComponent implements OnInit {
   public listarTipoRecurso(programaid:any) {
     this.formRecurso.controls.tipo_recursoid.setValue('');
     this.formRecurso.get('prestacion').reset();
+    this.formRecurso.get('prestacion').get('cuota').setValue('');
     this.formRecurso.get('modulo_alimentar').reset();
     this.formRecurso.get('modulo_alimentar').get('tipo_responsableid').setValue('');
     this.formRecurso.get('modulo_alimentar').get('responsable_entregaid').setValue('');
