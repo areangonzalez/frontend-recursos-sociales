@@ -13,6 +13,8 @@ export class PrestacionGeneralComponent implements OnInit {
   @Input("prestacion") public prestacion: FormGroup;
   @Input("submitted") public submitted: boolean;
 
+  public error_monto_mensual: boolean = false;
+
   constructor( private _utilService: UtilService, private _configNgbDate: NgbDatepickerConfig ){
     // configuro la fecha minima
     _configNgbDate.minDate = {year: 1900, month: 1, day: 1};
@@ -40,6 +42,16 @@ export class PrestacionGeneralComponent implements OnInit {
     if (!this._utilService.validarMoneda(moneda.value)) {
       moneda.value = moneda.value.substring(0, moneda.value.length -1);
     }
+  }
+  /**
+   * Se valida que el monto mensual no sea mayor a monto
+   * @param monto_mensual numero que proporciona el monto mensual
+   * @param monto numero que proporciona el monto
+   * @returns boolean devuelve falso/true para mostrar mensaje de error
+   */
+  public validarMontoMensual(monto_mensual: number, monto: number) {
+    monto = (monto) ? monto : 0;
+    return this.error_monto_mensual = (monto_mensual > monto) ? true : false;
   }
 
 }

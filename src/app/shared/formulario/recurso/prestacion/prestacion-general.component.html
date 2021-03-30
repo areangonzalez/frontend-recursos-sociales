@@ -31,7 +31,7 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">$</div>
               </div>
-              <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validarMoneda($event.target)" [ngClass]="{'is-invalid': (prestacion.get('monto').invalid && submitted)}">
+              <input type="text" id="monto" placeholder="Ej.: 1000" class="form-control" formControlName="monto" (keyup)="validarMoneda($event.target)" [ngClass]="{'is-invalid': (prestacion.get('monto').invalid && submitted)}" (change)="validarMontoMensual(prestacion.get('monto_mensual').value, $event.target.value)">
             </div>
             <div *ngIf="(prestacion.get('monto').invalid && submitted)" class="text-danger">
               <div *ngIf="prestacion.get('monto').hasError('required')">Por favor ingrese un monto. </div>
@@ -74,7 +74,10 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">$</div>
               </div>
-              <input type="text" id="monto_mensual" placeholder="Ej.: 1000" class="form-control" formControlName="monto_mensual" (keyup)="validarMoneda($event.target)">
+              <input type="text" id="monto_mensual" placeholder="Ej.: 1000" class="form-control" formControlName="monto_mensual" (keyup)="validarMoneda($event.target)" (change)="validarMontoMensual($event.target.value, prestacion.get('monto').value)" >
+            </div>
+            <div *ngIf="(error_monto_mensual)" class="text-danger">
+              <div>El monto mensual NO puede ser mayor al monto. </div>
             </div>
             <div *ngIf="((prestacion.get('cuota').value == 1) && submitted)" class="text-danger">
               <div>Por favor ingrese un monto mensual. </div>
