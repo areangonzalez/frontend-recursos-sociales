@@ -49,7 +49,7 @@ export class FormRecursoComponent implements OnInit {
         proposito: ['', Validators.required],
         fechaAlta: ['', Validators.required],
         fecha_alta: '',
-        fechaFinal: ['', Validators.required],
+        fechaFinal: '',
         fecha_final: '',
         monto: ['', Validators.required],
         monto_mensual: '',
@@ -183,6 +183,7 @@ export class FormRecursoComponent implements OnInit {
   public validarForm(){
     this.submitted = true;
     let recurso: object = {};
+    let noError = true;
 
     switch (this.programaSeleccionadoId.toString()) {
       case '6':
@@ -199,12 +200,41 @@ export class FormRecursoComponent implements OnInit {
       default:
         this.submittedMA = false;
         this.submittedPrestacion = true;
+        // validacion de formulario de prestacion
         if (this.formRecurso.get('prestacion').invalid) {
+          noError = false;
           this._mensajeService.cancelado("Campos sin completar!! Por favor verifique el formulario.", [{name:''}]);
           return;
-        }else{
-          recurso = this.armarParametrosPrestacion(this.formRecurso.value, false);
+        }
+        let monto_mensual = this.formRecurso.get("prestacion").get("monto_mensual").value;
+        monto_mensual = (monto_mensual == null || monto_mensual == '') ? true : parseFloat(monto_mensual); // si es true es para marcar error
+        let fechaFinal: boolean = (this.formRecurso.get("prestacion").get("fechaFinal").value == null) ? true : false;
+        let monto = parseFloat(this.formRecurso.get("prestacion").get("monto").value);
 
+        console.log(fechaFinal);
+        // valido si esta en cuotas
+        if ((this.formRecurso.get("prestacion").get("cuota").value == 1) && fechaFinal) {
+            noError = false;
+            this._mensajeService.cancelado("Campos sin completar!! Por favor verifique el formulario.", [{name:''}]);
+            return;
+        }
+
+        if ((this.formRecurso.get("prestacion").get("cuota").value == 1) && monto_mensual == true) {
+          noError = false;
+          this._mensajeService.cancelado("Campos sin completar!! Por favor verifique el formulario.", [{name:''}]);
+          return;
+        }
+
+        // valido que monto mensual no sea mayor a monto
+        if ((this.formRecurso.get("prestacion").get("cuota").value == 1) && (monto_mensual > monto)){
+          noError = false;
+          this._mensajeService.cancelado("Por favor verifique que monto mensual NO sea mayor a monto.", [{name:''}]);
+          return;
+        }
+        console.log(noError);
+
+        if (noError) {
+          recurso = this.armarParametrosPrestacion(this.formRecurso.value, false);
           this.obtenerDatos.emit(recurso);
         }
         break;

@@ -49,9 +49,19 @@ export class PrestacionGeneralComponent implements OnInit {
    * @param monto numero que proporciona el monto
    * @returns boolean devuelve falso/true para mostrar mensaje de error
    */
-  public validarMontoMensual(monto_mensual: number, monto: number) {
+  public validarMontoMensual(monto_mensual: any, monto: any) {
     monto = (monto) ? monto : 0;
-    return this.error_monto_mensual = (monto_mensual > monto) ? true : false;
+    monto_mensual = (monto_mensual) ? monto_mensual : 0;
+
+    return this.error_monto_mensual = (parseFloat(monto_mensual) > parseFloat(monto)) ? true : false;
+  }
+
+  public notificarErrorMontoMensual() {
+    if (this.prestacion.get("monto_mensual").value == null || this.prestacion.get("monto_mensual").value == '') {
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }
