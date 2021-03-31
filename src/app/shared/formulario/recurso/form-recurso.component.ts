@@ -211,14 +211,13 @@ export class FormRecursoComponent implements OnInit {
         let fechaFinal: boolean = (this.formRecurso.get("prestacion").get("fechaFinal").value == null) ? true : false;
         let monto = parseFloat(this.formRecurso.get("prestacion").get("monto").value);
 
-        console.log(fechaFinal);
         // valido si esta en cuotas
         if ((this.formRecurso.get("prestacion").get("cuota").value == 1) && fechaFinal) {
             noError = false;
             this._mensajeService.cancelado("Campos sin completar!! Por favor verifique el formulario.", [{name:''}]);
             return;
         }
-
+        // se valida si monto mensual tiene algun valor
         if ((this.formRecurso.get("prestacion").get("cuota").value == 1) && monto_mensual == true) {
           noError = false;
           this._mensajeService.cancelado("Campos sin completar!! Por favor verifique el formulario.", [{name:''}]);
@@ -231,7 +230,6 @@ export class FormRecursoComponent implements OnInit {
           this._mensajeService.cancelado("Por favor verifique que monto mensual NO sea mayor a monto.", [{name:''}]);
           return;
         }
-        console.log(noError);
 
         if (noError) {
           recurso = this.armarParametrosPrestacion(this.formRecurso.value, false);

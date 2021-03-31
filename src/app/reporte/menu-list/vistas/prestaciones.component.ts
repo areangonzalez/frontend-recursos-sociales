@@ -123,7 +123,7 @@ export class PrestacionesComponent implements OnInit {
       this.configPaginacion.colleccionSize = prestacion.total_filtrado;
       this.configPaginacion.pageSize = prestacion.pagesize;
       this.configPaginacion.monto_acreditado = prestacion.monto_acreditado;
-      this.configPaginacion.monto_baja = prestacion.monto_baja;
+      /* this.configPaginacion.monto_baja = prestacion.monto_baja; */
       this.configPaginacion.monto_sin_acreditar = prestacion.monto_sin_acreditar;
       this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, prestacion.total_filtrado, prestacion.pagesize);
       this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, prestacion.total_filtrado, prestacion.pagesize);

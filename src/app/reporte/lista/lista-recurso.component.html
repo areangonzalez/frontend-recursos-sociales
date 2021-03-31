@@ -14,10 +14,10 @@
         <span ngbTooltip="Monto acreditado" class="text-success">
           MA: {{configPaginacion.monto_acreditado | currency:'USD':'symbol-narrow':'2.2'}}
         </span>
-        &nbsp;|&nbsp;
+        <!-- &nbsp;|&nbsp;
         <span ngbTooltip="Monto baja" class="text-danger">
           MB: {{configPaginacion.monto_baja | currency:'USD':'symbol-narrow':'2.2'}}
-        </span>
+        </span> -->
       </div>
     </div>
     <div class="row pl-3 pr-3">
@@ -41,6 +41,7 @@
               <i *ngIf="(ordenarColumna == 'monto')" class="fas fa-sort-up" ngbTooltip="Ascendente" ></i>
               <i *ngIf="(ordenarColumna == '-monto')" class="fas fa-sort-down" ngbTooltip="Descendente" ></i>
             </th>
+            <th class="text-center" scope="col">Monto Acreditado</th>
             <th></th>
           </tr>
         </thead>
@@ -71,6 +72,7 @@
             <td class="text-center">{{recurso.programa}}</td>
             <td>{{recurso.proposito}}</td>
             <td class="text-center">{{recurso.monto | currency:'USD':'symbol-narrow':'2.2'}}</td>
+            <td class="text-center">{{recurso.monto_acreditado | currency:'USD':'symbol-narrow':'2.2'}}</td>
             <td>
               <div class="btn-group">
                 <modal-info-persona-prestacion-component class="btn-group" [recursoid]="recurso.id" [recursos]="recursosLista" (cambioEstado)="actualizarLista($event)"></modal-info-persona-prestacion-component>
