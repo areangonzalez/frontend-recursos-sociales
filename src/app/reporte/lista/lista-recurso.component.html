@@ -76,7 +76,7 @@
             <td>
               <div class="btn-group">
                 <modal-info-persona-prestacion-component class="btn-group" [recursoid]="recurso.id" [recursos]="recursosLista" (cambioEstado)="actualizarLista($event)"></modal-info-persona-prestacion-component>
-                <modal-acreditar-component class="btn-group" *ngIf="(!recurso.acreditacion && !recurso.baja)" [recursoid]="recurso.id" (obtenerRecurso)="actualizarLista($event)" ngbTooltip="Acreditar prestación"></modal-acreditar-component>
+                <modal-acreditar-component class="btn-group" *ngIf="(!recurso.acreditacion && !recurso.baja)" [recursoid]="recurso.id" [recursoCuota]="datosCuota(recurso)" (obtenerRecurso)="actualizarLista($event)" ngbTooltip="Acreditar prestación"></modal-acreditar-component>
                 <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" *ngIf="(!recurso.baja)" [recursoid]="recurso.id" (obtenerRecurso)="actualizarLista($event)" ></modal-baja-component>
               </div>
             </td>

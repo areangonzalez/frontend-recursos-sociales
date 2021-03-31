@@ -66,4 +66,16 @@ export class ListaRecursoComponent implements OnInit {
     this.ordenarColumna = (this.ordenarColumna != "fecha_alta") ? this.ordenarColumna = "fecha_alta" : this.ordenarColumna = "-fecha_alta";
     this.ordenar.emit(this.ordenarColumna);
   }
+
+  public datosCuota(recurso: any) {
+    let cuota: any = {};
+    cuota["cuota"] = recurso.cuota;
+    cuota["cant_cuota"] = recurso.cant_cuota + 1;
+    cuota["monto"] = recurso.monto;
+    cuota["monto_mensual"] = recurso.monto_mensual;
+    cuota["monto_acreditado"] = recurso.monto_acreditado;
+    cuota["monto_resto"] = recurso.monto_resto;
+
+    return cuota;
+  }
 }

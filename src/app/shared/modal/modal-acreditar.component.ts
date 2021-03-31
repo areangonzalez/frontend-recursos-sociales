@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilService } from 'src/app/core/utils';
@@ -8,8 +8,9 @@ import { RecursoSocialService, MensajesService } from 'src/app/core/services';
   selector: 'modal-acreditar-content',
   templateUrl: './modal-acreditar.content.html'
 })
-export class ModalAcreditarContent {
+export class ModalAcreditarContent implements OnInit{
   @Input("recursoid") public recursoid: any;
+  @Input("recursoCuota") public recursoCuota: any;
   public formAcreditar: FormGroup;
   public submitted: boolean = false;
   private fecha_acreditacion: string;
@@ -23,11 +24,23 @@ export class ModalAcreditarContent {
     private _mensajeService: MensajesService
   ) {
     this.formAcreditar = _fb.group({
-      fechaAcreditacion: ['', Validators.required]
+      fechaAcreditacion: ['', Validators.required],
+      monto_mensual: ''
     });
   }
 
-  get form(){return this.formAcreditar.controls;}
+  ngOnInit() {
+    this.formAcreditar.patchValue({"fechaAcreditacion": this.fechaHoy()})
+    if (this.recursoCuota.cuota) {
+      this.formAcreditar.patchValue({"monto_mensual": this.recursoCuota.monto_mensual});
+    }
+  }
+
+  public fechaHoy() {
+    let fecha = new Date();
+    let hoy: any = { year: fecha.getFullYear(), month: (fecha.getMonth() + 1), day: fecha.getDate() };
+    return hoy;
+  }
 
   /**
    * Envio el id de persona al componente padre del modal-content
@@ -79,6 +92,7 @@ export class ModalAcreditarComponent {
    * @function {Object} devuelve los datos de la persona
    */
   @Input("recursoid") public recursoid: any;
+  @Input("recursoCuota") public recursoCuota: any;
   @Output("obtenerRecurso") public obtenerRecurso = new EventEmitter();
 
   constructor(
@@ -92,6 +106,7 @@ export class ModalAcreditarComponent {
   open() {
     const modalRef = this.modalService.open(ModalAcreditarContent, {  centered: true });
     modalRef.componentInstance.recursoid = this.recursoid;
+    modalRef.componentInstance.recursoCuota = this.recursoCuota;
     modalRef.result.then(
       (result) => {
         if (result == 'closed'){
