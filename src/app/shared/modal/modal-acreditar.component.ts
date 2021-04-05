@@ -14,6 +14,7 @@ export class ModalAcreditarContent implements OnInit{
   public formAcreditar: FormGroup;
   public submitted: boolean = false;
   private fecha_acreditacion: string;
+  public errorMonto: boolean = false;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -25,14 +26,16 @@ export class ModalAcreditarContent implements OnInit{
   ) {
     this.formAcreditar = _fb.group({
       fechaAcreditacion: ['', Validators.required],
-      monto_mensual: ''
+      monto: ['', Validators.required]
     });
   }
 
   ngOnInit() {
     this.formAcreditar.patchValue({"fechaAcreditacion": this.fechaHoy()})
     if (this.recursoCuota.cuota) {
-      this.formAcreditar.patchValue({"monto_mensual": this.recursoCuota.monto_mensual});
+      this.formAcreditar.patchValue({"monto": this.recursoCuota.monto});
+    }else {
+      this.formAcreditar.patchValue({"monto": this.recursoCuota.monto_resto});
     }
   }
 
@@ -43,17 +46,34 @@ export class ModalAcreditarContent implements OnInit{
   }
 
   /**
+   * valido que la moneda sea numero
+   * @param moneda valor a verificar
+   */
+   public validarMoneda(moneda) {
+    if (!this._utilService.validarMoneda(moneda.value)) {
+      moneda.value = moneda.value.substring(0, moneda.value.length -1);
+    }
+  }
+
+  /**
    * Envio el id de persona al componente padre del modal-content
    * @param recursoid identificador de la persona que ha sido guardada
    */
   public guardar() {
     this.submitted = true;
+    this.errorMonto = false;
+
+    if (parseFloat(this.formAcreditar.get("monto").value) > parseFloat(this.recursoCuota.monto_total)) {
+      this.errorMonto = true;
+      this._mensajeService.cancelado("El monto no puede ser mayor al monto total.", [{name:''}]);
+      return;
+    }
 
     if (this.formAcreditar.invalid) {
-      this._mensajeService.cancelado("No se ha ingresado ninguna fecha de acreditación", [{name:''}]);
+      this._mensajeService.cancelado("Campos sin Completar", [{name:''}]);
       return;
     }else{
-      let param = {fecha_acreditacion: this.FormatFecha(this.formAcreditar.value.fechaAcreditacion)}
+      let param = {fecha_acreditacion: this.FormatFecha(this.formAcreditar.value.fechaAcreditacion), monto: this.formAcreditar.get("monto").value}
       this._recursoService.acreditar(param, this.recursoid).subscribe(
         result => {
           this._mensajeService.exitoso('Se ha confirmado la acreditación.', [{name:''}]);

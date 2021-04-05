@@ -28,7 +28,7 @@
               <tbody>
                 <tr>
                   <th class="text-left">Monto total:</th>
-                  <td class="text-right">{{recursoCuota.monto | currency:'USD':'symbol-narrow':'2.2'}}</td>
+                  <td class="text-right">{{recursoCuota.monto_total | currency:'USD':'symbol-narrow':'2.2'}}</td>
                 </tr>
                 <tr *ngIf="recursoCuota.cuota" >
                   <th class="text-left">Acreditado:</th>
@@ -45,9 +45,22 @@
               </tbody>
             </table>
           </div>
-          <div class="form-group">
-            <label for="monto_mensual" class="prioridad">Monto de la cuota</label>
-            <input type="text" class="form-control" formControlName="monto_mensual" placeholder="Ej.: 5000.00">
+          <div class="form-group col-md-12" >
+            <label for="monto" class="prioridad">Monto (<span>*</span>):</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">$</div>
+              </div>
+              <input type="text" id="monto" class="form-control" formControlName="monto" placeholder="Ej.: 5000.00"
+              (keyup)="validarMoneda($event.target);"
+              [ngClass]="{'is-invalid': ((formAcreditar.get('monto').invalid && submitted) || errorMonto)}">
+            </div>
+            <div *ngIf="(formAcreditar.get('monto').invalid && submitted)" class="text-danger">
+              <div *ngIf="formAcreditar.get('monto').hasError('required')">Por favor ingrese un monto. </div>
+            </div>
+            <div *ngIf="(errorMonto && submitted)" class="text-danger">
+              <div>El monto NO puede ser mayor al monto total. </div>
+            </div>
           </div>
         </fieldset>
     </form>
