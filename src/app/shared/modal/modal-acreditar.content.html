@@ -22,7 +22,7 @@
                 <div *ngIf="formAcreditar.get('fechaAcreditacion').hasError('required')">Por favor, ingrese una fecha. </div>
             </div>
         </div>
-        <fieldset *ngIf="recursoCuota.cuota">
+        <fieldset>
           <div class="d-flex justify-content-center mt-3">
             <table class="table table-sm col-6">
               <tbody>
@@ -30,7 +30,7 @@
                   <th class="text-left">Monto total:</th>
                   <td class="text-right">{{recursoCuota.monto | currency:'USD':'symbol-narrow':'2.2'}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="recursoCuota.cuota" >
                   <th class="text-left">Acreditado:</th>
                   <td class="text-right text-success">{{recursoCuota.monto_acreditado | currency:'USD':'symbol-narrow':'2.2'}}</td>
                 </tr>
@@ -38,7 +38,7 @@
                   <th class="text-left">Sin acreditar:</th>
                   <td class="text-right">{{recursoCuota.monto_resto | currency:'USD':'symbol-narrow':'2.2'}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="recursoCuota.cuota">
                   <th class="text-left">Nro Cuota:</th>
                   <td class="text-right">{{recursoCuota.cant_cuota}}</td>
                 </tr>
