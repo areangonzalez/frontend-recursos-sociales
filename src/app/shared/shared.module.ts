@@ -11,7 +11,7 @@ import { FormLugarComponent } from "./formulario/lugar";
 import { FormContactoComponent, FormRedSocialComponent } from "./formulario/contacto";
 import { PrestacionGeneralComponent, ModuloAlimentarComponent, FormRecursoComponent } from "./formulario/recurso";
 import { FormGrupoFamiliarComponent } from "./formulario/grupo-familiar";
-import { ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent } from './lista';
+import { ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent, ListaCuotaComponent } from './lista';
 import { VistaHeaderComponent, VistaBodyPrestacionGeneralComponent, VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent } from "./vista";
 import {
   ModalFormPersonaComponent, ModalFormPersonaContent,
@@ -46,7 +46,7 @@ import { ProgramaComponent } from "./programa";
       FormContactoComponent, FormRedSocialComponent,
       FormPersonaComponent,
       PrestacionGeneralComponent, ModuloAlimentarComponent, FormRecursoComponent,
-      ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent,
+      ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent, ListaCuotaComponent,
       VistaHeaderComponent, VistaBodyPrestacionGeneralComponent, VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent,
       ModalFormPersonaComponent, ModalFormPersonaContent,
       ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
@@ -59,7 +59,7 @@ import { ProgramaComponent } from "./programa";
       ProgramaComponent,
       FormGrupoFamiliarComponent,
       ModalGrupoFamiliarComponent, ModalGrupoFamiliarContent,
-      ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent, VistaBodyPrestacionGeneralComponent
+      ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent
     ],
     exports: [
         CommonModule,
@@ -72,7 +72,7 @@ import { ProgramaComponent } from "./programa";
         FormContactoComponent, FormRedSocialComponent,
         FormPersonaComponent,
         PrestacionGeneralComponent, ModuloAlimentarComponent, FormRecursoComponent,
-        ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent,
+        ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent, ListaCuotaComponent,
         VistaHeaderComponent, VistaBodyPrestacionGeneralComponent, VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent,
         ModalFormPersonaComponent, ModalFormPersonaContent,
         ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
