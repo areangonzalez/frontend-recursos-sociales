@@ -18,10 +18,7 @@ export class VistaInfoPrestacionesComponent implements OnInit {
     configTooltip.triggers = 'hover';
   }
 
-  ngOnInit() {
-    console.log(this.recursos);
-
-  }
+  ngOnInit() {}
 
   mostrarFA(estado:any, i:number){
     this.recursos[i].acreditacion = (estado == true) ? true : false;

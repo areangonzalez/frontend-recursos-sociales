@@ -11,4 +11,13 @@
       </div>
     </ng-template>
   </ngb-tab>
+  <ngb-tab *ngIf="(recurso.cuota)" title="Cuotas">
+    <ng-template  ngbTabContent>
+      <div class="card border-light p-2">
+        <div class="card-body">
+          <h2>Cuotas</h2>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
 </ngb-tabset>

@@ -2,14 +2,31 @@
     <ngb-tab *ngFor="let recurso of recursos">
       <ng-template ngbTabTitle>{{recurso.programa}} <span class='badge badge-info'>{{recurso.recurso_cantidad}}</span></ng-template>
         <ng-template  ngbTabContent >
-            <div class="card border-light p-2" *ngFor="let prestacion of recurso.recursos; let i = index;">
-              <div class="card-header">
-                <shared-vista-header [recurso]="prestacion"></shared-vista-header>
-              </div>
-                <div class="card-body">
-                  <shared-vista-body-prestacion-general [recurso]="prestacion"></shared-vista-body-prestacion-general>
-                </div>
-              </div>
+          <div class="card border-light p-2" *ngFor="let prestacion of recurso.recursos; let i = index;">
+            <ngb-tabset type="tabs" [justify]="'start'">
+              <ngb-tab title="Datos">
+                <ng-template  ngbTabContent>
+                  <div class="card border-light p-2">
+                    <div class="card-header">
+                      <shared-vista-header [recurso]="prestacion"></shared-vista-header>
+                    </div>
+                    <div class="card-body">
+                      <shared-vista-body-prestacion-general [recurso]="prestacion"></shared-vista-body-prestacion-general>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab *ngIf="(prestacion.cuota)" title="Cuotas">
+                <ng-template  ngbTabContent>
+                  <div class="card border-light p-2">
+                    <div class="card-body">
+                      <h2>Cuotas</h2>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
         </ng-template>
     </ngb-tab>
-  </ngb-tabset>
+</ngb-tabset>
