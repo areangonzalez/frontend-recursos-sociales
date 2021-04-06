@@ -19,6 +19,8 @@ export class VistaInfoPrestacionesComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.recursos);
+
   }
 
   mostrarFA(estado:any, i:number){

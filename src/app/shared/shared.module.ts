@@ -12,7 +12,7 @@ import { FormContactoComponent, FormRedSocialComponent } from "./formulario/cont
 import { PrestacionGeneralComponent, ModuloAlimentarComponent, FormRecursoComponent } from "./formulario/recurso";
 import { FormGrupoFamiliarComponent } from "./formulario/grupo-familiar";
 import { ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent } from './lista';
-import { VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent } from "./vista";
+import { VistaHeaderComponent, VistaBodyPrestacionGeneralComponent, VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent } from "./vista";
 import {
   ModalFormPersonaComponent, ModalFormPersonaContent,
   ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
@@ -47,7 +47,7 @@ import { ProgramaComponent } from "./programa";
       FormPersonaComponent,
       PrestacionGeneralComponent, ModuloAlimentarComponent, FormRecursoComponent,
       ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent,
-      VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent,
+      VistaHeaderComponent, VistaBodyPrestacionGeneralComponent, VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent,
       ModalFormPersonaComponent, ModalFormPersonaContent,
       ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
       ModalAcreditarComponent, ModalAcreditarContent, ModalConfirmarCanceladoAcreditarContent,
@@ -59,7 +59,7 @@ import { ProgramaComponent } from "./programa";
       ProgramaComponent,
       FormGrupoFamiliarComponent,
       ModalGrupoFamiliarComponent, ModalGrupoFamiliarContent,
-      ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent
+      ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent, VistaBodyPrestacionGeneralComponent
     ],
     exports: [
         CommonModule,
@@ -73,7 +73,7 @@ import { ProgramaComponent } from "./programa";
         FormPersonaComponent,
         PrestacionGeneralComponent, ModuloAlimentarComponent, FormRecursoComponent,
         ListaPersonaComponent, ListaRedSocialComponent, ListaGrupoFamiliarComponent,
-        VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent,
+        VistaHeaderComponent, VistaBodyPrestacionGeneralComponent, VistaInfoPersonaComponent, VistaInfoRecursoComponent, VistaInfoPrestacionesComponent,
         ModalFormPersonaComponent, ModalFormPersonaContent,
         ModalInfoPersonaPrestacionComponent, ModalInfoPersonaPrestacionContent,
         ModalAcreditarComponent, ModalAcreditarContent, ModalConfirmarCanceladoAcreditarContent,
