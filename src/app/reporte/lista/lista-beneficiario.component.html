@@ -14,10 +14,6 @@
     <span ngbTooltip="Monto acreditado" class="text-success">
       MA: {{configPaginacion.monto_acreditado | currency:'USD':'symbol-narrow':'2.2'}}
     </span>
-    &nbsp;|&nbsp;
-    <span ngbTooltip="Monto baja" class="text-danger">
-      MB: {{configPaginacion.monto_baja | currency:'USD':'symbol-narrow':'2.2'}}
-    </span>
   </div>
 </div>
 <div class="row pl-3 pr-3">
@@ -26,14 +22,10 @@
       <tr>
         <th scope="col">Nro Doc</th>
         <th colspan="2" scope="col">Apellido y nombre</th>
-        <!-- <th></th> -->
         <th class="text-center" scope="col">Localidad</th>
         <th class="text-center" scope="col">Monto acreditado (Cant)</th>
-        <th class="text-center" scope="col">Monto baja (Cant)</th>
         <th class="text-center" scope="col">Monto sin acreditar (Cant)</th>
-        <!-- <th scope="col">Propósito</th>
-        <th class="text-center" scope="col">Programa</th> -->
-        <th></th>
+        <th class="ancho-fijo-col"></th>
       </tr>
     </thead>
     <tbody *ngIf="(beneficiariosLista.length == 0)">
@@ -60,9 +52,8 @@
         </td>
         <td class="text-center">{{ (beneficiario.persona.lugar != undefined) ? beneficiario.persona.lugar.localidad : " - "}}</td>
         <td class="text-center">{{beneficiario.monto_acreditado | currency:'USD':'symbol-narrow':'2.2'}} ({{beneficiario.recurso_acreditado_cantidad}})</td>
-        <td class="text-center">{{beneficiario.monto_baja | currency:'USD':'symbol-narrow':'2.2'}} ({{beneficiario.recurso_baja_cantidad}})</td>
         <td class="text-center">{{beneficiario.monto_sin_acreditar | currency:'USD':'symbol-narrow':'2.2'}} ({{beneficiario.recurso_sin_acreditar_cantidad}})</td>
-        <td>
+        <td class="ancho-fijo-col">
           <div class="btn-group">
             <modal-info-beneficiario-component [beneficiarioid]="beneficiario.personaid" (cambioEstado)="actualizarLista($event)"></modal-info-beneficiario-component>
           </div>
