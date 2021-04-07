@@ -49,8 +49,8 @@ export class FormRecursoComponent implements OnInit {
         proposito: ['', Validators.required],
         fechaAlta: ['', Validators.required],
         fecha_alta: '',
-        fechaFinal: '',
-        fecha_final: '',
+        actividadFechaFinal: '',
+        actividad_fecha_final: '',
         monto: ['', Validators.required],
         monto_mensual: '',
         cuota: ['', Validators.required]
