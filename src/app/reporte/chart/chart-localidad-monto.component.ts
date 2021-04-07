@@ -40,10 +40,8 @@ export class ChartLocalidadMontoComponent implements OnInit {
           this.chart.data.labels.push(localidad[i].localidad);
           // monto acreditado
           this.chart.data.datasets[0].data.push(localidad[i].monto_acreditado);
-          // monto baja
-          this.chart.data.datasets[1].data.push(localidad[i].monto_baja);
           // monto sin acreditar
-          this.chart.data.datasets[2].data.push(localidad[i].monto_sin_acreditar);
+          this.chart.data.datasets[1].data.push(localidad[i].monto_sin_acreditar);
           //actualizo el grafico
           this.chart.update();
         });
@@ -61,12 +59,6 @@ export class ChartLocalidadMontoComponent implements OnInit {
             label: 'Acreditado',
             data: [],
             backgroundColor: 'green',
-            // fill: false
-          },
-          {
-            label: 'Baja',
-            data: [],
-            backgroundColor: 'red',
             // fill: false
           },
           {
@@ -105,9 +97,6 @@ export class ChartLocalidadMontoComponent implements OnInit {
           xAxes: [{
             barPercentage: 0.5,
             stacked: false,
-            /* gridLines: {
-                offsetGridLines: true
-            } */
           }],
           yAxes: [{
             stacked: false,

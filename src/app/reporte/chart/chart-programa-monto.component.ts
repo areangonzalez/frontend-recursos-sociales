@@ -30,12 +30,10 @@ export class ChartProgramaMontoComponent implements OnInit {
 
       programa.forEach((val, i) => {
         this.chart.data.labels.push(programa[i].nombre);
-        // baja
-        this.chart.data.datasets[0].data.push(programa[i].monto_baja);
         // acreditado
-        this.chart.data.datasets[1].data.push(programa[i].monto_acreditado);
+        this.chart.data.datasets[0].data.push(programa[i].monto_acreditado);
         // sin acreditar
-        this.chart.data.datasets[2].data.push(programa[i].monto_sin_acreditar);
+        this.chart.data.datasets[1].data.push(programa[i].monto_sin_acreditar);
         this.chart.update();
       });
     }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
@@ -47,19 +45,13 @@ export class ChartProgramaMontoComponent implements OnInit {
       data: {
         labels: [],
         datasets: [
-          {
-            label: 'Baja',
-            data: [],
-            backgroundColor: 'red',
-            fill: false
-          },
-          {
+          { // index 0
             label: 'Acreditado',
             data: [],
             backgroundColor: 'green',
             fill: false
           },
-          {
+          { // index 1
             label: 'Sin acreditar',
             data: [],
             backgroundColor: 'gray',
