@@ -58,6 +58,7 @@ export class BusquedaRecursoComponent implements OnInit {
       fecha_alta_hasta: '',
       fechaAltaHasta: null,
       estado: '',
+      mes: ''
   });
   }
 
