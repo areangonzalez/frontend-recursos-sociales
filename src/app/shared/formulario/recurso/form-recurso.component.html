@@ -43,8 +43,8 @@
       <modulo-alimentar *ngIf="(programaSeleccionadoId != '' && programaSeleccionadoId == '6')" [listaTipoResponsable]="listaTipoResponsable" [prestacionModuloAlimentar]="formRecurso.get('modulo_alimentar')" [submitted]="submittedMA"></modulo-alimentar>
       <div class="row">
         <div class="form-group col-md-12" *ngIf="(emprenderOrecrear)">
-          <label for="observacion">Lugar de capacitación:</label>
-          <input type="text" class="form-control" formControlName="lugar_capacitacion" placeholder="lugar de capacitacion...">
+          <label for="actividadCapacitacion">Lugar de capacitación:</label>
+          <input id="actividadCapacitacion" type="text" class="form-control" formControlName="actividad_capacitacion" placeholder="lugar de capacitacion...">
         </div>
         <div class="form-group col-md-12">
           <label for="observacion">Observación:</label>

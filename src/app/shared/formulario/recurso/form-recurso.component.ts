@@ -64,7 +64,7 @@ export class FormRecursoComponent implements OnInit {
         responsable_entregaid: ['', Validators.required],
         monto: ['', Validators.required]
       }),
-      lugar_capacitacion: '',
+      actividad_capacitacion: '',
       observacion: ''
     });
   }
