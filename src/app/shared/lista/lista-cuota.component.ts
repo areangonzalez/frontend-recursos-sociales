@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MensajesService } from './../../core/services';
+import { MensajesService, CuotaService } from './../../core/services';
 
 @Component({
   selector: 'shared-lista-cuota',
@@ -8,13 +8,14 @@ import { MensajesService } from './../../core/services';
 })
 export class ListaCuotaComponent {
 
-  constructor(private _msj: MensajesService) { }
+  constructor(private _msj: MensajesService, private _cuotaService: CuotaService) { }
 
   borrarCuota(confirmacion: boolean, id: number) {
     if (confirmacion) {
-      // servicio de borrado
-
-      this._msj.exitoso("Se ha borrado la cuota!", [{name: ''}]);
+      this._cuotaService.borrar(id).subscribe(
+        respuesta => {
+          this._msj.exitoso("Se ha borrado la cuota!", [{name: ''}]);
+        }, error => { this._msj.cancelado(error, [{name:''}]); })
     }
   }
 

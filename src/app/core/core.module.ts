@@ -31,7 +31,8 @@ import {
   DelegacionService,
   ConfiguracionParaPaginarService,
   UsuarioService, PermisosService, RolService,
-  SoporteService
+  SoporteService,
+  CuotaService
 } from './services';
 
 import { UtilService } from "./utils";
@@ -71,7 +72,8 @@ import { UtilService } from "./utils";
     DelegacionService,
     ConfiguracionParaPaginarService,
     UsuarioService, PermisosService, RolService,
-    SoporteService
+    SoporteService,
+    CuotaService
   ],
   declarations: []
 })

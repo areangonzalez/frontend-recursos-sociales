@@ -28,3 +28,4 @@ export * from './usuario.service';
 export * from './permisos.service';
 export * from './rol.service';
 export * from './soporte.service';
+export * from './cuota.service';
