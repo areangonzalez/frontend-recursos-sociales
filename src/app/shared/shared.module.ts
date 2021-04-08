@@ -23,7 +23,8 @@ import {
   ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
   ModalConfirmacionDescargaComponent, ModalConfirmacionDescargaContent,
   ModalGrupoFamiliarComponent, ModalGrupoFamiliarContent,
-  ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent
+  ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent,
+  BorrarCuotaContent, BorrarCuotaComponent
 } from "./modal";
 import { ProgramaComponent } from "./programa";
 
@@ -59,7 +60,8 @@ import { ProgramaComponent } from "./programa";
       ProgramaComponent,
       FormGrupoFamiliarComponent,
       ModalGrupoFamiliarComponent, ModalGrupoFamiliarContent,
-      ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent
+      ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent,
+      BorrarCuotaContent, BorrarCuotaComponent
     ],
     exports: [
         CommonModule,
@@ -85,7 +87,8 @@ import { ProgramaComponent } from "./programa";
         ProgramaComponent,
         FormGrupoFamiliarComponent,
         ModalGrupoFamiliarComponent, ModalGrupoFamiliarContent,
-        ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent
+        ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent,
+        BorrarCuotaContent, BorrarCuotaComponent
     ],
     entryComponents: [
       ModalFormPersonaComponent, ModalFormPersonaContent,
@@ -97,7 +100,8 @@ import { ProgramaComponent } from "./programa";
       ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
       ModalConfirmacionDescargaComponent, ModalConfirmacionDescargaContent,
       ModalGrupoFamiliarComponent, ModalGrupoFamiliarContent,
-      ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent
+      ModalBorrarMiembroGrupoFamiliarComponent, ModalBorrarMiembroGrupoFamiliarContent,
+      BorrarCuotaContent, BorrarCuotaComponent
     ]
 })
 export class SharedModule { }
