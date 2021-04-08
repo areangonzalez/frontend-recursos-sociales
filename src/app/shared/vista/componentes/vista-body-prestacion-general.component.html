@@ -75,6 +75,20 @@
       </dl>
     </div>
   </div>
+  <div *ngIf="recurso.cuota" class="row">
+    <div class="col-md-4">
+      <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Finalización de actividad:</dt>
+        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{recurso.actividad_fecha_final | date:'dd/MM/yyyy'}}</dd>
+      </dl>
+    </div>
+    <div class="col-md-8">
+      <dl class="row">
+        <dt class="col-3 col-sm-3 col-md-3 col-lg-3" style="margin-left: 0.8rem;">Lugar de Capacitación:</dt>
+        <dd class="col-4 col-sm-8 col-md-8 col-lg-8">{{recurso.actividad_capacitacion}}</dd>
+      </dl>
+    </div>
+  </div>
   <div class="row" *ngIf="(recurso.baja)">
     <div class="col-md-12">
       <dl class="row">
