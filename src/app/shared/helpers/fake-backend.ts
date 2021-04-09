@@ -86,6 +86,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let comisionesDeFomento = (<any>data).comisionesDeFomento;
         let delegaciones = (<any>data).delegaciones;
         let estadistcasModuloAlimentar = (<any>data).estadisticaModuloAlimentar;
+        let cuotas = (<any>data).cuotas;
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -1306,6 +1307,44 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // GET TIPO RESPONSABLES
             if (request.url.endsWith('/apimock/tipo-responsables') && request.method === 'GET') {
               return of(new HttpResponse({ status: 200, body: tipoResponsable }));
+            }
+            // GET CUOTAS
+            if (request.url.endsWith('/apimock/cuotas') && request.method === 'GET') {
+              let recursoid = request.params.get('recursoid');
+              if (localStorage.getItem("listaCuotas") !== undefined) {
+                cuotas = localStorage.getItem("listaCuotas");
+              }
+
+              let cuotaEncontradas = cuotas.filter(cuota => { return cuota.recursoid === recursoid });
+              if (recursoid != undefined) {
+                return of(new HttpResponse({ status: 200, body: cuotaEncontradas }));
+              }else {
+                return of(new HttpResponse({ status: 200, body: [] }));
+              }
+            }
+
+            // DELETE CUOTAS
+            if (request.url.match(/\/apimock\/cuotas\/\d+$/) && request.method === 'DELETE') {
+              let urlParts = request.url.split('/');
+              let id = parseInt(urlParts[urlParts.length - 1]);
+              if (localStorage.getItem("listaCuotas") !== undefined) {
+                cuotas = localStorage.getItem("listaCuotas");
+              }
+
+              for (let i = 0; i < cuotas.length; i++) {
+                if (cuotas[i].id === id) {
+                  cuotas.splice(i, 1);
+                }
+              }
+
+              localStorage.setItem("listaCuotas", JSON.stringify(cuotas))
+
+              if (id != undefined) {
+
+                return of(new HttpResponse({ status: 200 }));
+              }else {
+                return throwError({ error: { message: 'No es posible ejecutar esta acción' } });
+              }
             }
 
             // get PROGRAMAS por id /\/users\/\d+$/

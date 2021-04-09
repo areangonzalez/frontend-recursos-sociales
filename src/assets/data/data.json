@@ -7126,6 +7126,47 @@
               }
           }
       ],
+  "cuotas": [
+    { "id": 1, "monto": 5000, "recursoid": 1, "fecha_pago": "2021-02-28", "create_at": "2021-03-06 12:15:19", "borrar": false },
+    { "id": 2, "monto": 5000, "recursoid": 1, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 3, "monto": 25000, "recursoid": 2, "fecha_pago": "2021-01-30", "create_at": "2021-02-06 12:15:19", "borrar": false },
+    { "id": 4, "monto": 5000, "recursoid": 3, "fecha_pago": "2021-01-30", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 5, "monto": 5000, "recursoid": 3, "fecha_pago": "2021-02-28", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 6, "monto": 5000, "recursoid": 3, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 7, "monto": 5000, "recursoid": 4, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 8, "monto": 5000, "recursoid": 5, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 9, "monto": 5000, "recursoid": 6, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 10, "monto": 5000, "recursoid": 7, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 11, "monto": 5000, "recursoid": 8, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 12, "monto": 5000, "recursoid": 9, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 13, "monto": 5000, "recursoid": 10, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 14, "monto": 5000, "recursoid": 11, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 15, "monto": 5000, "recursoid": 12, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 16, "monto": 5000, "recursoid": 13, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 17, "monto": 5000, "recursoid": 14, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 18, "monto": 5000, "recursoid": 15, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 19, "monto": 5000, "recursoid": 16, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 20, "monto": 5000, "recursoid": 17, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 21, "monto": 5000, "recursoid": 18, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 22, "monto": 5000, "recursoid": 19, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 23, "monto": 5000, "recursoid": 20, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 24, "monto": 5000, "recursoid": 21, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 25, "monto": 5000, "recursoid": 22, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 26, "monto": 5000, "recursoid": 23, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 27, "monto": 5000, "recursoid": 24, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 28, "monto": 5000, "recursoid": 25, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 29, "monto": 5000, "recursoid": 26, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 30, "monto": 5000, "recursoid": 27, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 31, "monto": 5000, "recursoid": 28, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 32, "monto": 5000, "recursoid": 29, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 33, "monto": 5000, "recursoid": 30, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 34, "monto": 5000, "recursoid": 31, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 35, "monto": 5000, "recursoid": 32, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 36, "monto": 5000, "recursoid": 33, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 37, "monto": 5000, "recursoid": 34, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 38, "monto": 5000, "recursoid": 35, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 39, "monto": 5000, "recursoid": 36, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+  ],
   "recursos": [
     {
         "id": 1,
@@ -7137,6 +7178,10 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 1, "monto": 5000, "recursoid": 1, "fecha_pago": "2021-02-28", "create_at": "2021-03-06 12:15:19", "borrar": false },
+          { "id": 2, "monto": 5000, "recursoid": 1, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 1",
         "proposito": "Un proposito hecho con fixtures 1",
         "actividad_fecha_final": "2021-07-20",
@@ -7154,11 +7199,15 @@
         "fecha_inicial": "2016-01-29",
         "fecha_alta": "2014-10-06",
         "monto": 25000,
-        "monto_acreditado": 0,
-        "monto_resto": 25000,
+        "monto_acreditado": 25000,
+        "monto_resto": 0,
         "cant_cuota": 0,
         "monto_mensual": 0,
         "cuota": false,
+        "cuota_lista": [
+          { "id": 3, "monto": 25000, "recursoid": 2, "fecha_pago": "2021-01-30", "create_at": "2021-02-06 12:15:19", "borrar": false }
+        ],
+        "fecha_acreditacion": "2021-01-30",
         "observacion": "Observacion Fixture 2",
         "proposito": "Un proposito hecho con fixtures 2",
         "actividad_fecha_final": "2021-07-20",
@@ -7181,6 +7230,11 @@
         "cant_cuota": 3,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 4, "monto": 5000, "recursoid": 3, "fecha_pago": "2021-01-30", "create_at": "2021-04-06 12:15:19", "borrar": false },
+          { "id": 5, "monto": 5000, "recursoid": 3, "fecha_pago": "2021-02-28", "create_at": "2021-04-06 12:15:19", "borrar": false },
+          { "id": 6, "monto": 5000, "recursoid": 3, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 3",
         "proposito": "Un proposito hecho con fixtures 3",
         "actividad_fecha_final": "2021-07-20",
@@ -7203,6 +7257,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 7, "monto": 5000, "recursoid": 4, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 4",
         "proposito": "Un proposito hecho con fixtures 4",
         "actividad_fecha_final": "2021-07-20",
@@ -7225,6 +7282,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 8, "monto": 5000, "recursoid": 5, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 5",
         "proposito": "Un proposito hecho con fixtures 5",
         "actividad_fecha_final": "2021-07-20",
@@ -7247,6 +7307,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 9, "monto": 5000, "recursoid": 6, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 6",
         "proposito": "Un proposito hecho con fixtures 6",
         "actividad_fecha_final": "2021-07-20",
@@ -7269,6 +7332,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 10, "monto": 5000, "recursoid": 7, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 7",
         "proposito": "Un proposito hecho con fixtures 7",
         "actividad_fecha_final": "2021-07-20",
@@ -7291,6 +7357,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 11, "monto": 5000, "recursoid": 8, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 8",
         "proposito": "Un proposito hecho con fixtures 8",
         "actividad_fecha_final": "2021-07-20",
@@ -7313,6 +7382,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 12, "monto": 5000, "recursoid": 9, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 9",
         "proposito": "Un proposito hecho con fixtures 9",
         "actividad_fecha_final": "2021-07-20",
@@ -7335,6 +7407,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 13, "monto": 5000, "recursoid": 10, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 10",
         "proposito": "Un proposito hecho con fixtures 10",
         "actividad_fecha_final": "2021-07-20",
@@ -7357,6 +7432,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 14, "monto": 5000, "recursoid": 11, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 11",
         "proposito": "Un proposito hecho con fixtures 11",
         "actividad_fecha_final": "2021-07-20",
@@ -7379,6 +7457,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 15, "monto": 5000, "recursoid": 12, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 12",
         "proposito": "Un proposito hecho con fixtures 12",
         "actividad_fecha_final": "2021-07-20",
@@ -7401,6 +7482,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 16, "monto": 5000, "recursoid": 13, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 13",
         "proposito": "Un proposito hecho con fixtures 13",
         "actividad_fecha_final": "2021-07-20",
@@ -7423,6 +7507,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 17, "monto": 5000, "recursoid": 14, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 14",
         "proposito": "Un proposito hecho con fixtures 14",
         "actividad_fecha_final": "2021-07-20",
@@ -7445,6 +7532,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 18, "monto": 5000, "recursoid": 15, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 15",
         "proposito": "Un proposito hecho con fixtures 15",
         "actividad_fecha_final": "2021-07-20",
@@ -7467,6 +7557,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 19, "monto": 5000, "recursoid": 16, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 16",
         "proposito": "Un proposito hecho con fixtures 16",
         "actividad_fecha_final": "2021-07-20",
@@ -7489,6 +7582,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 20, "monto": 5000, "recursoid": 17, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 17",
         "proposito": "Un proposito hecho con fixtures 17",
         "actividad_fecha_final": "2021-07-20",
@@ -7511,6 +7607,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 21, "monto": 5000, "recursoid": 18, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 18",
         "proposito": "Un proposito hecho con fixtures 18",
         "actividad_fecha_final": "2021-07-20",
@@ -7533,6 +7632,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 22, "monto": 5000, "recursoid": 19, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 19",
         "proposito": "Un proposito hecho con fixtures 19",
         "actividad_fecha_final": "2021-07-20",
@@ -7555,6 +7657,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 23, "monto": 5000, "recursoid": 20, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 20",
         "proposito": "Un proposito hecho con fixtures 20",
         "actividad_fecha_final": "2021-07-20",
@@ -7577,6 +7682,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 24, "monto": 5000, "recursoid": 21, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 21",
         "proposito": "Un proposito hecho con fixtures 21",
         "actividad_fecha_final": "2021-07-20",
@@ -7599,6 +7707,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 25, "monto": 5000, "recursoid": 22, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 22",
         "proposito": "Un proposito hecho con fixtures 22",
         "actividad_fecha_final": "2021-07-20",
@@ -7621,6 +7732,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 26, "monto": 5000, "recursoid": 23, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 23",
         "proposito": "Un proposito hecho con fixtures 23",
         "actividad_fecha_final": "2021-07-20",
@@ -7643,6 +7757,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 27, "monto": 5000, "recursoid": 24, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 24",
         "proposito": "Un proposito hecho con fixtures 24",
         "actividad_fecha_final": "2021-07-20",
@@ -7665,6 +7782,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 28, "monto": 5000, "recursoid": 25, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 25",
         "proposito": "Un proposito hecho con fixtures 25",
         "actividad_fecha_final": "2021-07-20",
@@ -7687,6 +7807,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 29, "monto": 5000, "recursoid": 26, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 26",
         "proposito": "Un proposito hecho con fixtures 26",
         "actividad_fecha_final": "2021-07-20",
@@ -7709,6 +7832,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 30, "monto": 5000, "recursoid": 27, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 27",
         "proposito": "Un proposito hecho con fixtures 27",
         "actividad_fecha_final": "2021-07-20",
@@ -7731,6 +7857,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 31, "monto": 5000, "recursoid": 28, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 28",
         "proposito": "Un proposito hecho con fixtures 28",
         "actividad_fecha_final": "2021-07-20",
@@ -7753,6 +7882,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 32, "monto": 5000, "recursoid": 29, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 29",
         "proposito": "Un proposito hecho con fixtures 29",
         "actividad_fecha_final": "2021-07-20",
@@ -7775,6 +7907,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 33, "monto": 5000, "recursoid": 30, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 30",
         "proposito": "Un proposito hecho con fixtures 30",
         "actividad_fecha_final": "2021-07-20",
@@ -7797,6 +7932,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 34, "monto": 5000, "recursoid": 31, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 31",
         "proposito": "Un proposito hecho con fixtures 31",
         "actividad_fecha_final": "2021-07-20",
@@ -7819,6 +7957,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 35, "monto": 5000, "recursoid": 32, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 32",
         "proposito": "Un proposito hecho con fixtures 32",
         "actividad_fecha_final": "2021-07-20",
@@ -7841,6 +7982,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 36, "monto": 5000, "recursoid": 33, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 33",
         "proposito": "Un proposito hecho con fixtures 33",
         "actividad_fecha_final": "2021-07-20",
@@ -7863,6 +8007,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 37, "monto": 5000, "recursoid": 34, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 34",
         "proposito": "Un proposito hecho con fixtures 34",
         "actividad_fecha_final": "2021-07-20",
@@ -7885,6 +8032,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 38, "monto": 5000, "recursoid": 35, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 35",
         "proposito": "Un proposito hecho con fixtures 35",
         "actividad_fecha_final": "2021-07-20",
@@ -7907,6 +8057,9 @@
         "cant_cuota": 1,
         "monto_mensual": 5000,
         "cuota": true,
+        "cuota_lista": [
+          { "id": 39, "monto": 5000, "recursoid": 36, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false }
+        ],
         "observacion": "Observacion Fixture 36",
         "proposito": "Un proposito hecho con fixtures 36",
         "actividad_fecha_final": "2021-07-20",
