@@ -1312,8 +1312,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/cuotas') && request.method === 'GET') {
               let recursoid = parseInt(request.params.get('recursoid'));
               if (JSON.parse(localStorage.getItem("listaCuotas"))) {
-                cuotas = localStorage.getItem("listaCuotas");
+                cuotas = JSON.parse(localStorage.getItem("listaCuotas"));
               }
+              console.log(cuotas);
 
               let cuotaEncontradas = cuotas.filter(cuota => { return cuota.recursoid === recursoid });
               console.log(cuotaEncontradas);
@@ -1329,8 +1330,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.match(/\/apimock\/cuotas\/\d+$/) && request.method === 'DELETE') {
               let urlParts = request.url.split('/');
               let id = parseInt(urlParts[urlParts.length - 1]);
-              if (localStorage.getItem("listaCuotas") !== undefined) {
-                cuotas = localStorage.getItem("listaCuotas");
+              if (JSON.parse(localStorage.getItem("listaCuotas"))) {
+                cuotas = JSON.parse(localStorage.getItem("listaCuotas"));
               }
 
               for (let i = 0; i < cuotas.length; i++) {

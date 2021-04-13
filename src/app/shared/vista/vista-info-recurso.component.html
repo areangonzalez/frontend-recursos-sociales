@@ -15,7 +15,7 @@
     <ng-template  ngbTabContent>
       <div class="card border-light p-2">
         <div class="card-body">
-          <shared-lista-cuota [cuotaLista]="listadoCuotas"></shared-lista-cuota>
+          <shared-lista-cuota [cuotaLista]="listadoCuotas" [montoTotal]="recurso.monto" [montoAcreditado]="recurso.monto_acreditado" [recursoid]="recurso.id"></shared-lista-cuota>
         </div>
       </div>
     </ng-template>

@@ -1,10 +1,10 @@
 <div class="row d-flex justify-content-end font-weight-bold">
     <span ngbTooltip="Monto Total" container="body">
-      MT: $20.000,00
+      MT: {{montoTotal | currency:'USD':'symbol-narrow':'2.2'}}
     </span>
     &nbsp;|&nbsp;
     <span ngbTooltip="Monto acreditado" container="body" class="text-success">
-      MA: $15.000,00
+      MA: {{montoAcreditado | currency:'USD':'symbol-narrow':'2.2'}}
     </span>
 </div>
 <div class="row">
