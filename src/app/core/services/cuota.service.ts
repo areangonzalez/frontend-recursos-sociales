@@ -14,7 +14,7 @@ export class CuotaService {
    * @returns respuesta del api
    */
   borrar(id:number) {
-    return this._api.delete('/cuota/' + id);
+    return this._api.delete('/cuotas/' + id);
   }
   /**
    * Listado de cuotas por id de recurso (prestacion)
@@ -25,7 +25,7 @@ export class CuotaService {
     let httpParams = new HttpParams();
     httpParams = this._api.formatParams(httpParams, { recursoid: idRecurso });
 
-    return this._api.get('/cuota', httpParams);
+    return this._api.get('/cuotas', httpParams);
   }
 
 

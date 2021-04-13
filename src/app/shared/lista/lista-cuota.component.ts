@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MensajesService, CuotaService } from './../../core/services';
 
 @Component({
@@ -7,6 +7,7 @@ import { MensajesService, CuotaService } from './../../core/services';
   styleUrls: ['./lista-cuota.component.sass']
 })
 export class ListaCuotaComponent {
+  @Input("cuotaLista") public cuotaLista: any;
 
   constructor(private _msj: MensajesService, private _cuotaService: CuotaService) { }
 
@@ -18,6 +19,8 @@ export class ListaCuotaComponent {
         }, error => { this._msj.cancelado(error, [{name:''}]); })
     }
   }
+
+
 
 
 

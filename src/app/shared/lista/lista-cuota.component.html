@@ -18,23 +18,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th class="text-center" scope="row">1</th>
-        <td class="text-center">20/01/2021</td>
-        <td class="text-center">$5.000,00</td>
-        <td class="ancho-fijo-tabla"><shared-modal-borrar-cuota (confirmarBorrado)="borrarCuota($event, 1)"></shared-modal-borrar-cuota></td>
-      </tr>
-      <tr>
-        <th class="text-center" scope="row">2</th>
-        <td class="text-center">20/02/2021</td>
-        <td class="text-center">$5.000,00</td>
-        <td class="ancho-fijo-tabla"><shared-modal-borrar-cuota (confirmarBorrado)="borrarCuota($event, 2)"></shared-modal-borrar-cuota></td>
-      </tr>
-      <tr>
-        <th class="text-center" scope="row">3</th>
-        <td class="text-center">20/03/2021</td>
-        <td class="text-center">$5.000,00</td>
-        <td class="ancho-fijo-tabla"><shared-modal-borrar-cuota (confirmarBorrado)="borrarCuota($event, 3)"></shared-modal-borrar-cuota></td>
+      <tr *ngFor="let cuota of cuotaLista; let i = index;" >
+        <th class="text-center" scope="row">{{i + 1}}</th>
+        <td class="text-center">{{cuota.fecha_pago | date:'dd/MM/yyyy'}}</td>
+        <td class="text-center">{{cuota.monto | currency:'USD':'symbol-narrow':'2.2'}}</td>
+        <td class="ancho-fijo-tabla"><shared-modal-borrar-cuota (confirmarBorrado)="borrarCuota($event, cuota.id)"></shared-modal-borrar-cuota></td>
       </tr>
     </tbody>
   </table>

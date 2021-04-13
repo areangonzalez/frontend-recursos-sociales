@@ -1310,12 +1310,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // GET CUOTAS
             if (request.url.endsWith('/apimock/cuotas') && request.method === 'GET') {
-              let recursoid = request.params.get('recursoid');
-              if (localStorage.getItem("listaCuotas") !== undefined) {
+              let recursoid = parseInt(request.params.get('recursoid'));
+              if (JSON.parse(localStorage.getItem("listaCuotas"))) {
                 cuotas = localStorage.getItem("listaCuotas");
               }
 
               let cuotaEncontradas = cuotas.filter(cuota => { return cuota.recursoid === recursoid });
+              console.log(cuotaEncontradas);
+
               if (recursoid != undefined) {
                 return of(new HttpResponse({ status: 200, body: cuotaEncontradas }));
               }else {

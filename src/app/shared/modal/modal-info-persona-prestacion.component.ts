@@ -1,8 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfig, BotonDisenio } from 'src/app/core/models';
-import { RecursoSocialService, MensajesService, LoaderService } from 'src/app/core/services';
-import { RecursoRoutingModule } from 'src/app/recurso/recurso-routing.module';
+import { RecursoSocialService, MensajesService, LoaderService, CuotaService } from 'src/app/core/services';
 
 @Component({
   selector: 'modal-info-persona-prestacion-content',
@@ -14,13 +13,14 @@ export class ModalInfoPersonaPrestacionContent implements OnInit {
   @Input("cambioEstado") public cambioEstado = new EventEmitter();
   public recurso: any;
   public persona: any;
+  public cuotaListado: any;
 
   constructor(
     public activeModal: NgbActiveModal,
     private _recursoService: RecursoSocialService,
     private _mensajeService: MensajesService,
-    private _loaderService: LoaderService
-
+    private _loaderService: LoaderService,
+    private _cuotaService: CuotaService
   ) {}
 
   ngOnInit(){
@@ -36,9 +36,15 @@ export class ModalInfoPersonaPrestacionContent implements OnInit {
       recurso => {
         this.recurso = recurso;
         this.persona = recurso.persona;
+        if (recurso.cuota) {
+          this.obtenerCuota(recursoid);
+        }
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
-
+  /**
+   * actualiza el listado de recursos
+   * @param estado permite la actualizacion del listado si surge algun cambio
+   */
   public actualizarRecurso(estado:any){
     if (estado){
       this.obtenerRecurso(this.recursoid);
@@ -46,6 +52,13 @@ export class ModalInfoPersonaPrestacionContent implements OnInit {
 
     }
   }
+  public obtenerCuota(recursoid: any) {
+    this._cuotaService.listar(recursoid).subscribe(
+      resultado => {
+        this.cuotaListado = resultado;
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); })
+  }
+
 }
 
 @Component({

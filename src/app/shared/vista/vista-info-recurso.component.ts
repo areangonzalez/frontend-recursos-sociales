@@ -9,7 +9,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class VistaInfoRecursoComponent implements OnInit {
   @Input("recurso") public recurso:any;
-  //@Input("mostrarBoton") public mostrarBoton: boolean;
+  @Input("listadoCuotas") public listadoCuotas: any;
   @Output("cambioEstado") public cambioEstado = new EventEmitter();
 
   constructor(
