@@ -7127,8 +7127,8 @@
           }
       ],
   "cuotas": [
-    { "id": 1, "monto": 5000, "recursoid": 1, "fecha_pago": "2021-02-28", "create_at": "2021-03-06 12:15:19", "borrar": false },
-    { "id": 2, "monto": 5000, "recursoid": 1, "fecha_pago": "2021-03-31", "create_at": "2021-04-06 12:15:19", "borrar": false },
+    { "id": 1, "monto": 5000, "recursoid": 1, "fecha_pago": "2021-03-28", "create_at": "2021-03-06 12:15:19", "borrar": false },
+    { "id": 2, "monto": 5000, "recursoid": 1, "fecha_pago": "2021-04-18", "create_at": "2021-04-06 12:15:19", "borrar": true },
     { "id": 3, "monto": 25000, "recursoid": 2, "fecha_pago": "2021-01-30", "create_at": "2021-02-06 12:15:19", "borrar": false },
     { "id": 4, "monto": 5000, "recursoid": 3, "fecha_pago": "2021-01-30", "create_at": "2021-04-06 12:15:19", "borrar": false },
     { "id": 5, "monto": 5000, "recursoid": 3, "fecha_pago": "2021-02-28", "create_at": "2021-04-06 12:15:19", "borrar": false },

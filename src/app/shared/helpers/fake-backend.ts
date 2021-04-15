@@ -1314,10 +1314,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               if (JSON.parse(localStorage.getItem("listaCuotas"))) {
                 cuotas = JSON.parse(localStorage.getItem("listaCuotas"));
               }
-              console.log(cuotas);
 
               let cuotaEncontradas = cuotas.filter(cuota => { return cuota.recursoid === recursoid });
-              console.log(cuotaEncontradas);
 
               if (recursoid != undefined) {
                 return of(new HttpResponse({ status: 200, body: cuotaEncontradas }));

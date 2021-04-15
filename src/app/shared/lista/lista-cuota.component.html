@@ -22,7 +22,7 @@
         <th class="text-center" scope="row">{{i + 1}}</th>
         <td class="text-center">{{cuota.fecha_pago | date:'dd/MM/yyyy'}}</td>
         <td class="text-center">{{cuota.monto | currency:'USD':'symbol-narrow':'2.2'}}</td>
-        <td class="ancho-fijo-tabla"><shared-modal-borrar-cuota (confirmarBorrado)="borrarCuota($event, cuota.id)"></shared-modal-borrar-cuota></td>
+        <td class="ancho-fijo-tabla"><shared-modal-borrar-cuota *ngIf="cuota.borrar" (confirmarBorrado)="borrarCuota($event, cuota.id)"></shared-modal-borrar-cuota></td>
       </tr>
     </tbody>
   </table>
