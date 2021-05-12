@@ -54,16 +54,16 @@
       <label for="fecha_final" class="prioridad">Fecha Finalización:</label>
       <div class="input-group">
         <input class="form-control" #c2 placeholder="Ej.: dd/mm/yyyy" ngbDatepicker #frd2="ngbDatepicker"
-        id="fecha_final" formControlName="actividadFechaFinal" (ngModelChange)="formatFecha($event, 'fecha_final')" [ngClass]="{'is-invalid': (prestacion.get('cuota').value == 1 && submitted && prestacion.get('actividadFechaFinal').value == null)}" >
+        id="fecha_final" formControlName="fechaFinal" (ngModelChange)="formatFecha($event, 'fecha_final')" [ngClass]="{'is-invalid': (prestacion.get('cuota').value == 1 && submitted && prestacion.get('fechaFinal').value == null)}" >
         <div class="input-group-append">
             <button class="btn btn-outline-info" (click)="frd2.toggle()" type="button"
-                [ngClass]="{'btn-outline-danger': (prestacion.get('cuota').value == 1 && submitted && prestacion.get('actividadFechaFinal').value == null)}">
+                [ngClass]="{'btn-outline-danger': (prestacion.get('cuota').value == 1 && submitted && prestacion.get('fechaFinal').value == null)}">
                 <span class="oi oi-calendar" title="Fecha alta" aria-hidden="true"></span>
             </button>
           </div>
       </div>
       <div *ngIf="((prestacion.get('cuota').value == 1) && submitted)" class="text-danger">
-          <div *ngIf="(prestacion.get('actividadFechaFinal').value == null)">Por favor ingrese una fecha de finalización. </div>
+          <div *ngIf="(prestacion.get('fechaFinal').value == null)">Por favor ingrese una fecha de finalización. </div>
       </div>
     </div>
     <div class="col-md-4">

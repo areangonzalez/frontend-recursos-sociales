@@ -29,9 +29,9 @@ export class PrestacionGeneralComponent implements OnInit {
   public formatFecha(objFecha, clave: string) {
     if (objFecha != null){
       const fecha:string = this._utilService.formatearFecha(objFecha.day, objFecha.month, objFecha.year, 'yyyy-MM-dd');
-      this.prestacion.controls[clave].setValue(fecha);
+      this.prestacion.controls[clave].patchValue(fecha);
     }else{
-      this.prestacion.controls[clave].setValue('');
+      this.prestacion.controls[clave].patchValue('');
     }
   }
   /**

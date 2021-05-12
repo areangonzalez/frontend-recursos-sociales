@@ -24,6 +24,7 @@ export class FormRecursoComponent implements OnInit {
   public programaLista: any = [];
   public listaTipoRecursoAux: any = [];
   public emprenderOrecrear: boolean = false;
+  public esEmprender: boolean = false;
   public listaAlumnos = [];
   public submitted = false;
   public submittedMA = false;
@@ -49,8 +50,8 @@ export class FormRecursoComponent implements OnInit {
         proposito: ['', Validators.required],
         fechaAlta: ['', Validators.required],
         fecha_alta: '',
-        actividadFechaFinal: '',
-        actividad_fecha_final: '',
+        fechaFinal: '',
+        fecha_final: '',
         monto: ['', Validators.required],
         monto_mensual: '',
         cuota: ['', Validators.required]
@@ -77,6 +78,7 @@ export class FormRecursoComponent implements OnInit {
       this.formRecurso.get("programaid").patchValue(this.programaid);
       this.listarTipoRecurso(id);
       this.emprenderOrecrear = (this.programaid == 3 || this.programaid == 7) ? true : false;
+      this.esEmprender = (this.programaid == 3) ? true : false;
     }
   }
 
@@ -231,8 +233,21 @@ export class FormRecursoComponent implements OnInit {
           return;
         }
 
+        let listaIdAlumnos = this.armarListaAlumno();
+        if (this.esEmprender) {
+          if (listaIdAlumnos.length == 0) {
+            noError = false
+            this._mensajeService.cancelado('La lista de alumnos deberia de tener al menos una persona.', [{name:''}]);
+          }
+        }
+
+        console.log("Error: ",noError);
+
         if (noError) {
           recurso = this.armarParametrosPrestacion(this.formRecurso.value, false);
+          if (this.emprenderOrecrear) { // si es emprender o crear se agrega la lista de alumnos
+            recurso["lista_alumno"] = listaIdAlumnos;
+          }
           this.obtenerDatos.emit(recurso);
         }
         break;
@@ -243,25 +258,25 @@ export class FormRecursoComponent implements OnInit {
     let recurso: object = {
       programaid: formulario.programaid, tipo_recursoid: formulario.tipo_recursoid,
       localidadid: formulario.localidadid, observacion: formulario.observacion};
-    let alumno: any[] = [];
     if (esModuloAlimentar) {
       Object.assign(recurso, formulario.modulo_alimentar);
     }else{
       Object.assign(recurso, formulario.prestacion);
-      if (this.emprenderOrecrear){ // si es programa emprender
-        if (this.listaAlumnos.length > 0){
-          for (let i = 0; i < this.listaAlumnos.length; i++) {
-            alumno.push({ alumnoid: this.listaAlumnos[i].id });
-          }
-          recurso["alumno_lista"] = alumno;
-        }else{
-          this._mensajeService.cancelado('La lista de alumnos deberia de tener al menos una persona.', [{name:''}]);
-          return;
-        }
-      }
     }
 
     return recurso;
+  }
+
+  armarListaAlumno() {
+    let alumnos: any[] = [];
+    if (this.listaAlumnos.length > 0){
+      for (let i = 0; i < this.listaAlumnos.length; i++) {
+        alumnos.push({ alumnoid: this.listaAlumnos[i].id });
+      }
+      return alumnos;
+    }else{
+      return alumnos;
+    }
   }
 
   /**

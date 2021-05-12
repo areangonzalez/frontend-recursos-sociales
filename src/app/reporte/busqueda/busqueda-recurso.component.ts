@@ -28,6 +28,7 @@ export class BusquedaRecursoComponent implements OnInit {
   public toDate: NgbDate; // fecha hasta
   public mostrarDp: boolean = false; // Muestra el DatePicker
   public tipoRecursosListaAux: any[]; // lista auxiliar para el combo de tipo recursos
+  public meses: any = [];
 
   /**
    * @param _fb [FormBuilder] Arma el formulario de busqueda avanzada
@@ -142,6 +143,17 @@ export class BusquedaRecursoComponent implements OnInit {
     this.busquedaAvanzada.patchValue(busqueda);
     this.buscar();
     this.listarTipoRecursos('');
+  }
+
+  public listarMeses(){
+    this.meses = [];
+    if (this.busquedaAvanzada.get("estado").value != '') {
+      this.meses = [
+        { mes:1, nombre: "Enero"}, { mes:2, nombre: "Febrero"}, { mes:3, nombre: "Marzo"}, { mes:4, nombre: "Abril"},
+        { mes:5, nombre: "Mayo"}, { mes:6, nombre: "Junio"}, { mes:7, nombre: "Julio"}, { mes:8, nombre: "Agosto"},
+        { mes:9, nombre: "Septiembre"}, { mes:10, nombre: "Octubre"}, { mes:11, nombre: "Noviembre"}, { mes:12, nombre: "Diciembre"}
+      ]
+    }
   }
   /**
    * muestra el fomulario de busqueda avanzada

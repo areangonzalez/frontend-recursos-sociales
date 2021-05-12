@@ -624,9 +624,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     if ( persona.apellido.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ) {
                       return persona;
                     }
-                    if ( persona.lugar.calle.toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
-                      return persona;
-                    }
                   }
                 });
                 let totalFiltrado:number = resultado.length;

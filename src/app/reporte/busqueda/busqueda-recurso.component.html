@@ -70,7 +70,7 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="estado" class="prioridad">Estado:</label>
-                <select class="form-control" id="estado" formControlName="estado" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.estado.value)}" >
+                <select class="form-control" id="estado" formControlName="estado" (change)="listarMeses()" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.estado.value)}" >
                   <option value="">Seleccione un estado</option>
                   <option value="acreditado">Acreditados</option>
                   <option value="sin-acreditar">Sin Acreditar</option>
@@ -79,20 +79,9 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="mes" class="prioridad">Mes:</label>
-                <select class="form-control" id="mes" formControlName="mes" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.estado.value)}" >
+                <select class="form-control" id="mes" formControlName="mes" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.mes.value)}" >
                   <option value="">Seleccione un mes</option>
-                  <option value="1">Enero</option>
-                  <option value="2">Febrero</option>
-                  <option value="3">Marzo</option>
-                  <option value="4">Abril</option>
-                  <option value="5">Mayo</option>
-                  <option value="6">Junio</option>
-                  <option value="7">Julio</option>
-                  <option value="8">Agosto</option>
-                  <option value="9">Septiembre</option>
-                  <option value="10">Octubre</option>
-                  <option value="11">Noviembre</option>
-                  <option value="12">Diciembre</option>
+                  <option *ngFor="let m of meses" value="m.mes">{{m.nombre}}</option>
                 </select>
               </div>
             </div>
