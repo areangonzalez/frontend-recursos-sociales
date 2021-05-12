@@ -81,7 +81,7 @@
                 <label for="mes" class="prioridad">Mes:</label>
                 <select class="form-control" id="mes" formControlName="mes" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.controls.mes.value)}" >
                   <option value="">Seleccione un mes</option>
-                  <option *ngFor="let m of meses" value="m.mes">{{m.nombre}}</option>
+                  <option *ngFor="let m of meses" value="{{m.mes}}">{{m.nombre}}</option>
                 </select>
               </div>
             </div>

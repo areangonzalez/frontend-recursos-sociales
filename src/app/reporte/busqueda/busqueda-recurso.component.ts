@@ -147,7 +147,7 @@ export class BusquedaRecursoComponent implements OnInit {
 
   public listarMeses(){
     this.meses = [];
-    if (this.busquedaAvanzada.get("estado").value != '') {
+    if (this.busquedaAvanzada.get("estado").value != '' && this.busquedaAvanzada.get("estado").value != 'sin-acreditar') {
       this.meses = [
         { mes:1, nombre: "Enero"}, { mes:2, nombre: "Febrero"}, { mes:3, nombre: "Marzo"}, { mes:4, nombre: "Abril"},
         { mes:5, nombre: "Mayo"}, { mes:6, nombre: "Junio"}, { mes:7, nombre: "Julio"}, { mes:8, nombre: "Agosto"},
