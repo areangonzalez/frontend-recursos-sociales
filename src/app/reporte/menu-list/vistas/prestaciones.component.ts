@@ -12,7 +12,7 @@ export class PrestacionesComponent implements OnInit {
   public orden: string = "-fecha_alta"; // ordenamiento del listado predefinido
   public busqueda: any = {page: 0, pagesize: 20, sort: this.orden}; // parametros de la busqueda
   public recursosLista: any[] = []; // listado de las prestaciones
-  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_sin_acreditar": 0, "monto_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 }; // configuracion de paginacion
+  public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "monto_sin_acreditar": 0, "monto_total_acreditado": 0, "monto_mensual_acreditado": 0, "monto_baja": 0, "cantRegistros": 0, "totalRegistros": 0 }; // configuracion de paginacion
   public listaProgramas: any[]; // listado de programas
   public listaLocalidades: any[]; // listado de localidades
   public listaTipoPrestacion: any[]; // listado de tipo de prestaciones
@@ -122,7 +122,8 @@ export class PrestacionesComponent implements OnInit {
     public listarPrestaciones(prestacion:any) {
       this.configPaginacion.colleccionSize = prestacion.total_filtrado;
       this.configPaginacion.pageSize = prestacion.pagesize;
-      this.configPaginacion.monto_acreditado = prestacion.monto_acreditado;
+      this.configPaginacion.monto_total_acreditado = prestacion.monto_total_acreditado;
+      this.configPaginacion.monto_mensual_acreditado = prestacion.monto_mensual_acreditado;
       /* this.configPaginacion.monto_baja = prestacion.monto_baja; */
       this.configPaginacion.monto_sin_acreditar = prestacion.monto_sin_acreditar;
       this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, prestacion.total_filtrado, prestacion.pagesize);

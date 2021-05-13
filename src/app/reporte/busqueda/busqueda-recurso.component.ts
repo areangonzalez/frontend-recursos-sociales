@@ -28,7 +28,11 @@ export class BusquedaRecursoComponent implements OnInit {
   public toDate: NgbDate; // fecha hasta
   public mostrarDp: boolean = false; // Muestra el DatePicker
   public tipoRecursosListaAux: any[]; // lista auxiliar para el combo de tipo recursos
-  public meses: any = [];
+  public meses: any = [
+    { mes:"01", nombre: "Enero"}, { mes:"02", nombre: "Febrero"}, { mes:"03", nombre: "Marzo"}, { mes:"04", nombre: "Abril"},
+    { mes:"05", nombre: "Mayo"}, { mes:"06", nombre: "Junio"}, { mes:"07", nombre: "Julio"}, { mes:"08", nombre: "Agosto"},
+    { mes:"09", nombre: "Septiembre"}, { mes:10, nombre: "Octubre"}, { mes:11, nombre: "Noviembre"}, { mes:12, nombre: "Diciembre"}
+  ];
 
   /**
    * @param _fb [FormBuilder] Arma el formulario de busqueda avanzada
@@ -59,7 +63,8 @@ export class BusquedaRecursoComponent implements OnInit {
       fecha_alta_hasta: '',
       fechaAltaHasta: null,
       estado: '',
-      mes: ''
+      fechaPago: '',
+      fecha_pago: ''
   });
   }
 
@@ -114,7 +119,7 @@ export class BusquedaRecursoComponent implements OnInit {
     let esTrue: boolean = false;
     // busco dentro del objeto segun la clave
     for (const clave in busquedaAvanzada) {
-      if (clave !== 'fechaAltaDesde' && clave !== 'fechaAltaHasta'){
+      if (clave !== 'fechaAltaDesde' && clave !== 'fechaAltaHasta' && 'fechaPago'){
         if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
           Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
           esTrue = true;
@@ -136,6 +141,8 @@ export class BusquedaRecursoComponent implements OnInit {
         busqueda[key] = null;
       }else if (key == 'fechaAltaHasta') {
         busqueda[key] = null;
+      }else if (key == 'fechaPago') {
+        busqueda[key] = null;
       }else {
         busqueda[key] = '';
       }
@@ -143,17 +150,6 @@ export class BusquedaRecursoComponent implements OnInit {
     this.busquedaAvanzada.patchValue(busqueda);
     this.buscar();
     this.listarTipoRecursos('');
-  }
-
-  public listarMeses(){
-    this.meses = [];
-    if (this.busquedaAvanzada.get("estado").value != '' && this.busquedaAvanzada.get("estado").value != 'sin-acreditar') {
-      this.meses = [
-        { mes:1, nombre: "Enero"}, { mes:2, nombre: "Febrero"}, { mes:3, nombre: "Marzo"}, { mes:4, nombre: "Abril"},
-        { mes:5, nombre: "Mayo"}, { mes:6, nombre: "Junio"}, { mes:7, nombre: "Julio"}, { mes:8, nombre: "Agosto"},
-        { mes:9, nombre: "Septiembre"}, { mes:10, nombre: "Octubre"}, { mes:11, nombre: "Noviembre"}, { mes:12, nombre: "Diciembre"}
-      ]
-    }
   }
   /**
    * muestra el fomulario de busqueda avanzada

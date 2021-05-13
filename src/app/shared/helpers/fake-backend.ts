@@ -517,9 +517,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   }
                   // sumo los montos filtrados
                   let monto_acreditado:any;
+                  let monto_mensual_acreditado = 0;
                   let monto_baja:any;
                   for (let i = 0; i < recursosEncontrados.length; i++) {
                     sumarMonto = recursosEncontrados[i]["monto"] + sumarMonto;
+                    if (recursosEncontrados[i]["monto_mensual_acreditado"] != undefined){
+                      monto_mensual_acreditado = recursosEncontrados[i]["monto_mensual_acreditado"] + monto_mensual_acreditado;
+                    }
                   }
                   monto_acreditado = recursosEncontrados.map(recurso => {
                     return (recurso.fecha_acreditacion != undefined && !(recurso.fecha_baja != undefined)) ? recurso.monto : 0;
@@ -527,6 +531,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   monto_baja = recursosEncontrados.map(recurso => {
                     return (recurso.fecha_baja != undefined) ? recurso.monto : 0;
                   });
+                  console.log(monto_mensual_acreditado);
+
 
               /*  "monto_acreditado": 0,
                   "monto_baja": 0,
@@ -540,7 +546,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   listaRecursos.total_filtrado = recursosEncontrados.length;
                   listaRecursos.pages = totalPagina;
                   listaRecursos.monto_total = sumarMonto;
-                  listaRecursos["monto_acreditado"] = (monto_acreditado.length != 0) ? sum(monto_acreditado) : 0;
+                  listaRecursos["monto_total_acreditado"] = (monto_acreditado.length != 0) ? sum(monto_acreditado) : 0;
+                  listaRecursos["monto_mensual_acreditado"] = (recursosEncontrados.length != 0) ? monto_mensual_acreditado : 0;
                   listaRecursos["monto_baja"] = (monto_baja.length != 0) ? sum(monto_baja) : 0;
                   listaRecursos["monto_sin_acreditar"] = sumarMonto - ((monto_acreditado.length != 0) ? sum(monto_acreditado) : 0) - ((monto_baja.length != 0) ? sum(monto_baja) : 0);
                   if (page > 0) {
@@ -554,6 +561,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   }
 
 
+                  console.log(listaRecursos);
 
                 return of(new HttpResponse({ status: 200, body: listaRecursos }));
               }
@@ -576,6 +584,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               nuevoRecurso["localidad"] = nombrePorId(nuevoRecurso.localidadid, localidades);
               nuevoRecurso["responsable_entrega"] = nombrePorId(nuevoRecurso.responsable_entregaid, responsables);
               nuevoRecurso["programaid"] = parseInt(nuevoRecurso.programaid);
+              nuevoRecurso["monto_mensual_acreditado"] = 0;
+              nuevoRecurso["monto_total_acreditado"] = 0;
+
 
               delete nuevoRecurso["fechaAlta"];
 
