@@ -32,7 +32,7 @@
                 </tr>
                 <tr *ngIf="recursoCuota.cuota" >
                   <th class="text-left">Acreditado:</th>
-                  <td class="text-right text-success">{{recursoCuota.monto_acreditado | currency:'USD':'symbol-narrow':'2.2'}}</td>
+                  <td class="text-right text-success">{{recursoCuota.monto_total_acreditado | currency:'USD':'symbol-narrow':'2.2'}}</td>
                 </tr>
                 <tr>
                   <th class="text-left">Sin acreditar:</th>
