@@ -285,5 +285,6 @@ export class FormRecursoComponent implements OnInit {
     // obtengo el nombre del programa
     let selectElementText = event.target['options'][event.target['options'].selectedIndex].text;
     this.emprenderOrecrear = (selectElementText.toLowerCase() === "emprender" || selectElementText.toLowerCase() === "recrear") ? true : false;
+    this.esEmprender = (selectElementText.toLowerCase() === "emprender") ? true : false;
   }
 }
