@@ -15,6 +15,7 @@
           <th scope="col">Nro. Documento</th>
           <th scope="col">Apellido y nombre</th>
           <th class="text-center" scope="col">Dirección / Contacto</th>
+          <th></th>
         </tr>
       </thead>
       <tbody *ngIf="(listaPersonas.length == 0)">
@@ -23,7 +24,7 @@
         </tr>
       </tbody>
       <tbody *ngIf="(listaPersonas.length > 0)">
-        <tr *ngFor="let persona of listaPersonas" (click)="seleccionarPersona(persona.id, persona)" container="body" ngbTooltip="Seleccionar">
+        <tr *ngFor="let persona of listaPersonas">
           <td scope="row">{{persona.nro_documento}}</td>
           <td >
             {{persona.apellido}}, {{persona.nombre}}
@@ -38,6 +39,10 @@
                 <a *ngFor="let redSocial of persona.lista_red_social" href="{{redSocial.perfil}}" target="_blank" ngbTooltip="{{redSocial.tipo_red_social}}" class="btn btn-sm btn-light"><i class="{{redSocial.icon_class}}"></i></a>
               </div>
             </div>
+          </td>
+          <td class="text-center">
+            <button type="button" class="btn btn-sm btn-success"  (click)="seleccionarPersona(persona.id, persona)" container="body" ngbTooltip="Seleccionar"><i class="fas fa-check"></i></button>
+            <modal-form-persona-component class="btn-group" ngbTooltip="Editar beneficiario" [configModal]="configModalEdicion" [disenioBoton]="configBotonModal" (obtenerPersona)="personaEditada($event)" [personaid]="persona.id" ></modal-form-persona-component>
           </td>
         </tr>
       </tbody>

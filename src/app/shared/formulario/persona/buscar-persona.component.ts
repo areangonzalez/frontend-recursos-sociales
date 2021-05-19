@@ -18,6 +18,8 @@ export class BuscarPersonaComponent implements OnInit {
   public botonAgregar: BotonDisenio = {class: "btn btn-success", iconoClass: "fas fa-user-plus",  text: ""};
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public filtradoBusqueda: any = {};
+  public configModalEdicion: ModalConfig = { title: "Editar beneficiario" };
+  public configBotonModal: BotonDisenio = { class: 'btn btn-sm btn-light', iconoClass: 'fas fa-pencil-alt', text:'' };
 
   constructor(
     private _cd: ChangeDetectorRef,
@@ -92,6 +94,18 @@ export class BuscarPersonaComponent implements OnInit {
   public personaCreada(personaid) {
     const datos: object = {id: personaid};
     this.personaElegida.emit(datos);
+  }
+  /**
+   * Obtiene los datos para editar a una persona
+   * @param personaid identificador de la persona
+   */
+   public personaEditada(personaid){
+    this._personaService.personaPorId(personaid).subscribe(
+      datos => {
+        this.actualizarBusqueda(datos["nro_documento"]);
+      }, error => {
+        this._mensajeService.cancelado(error, [{name:''}]);
+      })
   }
   /**
    * limpia el listado de busqueda

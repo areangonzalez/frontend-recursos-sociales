@@ -65,7 +65,7 @@ export class FormRecursoComponent implements OnInit {
         responsable_entregaid: ['', Validators.required],
         monto: ['', Validators.required]
       }),
-      actividad_capacitacion: '',
+      lugar_capacitacion: '',
       observacion: ''
     });
   }
@@ -244,7 +244,7 @@ export class FormRecursoComponent implements OnInit {
         if (noError) {
           recurso = this.armarParametrosPrestacion(this.formRecurso.value, false);
           if (this.emprenderOrecrear) { // si es emprender o crear se agrega la lista de alumnos
-            recurso["lista_alumno"] = listaIdAlumnos;
+            recurso["alumno_lista"] = listaIdAlumnos;
           }
           this.obtenerDatos.emit(recurso);
         }
