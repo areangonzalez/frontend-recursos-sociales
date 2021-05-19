@@ -261,6 +261,9 @@ export class FormRecursoComponent implements OnInit {
     }else{
       Object.assign(recurso, formulario.prestacion);
     }
+    if (this.emprenderOrecrear) {
+      Object.assign(recurso, { "lugar_capacitacion": formulario.lugar_capacitacion});
+    }
 
     return recurso;
   }
