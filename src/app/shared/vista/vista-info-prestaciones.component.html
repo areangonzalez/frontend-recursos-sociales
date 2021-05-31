@@ -8,7 +8,7 @@
                 <ng-template  ngbTabContent>
                   <div class="card border-light p-2">
                     <div class="card-header">
-                      <shared-vista-header [recurso]="prestacion"></shared-vista-header>
+                      <shared-vista-header [recurso]="prestacion" (actualizarDatos)="actualizarRecurso($event, prestacion.id)"></shared-vista-header>
                     </div>
                     <div class="card-body">
                       <shared-vista-body-prestacion-general [recurso]="prestacion"></shared-vista-body-prestacion-general>
@@ -20,7 +20,7 @@
                 <ng-template  ngbTabContent>
                   <div class="card border-light p-2">
                     <div class="card-body">
-                      <shared-lista-cuota></shared-lista-cuota>
+                      <shared-lista-cuota [cuotaLista]="listadoCuotas" [montoTotal]="prestacion.monto" [montoAcreditado]="prestacion.monto_total_acreditado" [recursoid]="prestacion.id" (eliminoCuota)="actualizarRecurso($event, prestacion.id)"></shared-lista-cuota>
                     </div>
                   </div>
                 </ng-template>
