@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'shared-vista-header',
@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class VistaHeaderComponent implements OnInit {
   @Input("recurso") public recurso: any;
+  @Output("actualizarDatos") public actualizarDatos = new EventEmitter();
 
   constructor() { }
 
@@ -24,6 +25,10 @@ export class VistaHeaderComponent implements OnInit {
     cuota["monto"] = (parseFloat(recurso.monto_resto) < parseFloat(recurso.monto_mensual)) ? recurso.monto_resto : recurso.monto_mensual;
 
     return cuota;
+  }
+
+  public obtenerRespuesta(estado: any) {
+    this.actualizarDatos.emit(estado);
   }
 
 }

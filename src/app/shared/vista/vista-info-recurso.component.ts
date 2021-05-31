@@ -1,5 +1,7 @@
+import { MensajesService } from './../../core/services/mesnaje.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+import { RecursoSocialService } from 'src/app/core/services';
 
 @Component({
   selector: 'shared-vista-info-recurso',
@@ -13,7 +15,7 @@ export class VistaInfoRecursoComponent implements OnInit {
   @Output("cambioEstado") public cambioEstado = new EventEmitter();
 
   constructor(
-    configTooltip: NgbTooltipConfig
+    configTooltip: NgbTooltipConfig, private _recursoService: RecursoSocialService, private _msj: MensajesService
   ){
     configTooltip.placement = 'top';
     configTooltip.triggers = 'hover';
@@ -22,13 +24,24 @@ export class VistaInfoRecursoComponent implements OnInit {
   ngOnInit() {
   }
 
-  mostrarFA(estado:any){
-    this.recurso.acreditacion = (estado == true) ? true : false;
-    this.cambioEstado.emit(estado);
+  actualizarRecurso(estado:any, recursoid: number){
+    if (estado) {
+      this.obtenerRecurso(recursoid);
+      this.cambioEstado.emit(estado);
+    }
   }
 
   mostrarFB(estado:any){
     this.recurso.baja = (estado == true) ? true : false;
     this.cambioEstado.emit(estado);
   }
+
+  obtenerRecurso(id: number) {
+    this._recursoService.recursoPorId(id).subscribe(
+      respuesta => {
+        this.recurso = respuesta;
+        this.listadoCuotas = respuesta.lista_cuota;
+      }, error => { this._msj.cancelado(error, [{name:''}]); });
+  }
+
 }

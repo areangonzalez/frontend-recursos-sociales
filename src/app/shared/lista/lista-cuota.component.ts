@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MensajesService, CuotaService } from './../../core/services';
 
 @Component({
@@ -11,6 +11,7 @@ export class ListaCuotaComponent {
   @Input("montoTotal") public montoTotal: any;
   @Input("montoAcreditado") public montoAcreditado: any;
   @Input("recursoid") public recursoid: number;
+  @Output("eliminoCuota") public eliminoCuota = new EventEmitter();
 
   constructor(private _msj: MensajesService, private _cuotaService: CuotaService) { }
   /**
@@ -22,9 +23,10 @@ export class ListaCuotaComponent {
     if (confirmacion) {
       this._cuotaService.borrar(id).subscribe(
         respuesta => {
+          this.eliminoCuota.emit(true);
           this.listarCuotas(this.recursoid);
           this._msj.exitoso("Se ha borrado la cuota!", [{name: ''}]);
-        }, error => { this._msj.cancelado(error, [{name:''}]); })
+        }, error => { this._msj.cancelado(error, [{name:''}]); this.eliminoCuota.emit(false); })
     }
   }
 

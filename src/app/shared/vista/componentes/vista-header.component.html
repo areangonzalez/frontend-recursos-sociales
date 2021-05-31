@@ -3,8 +3,8 @@
   <span class="d-flex align-items-center text-success" *ngIf="(recurso.acreditacion)">Acreditacion: {{recurso.fecha_acreditacion | date:'dd/MM/yyyy'}}</span>
   <span class="d-flex align-items-center text-danger" *ngIf="(recurso.baja)" >Baja: {{recurso.fecha_baja | date:'dd/MM/yyyy'}}</span>
   <span class="d-flex align-items-end" *ngIf="(!recurso.baja)">
-      <modal-acreditar-component class="btn-group" *ngIf="(!recurso.acreditacion && !recurso.baja)" [recursoid]="recurso.id" [recursoCuota]="datosCuota(recurso)"  (obtenerRecurso)="mostrarFA($event)" ngbTooltip="Acreditar prestación" container="body"></modal-acreditar-component>
-      <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" [recursoid]="recurso.id" container="body" (obtenerRecurso)="mostrarFB($event)" ></modal-baja-component>
+      <modal-acreditar-component class="btn-group" *ngIf="(!recurso.acreditacion && !recurso.baja)" [recursoid]="recurso.id" [recursoCuota]="datosCuota(recurso)"  (obtenerRecurso)="obtenerRespuesta($event)" ngbTooltip="Acreditar prestación" container="body"></modal-acreditar-component>
+      <modal-baja-component class="btn-group" ngbTooltip="Baja prestación" [recursoid]="recurso.id" container="body" (obtenerRecurso)="obtenerRespuesta($event)" ></modal-baja-component>
   </span>
 </div>
 <div class="d-flex justify-content-between" *ngIf="(recurso.programaid == 6)">
