@@ -20,7 +20,7 @@
                 <ng-template  ngbTabContent>
                   <div class="card border-light p-2">
                     <div class="card-body">
-                      <shared-lista-cuota [cuotaLista]="prestacion.lista_cuota" [montoTotal]="prestacion.monto" [montoAcreditado]="prestacion.monto_total_acreditado" [recursoid]="prestacion.personaid" (eliminoCuota)="actualizarRecurso($event, prestacion.id)"></shared-lista-cuota>
+                      <shared-lista-cuota [cuotaLista]="prestacion.lista_cuota" [montoTotal]="prestacion.monto" [montoAcreditado]="prestacion.monto_total_acreditado" [recursoid]="prestacion.id" (eliminoCuota)="actualizarRecurso($event, prestacion.personaid)"></shared-lista-cuota>
                     </div>
                   </div>
                 </ng-template>

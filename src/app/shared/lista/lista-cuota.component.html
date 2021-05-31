@@ -17,7 +17,7 @@
         <th class="ancho-fijo-tabla"></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="(cuotaLista.length > 0)">
       <tr *ngFor="let cuota of cuotaLista; let i = index;" >
         <th class="text-center" scope="row">{{i + 1}}</th>
         <td class="text-center">{{cuota.fecha_pago | date:'dd/MM/yyyy'}}</td>
