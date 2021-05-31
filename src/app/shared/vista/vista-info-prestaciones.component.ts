@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
-import { RecursoSocialService, MensajesService } from 'src/app/core/services';
+import { BeneficiarioService, MensajesService } from 'src/app/core/services';
 
 @Component({
   selector: 'shared-vista-info-prestaciones',
@@ -13,7 +13,7 @@ export class VistaInfoPrestacionesComponent implements OnInit {
   @Output("cambioEstado") public cambioEstado = new EventEmitter();
 
   constructor(
-    configTooltip: NgbTooltipConfig, private _recursoService: RecursoSocialService, private _msj: MensajesService
+    configTooltip: NgbTooltipConfig, private _beneficiarioService: BeneficiarioService, private _msj: MensajesService
   ){
     configTooltip.placement = 'top';
     configTooltip.triggers = 'hover';
@@ -21,18 +21,17 @@ export class VistaInfoPrestacionesComponent implements OnInit {
 
   ngOnInit() {}
 
-  actualizarRecurso(estado:any, recursoid: number){
+  actualizarRecurso(estado:any, beneficiarioid: number){
     if (estado) {
-      this.obtenerRecurso(recursoid);
+      this.obtenerBeneficiario(beneficiarioid);
       this.cambioEstado.emit(estado);
     }
   }
 
-  obtenerRecurso(id: number) {
-    this._recursoService.recursoPorId(id).subscribe(
+  obtenerBeneficiario(id: number) {
+    this._beneficiarioService.beneficiarioPorId(id).subscribe(
       respuesta => {
-        this.recurso = respuesta;
-        this.listadoCuotas = respuesta.lista_cuota;
+        this.recursos = respuesta.recurso_lista;
       }, error => { this._msj.cancelado(error, [{name:''}]); });
   }
 
