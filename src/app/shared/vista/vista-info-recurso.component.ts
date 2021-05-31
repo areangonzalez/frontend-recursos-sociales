@@ -1,7 +1,6 @@
-import { MensajesService } from './../../core/services/mesnaje.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
-import { RecursoSocialService } from 'src/app/core/services';
+import { RecursoSocialService, MensajesService } from 'src/app/core/services';
 
 @Component({
   selector: 'shared-vista-info-recurso',
@@ -29,11 +28,6 @@ export class VistaInfoRecursoComponent implements OnInit {
       this.obtenerRecurso(recursoid);
       this.cambioEstado.emit(estado);
     }
-  }
-
-  mostrarFB(estado:any){
-    this.recurso.baja = (estado == true) ? true : false;
-    this.cambioEstado.emit(estado);
   }
 
   obtenerRecurso(id: number) {
