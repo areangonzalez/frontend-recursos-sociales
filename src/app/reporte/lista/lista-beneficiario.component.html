@@ -23,8 +23,9 @@
         <th scope="col">Nro Doc</th>
         <th colspan="2" scope="col">Apellido y nombre</th>
         <th class="text-center" scope="col">Localidad</th>
-        <th class="text-center" scope="col">Monto acreditado (Cant)</th>
-        <th class="text-center" scope="col">Monto sin acreditar (Cant)</th>
+        <th class="text-center" scope="col">Monto acreditado</th>
+        <th class="text-center" scope="col">Monto sin acreditar</th>
+        <th class="text-center" scope="col">Cant. de Prestaciones</th>
         <th class="ancho-fijo-col"></th>
       </tr>
     </thead>
@@ -51,8 +52,9 @@
           </div>
         </td>
         <td class="text-center">{{ (beneficiario.persona.lugar != undefined) ? beneficiario.persona.lugar.localidad : " - "}}</td>
-        <td class="text-center">{{beneficiario.monto_acreditado | currency:'USD':'symbol-narrow':'2.2'}} ({{beneficiario.recurso_acreditado_cantidad}})</td>
-        <td class="text-center">{{beneficiario.monto_sin_acreditar | currency:'USD':'symbol-narrow':'2.2'}} ({{beneficiario.recurso_sin_acreditar_cantidad}})</td>
+        <td class="text-center">{{beneficiario.monto_acreditado | currency:'USD':'symbol-narrow':'2.2'}}</td>
+        <td class="text-center">{{beneficiario.monto_sin_acreditar | currency:'USD':'symbol-narrow':'2.2'}}</td>
+        <td class="text-center">{{beneficiario.recurso_cantidad}}</td>
         <td class="ancho-fijo-col">
           <div class="btn-group">
             <modal-info-beneficiario-component [beneficiarioid]="beneficiario.personaid" (cambioEstado)="actualizarLista($event)"></modal-info-beneficiario-component>
