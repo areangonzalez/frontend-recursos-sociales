@@ -3,9 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { VistaRecursoComponent } from './recurso';
 
 const routes: Routes = [
-    /* {
-      path: ':recursoid', component: VistaRecursoComponent,
-    }, */
     {
       path: 'prestacion/:recursoid', component: VistaRecursoComponent, data: { title: 'Visualizar prestación', breadcrumb: 'Prestación' }
     },
