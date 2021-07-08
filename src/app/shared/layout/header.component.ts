@@ -65,4 +65,8 @@ export class HeaderComponent implements OnInit {
       }
     }
 
+    esAdmin() {
+      return (this._authentication.loggedIn.rol !== 'admin') ? false : true;
+    }
+
 }

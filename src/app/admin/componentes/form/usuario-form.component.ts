@@ -53,6 +53,10 @@ export class UsuarioFormComponent implements OnInit {
    */
   validarForm() {
     this.submitted = true;
+    if (!this._util.validarUltimoDigitoCuil(this.persona.get("cuil").value)) {
+      this._mensajeService.cancelado("El numero de cuil es incorrecto, Por favor verifique el Número de Documento o los digitos de CUIL.", [{name:''}]);
+      return;
+    }
     if (this.persona.invalid && this.persona.get('usuario').invalid) { // verifico la validación en los campos del formulario
       this._mensajeService.cancelado("Campos sin completar!!", [{name:''}]);
       return;
